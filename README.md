@@ -1,3 +1,13 @@
+# Base De Datos
+
+## Algoritmos y Estructuras de Datos 2 - Trabajo Práctico 2
+
+El enunciado se encuentra en la carpeta *docs*
+Todo el código generado para el trabajo está en *src*
+Puede importarse el repositorio en CLion y correr los tests.
+
+El trabajo consistió en implementar una base de datos con una funcionalidad mínima de crear tablas, ingresar datos y poder hacer joins entre distintas tablas.
+
 # Para empezar 
 
 Es necesario bajar el código del este repositorio. Esto puede hacerse
