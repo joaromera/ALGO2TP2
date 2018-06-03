@@ -1,0 +1,298 @@
+\hypertarget{classTabla}{}\section{Referencia de la Clase Tabla}
+\label{classTabla}\index{Tabla@{Tabla}}
+
+
+Representa una tabla de una base de datos.  
+
+
+
+
+{\ttfamily \#include $<$Tabla.\+h$>$}
+
+
+
+Diagrama de colaboración para Tabla\+:
+% FIG 0
+\subsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classTabla_1_1const__iterador__registros}{const\+\_\+iterador\+\_\+registros}}
+\begin{DoxyCompactList}\small\item\em Iterador de los registros de una tabla. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTabla_a5a7be353082561e06a877b2255c0ea5c}{Tabla}} (const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ string $>$ \&\mbox{\hyperlink{classTabla_a9b75ecc34187bd3aaec51f610c961d33}{claves}}, const vector$<$ string $>$ \&\mbox{\hyperlink{classTabla_a9c9db2609fca7a928c12f423864dbe8d}{campos}}, const vector$<$ \mbox{\hyperlink{classDato}{Dato}} $>$ \&tipos)
+\begin{DoxyCompactList}\small\item\em Inicializa una tabla sin registros y con la descripción parámetro. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classTabla_1_1const__iterador__registros}{const\+\_\+iterador\+\_\+registros}} \mbox{\hyperlink{classTabla_a99345e41702e7e9984732c6f3672e386}{agregar\+Registro}} (const \mbox{\hyperlink{classRegistro}{Registro}} \&r)
+\begin{DoxyCompactList}\small\item\em Inserta un nuevo registro en la tabla. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ string $>$ \& \mbox{\hyperlink{classTabla_a9c9db2609fca7a928c12f423864dbe8d}{campos}} () const
+\begin{DoxyCompactList}\small\item\em Campos de la tabla. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classDato}{Dato}} \& \mbox{\hyperlink{classTabla_ad73268a20c41a93f2ffd34656e1f0123}{tipo\+Campo}} (const string \&campo) const
+\begin{DoxyCompactList}\small\item\em Tipo del campo parámetro para la tabla. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ string $>$ \& \mbox{\hyperlink{classTabla_a9b75ecc34187bd3aaec51f610c961d33}{claves}} () const
+\begin{DoxyCompactList}\small\item\em Subconjunto de campos que son clave. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$ \& \mbox{\hyperlink{classTabla_a11b94420ed8fa905471a34b41a5191ad}{registros}} () const
+\begin{DoxyCompactList}\small\item\em Subconjunto de registros en la tabla. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classTabla_a89ec62f42350f3b40bb1d578b4934fc6}{cant\+\_\+registros}} () const
+\begin{DoxyCompactList}\small\item\em Cantidad de registros en la tabla. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classTabla_1_1const__iterador__registros}{const\+\_\+iterador\+\_\+registros}} \mbox{\hyperlink{classTabla_abbae06c74157e0ddfe66796a78bb2c65}{registros\+\_\+begin}} () const
+\begin{DoxyCompactList}\small\item\em Iterador al inicio de los registros de la tabla. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classTabla_1_1const__iterador__registros}{const\+\_\+iterador\+\_\+registros}} \mbox{\hyperlink{classTabla_a0dbdc0d601d5963f38df24367e373e53}{registros\+\_\+end}} () const
+\begin{DoxyCompactList}\small\item\em Iterador al final de los registros de la tabla. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Atributos privados}
+\begin{Indent}\textbf{ Representación}\par
+{\em rep\+: tabla $\to$ bool~\newline
+rep(t) $\equiv$
+\begin{DoxyItemize}
+\item $\lnot$ $\emptyset$?(\+\_\+claves) $\land$
+\item \+\_\+claves $\subseteq$ \+\_\+campos $\land$
+\item \+\_\+campos = claves(\+\_\+tipos) $\land$
+\item $\forall$ (r \+: registro) r $\in$ \+\_\+registros $\Rightarrow$ (
+\begin{DoxyItemize}
+\item campos(r) = \+\_\+campos
+\item $\forall$ (c \+: campo) c $\in$ \+\_\+campos $\Rightarrow$ Nat?(valor(c, r)) = Nat?(obtener(c, \+\_\+tipos))
+\item no se repiten claves $\equiv$ $\forall$ (r\textquotesingle{} \+: registro) r $\in$ (\+\_\+registros -\/ \{r\}) $\Rightarrow$ $\lnot$ hay\+Coincidencia(r, \+\_\+claves, \+\_\+registros)
+\end{DoxyItemize}
+\item )
+\end{DoxyItemize}
+
+abs\+: tabla $\to$ \mbox{\hyperlink{classTabla}{Tabla}}~\newline
+abs(t) $\equiv$ t\textquotesingle{} $|$
+\begin{DoxyItemize}
+\item campos(t\textquotesingle{}) = \+\_\+campos $\land$
+\item claves(t\textquotesingle{}) = \+\_\+claves $\land$
+\item $\forall$ (c \+: string) c  \+\_\+campos $\Rightarrow$ tipo\+Campo(c, r\textquotesingle{}) = Nat?(obtener(c, \+\_\+tipos)) $\land$
+\item registros(t\textquotesingle{}) = \+\_\+registros 
+\end{DoxyItemize}}\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classTabla_a3fc11c070caf35a44a23724a6a5bae92}\label{classTabla_a3fc11c070caf35a44a23724a6a5bae92}} 
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ string $>$ {\bfseries \+\_\+claves}
+\item 
+\mbox{\Hypertarget{classTabla_ac527baaf100aea820dd4d1687b0f2378}\label{classTabla_ac527baaf100aea820dd4d1687b0f2378}} 
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ string $>$ {\bfseries \+\_\+campos}
+\item 
+\mbox{\Hypertarget{classTabla_af3bc6468c890f3c0ea110f45377abf51}\label{classTabla_af3bc6468c890f3c0ea110f45377abf51}} 
+\mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ string, \mbox{\hyperlink{classDato}{Dato}} $>$ {\bfseries \+\_\+tipos}
+\item 
+\mbox{\Hypertarget{classTabla_a28b3aa83e48d95fbeb5a6308a58defcc}\label{classTabla_a28b3aa83e48d95fbeb5a6308a58defcc}} 
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$ {\bfseries \+\_\+registros}
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Descripción detallada}
+Representa una tabla de una base de datos. 
+
+Una tabla es una colección de registros que cumplen la descripción de la misma. La descripción de una tabla consiste en una serie de nombres que describen los campos y un tipo para cada campo que explicita el tipo de dato que un registro puede tener en ese campo.
+
+La descripción también selecciona un subconjunto de los campos como  claves. Dada las claves, una tabla no puede tener dos registros con los mismos valores para todos los campos claves.
+
+{\bfseries se explica con} T\+AD \mbox{\hyperlink{classTabla}{Tabla}} 
+
+\subsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classTabla_a5a7be353082561e06a877b2255c0ea5c}\label{classTabla_a5a7be353082561e06a877b2255c0ea5c}} 
+\index{Tabla@{Tabla}!Tabla@{Tabla}}
+\index{Tabla@{Tabla}!Tabla@{Tabla}}
+\subsubsection{\texorpdfstring{Tabla()}{Tabla()}}
+{\footnotesize\ttfamily Tabla\+::\+Tabla (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ string $>$ \&}]{claves,  }\item[{const vector$<$ string $>$ \&}]{campos,  }\item[{const vector$<$ \mbox{\hyperlink{classDato}{Dato}} $>$ \&}]{tipos }\end{DoxyParamCaption})}
+
+
+
+Inicializa una tabla sin registros y con la descripción parámetro. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em claves} & Subconjunto de los campos que son claves. \\
+\hline
+{\em campos} & Conjunto de nombres de claves. El órden se corresponde con el de datos \\
+\hline
+{\em tipos} & Conjunto de datos cuyo tipo define el tipo admisible en cada campo. El valor de los datos se ignora.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondición}
+$\lnot$ $\emptyset$ ?(c) $\land$ $\forall$ (c\+: campo) c  claves $\Rightarrow$ esta?(c, campos) $\land$ long(campos) = long(tipos) $\land$ sin\+Repetidos(campos) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = nueva\+Tabla(claves, nuevo\+Registro(campos, tipos))
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(long(campos) $\ast$ (copy(campo) + copy(dato)))
+\end{DoxyDescription}
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classTabla_a99345e41702e7e9984732c6f3672e386}\label{classTabla_a99345e41702e7e9984732c6f3672e386}} 
+\index{Tabla@{Tabla}!agregar\+Registro@{agregar\+Registro}}
+\index{agregar\+Registro@{agregar\+Registro}!Tabla@{Tabla}}
+\subsubsection{\texorpdfstring{agregar\+Registro()}{agregarRegistro()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTabla_1_1const__iterador__registros}{Tabla\+::const\+\_\+iterador\+\_\+registros}} Tabla\+::agregar\+Registro (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classRegistro}{Registro}} \&}]{r }\end{DoxyParamCaption})}
+
+
+
+Inserta un nuevo registro en la tabla. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em r} & \mbox{\hyperlink{classRegistro}{Registro}} a agregar\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondición}
+t = {\bfseries this} $\land$ campos(r) = campos(t) $\land$ puedo\+Insertar?(r, t) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} = agregar\+Registro(r, t) $\land$ {\bfseries res} apunta al registro recién agregado.
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(copy(registro))
+\end{DoxyDescription}\mbox{\Hypertarget{classTabla_a9c9db2609fca7a928c12f423864dbe8d}\label{classTabla_a9c9db2609fca7a928c12f423864dbe8d}} 
+\index{Tabla@{Tabla}!campos@{campos}}
+\index{campos@{campos}!Tabla@{Tabla}}
+\subsubsection{\texorpdfstring{campos()}{campos()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ string $>$ \& Tabla\+::campos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Campos de la tabla. 
+
+El conjunto se devuelve por referencia no-\/modificable
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = campos({\bfseries this})
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classTabla_a89ec62f42350f3b40bb1d578b4934fc6}\label{classTabla_a89ec62f42350f3b40bb1d578b4934fc6}} 
+\index{Tabla@{Tabla}!cant\+\_\+registros@{cant\+\_\+registros}}
+\index{cant\+\_\+registros@{cant\+\_\+registros}!Tabla@{Tabla}}
+\subsubsection{\texorpdfstring{cant\+\_\+registros()}{cant\_registros()}}
+{\footnotesize\ttfamily int Tabla\+::cant\+\_\+registros (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Cantidad de registros en la tabla. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = \mbox{\hyperlink{classTabla_a11b94420ed8fa905471a34b41a5191ad}{registros}}({\bfseries this})
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classTabla_a9b75ecc34187bd3aaec51f610c961d33}\label{classTabla_a9b75ecc34187bd3aaec51f610c961d33}} 
+\index{Tabla@{Tabla}!claves@{claves}}
+\index{claves@{claves}!Tabla@{Tabla}}
+\subsubsection{\texorpdfstring{claves()}{claves()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ string $>$ \& Tabla\+::claves (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Subconjunto de campos que son clave. 
+
+El conjunto se devuelve por referencia no-\/modificable.
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = claves({\bfseries this})
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classTabla_a11b94420ed8fa905471a34b41a5191ad}\label{classTabla_a11b94420ed8fa905471a34b41a5191ad}} 
+\index{Tabla@{Tabla}!registros@{registros}}
+\index{registros@{registros}!Tabla@{Tabla}}
+\subsubsection{\texorpdfstring{registros()}{registros()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$ \& Tabla\+::registros (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Subconjunto de registros en la tabla. 
+
+El conjunto se devuelve por referencia no-\/modificable.
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = registros({\bfseries this})
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classTabla_abbae06c74157e0ddfe66796a78bb2c65}\label{classTabla_abbae06c74157e0ddfe66796a78bb2c65}} 
+\index{Tabla@{Tabla}!registros\+\_\+begin@{registros\+\_\+begin}}
+\index{registros\+\_\+begin@{registros\+\_\+begin}!Tabla@{Tabla}}
+\subsubsection{\texorpdfstring{registros\+\_\+begin()}{registros\_begin()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTabla_1_1const__iterador__registros}{Tabla\+::const\+\_\+iterador\+\_\+registros}} Tabla\+::registros\+\_\+begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Iterador al inicio de los registros de la tabla. 
+
+El iterador resultado es conformante con \href{http://en.cppreference.com/w/cpp/concept/InputIterator}{\tt std\+::\+Input\+Iterator}
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+El iterador {\bfseries res} recorre los registros de la tabla en un orden no definido.
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classTabla_a0dbdc0d601d5963f38df24367e373e53}\label{classTabla_a0dbdc0d601d5963f38df24367e373e53}} 
+\index{Tabla@{Tabla}!registros\+\_\+end@{registros\+\_\+end}}
+\index{registros\+\_\+end@{registros\+\_\+end}!Tabla@{Tabla}}
+\subsubsection{\texorpdfstring{registros\+\_\+end()}{registros\_end()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTabla_1_1const__iterador__registros}{Tabla\+::const\+\_\+iterador\+\_\+registros}} Tabla\+::registros\+\_\+end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Iterador al final de los registros de la tabla. 
+
+El iterador resultado es conformante con \href{http://en.cppreference.com/w/cpp/concept/InputIterator}{\tt std\+::\+Input\+Iterator}
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+El iterador {\bfseries res} apunta al lugar-\/pasando-\/el-\/último de los registros de la tabla. Puede utilizarse para comparar con otro \mbox{\hyperlink{classTabla_1_1const__iterador__registros}{const\+\_\+iterador\+\_\+registros}} para saber si se llegó al final de la iteración.
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classTabla_ad73268a20c41a93f2ffd34656e1f0123}\label{classTabla_ad73268a20c41a93f2ffd34656e1f0123}} 
+\index{Tabla@{Tabla}!tipo\+Campo@{tipo\+Campo}}
+\index{tipo\+Campo@{tipo\+Campo}!Tabla@{Tabla}}
+\subsubsection{\texorpdfstring{tipo\+Campo()}{tipoCampo()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classDato}{Dato}} \& Tabla\+::tipo\+Campo (\begin{DoxyParamCaption}\item[{const string \&}]{campo }\end{DoxyParamCaption}) const}
+
+
+
+Tipo del campo parámetro para la tabla. 
+
+El dato se devuelve por referencia no-\/modificable. El dato se utiliza solo para representar el tipo. Su valor se ignora.
+
+\begin{DoxyPrecond}{Precondición}
+campo $\in$ campos({\bfseries this}) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+tipo\+Campo(campo, {\bfseries this})
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(\#(campos({\bfseries this})) $\ast$ cmp(campo)
+\end{DoxyDescription}
+
+La documentación para esta clase fue generada a partir de los siguientes ficheros\+:\begin{DoxyCompactItemize}
+\item 
+src/Tabla.\+h\item 
+src/Tabla.\+cpp\end{DoxyCompactItemize}

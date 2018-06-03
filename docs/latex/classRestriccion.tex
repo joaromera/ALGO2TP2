@@ -1,0 +1,148 @@
+\hypertarget{classRestriccion}{}\section{Referencia de la Clase Restriccion}
+\label{classRestriccion}\index{Restriccion@{Restriccion}}
+
+
+Representa una restricción de la base de datos.  
+
+
+
+
+{\ttfamily \#include $<$Restriccion.\+h$>$}
+
+
+
+Diagrama de colaboración para Restriccion\+:
+% FIG 0
+\subsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classRestriccion_a6a2bb9363d1083319784caec16d9c47f}{Restriccion}} (const string \&\mbox{\hyperlink{classRestriccion_a00025b954d3f918c0769e5851aa6e19d}{campo}}, const \mbox{\hyperlink{classDato}{Dato}} \&\mbox{\hyperlink{classRestriccion_a54b0ae0865a0a3eee152931e22b8b7f8}{dato}}, bool \mbox{\hyperlink{classRestriccion_a00cadade77b720aeefb909b879d01647}{igual}})
+\begin{DoxyCompactList}\small\item\em Constructor de Restricción. \end{DoxyCompactList}\item 
+const string \& \mbox{\hyperlink{classRestriccion_a00025b954d3f918c0769e5851aa6e19d}{campo}} () const
+\begin{DoxyCompactList}\small\item\em Observador campo. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classDato}{Dato}} \& \mbox{\hyperlink{classRestriccion_a54b0ae0865a0a3eee152931e22b8b7f8}{dato}} () const
+\begin{DoxyCompactList}\small\item\em Observador dato. \end{DoxyCompactList}\item 
+const bool \& \mbox{\hyperlink{classRestriccion_a00cadade77b720aeefb909b879d01647}{igual}} () const
+\begin{DoxyCompactList}\small\item\em Observador por\+Igual. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Atributos privados}
+\begin{Indent}\textbf{ Representación}\par
+{\em rep\+: restricción $\to$ bool~\newline
+rep(r) $\equiv$ true
+
+abs\+: restricción $\to$ Restricción ~\newline
+abs(r) $\equiv$ r\textquotesingle{} $|$
+\begin{DoxyItemize}
+\item campo(r\textquotesingle{}) = \+\_\+campo $\land$
+\item dato(r\textquotesingle{}) = \+\_\+dato $\land$
+\item por\+Igual(r\textquotesingle{}) = \+\_\+igual 
+\end{DoxyItemize}}\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRestriccion_a30dff6c0b92a829c82905d01c034fdf4}\label{classRestriccion_a30dff6c0b92a829c82905d01c034fdf4}} 
+string {\bfseries \+\_\+campo}
+\item 
+\mbox{\Hypertarget{classRestriccion_a1052448653d6cb5f14537e432b20983c}\label{classRestriccion_a1052448653d6cb5f14537e432b20983c}} 
+\mbox{\hyperlink{classDato}{Dato}} {\bfseries \+\_\+dato}
+\item 
+\mbox{\Hypertarget{classRestriccion_ac7f162378d50128fc313c811ff40266b}\label{classRestriccion_ac7f162378d50128fc313c811ff40266b}} 
+bool {\bfseries \+\_\+igual}
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Descripción detallada}
+Representa una restricción de la base de datos. 
+
+{\bfseries se explica con} T\+AD \mbox{\hyperlink{classRestriccion}{Restriccion}} 
+
+\subsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classRestriccion_a6a2bb9363d1083319784caec16d9c47f}\label{classRestriccion_a6a2bb9363d1083319784caec16d9c47f}} 
+\index{Restriccion@{Restriccion}!Restriccion@{Restriccion}}
+\index{Restriccion@{Restriccion}!Restriccion@{Restriccion}}
+\subsubsection{\texorpdfstring{Restriccion()}{Restriccion()}}
+{\footnotesize\ttfamily Restriccion\+::\+Restriccion (\begin{DoxyParamCaption}\item[{const string \&}]{campo,  }\item[{const \mbox{\hyperlink{classDato}{Dato}} \&}]{dato,  }\item[{bool}]{igual }\end{DoxyParamCaption})}
+
+
+
+Constructor de Restricción. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} == nueva(campo, dato, igual)
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(L)
+\end{DoxyDescription}
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classRestriccion_a00025b954d3f918c0769e5851aa6e19d}\label{classRestriccion_a00025b954d3f918c0769e5851aa6e19d}} 
+\index{Restriccion@{Restriccion}!campo@{campo}}
+\index{campo@{campo}!Restriccion@{Restriccion}}
+\subsubsection{\texorpdfstring{campo()}{campo()}}
+{\footnotesize\ttfamily const string \& Restriccion\+::campo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Observador campo. 
+
+El valor resultado se devuelve por referencia
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} == campo({\bfseries this}\}
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classRestriccion_a54b0ae0865a0a3eee152931e22b8b7f8}\label{classRestriccion_a54b0ae0865a0a3eee152931e22b8b7f8}} 
+\index{Restriccion@{Restriccion}!dato@{dato}}
+\index{dato@{dato}!Restriccion@{Restriccion}}
+\subsubsection{\texorpdfstring{dato()}{dato()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classDato}{Dato}} \& Restriccion\+::dato (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Observador dato. 
+
+El valor resultado se devuelve por referencia
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} == dato({\bfseries this}\}
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classRestriccion_a00cadade77b720aeefb909b879d01647}\label{classRestriccion_a00cadade77b720aeefb909b879d01647}} 
+\index{Restriccion@{Restriccion}!igual@{igual}}
+\index{igual@{igual}!Restriccion@{Restriccion}}
+\subsubsection{\texorpdfstring{igual()}{igual()}}
+{\footnotesize\ttfamily const bool \& Restriccion\+::igual (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Observador por\+Igual. 
+
+El valor resultado se devuelve por referencia
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} == por\+Igual({\bfseries this}\}
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}
+
+La documentación para esta clase fue generada a partir de los siguientes ficheros\+:\begin{DoxyCompactItemize}
+\item 
+src/Restriccion.\+h\item 
+src/Restriccion.\+cpp\end{DoxyCompactItemize}

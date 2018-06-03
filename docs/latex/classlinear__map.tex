@@ -1,0 +1,497 @@
+\hypertarget{classlinear__map}{}\section{Referencia de la plantilla de la Clase linear\+\_\+map$<$ K, S $>$}
+\label{classlinear__map}\index{linear\+\_\+map$<$ K, S $>$@{linear\+\_\+map$<$ K, S $>$}}
+
+
+Módulo diccionario con inserción en O(1)  
+
+
+
+
+{\ttfamily \#include $<$linear\+\_\+map.\+h$>$}
+
+\subsection*{Tipos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classlinear__map_a85577f6aa54870bf9b5d2f85f0749078}\label{classlinear__map_a85577f6aa54870bf9b5d2f85f0749078}} 
+using {\bfseries key\+\_\+type} = K
+\item 
+\mbox{\Hypertarget{classlinear__map_aaed4a6810a4a46c0cede18821069cc65}\label{classlinear__map_aaed4a6810a4a46c0cede18821069cc65}} 
+using {\bfseries mapped\+\_\+type} = S
+\item 
+\mbox{\Hypertarget{classlinear__map_a8bf7640c132d7e6fa5c4e68e1623d27d}\label{classlinear__map_a8bf7640c132d7e6fa5c4e68e1623d27d}} 
+using {\bfseries value\+\_\+type} = pair$<$ const K, S $>$
+\item 
+\mbox{\Hypertarget{classlinear__map_a08095dfd88596e72f10d59a212b622f8}\label{classlinear__map_a08095dfd88596e72f10d59a212b622f8}} 
+using {\bfseries size\+\_\+type} = size\+\_\+t
+\item 
+\mbox{\Hypertarget{classlinear__map_adbf8f5cd4879764446dab7673114b49b}\label{classlinear__map_adbf8f5cd4879764446dab7673114b49b}} 
+using {\bfseries iterator} = typename list$<$ pair$<$ const K, S $>$ $>$\+::iterator
+\item 
+\mbox{\Hypertarget{classlinear__map_a5dc3aa756da9119bfb14aee312c46d2f}\label{classlinear__map_a5dc3aa756da9119bfb14aee312c46d2f}} 
+using {\bfseries const\+\_\+iterator} = typename list$<$ pair$<$ const K, S $>$ $>$\+::const\+\_\+iterator
+\end{DoxyCompactItemize}
+\subsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classlinear__map_a2343174c5c974fefcec889b0954debcf}{linear\+\_\+map}} ()
+\begin{DoxyCompactList}\small\item\em Crea un diccionario vacio. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classlinear__map_a29a92ea4bf65d4f5936b061ebb8309fa}{linear\+\_\+map}} (const \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$ \&other)
+\begin{DoxyCompactList}\small\item\em Constructor por copia. \end{DoxyCompactList}\item 
+pair$<$ iterator, bool $>$ \mbox{\hyperlink{classlinear__map_a3631b2f824bbf4489943f0816464068e}{insert}} (const value\+\_\+type \&v)
+\begin{DoxyCompactList}\small\item\em Define o redefine una relación en el diccionario. \end{DoxyCompactList}\item 
+iterator \mbox{\hyperlink{classlinear__map_a6f04a74f63434402f7198aaac798d9da}{fast\+\_\+insert}} (const value\+\_\+type \&v)
+\begin{DoxyCompactList}\small\item\em Define una nueva relación en el diccionario. \end{DoxyCompactList}\item 
+size\+\_\+type \mbox{\hyperlink{classlinear__map_a3236ab6c5afff15a94cbc932cba6934b}{size}} () const
+\begin{DoxyCompactList}\small\item\em Tamaño del diccionario. \end{DoxyCompactList}\item 
+S \& \mbox{\hyperlink{classlinear__map_ad528c5b74bb14cfe7170bffffce2e979}{at}} (const K \&key)
+\begin{DoxyCompactList}\small\item\em Devuelve el significado relacionado con la clave. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classlinear__map_af6a78e9c9189a3ab81d2aaa8a187c754}{empty}} () const
+\begin{DoxyCompactList}\small\item\em True si el diccionario está vacío. \end{DoxyCompactList}\item 
+iterator \mbox{\hyperlink{classlinear__map_a227924393723570ac58f79fd194aac61}{find}} (const K \&k)
+\begin{DoxyCompactList}\small\item\em Devuelve un iterador relacionado a la clave buscada. End si no está definida. \end{DoxyCompactList}\item 
+const\+\_\+iterator \mbox{\hyperlink{classlinear__map_a99493e350f97f5c3932840a28406fd37}{find}} (const K \&k) const
+\begin{DoxyCompactList}\small\item\em Devuelve un iterador const relacionado a la clave buscada. End si no está definida. \end{DoxyCompactList}\item 
+iterator \mbox{\hyperlink{classlinear__map_a88a219ae647727d1b7e67c2dbe36d972}{begin}} ()
+\begin{DoxyCompactList}\small\item\em Devuelve un iterador al inicio del diccionario. \end{DoxyCompactList}\item 
+iterator \mbox{\hyperlink{classlinear__map_a29f90bee46581029b6ce496d4ea46683}{end}} ()
+\begin{DoxyCompactList}\small\item\em Devuelve un iterador a la posición pasando-\/el-\/último. \end{DoxyCompactList}\item 
+const\+\_\+iterator \mbox{\hyperlink{classlinear__map_a6f3bef755dbfb788cfe653a3ba70c211}{begin}} () const
+\begin{DoxyCompactList}\small\item\em Devuelve un iterador const al inicio del diccionario. \end{DoxyCompactList}\item 
+const\+\_\+iterator \mbox{\hyperlink{classlinear__map_a20a63149ca91f200c2ff3ea25bd0ad97}{end}} () const
+\begin{DoxyCompactList}\small\item\em Devuelve un iterador const a la posición pasando-\/el-\/último. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classlinear__map_ac906ffa073c059c8ea5897b79c92c6f4}{count}} (const K \&k) const
+\begin{DoxyCompactList}\small\item\em Cantidad de apariciones de la clave. \end{DoxyCompactList}\item 
+const S \& \mbox{\hyperlink{classlinear__map_a373f306f920941123cb47f6b77ed97ed}{at}} (const K \&key) const
+\begin{DoxyCompactList}\small\item\em Devuelve el significado relacionado con la clave. \end{DoxyCompactList}\item 
+size\+\_\+type \mbox{\hyperlink{classlinear__map_a932198aa420701fb84af74434764be9d}{erase}} (const K \&key)
+\begin{DoxyCompactList}\small\item\em Elimina el significado del diccionario. Devuelve la cantidad de elementos elminados. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classlinear__map}{linear\+\_\+map}} \& \mbox{\hyperlink{classlinear__map_a9868e2ada8b775c57521506fe7dd24a7}{operator=}} (const \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}} \&other)
+\begin{DoxyCompactList}\small\item\em Operador asignación del diccionario. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classlinear__map_a3429a0dcc296c4098aef699e089073a1}{operator==}} (const \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}} \&other) const
+\begin{DoxyCompactList}\small\item\em True si los diccionarios son iguales. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Atributos privados}
+\begin{Indent}\textbf{ Representación\+:}\par
+{\em rep\+: \mbox{\hyperlink{classlinear__map}{linear\+\_\+map(\+Clave, Significado)}} $\to$ bool~\newline
+rep(d) $\equiv$
+\begin{DoxyItemize}
+\item $\forall$ (i, j \+: Nat) (0 $\leq$ i, j $<$ long(\+\_\+elems) $\land$ $\pi_1$(\+\_\+elems\mbox{[}i\mbox{]}) == $\pi_1$(\+\_\+elems\mbox{[}j\mbox{]})) $\Rightarrow$ i = j
+\end{DoxyItemize}
+
+$\bullet$ \mbox{[} $\bullet$\mbox{]} \+: Secu( $\alpha$) s $\times$ Nat i $\rightarrow$ $\alpha$ \{0 $\leq$ i $<$ long(s)\} ~\newline
+s\mbox{[}i\mbox{]} $\equiv$ {\bfseries if} i = 0 {\bfseries then} prim(s) {\bfseries else} fin(s)\mbox{[}i -\/ 1\mbox{]} {\bfseries fi} 
+
+abs\+: \mbox{\hyperlink{classlinear__map}{linear\+\_\+map(\+Clave, Significado)}} $\to$ Dicc(\+Clave, Significado)~\newline
+abs(d) $\equiv$ d\textquotesingle{} $|$
+\begin{DoxyItemize}
+\item $\forall$ (c \+: Clave) def?(c, d\textquotesingle{}) $\Leftrightarrow$ $\exists$ (t \+: tupla(\+Clave, Significado)) está?(t, \+\_\+elems) $\land$ P1(t) == c
+\item $\forall$ (t \+: tupla(\+Clave, Significado)) está?(t, \+\_\+elems) $\Rightarrow$ P2(t) == obtener(P1(t), d\textquotesingle{}) 
+\end{DoxyItemize}}\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classlinear__map_aeb6846d41a9b28c5511b1ece965efe61}\label{classlinear__map_aeb6846d41a9b28c5511b1ece965efe61}} 
+list$<$ pair$<$ const K, S $>$ $>$ {\bfseries \+\_\+elems}
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Descripción detallada}
+\subsubsection*{template$<$class K, class S$>$\newline
+class linear\+\_\+map$<$ K, S $>$}
+
+Módulo diccionario con inserción en O(1) 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em K} & tipo paramétrico para la clave \\
+\hline
+{\em S} & tipo paramétrico para el significado\\
+\hline
+\end{DoxyTemplParams}
+Se espera que K tenga\+:
+\begin{DoxyItemize}
+\item operator==
+\item Constructor por copia
+\end{DoxyItemize}
+
+Se espera que S tenga\+:
+\begin{DoxyItemize}
+\item Constructor por copia
+\end{DoxyItemize}
+
+{\bfseries se explica con} T\+AD Diccionario(\+K, S) 
+
+\subsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classlinear__map_a2343174c5c974fefcec889b0954debcf}\label{classlinear__map_a2343174c5c974fefcec889b0954debcf}} 
+\index{linear\+\_\+map@{linear\+\_\+map}!linear\+\_\+map@{linear\+\_\+map}}
+\index{linear\+\_\+map@{linear\+\_\+map}!linear\+\_\+map@{linear\+\_\+map}}
+\subsubsection{\texorpdfstring{linear\+\_\+map()}{linear\_map()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class K , class S $>$ \\
+\mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::\mbox{\hyperlink{classlinear__map}{linear\+\_\+map}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Crea un diccionario vacio. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} = vacio
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__map_a29a92ea4bf65d4f5936b061ebb8309fa}\label{classlinear__map_a29a92ea4bf65d4f5936b061ebb8309fa}} 
+\index{linear\+\_\+map@{linear\+\_\+map}!linear\+\_\+map@{linear\+\_\+map}}
+\index{linear\+\_\+map@{linear\+\_\+map}!linear\+\_\+map@{linear\+\_\+map}}
+\subsubsection{\texorpdfstring{linear\+\_\+map()}{linear\_map()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class K, class S$>$ \\
+\mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::\mbox{\hyperlink{classlinear__map}{linear\+\_\+map}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$ \&}]{other }\end{DoxyParamCaption})}
+
+
+
+Constructor por copia. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} es una copia de other. No hay aliasing.
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(\#claves(ohter) $\ast$ (copy(\+Clave) + copy(\+Significado)))
+\end{DoxyDescription}
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classlinear__map_ad528c5b74bb14cfe7170bffffce2e979}\label{classlinear__map_ad528c5b74bb14cfe7170bffffce2e979}} 
+\index{linear\+\_\+map@{linear\+\_\+map}!at@{at}}
+\index{at@{at}!linear\+\_\+map@{linear\+\_\+map}}
+\subsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class K, class S $>$ \\
+S \& \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::at (\begin{DoxyParamCaption}\item[{const K \&}]{key }\end{DoxyParamCaption})}
+
+
+
+Devuelve el significado relacionado con la clave. 
+
+El significado se devuelve por referencia modificable.
+
+\begin{DoxyPrecond}{Precondición}
+def?(key, {\bfseries this}) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = obtener({\bfseries this}, k)
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(\#claves({\bfseries this}))
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__map_a373f306f920941123cb47f6b77ed97ed}\label{classlinear__map_a373f306f920941123cb47f6b77ed97ed}} 
+\index{linear\+\_\+map@{linear\+\_\+map}!at@{at}}
+\index{at@{at}!linear\+\_\+map@{linear\+\_\+map}}
+\subsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class K, class S $>$ \\
+const S \& \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::at (\begin{DoxyParamCaption}\item[{const K \&}]{key }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve el significado relacionado con la clave. 
+
+El significado se devuelve por referencia no-\/modificable.
+
+\begin{DoxyPrecond}{Precondición}
+def?(key, {\bfseries this}) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = obtener({\bfseries this}, k)
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(\#claves({\bfseries this}))
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__map_a88a219ae647727d1b7e67c2dbe36d972}\label{classlinear__map_a88a219ae647727d1b7e67c2dbe36d972}} 
+\index{linear\+\_\+map@{linear\+\_\+map}!begin@{begin}}
+\index{begin@{begin}!linear\+\_\+map@{linear\+\_\+map}}
+\subsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class K , class S $>$ \\
+\mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::iterator \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Devuelve un iterador al inicio del diccionario. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} apunta al inicio del diccionario
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__map_a6f3bef755dbfb788cfe653a3ba70c211}\label{classlinear__map_a6f3bef755dbfb788cfe653a3ba70c211}} 
+\index{linear\+\_\+map@{linear\+\_\+map}!begin@{begin}}
+\index{begin@{begin}!linear\+\_\+map@{linear\+\_\+map}}
+\subsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class K , class S $>$ \\
+\mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::const\+\_\+iterator \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve un iterador const al inicio del diccionario. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} apunta al inicio del diccionario
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__map_ac906ffa073c059c8ea5897b79c92c6f4}\label{classlinear__map_ac906ffa073c059c8ea5897b79c92c6f4}} 
+\index{linear\+\_\+map@{linear\+\_\+map}!count@{count}}
+\index{count@{count}!linear\+\_\+map@{linear\+\_\+map}}
+\subsubsection{\texorpdfstring{count()}{count()}}
+{\footnotesize\ttfamily template$<$class K, class S $>$ \\
+size\+\_\+t \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::count (\begin{DoxyParamCaption}\item[{const K \&}]{k }\end{DoxyParamCaption}) const}
+
+
+
+Cantidad de apariciones de la clave. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries if} def?({\bfseries this}, k) {\bfseries then} {\bfseries res} = 1 {\bfseries else} {\bfseries res} = 0 {\bfseries fi} 
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(\#claves({\bfseries this}) $\ast$ cmp(\+Clave)
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__map_af6a78e9c9189a3ab81d2aaa8a187c754}\label{classlinear__map_af6a78e9c9189a3ab81d2aaa8a187c754}} 
+\index{linear\+\_\+map@{linear\+\_\+map}!empty@{empty}}
+\index{empty@{empty}!linear\+\_\+map@{linear\+\_\+map}}
+\subsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily template$<$class K, class S$>$ \\
+bool \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+True si el diccionario está vacío. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = $\emptyset$?(claves({\bfseries this}))
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__map_a29f90bee46581029b6ce496d4ea46683}\label{classlinear__map_a29f90bee46581029b6ce496d4ea46683}} 
+\index{linear\+\_\+map@{linear\+\_\+map}!end@{end}}
+\index{end@{end}!linear\+\_\+map@{linear\+\_\+map}}
+\subsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class K , class S $>$ \\
+\mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::iterator \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Devuelve un iterador a la posición pasando-\/el-\/último. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} apunta a la posición pasando-\/el-\/último
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__map_a20a63149ca91f200c2ff3ea25bd0ad97}\label{classlinear__map_a20a63149ca91f200c2ff3ea25bd0ad97}} 
+\index{linear\+\_\+map@{linear\+\_\+map}!end@{end}}
+\index{end@{end}!linear\+\_\+map@{linear\+\_\+map}}
+\subsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class K , class S $>$ \\
+\mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::const\+\_\+iterator \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve un iterador const a la posición pasando-\/el-\/último. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} apunta a la posición pasando-\/el-\/último
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__map_a932198aa420701fb84af74434764be9d}\label{classlinear__map_a932198aa420701fb84af74434764be9d}} 
+\index{linear\+\_\+map@{linear\+\_\+map}!erase@{erase}}
+\index{erase@{erase}!linear\+\_\+map@{linear\+\_\+map}}
+\subsubsection{\texorpdfstring{erase()}{erase()}}
+{\footnotesize\ttfamily template$<$class K, class S $>$ \\
+\mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::size\+\_\+type \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::erase (\begin{DoxyParamCaption}\item[{const K \&}]{key }\end{DoxyParamCaption})}
+
+
+
+Elimina el significado del diccionario. Devuelve la cantidad de elementos elminados. 
+
+\begin{DoxyPrecond}{Precondición}
+d == {\bfseries this} $\land$ def?(key, {\bfseries this}) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} == borrar(key, d) $\land$ {\bfseries res} = 1
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(\#claves({\bfseries this}))
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__map_a6f04a74f63434402f7198aaac798d9da}\label{classlinear__map_a6f04a74f63434402f7198aaac798d9da}} 
+\index{linear\+\_\+map@{linear\+\_\+map}!fast\+\_\+insert@{fast\+\_\+insert}}
+\index{fast\+\_\+insert@{fast\+\_\+insert}!linear\+\_\+map@{linear\+\_\+map}}
+\subsubsection{\texorpdfstring{fast\+\_\+insert()}{fast\_insert()}}
+{\footnotesize\ttfamily template$<$class K, class S$>$ \\
+\mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::iterator \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::fast\+\_\+insert (\begin{DoxyParamCaption}\item[{const value\+\_\+type \&}]{v }\end{DoxyParamCaption})}
+
+
+
+Define una nueva relación en el diccionario. 
+
+\begin{DoxyPrecond}{Precondición}
+d = {\bfseries this} $\land$ $\lnot$ def?( $\pi_1$(v), {\bfseries this}) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} = definir(d, $\pi_1$(v), $\pi_2$(v)) $\land$ {\bfseries res} es un iterador que apunta a la relación recién definida
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(copy(v))
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__map_a227924393723570ac58f79fd194aac61}\label{classlinear__map_a227924393723570ac58f79fd194aac61}} 
+\index{linear\+\_\+map@{linear\+\_\+map}!find@{find}}
+\index{find@{find}!linear\+\_\+map@{linear\+\_\+map}}
+\subsubsection{\texorpdfstring{find()}{find()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class K, class S $>$ \\
+\mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::iterator \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::find (\begin{DoxyParamCaption}\item[{const K \&}]{k }\end{DoxyParamCaption})}
+
+
+
+Devuelve un iterador relacionado a la clave buscada. End si no está definida. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+
+\begin{DoxyItemize}
+\item def?(k, {\bfseries this}) $\Rightarrow$ $\pi_1$({\bfseries res}) = k $\land$ $\pi_2$({\bfseries res}) = obtener(k, {\bfseries this}) $\lor$
+\item def?(k, {\bfseries this}) $\Rightarrow$ {\bfseries res} es end
+\end{DoxyItemize}
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(\#claves({\bfseries this}))
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__map_a99493e350f97f5c3932840a28406fd37}\label{classlinear__map_a99493e350f97f5c3932840a28406fd37}} 
+\index{linear\+\_\+map@{linear\+\_\+map}!find@{find}}
+\index{find@{find}!linear\+\_\+map@{linear\+\_\+map}}
+\subsubsection{\texorpdfstring{find()}{find()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class K, class S $>$ \\
+\mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::const\+\_\+iterator \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::find (\begin{DoxyParamCaption}\item[{const K \&}]{k }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve un iterador const relacionado a la clave buscada. End si no está definida. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+
+\begin{DoxyItemize}
+\item def?(k, {\bfseries this}) $\Rightarrow$ $\pi_1$({\bfseries res}) = k $\land$ $\pi_2$({\bfseries res}) = obtener(k, {\bfseries this}) $\lor$
+\item def?(k, {\bfseries this}) $\Rightarrow$ {\bfseries res} es end
+\end{DoxyItemize}
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(\#claves({\bfseries this}))
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__map_a3631b2f824bbf4489943f0816464068e}\label{classlinear__map_a3631b2f824bbf4489943f0816464068e}} 
+\index{linear\+\_\+map@{linear\+\_\+map}!insert@{insert}}
+\index{insert@{insert}!linear\+\_\+map@{linear\+\_\+map}}
+\subsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily template$<$class K, class S$>$ \\
+pair$<$ typename \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::iterator, bool $>$ \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::insert (\begin{DoxyParamCaption}\item[{const value\+\_\+type \&}]{v }\end{DoxyParamCaption})}
+
+
+
+Define o redefine una relación en el diccionario. 
+
+\begin{DoxyPrecond}{Precondición}
+d = {\bfseries this} 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} = definir(d, $\pi_1$(v), $\pi_2$(v)) $\land$ {\bfseries res} es una tupla con el primer elemento un iterador a la relación definida y el segúndo elemento indica si $\pi_1$(v) no era clave del diccionario
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(\#claves({\bfseries this}) + copy(v))
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__map_a9868e2ada8b775c57521506fe7dd24a7}\label{classlinear__map_a9868e2ada8b775c57521506fe7dd24a7}} 
+\index{linear\+\_\+map@{linear\+\_\+map}!operator=@{operator=}}
+\index{operator=@{operator=}!linear\+\_\+map@{linear\+\_\+map}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$class K , class S $>$ \\
+\mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$ \& \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$ \&}]{other }\end{DoxyParamCaption})}
+
+
+
+Operador asignación del diccionario. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} == other $\land$ {\bfseries res} es referencia a {\bfseries this}
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(\#claves({\bfseries this}) + \#claves(other) $\ast$ (copy(\+Clave) + copy(\+Significado)))
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__map_a3429a0dcc296c4098aef699e089073a1}\label{classlinear__map_a3429a0dcc296c4098aef699e089073a1}} 
+\index{linear\+\_\+map@{linear\+\_\+map}!operator==@{operator==}}
+\index{operator==@{operator==}!linear\+\_\+map@{linear\+\_\+map}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily template$<$class K , class S $>$ \\
+bool \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$ \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+True si los diccionarios son iguales. 
+
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(\#claves({\bfseries this}) $\ast$ \#claves(other))
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__map_a3236ab6c5afff15a94cbc932cba6934b}\label{classlinear__map_a3236ab6c5afff15a94cbc932cba6934b}} 
+\index{linear\+\_\+map@{linear\+\_\+map}!size@{size}}
+\index{size@{size}!linear\+\_\+map@{linear\+\_\+map}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$class K , class S $>$ \\
+\mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::size\+\_\+type \mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ K, S $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Tamaño del diccionario. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = \#clave({\bfseries this})
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}
+
+La documentación para esta clase fue generada a partir de los siguientes ficheros\+:\begin{DoxyCompactItemize}
+\item 
+src/linear\+\_\+map.\+h\item 
+src/linear\+\_\+map.\+hpp\end{DoxyCompactItemize}

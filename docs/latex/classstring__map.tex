@@ -1,0 +1,580 @@
+\hypertarget{classstring__map}{}\section{Referencia de la plantilla de la Clase string\+\_\+map$<$ T $>$}
+\label{classstring__map}\index{string\+\_\+map$<$ T $>$@{string\+\_\+map$<$ T $>$}}
+
+
+Implementacion de map$<$string,\+T$>$ sobre Trie.  
+
+
+
+
+{\ttfamily \#include $<$string\+\_\+map.\+h$>$}
+
+
+
+Diagrama de colaboración para string\+\_\+map$<$ T $>$\+:
+% FIG 0
+\subsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classstring__map_1_1const__iterator}{const\+\_\+iterator}}
+\item 
+class \mbox{\hyperlink{classstring__map_1_1iterator}{iterator}}
+\item 
+struct \mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}}
+\end{DoxyCompactItemize}
+\subsection*{Tipos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classstring__map_ac6b29d74d0658db5938f53b66394d2ca}\label{classstring__map_ac6b29d74d0658db5938f53b66394d2ca}} 
+typedef string {\bfseries key\+\_\+type}
+\item 
+\mbox{\Hypertarget{classstring__map_a87309fe41124ea0f9f9fe22729e1fdf7}\label{classstring__map_a87309fe41124ea0f9f9fe22729e1fdf7}} 
+typedef T {\bfseries mapped\+\_\+type}
+\item 
+\mbox{\Hypertarget{classstring__map_aba7d0f8b84310cf46a990b404834074b}\label{classstring__map_aba7d0f8b84310cf46a990b404834074b}} 
+typedef std\+::pair$<$ const key\+\_\+type, mapped\+\_\+type $>$ {\bfseries value\+\_\+type}
+\item 
+\mbox{\Hypertarget{classstring__map_a91a355e52de423b8385b72caf553e3de}\label{classstring__map_a91a355e52de423b8385b72caf553e3de}} 
+typedef size\+\_\+t {\bfseries size\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classstring__map_acd7803d493b09db56e2e9022e526def7}{string\+\_\+map}} ()
+\begin{DoxyCompactList}\small\item\em Construye mapa vacio. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classstring__map_a37b201370c0a6a3c2aa488dedbc0a9d7}{$\sim$string\+\_\+map}} ()
+\begin{DoxyCompactList}\small\item\em Destruye mapa. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classstring__map_a699366edd8a6d33bdc7977a42038822b}{string\+\_\+map}} (const \mbox{\hyperlink{classstring__map}{string\+\_\+map}} \&p)
+\begin{DoxyCompactList}\small\item\em Constructor por copia. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}} \& \mbox{\hyperlink{classstring__map_a96848d5ec60072643cae6c412a8c2d8f}{operator=}} (const \mbox{\hyperlink{classstring__map}{string\+\_\+map}} \&p)
+\begin{DoxyCompactList}\small\item\em Operador de asignacion. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classstring__map_aadca3f9b617f66163f00982b88d3a368}{operator==}} (const \mbox{\hyperlink{classstring__map}{string\+\_\+map}} \&otro) const
+\begin{DoxyCompactList}\small\item\em Operadores de comparacion. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classstring__map_ac7db64d13d22674a2d53c8af469186fa}{operator!=}} (const \mbox{\hyperlink{classstring__map}{string\+\_\+map}} \&otro) const
+\begin{DoxyCompactList}\small\item\em Operadores de comparacion. \end{DoxyCompactList}\item 
+size\+\_\+type \mbox{\hyperlink{classstring__map_aaca5a3ee235d2e7dd09e58385fff4f47}{count}} (const key\+\_\+type \&key) const
+\begin{DoxyCompactList}\small\item\em Cantidad de apariciones de la clave (0 o 1) \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classstring__map_a4fabf7143525fb9e00d7cf3279f6d854}{size}} () const
+\begin{DoxyCompactList}\small\item\em Devuelve cantidad de claves definidas. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classstring__map_a55e9dbcd6209953b93c7a98d93e154b6}{empty}} () const
+\begin{DoxyCompactList}\small\item\em Permite saber si es vacio (no tiene ninguna clave definida) \end{DoxyCompactList}\item 
+mapped\+\_\+type \& \mbox{\hyperlink{classstring__map_a82bd8d05388e69e02a75980ef759e217}{operator\mbox{[}$\,$\mbox{]}}} (const key\+\_\+type \&key)
+\begin{DoxyCompactList}\small\item\em Acceso / definición de pares clave/valor. \end{DoxyCompactList}\item 
+mapped\+\_\+type \& \mbox{\hyperlink{classstring__map_afcc707f585755be24ffc4b06149f1cec}{at}} (const key\+\_\+type \&key)
+\begin{DoxyCompactList}\small\item\em Acceso a una clave sin modificar mapa. \end{DoxyCompactList}\item 
+const mapped\+\_\+type \& \mbox{\hyperlink{classstring__map_aa57a57621a1bd76ce603bc9b22606458}{at}} (const key\+\_\+type \&key) const
+\begin{DoxyCompactList}\small\item\em Acceso a una clave sin modificar mapa. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classstring__map_a5e0460b9c8c6f7c6e5f76e0112446842}\label{classstring__map_a5e0460b9c8c6f7c6e5f76e0112446842}} 
+void \mbox{\hyperlink{classstring__map_a5e0460b9c8c6f7c6e5f76e0112446842}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Vacia el mapa. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \mbox{\hyperlink{classstring__map_aced2bd9493475515f3dc765a379484bd}{begin}} ()
+\begin{DoxyCompactList}\small\item\em iterador al primer par $<$clave,significado$>$ en orden lexicografico \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \mbox{\hyperlink{classstring__map_ab063b2f78945d192c5ef3ccc68db8e80}{end}} ()
+\begin{DoxyCompactList}\small\item\em iterador al fin de la coleccion \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classstring__map_a6b917b6b9adea2d69b4e325fa7169c0d}\label{classstring__map_a6b917b6b9adea2d69b4e325fa7169c0d}} 
+\mbox{\hyperlink{classstring__map_1_1const__iterator}{const\+\_\+iterator}} \mbox{\hyperlink{classstring__map_a6b917b6b9adea2d69b4e325fa7169c0d}{begin}} () const
+\begin{DoxyCompactList}\small\item\em Versiones const de begin/end. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classstring__map_a8b5daa9535fb19da27b334d0d530cac5}\label{classstring__map_a8b5daa9535fb19da27b334d0d530cac5}} 
+\mbox{\hyperlink{classstring__map_1_1const__iterator}{const\+\_\+iterator}} {\bfseries end} () const
+\item 
+\mbox{\Hypertarget{classstring__map_a8db2c1d5b91edfefe123798561926548}\label{classstring__map_a8db2c1d5b91edfefe123798561926548}} 
+\mbox{\hyperlink{classstring__map_1_1const__iterator}{const\+\_\+iterator}} {\bfseries cbegin} () const
+\item 
+\mbox{\Hypertarget{classstring__map_aff19dfc4a3322fa8e0a8d2d327a0cba8}\label{classstring__map_aff19dfc4a3322fa8e0a8d2d327a0cba8}} 
+\mbox{\hyperlink{classstring__map_1_1const__iterator}{const\+\_\+iterator}} {\bfseries cend} () const
+\item 
+\mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \mbox{\hyperlink{classstring__map_abbe345fcf0ece43b416ea0e4699d95ed}{find}} (const key\+\_\+type \&key)
+\begin{DoxyCompactList}\small\item\em busca una clave \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classstring__map_1_1const__iterator}{const\+\_\+iterator}} \mbox{\hyperlink{classstring__map_a4542bfa7df12212f10a9bf7bf10d3804}{find}} (const key\+\_\+type \&key) const
+\begin{DoxyCompactList}\small\item\em busca una clave \end{DoxyCompactList}\item 
+pair$<$ \mbox{\hyperlink{classstring__map_1_1iterator}{iterator}}, bool $>$ \mbox{\hyperlink{classstring__map_a2fff1076bccd20802f03f72a92275b33}{insert}} (const value\+\_\+type \&value)
+\begin{DoxyCompactList}\small\item\em insercion \end{DoxyCompactList}\item 
+size\+\_\+type \mbox{\hyperlink{classstring__map_a380bf45fbfd19efcda1f9579e5c8600c}{erase}} (const key\+\_\+type \&key)
+\begin{DoxyCompactList}\small\item\em eliminar una clave \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \mbox{\hyperlink{classstring__map_aad96e9f05f2a7f4196331e0fcba3bae7}{erase}} (\mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} pos)
+\begin{DoxyCompactList}\small\item\em eliminar una clave mediante iterador \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Representación}
+\label{_amgrp804caec2222e5f28d512690182d357cf}%
+String Map se representa con tupla$<$head\+: puntero(\+Nodo), cant\+Claves\+: nat$>$
+
+donde \mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} es tupla $<$clave\+: string, padre\+: puntero(\+Nodo), hijos\+: arreglo(puntero(\+Nodo)), cant\+Hijos\+: nat, par\+: tupla(string, T)$>$$>$
+
+rep\+: \mbox{\hyperlink{classstring__map}{string\+\_\+map}} sm $\to$ bool~\newline
+rep(sm) $\equiv$
+\begin{DoxyItemize}
+\item sm.\+cant\+Claves == \#claves\+SM(sm.\+head) $\land$
+\item cant\+Hijos\+Ok(sm.\+head) $\land$
+\item consistencia\+Padre\+Hijo(sm.\+head, sm.\+head.\+hijos) $\land$
+\item camino\+Valido\+Clave\+De\+Par(sm.\+head, sm.\+head, sm.\+head.\+hijos)
+\end{DoxyItemize}
+
+abs\+: \mbox{\hyperlink{classstring__map}{string\+\_\+map}} sm $\to$ diccionario(string, T)~\newline
+abs(sm) $\equiv$ d \+: diccionario $|$
+\begin{DoxyItemize}
+\item claves(d) == claves\+SM(sm.\+head) $\land$
+\item ( $\forall$ cl $\in$ claves(d)) (definido(cl, sm) $\land$ obtener(cl, d) == significado(cl, sm))
+\end{DoxyItemize}
+
+cant\+Hijos\+Ok \+: \mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} n $\to$ bool
+
+cant\+Hijos\+Ok(n) $\equiv$ if n != nil then n.\+cant\+Hijos == contar\+Hijos(n.\+hijos) $\land$ hijos\+De\+Hijos(n.\+hijos) else True fi
+
+hijos\+De\+Hijos \+: arreglo(nodo) an $\to$ bool
+
+hijos\+De\+Hijos(an) $\equiv$ if vacia?(an) then True else cant\+Hijos\+Ok(prim(an)) $\land$ hijos\+De\+Hijos(fin(an)) fi
+
+contar\+Hijos \+: arreglo(nodo) an $\to$ nat
+
+contar\+Hijos(an) $\equiv$ if vacia?(an) then 0 else if prim(an) != nil then 1 + contar\+Hijos(fin(an)) else 0 + contar\+Hijos(fin(an)) fi fi
+
+consistencia\+Padre\+Hijo \+: \mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} n x arreglo(nodo) an $\to$ bool
+
+consistencia\+Padre\+Hijo $\equiv$ if vacia?(an) then True else if prim(an) != nil then n == prim(an).padre $\land$ n.\+hijos\mbox{[}ord(prim(an).clave))\mbox{]} == prim(an) $\land$ consistencia\+Padre\+Hijo(n, fin(an)) $\land$ consistencia\+Padre\+Hijo(prim(an), prim(an).hijos) else consistencia\+Padre\+Hijo(n, fin(an)) fi fi
+
+camino\+Valido\+Clave\+De\+Par \+: \mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} r x \mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} n x arreglo(nodo) an $\to$ bool
+
+camino\+Valido\+Clave\+De\+Par $\equiv$ if vacia?(an) then True else if prim(an) != nil then if prim(an).par != nil then buscar(π1(prim(an)), π1(prim(an)) r) $\land$ camino\+Valido\+Clave\+De\+Par(r, n, fin(an)) $\land$ camino\+Valido\+Clave\+De\+Par(r, prim(an), prim(an).hijos) else camino\+Valido\+Clave\+De\+Par(r, n, fin(an)) $\land$ camino\+Valido\+Clave\+De\+Par(r, prim(an), prim(an).hijos) fi else camino\+Valido\+Clave\+De\+Par(r, n, fin(an)) fi
+
+claves\+SM \+: \mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} n $\to$ conj(strings)
+
+claves\+SM $\equiv$ if n != N\+IL then if n.\+par != N\+IL then Ag(π1(n.\+par), ø) U recorrer\+Hijos(n.\+hijos) else recorrer\+Hijos(n.\+hijos) fi else ø fi
+
+recorrer\+Hijos \+: arreglo(puntero(nodo)) sn $\to$ conj(strings)
+
+recorrer\+Hijos $\equiv$ if vacia?(sn) then ø else claves\+S\+M(prim(sn)) U recorrer\+Hijos(fin(sn)) fi
+
+definido \+: secu(char) clave x String Map sm $\to$ bool
+
+definido(clave, sm) $\equiv$ buscar(clave, clave, sm.\+head)
+
+buscar \+: secu(char) clave x secu(char) ch x \mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} n $\to$ bool
+
+buscar(clave, ch, n) $\equiv$ if n == N\+IL then False else if vacia?(ch) then clave == π1(n.\+par) else prim(ch) == n.\+clave $\land$ buscar(clave, fin(ch), n.\+hijos\mbox{[}ord(prim(ch))\mbox{]}) fi fi
+
+significado \+: secu(char) clave x String Map sm $\to$ T \{definido(clave, sm)\}
+
+significado(clave, string\+\_\+map) $\equiv$ buscar\+Significado(clave, sm.\+head)
+
+buscar\+Significado \+: secu(char) clave x \mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} n $\to$ bool
+
+buscar\+Significado(clave, n) $\equiv$ if vacia?(ch) then π2(n.\+par) else buscar\+Significado(fin(ch), n.\+hijos\mbox{[}ord(prim(ch))\mbox{]}) fi \begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classstring__map_a4e60d9ce91c1b8c217b626fcaf8d95da}\label{classstring__map_a4e60d9ce91c1b8c217b626fcaf8d95da}} 
+\mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} $\ast$ {\bfseries head}
+\item 
+\mbox{\Hypertarget{classstring__map_a1a4b844fe3d37c0ea5602e2bc7b1d6f2}\label{classstring__map_a1a4b844fe3d37c0ea5602e2bc7b1d6f2}} 
+size\+\_\+t {\bfseries cant\+Claves} = 0
+\item 
+\mbox{\Hypertarget{classstring__map_adad31fdfbdd23045b03a70bb81f9fa15}\label{classstring__map_adad31fdfbdd23045b03a70bb81f9fa15}} 
+void {\bfseries borrar} (\mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} $\ast$\&n)
+\item 
+\mbox{\Hypertarget{classstring__map_a8644f3f069fedb8f3b94ccd6704eafa2}\label{classstring__map_a8644f3f069fedb8f3b94ccd6704eafa2}} 
+void {\bfseries copiar\+Hijos} (\mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} $\ast$head, \mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} $\ast$other)
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+\subsubsection*{template$<$typename T$>$\newline
+class string\+\_\+map$<$ T $>$}
+
+Implementacion de map$<$string,\+T$>$ sobre Trie. 
+
+Asume de T\+:
+\begin{DoxyItemize}
+\item tiene constructor por copia
+\item tiene operador ==
+\item solo permite utilizar el operator\mbox{[}\mbox{]} si T tiene constructor por defecto
+\end{DoxyItemize}
+
+{\bfseries se explica con} T\+AD Diccionario(string, T) 
+
+\subsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classstring__map_acd7803d493b09db56e2e9022e526def7}\label{classstring__map_acd7803d493b09db56e2e9022e526def7}} 
+\index{string\+\_\+map@{string\+\_\+map}!string\+\_\+map@{string\+\_\+map}}
+\index{string\+\_\+map@{string\+\_\+map}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{string\+\_\+map()}{string\_map()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::\mbox{\hyperlink{classstring__map}{string\+\_\+map}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Construye mapa vacio. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} = nuevo\+SM
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_a37b201370c0a6a3c2aa488dedbc0a9d7}\label{classstring__map_a37b201370c0a6a3c2aa488dedbc0a9d7}} 
+\index{string\+\_\+map@{string\+\_\+map}!````~string\+\_\+map@{$\sim$string\+\_\+map}}
+\index{````~string\+\_\+map@{$\sim$string\+\_\+map}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{$\sim$string\+\_\+map()}{~string\_map()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::$\sim$\mbox{\hyperlink{classstring__map}{string\+\_\+map}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destruye mapa. 
+
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(sn $\ast$ S)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_a699366edd8a6d33bdc7977a42038822b}\label{classstring__map_a699366edd8a6d33bdc7977a42038822b}} 
+\index{string\+\_\+map@{string\+\_\+map}!string\+\_\+map@{string\+\_\+map}}
+\index{string\+\_\+map@{string\+\_\+map}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{string\+\_\+map()}{string\_map()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::\mbox{\hyperlink{classstring__map}{string\+\_\+map}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$ \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Constructor por copia. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} = nuevo\+SM $\land$ {\bfseries this} = p 
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(sn $\ast$ S)
+\end{DoxyDescription}
+\end{DoxyPostcond}
+
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classstring__map_afcc707f585755be24ffc4b06149f1cec}\label{classstring__map_afcc707f585755be24ffc4b06149f1cec}} 
+\index{string\+\_\+map@{string\+\_\+map}!at@{at}}
+\index{at@{at}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::mapped\+\_\+type \& \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::at (\begin{DoxyParamCaption}\item[{const key\+\_\+type \&}]{key }\end{DoxyParamCaption})}
+
+
+
+Acceso a una clave sin modificar mapa. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em key} & clave a acceder que debe existir previamente \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+una referencia a la definicion.
+\end{DoxyReturn}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(S)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_aa57a57621a1bd76ce603bc9b22606458}\label{classstring__map_aa57a57621a1bd76ce603bc9b22606458}} 
+\index{string\+\_\+map@{string\+\_\+map}!at@{at}}
+\index{at@{at}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+const \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::mapped\+\_\+type \& \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::at (\begin{DoxyParamCaption}\item[{const key\+\_\+type \&}]{key }\end{DoxyParamCaption}) const}
+
+
+
+Acceso a una clave sin modificar mapa. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em key} & clave a acceder que debe existir previamente \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+una referencia const a la definicion.
+\end{DoxyReturn}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(S)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_aced2bd9493475515f3dc765a379484bd}\label{classstring__map_aced2bd9493475515f3dc765a379484bd}} 
+\index{string\+\_\+map@{string\+\_\+map}!begin@{begin}}
+\index{begin@{begin}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::\mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+iterador al primer par $<$clave,significado$>$ en orden lexicografico 
+
+\begin{DoxyReturn}{Devuelve}
+iterador al elemento o \mbox{\hyperlink{classstring__map_ab063b2f78945d192c5ef3ccc68db8e80}{end()}} si el mapa era vacio
+\end{DoxyReturn}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(S)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_aaca5a3ee235d2e7dd09e58385fff4f47}\label{classstring__map_aaca5a3ee235d2e7dd09e58385fff4f47}} 
+\index{string\+\_\+map@{string\+\_\+map}!count@{count}}
+\index{count@{count}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{count()}{count()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+size\+\_\+t \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::count (\begin{DoxyParamCaption}\item[{const key\+\_\+type \&}]{key }\end{DoxyParamCaption}) const}
+
+
+
+Cantidad de apariciones de la clave (0 o 1) 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em key} & clave a buscar\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+if key $\in$ claves({\bfseries this}) then {\bfseries res} = 1 else {\bfseries res} = 0 fi
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(S)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_a55e9dbcd6209953b93c7a98d93e154b6}\label{classstring__map_a55e9dbcd6209953b93c7a98d93e154b6}} 
+\index{string\+\_\+map@{string\+\_\+map}!empty@{empty}}
+\index{empty@{empty}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Permite saber si es vacio (no tiene ninguna clave definida) 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+if \#claves({\bfseries this}) = 0 then {\bfseries res} = true else {\bfseries res} = false fi 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{classstring__map_ab063b2f78945d192c5ef3ccc68db8e80}\label{classstring__map_ab063b2f78945d192c5ef3ccc68db8e80}} 
+\index{string\+\_\+map@{string\+\_\+map}!end@{end}}
+\index{end@{end}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::\mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+iterador al fin de la coleccion 
+
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(S)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_a380bf45fbfd19efcda1f9579e5c8600c}\label{classstring__map_a380bf45fbfd19efcda1f9579e5c8600c}} 
+\index{string\+\_\+map@{string\+\_\+map}!erase@{erase}}
+\index{erase@{erase}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{erase()}{erase()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T$>$ \\
+size\+\_\+type \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::erase (\begin{DoxyParamCaption}\item[{const key\+\_\+type \&}]{key }\end{DoxyParamCaption})}
+
+
+
+eliminar una clave 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em key} & clave a eliminar \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+cantidad de elementos eliminados
+\end{DoxyReturn}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(S)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_aad96e9f05f2a7f4196331e0fcba3bae7}\label{classstring__map_aad96e9f05f2a7f4196331e0fcba3bae7}} 
+\index{string\+\_\+map@{string\+\_\+map}!erase@{erase}}
+\index{erase@{erase}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{erase()}{erase()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::\mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::erase (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classstring__map_1_1iterator}{iterator}}}]{pos }\end{DoxyParamCaption})}
+
+
+
+eliminar una clave mediante iterador 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em pos} & iterador apuntando a clave a eliminar \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+iterador apuntando el proximo de la clave eliminada (o \mbox{\hyperlink{classstring__map_ab063b2f78945d192c5ef3ccc68db8e80}{end()}} si era la ultima)
+\end{DoxyReturn}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(S)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_abbe345fcf0ece43b416ea0e4699d95ed}\label{classstring__map_abbe345fcf0ece43b416ea0e4699d95ed}} 
+\index{string\+\_\+map@{string\+\_\+map}!find@{find}}
+\index{find@{find}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{find()}{find()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::\mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::find (\begin{DoxyParamCaption}\item[{const key\+\_\+type \&}]{key }\end{DoxyParamCaption})}
+
+
+
+busca una clave 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em key} & clave a buscar \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+un iterador al par $<$clave, significado$>$, si la clave no existe devuelve el end
+\end{DoxyReturn}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(S)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_a4542bfa7df12212f10a9bf7bf10d3804}\label{classstring__map_a4542bfa7df12212f10a9bf7bf10d3804}} 
+\index{string\+\_\+map@{string\+\_\+map}!find@{find}}
+\index{find@{find}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{find()}{find()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::\mbox{\hyperlink{classstring__map_1_1const__iterator}{const\+\_\+iterator}} \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::find (\begin{DoxyParamCaption}\item[{const key\+\_\+type \&}]{key }\end{DoxyParamCaption}) const}
+
+
+
+busca una clave 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em key} & clave a buscar \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+un iterador const al par $<$clave, significado$>$, si la clave no existe devuelve el end
+\end{DoxyReturn}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(S)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_a2fff1076bccd20802f03f72a92275b33}\label{classstring__map_a2fff1076bccd20802f03f72a92275b33}} 
+\index{string\+\_\+map@{string\+\_\+map}!insert@{insert}}
+\index{insert@{insert}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+pair$<$ typename \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::\mbox{\hyperlink{classstring__map_1_1iterator}{iterator}}, bool $>$ \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::insert (\begin{DoxyParamCaption}\item[{const value\+\_\+type \&}]{value }\end{DoxyParamCaption})}
+
+
+
+insercion 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em value} & par $<$clave,significado$>$ a insertar \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+un par con un iterador al par clave-\/significado agregado o modificado y un bool que indica si la clave se insertó como una clave nueva.
+\end{DoxyReturn}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(S + copy(\+T))
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_ac7db64d13d22674a2d53c8af469186fa}\label{classstring__map_ac7db64d13d22674a2d53c8af469186fa}} 
+\index{string\+\_\+map@{string\+\_\+map}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$ \&}]{otro }\end{DoxyParamCaption}) const}
+
+
+
+Operadores de comparacion. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} != p 
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(sn $\ast$ S)
+\end{DoxyDescription}
+\end{DoxyPostcond}
+\mbox{\Hypertarget{classstring__map_a96848d5ec60072643cae6c412a8c2d8f}\label{classstring__map_a96848d5ec60072643cae6c412a8c2d8f}} 
+\index{string\+\_\+map@{string\+\_\+map}!operator=@{operator=}}
+\index{operator=@{operator=}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$ \& \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$ \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Operador de asignacion. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} = p
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(sn $\ast$ S)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_aadca3f9b617f66163f00982b88d3a368}\label{classstring__map_aadca3f9b617f66163f00982b88d3a368}} 
+\index{string\+\_\+map@{string\+\_\+map}!operator==@{operator==}}
+\index{operator==@{operator==}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$ \&}]{otro }\end{DoxyParamCaption}) const}
+
+
+
+Operadores de comparacion. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} == p 
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(sn $\ast$ S)
+\end{DoxyDescription}
+\end{DoxyPostcond}
+\mbox{\Hypertarget{classstring__map_a82bd8d05388e69e02a75980ef759e217}\label{classstring__map_a82bd8d05388e69e02a75980ef759e217}} 
+\index{string\+\_\+map@{string\+\_\+map}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::mapped\+\_\+type \& \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const key\+\_\+type \&}]{key }\end{DoxyParamCaption})}
+
+
+
+Acceso / definición de pares clave/valor. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em key} & clave a acceder, si no existe, se crea \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+una referencia a la definicion.
+\end{DoxyReturn}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(S)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_a4fabf7143525fb9e00d7cf3279f6d854}\label{classstring__map_a4fabf7143525fb9e00d7cf3279f6d854}} 
+\index{string\+\_\+map@{string\+\_\+map}!size@{size}}
+\index{size@{size}!string\+\_\+map@{string\+\_\+map}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+size\+\_\+t \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve cantidad de claves definidas. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = \#claves({\bfseries this}) 
+\end{DoxyPostcond}
+
+
+La documentación para esta clase fue generada a partir de los siguientes ficheros\+:\begin{DoxyCompactItemize}
+\item 
+src/string\+\_\+map.\+h\item 
+src/string\+\_\+map.\+hpp\end{DoxyCompactItemize}

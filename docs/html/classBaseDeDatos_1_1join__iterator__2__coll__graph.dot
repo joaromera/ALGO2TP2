@@ -1,0 +1,21 @@
+digraph "BaseDeDatos::join_iterator_2"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="BaseDeDatos::join_iterator_2",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" it_end\nit" ,fontname="Helvetica"];
+  Node2 [label="linear_set\< Registro \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classlinear__set.html"];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _elems" ,fontname="Helvetica"];
+  Node3 [label="linear_map\< Registro,\l bool \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classlinear__map.html"];
+  Node4 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" it_index_end\nit_index" ,fontname="Helvetica"];
+  Node4 [label="string_map\< linear\l_set\< Registro \> \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classstring__map.html"];
+  Node5 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" head" ,fontname="Helvetica"];
+  Node5 [label="string_map\< T \>::Nodo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structstring__map_1_1Nodo.html"];
+  Node6 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" par" ,fontname="Helvetica"];
+  Node6 [label="pair\< const key_type, T \>",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node5 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" padre" ,fontname="Helvetica"];
+  Node7 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" clave" ,fontname="Helvetica"];
+  Node7 [label="string",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node8 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" hijos" ,fontname="Helvetica"];
+  Node8 [label="vector\< string_map\l::Nodo *\>",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+}

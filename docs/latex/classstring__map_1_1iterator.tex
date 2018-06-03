@@ -1,0 +1,257 @@
+\hypertarget{classstring__map_1_1iterator}{}\section{Referencia de la Clase string\+\_\+map$<$ T $>$\+:\+:iterator}
+\label{classstring__map_1_1iterator}\index{string\+\_\+map$<$ T $>$\+::iterator@{string\+\_\+map$<$ T $>$\+::iterator}}
+
+
+Diagrama de colaboración para string\+\_\+map$<$ T $>$\+:\+:iterator\+:
+% FIG 0
+\subsection*{Tipos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classstring__map_1_1iterator_a16eb7e34ca8bfcd4d5e35313d9a705c1}\label{classstring__map_1_1iterator_a16eb7e34ca8bfcd4d5e35313d9a705c1}} 
+typedef string {\bfseries key\+\_\+type}
+\item 
+\mbox{\Hypertarget{classstring__map_1_1iterator_a0b1247eb38e91de58ef66285c7d7378e}\label{classstring__map_1_1iterator_a0b1247eb38e91de58ef66285c7d7378e}} 
+typedef T {\bfseries mapped\+\_\+type}
+\item 
+\mbox{\Hypertarget{classstring__map_1_1iterator_adf55a6194045f596a69c8a7ec0e0b9fe}\label{classstring__map_1_1iterator_adf55a6194045f596a69c8a7ec0e0b9fe}} 
+typedef std\+::pair$<$ const key\+\_\+type, mapped\+\_\+type $>$ {\bfseries value\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classstring__map_1_1iterator_adfa11e83ddfb983172d2fb367184c486}{iterator}} ()
+\begin{DoxyCompactList}\small\item\em Constructor por defecto del iterador. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classstring__map_1_1iterator_a9421aa5f1c72795f03172f3e0ecd87ca}{iterator}} (const \mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \&n)
+\begin{DoxyCompactList}\small\item\em Constructor por copia del iterador. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \& \mbox{\hyperlink{classstring__map_1_1iterator_a89370874c0a2a3fcc6b6980851b32525}{operator=}} (const \mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \&n)
+\begin{DoxyCompactList}\small\item\em Operador de asignacion. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classstring__map_1_1iterator_a78fea15b5e6288434dbb4876e07b5eaa}{operator==}} (const \mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \&n) const
+\begin{DoxyCompactList}\small\item\em Operador de comparacion. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classstring__map_1_1iterator_aabc2350ae8191b4dd7102495893ea66a}{operator!=}} (const \mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \&n) const
+\begin{DoxyCompactList}\small\item\em Operador de comparacion. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \& \mbox{\hyperlink{classstring__map_1_1iterator_a778cc925cf490cea0d6093a7d477413f}{operator++}} ()
+\begin{DoxyCompactList}\small\item\em Avanza el iterador una posición. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \mbox{\hyperlink{classstring__map_1_1iterator_a8b5800a8088641deb59733b264741456}{operator++}} (int n)
+\begin{DoxyCompactList}\small\item\em Avanza el iterador n posiciones. \end{DoxyCompactList}\item 
+value\+\_\+type \& \mbox{\hyperlink{classstring__map_1_1iterator_a038260842d444e91f54e58ce7b0c8bcb}{operator$\ast$}} () const
+\begin{DoxyCompactList}\small\item\em Desreferencia el puntero. \end{DoxyCompactList}\item 
+value\+\_\+type $\ast$ \mbox{\hyperlink{classstring__map_1_1iterator_a45053b6d360c1a5fd5918dc91604c38f}{operator-\/$>$}} () const
+\begin{DoxyCompactList}\small\item\em Operador flechita. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Métodos privados}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classstring__map_1_1iterator_a9adc687055baa860aaddb8f2f955ae1a}\label{classstring__map_1_1iterator_a9adc687055baa860aaddb8f2f955ae1a}} 
+{\bfseries iterator} (\mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} $\ast$n)
+\item 
+\mbox{\Hypertarget{classstring__map_1_1iterator_a6cc896811a026a8ef41b18e752d7242e}\label{classstring__map_1_1iterator_a6cc896811a026a8ef41b18e752d7242e}} 
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::\mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} $\ast$ {\bfseries proximo\+Abajo} (\mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} $\ast$n)
+\item 
+\mbox{\Hypertarget{classstring__map_1_1iterator_a00b59cd4a85c0828dea0aade6f532e73}\label{classstring__map_1_1iterator_a00b59cd4a85c0828dea0aade6f532e73}} 
+void {\bfseries buscar\+Nodo\+Abajo} (\mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} $\ast$\&n)
+\item 
+\mbox{\Hypertarget{classstring__map_1_1iterator_a48327eb643b98cf47f1fc5b4ee0cc4b5}\label{classstring__map_1_1iterator_a48327eb643b98cf47f1fc5b4ee0cc4b5}} 
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::\mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} $\ast$ {\bfseries proximo\+Arriba} (\mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} $\ast$n)
+\item 
+\mbox{\Hypertarget{classstring__map_1_1iterator_a51444dff4d88dfd7750691f7fc9da4d9}\label{classstring__map_1_1iterator_a51444dff4d88dfd7750691f7fc9da4d9}} 
+void {\bfseries buscar\+Nodo\+Arriba} (\mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} $\ast$\&n)
+\end{DoxyCompactItemize}
+\subsection*{Atributos privados}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classstring__map_1_1iterator_ac153c60abe33692e040a47f7f7457db8}\label{classstring__map_1_1iterator_ac153c60abe33692e040a47f7f7457db8}} 
+\mbox{\hyperlink{structstring__map_1_1Nodo}{Nodo}} $\ast$ {\bfseries nodo}
+\end{DoxyCompactItemize}
+\subsection*{Amigas}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classstring__map_1_1iterator_a70a1267e13829b1e5be02846caf0ee84}\label{classstring__map_1_1iterator_a70a1267e13829b1e5be02846caf0ee84}} 
+class {\bfseries string\+\_\+map}
+\end{DoxyCompactItemize}
+
+
+\subsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classstring__map_1_1iterator_adfa11e83ddfb983172d2fb367184c486}\label{classstring__map_1_1iterator_adfa11e83ddfb983172d2fb367184c486}} 
+\index{string\+\_\+map\+::iterator@{string\+\_\+map\+::iterator}!iterator@{iterator}}
+\index{iterator@{iterator}!string\+\_\+map\+::iterator@{string\+\_\+map\+::iterator}}
+\subsubsection{\texorpdfstring{iterator()}{iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T$>$ \\
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::iterator\+::iterator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor por defecto del iterador. 
+
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_1_1iterator_a9421aa5f1c72795f03172f3e0ecd87ca}\label{classstring__map_1_1iterator_a9421aa5f1c72795f03172f3e0ecd87ca}} 
+\index{string\+\_\+map\+::iterator@{string\+\_\+map\+::iterator}!iterator@{iterator}}
+\index{iterator@{iterator}!string\+\_\+map\+::iterator@{string\+\_\+map\+::iterator}}
+\subsubsection{\texorpdfstring{iterator()}{iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T$>$ \\
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::iterator\+::iterator (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor por copia del iterador. 
+
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classstring__map_1_1iterator_aabc2350ae8191b4dd7102495893ea66a}\label{classstring__map_1_1iterator_aabc2350ae8191b4dd7102495893ea66a}} 
+\index{string\+\_\+map\+::iterator@{string\+\_\+map\+::iterator}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!string\+\_\+map\+::iterator@{string\+\_\+map\+::iterator}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily template$<$typename T$>$ \\
+bool \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::iterator\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Operador de comparacion. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em $<$strong} & class=\char`\"{}paramname\char`\"{}$>$n\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+res != (first(par(nodo)) = first(par({\bfseries n}.nodo)) $\land$ second(par(nodo)) = second(par({\bfseries n}.nodo)))
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_1_1iterator_a038260842d444e91f54e58ce7b0c8bcb}\label{classstring__map_1_1iterator_a038260842d444e91f54e58ce7b0c8bcb}} 
+\index{string\+\_\+map\+::iterator@{string\+\_\+map\+::iterator}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!string\+\_\+map\+::iterator@{string\+\_\+map\+::iterator}}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily template$<$typename T$>$ \\
+value\+\_\+type\& \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::iterator\+::operator$\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Desreferencia el puntero. 
+
+El valor devuelto tiene aliasing dentro de la colección.
+
+\begin{DoxyPrecond}{Precondición}
+El iterador no debe estar en la posición pasando-\/el-\/último. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+El valor resultado es una referencia constante al valor apuntado.
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_1_1iterator_a778cc925cf490cea0d6093a7d477413f}\label{classstring__map_1_1iterator_a778cc925cf490cea0d6093a7d477413f}} 
+\index{string\+\_\+map\+::iterator@{string\+\_\+map\+::iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!string\+\_\+map\+::iterator@{string\+\_\+map\+::iterator}}
+\subsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T$>$ \\
+\mbox{\hyperlink{classstring__map_1_1iterator}{iterator}}\& \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::iterator\+::operator++ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Avanza el iterador una posición. 
+
+\begin{DoxyPrecond}{Precondición}
+El iterador no debe estar en la posición pasando-\/el-\/último. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} es una referencia a {\bfseries this}. {\bfseries this} apunta a la posición siguiente.
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_1_1iterator_a8b5800a8088641deb59733b264741456}\label{classstring__map_1_1iterator_a8b5800a8088641deb59733b264741456}} 
+\index{string\+\_\+map\+::iterator@{string\+\_\+map\+::iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!string\+\_\+map\+::iterator@{string\+\_\+map\+::iterator}}
+\subsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T$>$ \\
+\mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::iterator\+::operator++ (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Avanza el iterador n posiciones. 
+
+\begin{DoxyPrecond}{Precondición}
+El iterador no debe estar en la posición pasando-\/el-\/ante-\/n-\/último. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} es una referencia a {\bfseries this}. {\bfseries this} apunta a la posición siguienten veces.
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_1_1iterator_a45053b6d360c1a5fd5918dc91604c38f}\label{classstring__map_1_1iterator_a45053b6d360c1a5fd5918dc91604c38f}} 
+\index{string\+\_\+map\+::iterator@{string\+\_\+map\+::iterator}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!string\+\_\+map\+::iterator@{string\+\_\+map\+::iterator}}
+\subsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}}
+{\footnotesize\ttfamily template$<$typename T$>$ \\
+value\+\_\+type$\ast$ \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::iterator\+::operator-\/$>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Operador flechita. 
+
+El valor devuelvo tiene aliasing dentro de la colección.
+
+\begin{DoxyPrecond}{Precondición}
+El iterador no debe estar en la posición pasando-\/el-\/último. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+El valor resultado es un puntero al valor apuntado.
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_1_1iterator_a89370874c0a2a3fcc6b6980851b32525}\label{classstring__map_1_1iterator_a89370874c0a2a3fcc6b6980851b32525}} 
+\index{string\+\_\+map\+::iterator@{string\+\_\+map\+::iterator}!operator=@{operator=}}
+\index{operator=@{operator=}!string\+\_\+map\+::iterator@{string\+\_\+map\+::iterator}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$typename T$>$ \\
+\mbox{\hyperlink{classstring__map_1_1iterator}{iterator}}\& \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::iterator\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Operador de asignacion. 
+
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classstring__map_1_1iterator_a78fea15b5e6288434dbb4876e07b5eaa}\label{classstring__map_1_1iterator_a78fea15b5e6288434dbb4876e07b5eaa}} 
+\index{string\+\_\+map\+::iterator@{string\+\_\+map\+::iterator}!operator==@{operator==}}
+\index{operator==@{operator==}!string\+\_\+map\+::iterator@{string\+\_\+map\+::iterator}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily template$<$typename T$>$ \\
+bool \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ T $>$\+::iterator\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classstring__map_1_1iterator}{iterator}} \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Operador de comparacion. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em $<$strong} & class=\char`\"{}paramname\char`\"{}$>$n\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+res == (first(par(nodo)) = first(par({\bfseries n}.nodo)) $\land$ second(par(nodo)) = second(par({\bfseries n}.nodo)))
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}
+
+La documentación para esta clase fue generada a partir de los siguientes ficheros\+:\begin{DoxyCompactItemize}
+\item 
+src/string\+\_\+map.\+h\item 
+src/string\+\_\+map.\+hpp\end{DoxyCompactItemize}

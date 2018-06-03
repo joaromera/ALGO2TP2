@@ -1,0 +1,71 @@
+\hypertarget{classBaseDeDatos_1_1join__iterator__2}{}\section{Referencia de la Clase Base\+De\+Datos\+:\+:join\+\_\+iterator\+\_\+2}
+\label{classBaseDeDatos_1_1join__iterator__2}\index{Base\+De\+Datos\+::join\+\_\+iterator\+\_\+2@{Base\+De\+Datos\+::join\+\_\+iterator\+\_\+2}}
+
+
+Parecido al otro \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}}, pero con la idea de directamente pasar los iteradores desde Base\+De\+Datos\+::join.  
+
+
+
+
+{\ttfamily \#include $<$Base\+De\+Datos.\+h$>$}
+
+
+
+Diagrama de colaboración para Base\+De\+Datos\+:\+:join\+\_\+iterator\+\_\+2\+:
+% FIG 0
+\subsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator__2_aff1cf476c676fdd5c25e17c488d82bee}\label{classBaseDeDatos_1_1join__iterator__2_aff1cf476c676fdd5c25e17c488d82bee}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator__2}{join\+\_\+iterator\+\_\+2}} \&j) const
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator__2_a71711bc583d1737e4aec219c410296fe}\label{classBaseDeDatos_1_1join__iterator__2_a71711bc583d1737e4aec219c410296fe}} 
+bool {\bfseries operator!=} (const \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator__2}{join\+\_\+iterator\+\_\+2}} \&j) const
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator__2_a864f33fa6b91e697c522dc911dc369b1}\label{classBaseDeDatos_1_1join__iterator__2_a864f33fa6b91e697c522dc911dc369b1}} 
+\mbox{\hyperlink{classBaseDeDatos_1_1join__iterator__2}{join\+\_\+iterator\+\_\+2}} \& {\bfseries operator++} ()
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator__2_abd169306d727f7a478e75783bdef42c3}\label{classBaseDeDatos_1_1join__iterator__2_abd169306d727f7a478e75783bdef42c3}} 
+\mbox{\hyperlink{classBaseDeDatos_1_1join__iterator__2}{join\+\_\+iterator\+\_\+2}} {\bfseries operator++} (int n)
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator__2_a474dc4b1a11400e3e45830caab537770}\label{classBaseDeDatos_1_1join__iterator__2_a474dc4b1a11400e3e45830caab537770}} 
+const \mbox{\hyperlink{classRegistro}{Registro}} \& {\bfseries operator$\ast$} () const
+\end{DoxyCompactItemize}
+\subsection*{Métodos privados}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator__2_ab6dba08b4ebcac9d21601e5770b81aca}\label{classBaseDeDatos_1_1join__iterator__2_ab6dba08b4ebcac9d21601e5770b81aca}} 
+{\bfseries join\+\_\+iterator\+\_\+2} (\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$$>$\+::iterator it\+\_\+index, \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$\+::iterator it, \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$$>$\+::iterator it\+\_\+index\+\_\+end, \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$\+::iterator it\+\_\+end)
+\end{DoxyCompactItemize}
+\subsection*{Atributos privados}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator__2_a16bb0e828d121d038eeec3f84be80bac}\label{classBaseDeDatos_1_1join__iterator__2_a16bb0e828d121d038eeec3f84be80bac}} 
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$ $>$\+::iterator {\bfseries it\+\_\+index}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator__2_a258f1841ee1e5cc1283cb5ac15926677}\label{classBaseDeDatos_1_1join__iterator__2_a258f1841ee1e5cc1283cb5ac15926677}} 
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$ $>$\+::iterator {\bfseries it\+\_\+index\+\_\+end}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator__2_aaaa3847f7215f3364bb03a56f2092852}\label{classBaseDeDatos_1_1join__iterator__2_aaaa3847f7215f3364bb03a56f2092852}} 
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$\+::iterator {\bfseries it}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator__2_a5b545c20eed8d431a7dea0dc78715f61}\label{classBaseDeDatos_1_1join__iterator__2_a5b545c20eed8d431a7dea0dc78715f61}} 
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$\+::iterator {\bfseries it\+\_\+end}
+\end{DoxyCompactItemize}
+\subsection*{Amigas}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator__2_af1e840dbc460e53fa421d03b2da138e4}\label{classBaseDeDatos_1_1join__iterator__2_af1e840dbc460e53fa421d03b2da138e4}} 
+class {\bfseries Base\+De\+Datos}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator__2_a172484163cb8b80140c3053a4c68e4da}\label{classBaseDeDatos_1_1join__iterator__2_a172484163cb8b80140c3053a4c68e4da}} 
+class {\bfseries Tabla}
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Parecido al otro \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}}, pero con la idea de directamente pasar los iteradores desde Base\+De\+Datos\+::join. 
+
+La documentación para esta clase fue generada a partir del siguiente fichero\+:\begin{DoxyCompactItemize}
+\item 
+src/Base\+De\+Datos.\+h\end{DoxyCompactItemize}

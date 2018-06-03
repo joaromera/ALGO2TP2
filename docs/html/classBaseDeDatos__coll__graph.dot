@@ -1,0 +1,28 @@
+digraph "BaseDeDatos"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="BaseDeDatos",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _uso_criterios" ,fontname="Helvetica"];
+  Node2 [label="linear_map\< linear\l_set, int \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classlinear__map.html"];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _nombres_tablas" ,fontname="Helvetica"];
+  Node3 [label="linear_set\< string \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classlinear__set.html"];
+  Node4 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _elems" ,fontname="Helvetica"];
+  Node4 [label="linear_map\< string,\l bool \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classlinear__map.html"];
+  Node5 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _indicesNum" ,fontname="Helvetica"];
+  Node5 [label="string_map\< string\l_map\< map\< int, linear\l_set\< Registro \> \> \> \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classstring__map.html"];
+  Node6 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" head" ,fontname="Helvetica"];
+  Node6 [label="string_map\< T \>::Nodo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structstring__map_1_1Nodo.html"];
+  Node6 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" padre" ,fontname="Helvetica"];
+  Node7 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" clave" ,fontname="Helvetica"];
+  Node7 [label="string",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node8 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" hijos" ,fontname="Helvetica"];
+  Node8 [label="vector\< string_map\l::Nodo *\>",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node9 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _indices" ,fontname="Helvetica"];
+  Node9 [label="string_map\< string\l_map\< string_map\< linear\l_set\< Registro \> \> \> \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classstring__map.html"];
+  Node6 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" head" ,fontname="Helvetica"];
+  Node10 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _tablas" ,fontname="Helvetica"];
+  Node10 [label="string_map\< Tabla \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classstring__map.html"];
+  Node6 -> Node10 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" head" ,fontname="Helvetica"];
+}

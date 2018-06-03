@@ -1,0 +1,456 @@
+\hypertarget{classlinear__set}{}\section{Referencia de la plantilla de la Clase linear\+\_\+set$<$ T $>$}
+\label{classlinear__set}\index{linear\+\_\+set$<$ T $>$@{linear\+\_\+set$<$ T $>$}}
+
+
+Conjunto con inserción en tiempo constante.  
+
+
+
+
+{\ttfamily \#include $<$linear\+\_\+set.\+h$>$}
+
+
+
+Diagrama de colaboración para linear\+\_\+set$<$ T $>$\+:
+% FIG 0
+\subsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classlinear__set_1_1const__iterator}{const\+\_\+iterator}}
+\item 
+class \mbox{\hyperlink{classlinear__set_1_1iterator}{iterator}}
+\end{DoxyCompactItemize}
+\subsection*{Tipos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classlinear__set_a3d7088f5ad3d506bc94ad0fa62c40fed}\label{classlinear__set_a3d7088f5ad3d506bc94ad0fa62c40fed}} 
+using {\bfseries value\+\_\+type} = T
+\item 
+\mbox{\Hypertarget{classlinear__set_a502855ac3cffe6a33ba8eed857bd14bf}\label{classlinear__set_a502855ac3cffe6a33ba8eed857bd14bf}} 
+using {\bfseries size\+\_\+type} = size\+\_\+t
+\end{DoxyCompactItemize}
+\subsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classlinear__set_a6d872f648b8f79012ad962ad852f8ae7}{linear\+\_\+set}} ()
+\begin{DoxyCompactList}\small\item\em Crea un conjunto vacio. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classlinear__set_aa99e56c1ec649af8f0fa8c681d31fcb6}{linear\+\_\+set}} (std\+::initializer\+\_\+list$<$ value\+\_\+type $>$ init)
+\begin{DoxyCompactList}\small\item\em Crea un conjunto con los valores parámetros. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Input\+It $>$ }\\\mbox{\hyperlink{classlinear__set_ac1949a93e1927b46604fbdcecb8a1ae3}{linear\+\_\+set}} (Input\+It first, Input\+It last)
+\begin{DoxyCompactList}\small\item\em Crea un conjunto con los valores parámetros. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classlinear__set_a45f6e9a11657e0945e88300da619af22}{linear\+\_\+set}} (const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$ \&other)
+\begin{DoxyCompactList}\small\item\em Constructor por copia. \end{DoxyCompactList}\item 
+pair$<$ \mbox{\hyperlink{classlinear__set_1_1iterator}{iterator}}, bool $>$ \mbox{\hyperlink{classlinear__set_a66b2d1323a28dcd2dd7511e4b65f4529}{insert}} (const T \&x)
+\begin{DoxyCompactList}\small\item\em Agrega el elemento al conjunto. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classlinear__set_1_1iterator}{iterator}} \mbox{\hyperlink{classlinear__set_a095fc4a1f15f43650efa7518aa58579f}{fast\+\_\+insert}} (const value\+\_\+type \&v)
+\begin{DoxyCompactList}\small\item\em Agrega el elemento al conjunto. \end{DoxyCompactList}\item 
+size\+\_\+type \mbox{\hyperlink{classlinear__set_a5f61fef1dce039b252941854b6eddbfe}{count}} (const T \&x) const
+\begin{DoxyCompactList}\small\item\em Cantidad de apariciones del valor. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classlinear__set_a3f78f76d16b8570efa01319dad8d1834}{empty}} () const
+\begin{DoxyCompactList}\small\item\em True si el conjunto está vacío. \end{DoxyCompactList}\item 
+size\+\_\+type \mbox{\hyperlink{classlinear__set_aa20eaba8c492bb3b93c63384c0b55e58}{size}} () const
+\begin{DoxyCompactList}\small\item\em Tamaño del conjunto. \end{DoxyCompactList}\item 
+size\+\_\+type \mbox{\hyperlink{classlinear__set_a264d97735943af5490e73e469c3e7303}{erase}} (const T \&x)
+\begin{DoxyCompactList}\small\item\em Elimina el valor del conjunto. Devuelve la cantidad de elementos elminados. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classlinear__set_1_1iterator}{iterator}} \mbox{\hyperlink{classlinear__set_a415e0c8461f6a702129b7612a538ffb1}{find}} (const T \&x)
+\begin{DoxyCompactList}\small\item\em Devuelve un iterador relacionado al valor buscado. End si no está definida. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$ \& \mbox{\hyperlink{classlinear__set_a5bea24f94c4ea45550ec4b066ffb8cf1}{operator=}} (const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$ \&other)
+\begin{DoxyCompactList}\small\item\em Operador asignación del conjunto. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classlinear__set_a49b9debdaaca2478d5df6c1f0fffab33}{operator==}} (const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em True si los conjuntos son iguales. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classlinear__set_1_1iterator}{iterator}} \mbox{\hyperlink{classlinear__set_a80bad302b65a43aba2a0fbf5e4637a59}{begin}} ()
+\begin{DoxyCompactList}\small\item\em Devuelve un iterador al inicio del conjunto. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classlinear__set_1_1iterator}{iterator}} \mbox{\hyperlink{classlinear__set_aa16e2607ba7bc80c86eda9f2301d194d}{end}} ()
+\begin{DoxyCompactList}\small\item\em Devuelve un iterador a la posición pasando-\/el-\/último. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classlinear__set_1_1const__iterator}{const\+\_\+iterator}} \mbox{\hyperlink{classlinear__set_ab75a525c9d40b5dc9c301c47095b0f9f}{begin}} () const
+\begin{DoxyCompactList}\small\item\em Devuelve un iterador const al inicio del conjunto. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classlinear__set_1_1const__iterator}{const\+\_\+iterator}} \mbox{\hyperlink{classlinear__set_a63decaa5799e90e2f40ee786b44e0263}{end}} () const
+\begin{DoxyCompactList}\small\item\em Devuelve un iterador const a la posición pasando-\/el-\/último. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Atributos privados}
+\begin{Indent}\textbf{ Representación\+:}\par
+{\em rep\+: \mbox{\hyperlink{classlinear__set}{linear\+\_\+set(\+T)}} $\to$ bool~\newline
+rep(c) $\equiv$
+\begin{DoxyItemize}
+\item $\forall$ (t \+: T) (def?(t, \+\_\+elems) $\Rightarrow$ obtener(t, \+\_\+elems))
+\end{DoxyItemize}
+
+abs\+: \mbox{\hyperlink{classlinear__set}{linear\+\_\+set(\+T)}} $\to$ Conj(\+T)~\newline
+abs(c) $\equiv$ c\textquotesingle{} $|$
+\begin{DoxyItemize}
+\item $\forall$ (x \+: T) x $\in$ c\textquotesingle{} $\Leftrightarrow$ def?(c, c) 
+\end{DoxyItemize}}\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classlinear__set_ab9ee1d2a9a2b2786152f68bd0039d201}\label{classlinear__set_ab9ee1d2a9a2b2786152f68bd0039d201}} 
+\mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ T, bool $>$ {\bfseries \+\_\+elems}
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Descripción detallada}
+\subsubsection*{template$<$typename T$>$\newline
+class linear\+\_\+set$<$ T $>$}
+
+Conjunto con inserción en tiempo constante. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & tipo paramétrico del conjunto Debe tener\+:
+\begin{DoxyItemize}
+\item operator==
+\item Constructor por copia
+\end{DoxyItemize}\\
+\hline
+\end{DoxyTemplParams}
+{\bfseries se explica con} T\+AD Conjunto(\+T) 
+
+\subsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classlinear__set_a6d872f648b8f79012ad962ad852f8ae7}\label{classlinear__set_a6d872f648b8f79012ad962ad852f8ae7}} 
+\index{linear\+\_\+set@{linear\+\_\+set}!linear\+\_\+set@{linear\+\_\+set}}
+\index{linear\+\_\+set@{linear\+\_\+set}!linear\+\_\+set@{linear\+\_\+set}}
+\subsubsection{\texorpdfstring{linear\+\_\+set()}{linear\_set()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Crea un conjunto vacio. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} = $\emptyset$
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__set_aa99e56c1ec649af8f0fa8c681d31fcb6}\label{classlinear__set_aa99e56c1ec649af8f0fa8c681d31fcb6}} 
+\index{linear\+\_\+set@{linear\+\_\+set}!linear\+\_\+set@{linear\+\_\+set}}
+\index{linear\+\_\+set@{linear\+\_\+set}!linear\+\_\+set@{linear\+\_\+set}}
+\subsubsection{\texorpdfstring{linear\+\_\+set()}{linear\_set()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}} (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ value\+\_\+type $>$}]{init }\end{DoxyParamCaption})}
+
+
+
+Crea un conjunto con los valores parámetros. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+( $\forall$ x \+: T) x $\in$ {\bfseries this} $\Leftrightarrow$ está?(x, init)
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(long(init) $\ast$ copy(\+T))
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__set_ac1949a93e1927b46604fbdcecb8a1ae3}\label{classlinear__set_ac1949a93e1927b46604fbdcecb8a1ae3}} 
+\index{linear\+\_\+set@{linear\+\_\+set}!linear\+\_\+set@{linear\+\_\+set}}
+\index{linear\+\_\+set@{linear\+\_\+set}!linear\+\_\+set@{linear\+\_\+set}}
+\subsubsection{\texorpdfstring{linear\+\_\+set()}{linear\_set()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+template$<$class Input\+It $>$ \\
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}} (\begin{DoxyParamCaption}\item[{Input\+It}]{first,  }\item[{Input\+It}]{last }\end{DoxyParamCaption})}
+
+
+
+Crea un conjunto con los valores parámetros. 
+
+\begin{DoxyPrecond}{Precondición}
+first y last son iteradores del mismo contenedor 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} tiene solo los valores en el rango first -\/$>$ last
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$($\vert$last -\/ first$\vert$ $\ast$ copy(\+T))
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__set_a45f6e9a11657e0945e88300da619af22}\label{classlinear__set_a45f6e9a11657e0945e88300da619af22}} 
+\index{linear\+\_\+set@{linear\+\_\+set}!linear\+\_\+set@{linear\+\_\+set}}
+\index{linear\+\_\+set@{linear\+\_\+set}!linear\+\_\+set@{linear\+\_\+set}}
+\subsubsection{\texorpdfstring{linear\+\_\+set()}{linear\_set()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$ \&}]{other }\end{DoxyParamCaption})}
+
+
+
+Constructor por copia. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} es una copia de other. No hay aliasing.
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(\#claves(other) $\ast$ copy(\+T))
+\end{DoxyDescription}
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classlinear__set_a80bad302b65a43aba2a0fbf5e4637a59}\label{classlinear__set_a80bad302b65a43aba2a0fbf5e4637a59}} 
+\index{linear\+\_\+set@{linear\+\_\+set}!begin@{begin}}
+\index{begin@{begin}!linear\+\_\+set@{linear\+\_\+set}}
+\subsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::\mbox{\hyperlink{classlinear__set_1_1iterator}{iterator}} \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Devuelve un iterador al inicio del conjunto. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} apunta al inicio del conjunto
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__set_ab75a525c9d40b5dc9c301c47095b0f9f}\label{classlinear__set_ab75a525c9d40b5dc9c301c47095b0f9f}} 
+\index{linear\+\_\+set@{linear\+\_\+set}!begin@{begin}}
+\index{begin@{begin}!linear\+\_\+set@{linear\+\_\+set}}
+\subsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::\mbox{\hyperlink{classlinear__set_1_1const__iterator}{const\+\_\+iterator}} \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve un iterador const al inicio del conjunto. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} apunta al inicio del conjunto
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__set_a5f61fef1dce039b252941854b6eddbfe}\label{classlinear__set_a5f61fef1dce039b252941854b6eddbfe}} 
+\index{linear\+\_\+set@{linear\+\_\+set}!count@{count}}
+\index{count@{count}!linear\+\_\+set@{linear\+\_\+set}}
+\subsubsection{\texorpdfstring{count()}{count()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::size\+\_\+type \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::count (\begin{DoxyParamCaption}\item[{const T \&}]{x }\end{DoxyParamCaption}) const}
+
+
+
+Cantidad de apariciones del valor. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+(x $\in$ {\bfseries this} $\land$ {\bfseries res} = 1) $\lor$ (x  $\in$ {\bfseries this} $\land$ {\bfseries res} = 0)
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(n) $\ast$ cmp(\+T)
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__set_a3f78f76d16b8570efa01319dad8d1834}\label{classlinear__set_a3f78f76d16b8570efa01319dad8d1834}} 
+\index{linear\+\_\+set@{linear\+\_\+set}!empty@{empty}}
+\index{empty@{empty}!linear\+\_\+set@{linear\+\_\+set}}
+\subsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+True si el conjunto está vacío. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = $\emptyset$?({\bfseries this})
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__set_aa16e2607ba7bc80c86eda9f2301d194d}\label{classlinear__set_aa16e2607ba7bc80c86eda9f2301d194d}} 
+\index{linear\+\_\+set@{linear\+\_\+set}!end@{end}}
+\index{end@{end}!linear\+\_\+set@{linear\+\_\+set}}
+\subsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::\mbox{\hyperlink{classlinear__set_1_1iterator}{iterator}} \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Devuelve un iterador a la posición pasando-\/el-\/último. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} apunta a la posición pasando-\/el-\/último
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__set_a63decaa5799e90e2f40ee786b44e0263}\label{classlinear__set_a63decaa5799e90e2f40ee786b44e0263}} 
+\index{linear\+\_\+set@{linear\+\_\+set}!end@{end}}
+\index{end@{end}!linear\+\_\+set@{linear\+\_\+set}}
+\subsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::\mbox{\hyperlink{classlinear__set_1_1const__iterator}{const\+\_\+iterator}} \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve un iterador const a la posición pasando-\/el-\/último. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} apunta a la posición pasando-\/el-\/último
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__set_a264d97735943af5490e73e469c3e7303}\label{classlinear__set_a264d97735943af5490e73e469c3e7303}} 
+\index{linear\+\_\+set@{linear\+\_\+set}!erase@{erase}}
+\index{erase@{erase}!linear\+\_\+set@{linear\+\_\+set}}
+\subsubsection{\texorpdfstring{erase()}{erase()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::size\+\_\+type \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::erase (\begin{DoxyParamCaption}\item[{const T \&}]{x }\end{DoxyParamCaption})}
+
+
+
+Elimina el valor del conjunto. Devuelve la cantidad de elementos elminados. 
+
+\begin{DoxyPrecond}{Precondición}
+c == {\bfseries this} $\land$ x $\in$ {\bfseries this} 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} == c -\/ \{x\} $\land$ {\bfseries res} = 1
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(\#claves({\bfseries this}))
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__set_a095fc4a1f15f43650efa7518aa58579f}\label{classlinear__set_a095fc4a1f15f43650efa7518aa58579f}} 
+\index{linear\+\_\+set@{linear\+\_\+set}!fast\+\_\+insert@{fast\+\_\+insert}}
+\index{fast\+\_\+insert@{fast\+\_\+insert}!linear\+\_\+set@{linear\+\_\+set}}
+\subsubsection{\texorpdfstring{fast\+\_\+insert()}{fast\_insert()}}
+{\footnotesize\ttfamily template$<$typename T$>$ \\
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::\mbox{\hyperlink{classlinear__set_1_1iterator}{iterator}} \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::fast\+\_\+insert (\begin{DoxyParamCaption}\item[{const value\+\_\+type \&}]{v }\end{DoxyParamCaption})}
+
+
+
+Agrega el elemento al conjunto. 
+
+\begin{DoxyPrecond}{Precondición}
+c = {\bfseries this} $\land$ $\lnot$ x $\in$ {\bfseries this} 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} = Ag(x, c) y {\bfseries res} apunta al elemento agregado.
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(copy(v))
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__set_a415e0c8461f6a702129b7612a538ffb1}\label{classlinear__set_a415e0c8461f6a702129b7612a538ffb1}} 
+\index{linear\+\_\+set@{linear\+\_\+set}!find@{find}}
+\index{find@{find}!linear\+\_\+set@{linear\+\_\+set}}
+\subsubsection{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::\mbox{\hyperlink{classlinear__set_1_1iterator}{iterator}} \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::find (\begin{DoxyParamCaption}\item[{const T \&}]{x }\end{DoxyParamCaption})}
+
+
+
+Devuelve un iterador relacionado al valor buscado. End si no está definida. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+
+\begin{DoxyItemize}
+\item x $\in$ {\bfseries this} $\Rightarrow$ {\bfseries res} apunta a la aparición de x en el conjunto
+\item x $\in$ {\bfseries this} $\Rightarrow$ {\bfseries res} es end
+\end{DoxyItemize}
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(\#claves({\bfseries this}))
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__set_a66b2d1323a28dcd2dd7511e4b65f4529}\label{classlinear__set_a66b2d1323a28dcd2dd7511e4b65f4529}} 
+\index{linear\+\_\+set@{linear\+\_\+set}!insert@{insert}}
+\index{insert@{insert}!linear\+\_\+set@{linear\+\_\+set}}
+\subsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+pair$<$ typename \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::\mbox{\hyperlink{classlinear__set_1_1iterator}{iterator}}, bool $>$ \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::insert (\begin{DoxyParamCaption}\item[{const T \&}]{x }\end{DoxyParamCaption})}
+
+
+
+Agrega el elemento al conjunto. 
+
+El elemento no se agrega si ya estaba.
+
+\begin{DoxyPrecond}{Precondición}
+c = {\bfseries this} 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} = Ag(x, c) y $\pi_1$({\bfseries res}) apunta al elemento agregado y $\pi_2$({\bfseries res}) es true si x no estaba ya en el conjunto.
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(\#claves({\bfseries this}) + copy(v))
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__set_a5bea24f94c4ea45550ec4b066ffb8cf1}\label{classlinear__set_a5bea24f94c4ea45550ec4b066ffb8cf1}} 
+\index{linear\+\_\+set@{linear\+\_\+set}!operator=@{operator=}}
+\index{operator=@{operator=}!linear\+\_\+set@{linear\+\_\+set}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$ \& \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$ \&}]{other }\end{DoxyParamCaption})}
+
+
+
+Operador asignación del conjunto. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} == other y {\bfseries res} refiere a {\bfseries this}
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(\#claves({\bfseries this}) + \#(other) $\ast$ copy(\+T))
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__set_a49b9debdaaca2478d5df6c1f0fffab33}\label{classlinear__set_a49b9debdaaca2478d5df6c1f0fffab33}} 
+\index{linear\+\_\+set@{linear\+\_\+set}!operator==@{operator==}}
+\index{operator==@{operator==}!linear\+\_\+set@{linear\+\_\+set}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+bool \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$ \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+True si los conjuntos son iguales. 
+
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(\#({\bfseries this}) $\ast$ \#(other))
+\end{DoxyDescription}\mbox{\Hypertarget{classlinear__set_aa20eaba8c492bb3b93c63384c0b55e58}\label{classlinear__set_aa20eaba8c492bb3b93c63384c0b55e58}} 
+\index{linear\+\_\+set@{linear\+\_\+set}!size@{size}}
+\index{size@{size}!linear\+\_\+set@{linear\+\_\+set}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::size\+\_\+type \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ T $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Tamaño del conjunto. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = \#clave({\bfseries this})
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}
+
+La documentación para esta clase fue generada a partir de los siguientes ficheros\+:\begin{DoxyCompactItemize}
+\item 
+src/linear\+\_\+set.\+h\item 
+src/linear\+\_\+set.\+hpp\end{DoxyCompactItemize}

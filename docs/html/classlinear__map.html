@@ -1,0 +1,722 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>TP2 AED2 - 2C-2017: Referencia de la plantilla de la Clase linear_map&lt; K, S &gt;</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">TP2 AED2 - 2C-2017
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Tipos públicos</a> &#124;
+<a href="#pub-methods">Métodos públicos</a> &#124;
+<a href="classlinear__map-members.html">Lista de todos los miembros</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia de la plantilla de la Clase linear_map&lt; K, S &gt;</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Módulo diccionario con inserción en O(1)  
+ <a href="classlinear__map.html#details">Más...</a></p>
+
+<p><code>#include &lt;<a class="el" href="linear__map_8h_source.html">linear_map.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Tipos públicos</h2></td></tr>
+<tr class="memitem:a85577f6aa54870bf9b5d2f85f0749078"><td class="memItemLeft" align="right" valign="top"><a id="a85577f6aa54870bf9b5d2f85f0749078"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>key_type</b> = K</td></tr>
+<tr class="separator:a85577f6aa54870bf9b5d2f85f0749078"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaed4a6810a4a46c0cede18821069cc65"><td class="memItemLeft" align="right" valign="top"><a id="aaed4a6810a4a46c0cede18821069cc65"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>mapped_type</b> = S</td></tr>
+<tr class="separator:aaed4a6810a4a46c0cede18821069cc65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bf7640c132d7e6fa5c4e68e1623d27d"><td class="memItemLeft" align="right" valign="top"><a id="a8bf7640c132d7e6fa5c4e68e1623d27d"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> = pair&lt; const K, S &gt;</td></tr>
+<tr class="separator:a8bf7640c132d7e6fa5c4e68e1623d27d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08095dfd88596e72f10d59a212b622f8"><td class="memItemLeft" align="right" valign="top"><a id="a08095dfd88596e72f10d59a212b622f8"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>size_type</b> = size_t</td></tr>
+<tr class="separator:a08095dfd88596e72f10d59a212b622f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbf8f5cd4879764446dab7673114b49b"><td class="memItemLeft" align="right" valign="top"><a id="adbf8f5cd4879764446dab7673114b49b"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator</b> = typename list&lt; pair&lt; const K, S &gt; &gt;::iterator</td></tr>
+<tr class="separator:adbf8f5cd4879764446dab7673114b49b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dc3aa756da9119bfb14aee312c46d2f"><td class="memItemLeft" align="right" valign="top"><a id="a5dc3aa756da9119bfb14aee312c46d2f"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator</b> = typename list&lt; pair&lt; const K, S &gt; &gt;::const_iterator</td></tr>
+<tr class="separator:a5dc3aa756da9119bfb14aee312c46d2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Métodos públicos</h2></td></tr>
+<tr class="memitem:a2343174c5c974fefcec889b0954debcf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlinear__map.html#a2343174c5c974fefcec889b0954debcf">linear_map</a> ()</td></tr>
+<tr class="memdesc:a2343174c5c974fefcec889b0954debcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crea un diccionario vacio.  <a href="#a2343174c5c974fefcec889b0954debcf">Más...</a><br /></td></tr>
+<tr class="separator:a2343174c5c974fefcec889b0954debcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29a92ea4bf65d4f5936b061ebb8309fa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlinear__map.html#a29a92ea4bf65d4f5936b061ebb8309fa">linear_map</a> (const <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt; &amp;other)</td></tr>
+<tr class="memdesc:a29a92ea4bf65d4f5936b061ebb8309fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor por copia.  <a href="#a29a92ea4bf65d4f5936b061ebb8309fa">Más...</a><br /></td></tr>
+<tr class="separator:a29a92ea4bf65d4f5936b061ebb8309fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3631b2f824bbf4489943f0816464068e"><td class="memItemLeft" align="right" valign="top">pair&lt; iterator, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlinear__map.html#a3631b2f824bbf4489943f0816464068e">insert</a> (const value_type &amp;v)</td></tr>
+<tr class="memdesc:a3631b2f824bbf4489943f0816464068e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define o redefine una relación en el diccionario.  <a href="#a3631b2f824bbf4489943f0816464068e">Más...</a><br /></td></tr>
+<tr class="separator:a3631b2f824bbf4489943f0816464068e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f04a74f63434402f7198aaac798d9da"><td class="memItemLeft" align="right" valign="top">iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlinear__map.html#a6f04a74f63434402f7198aaac798d9da">fast_insert</a> (const value_type &amp;v)</td></tr>
+<tr class="memdesc:a6f04a74f63434402f7198aaac798d9da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define una nueva relación en el diccionario.  <a href="#a6f04a74f63434402f7198aaac798d9da">Más...</a><br /></td></tr>
+<tr class="separator:a6f04a74f63434402f7198aaac798d9da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3236ab6c5afff15a94cbc932cba6934b"><td class="memItemLeft" align="right" valign="top">size_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlinear__map.html#a3236ab6c5afff15a94cbc932cba6934b">size</a> () const</td></tr>
+<tr class="memdesc:a3236ab6c5afff15a94cbc932cba6934b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tamaño del diccionario.  <a href="#a3236ab6c5afff15a94cbc932cba6934b">Más...</a><br /></td></tr>
+<tr class="separator:a3236ab6c5afff15a94cbc932cba6934b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad528c5b74bb14cfe7170bffffce2e979"><td class="memItemLeft" align="right" valign="top">S &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlinear__map.html#ad528c5b74bb14cfe7170bffffce2e979">at</a> (const K &amp;key)</td></tr>
+<tr class="memdesc:ad528c5b74bb14cfe7170bffffce2e979"><td class="mdescLeft">&#160;</td><td class="mdescRight">Devuelve el significado relacionado con la clave.  <a href="#ad528c5b74bb14cfe7170bffffce2e979">Más...</a><br /></td></tr>
+<tr class="separator:ad528c5b74bb14cfe7170bffffce2e979"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6a78e9c9189a3ab81d2aaa8a187c754"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlinear__map.html#af6a78e9c9189a3ab81d2aaa8a187c754">empty</a> () const</td></tr>
+<tr class="memdesc:af6a78e9c9189a3ab81d2aaa8a187c754"><td class="mdescLeft">&#160;</td><td class="mdescRight">True si el diccionario está vacío.  <a href="#af6a78e9c9189a3ab81d2aaa8a187c754">Más...</a><br /></td></tr>
+<tr class="separator:af6a78e9c9189a3ab81d2aaa8a187c754"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a227924393723570ac58f79fd194aac61"><td class="memItemLeft" align="right" valign="top">iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlinear__map.html#a227924393723570ac58f79fd194aac61">find</a> (const K &amp;k)</td></tr>
+<tr class="memdesc:a227924393723570ac58f79fd194aac61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Devuelve un iterador relacionado a la clave buscada. End si no está definida.  <a href="#a227924393723570ac58f79fd194aac61">Más...</a><br /></td></tr>
+<tr class="separator:a227924393723570ac58f79fd194aac61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99493e350f97f5c3932840a28406fd37"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlinear__map.html#a99493e350f97f5c3932840a28406fd37">find</a> (const K &amp;k) const</td></tr>
+<tr class="memdesc:a99493e350f97f5c3932840a28406fd37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Devuelve un iterador const relacionado a la clave buscada. End si no está definida.  <a href="#a99493e350f97f5c3932840a28406fd37">Más...</a><br /></td></tr>
+<tr class="separator:a99493e350f97f5c3932840a28406fd37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88a219ae647727d1b7e67c2dbe36d972"><td class="memItemLeft" align="right" valign="top">iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlinear__map.html#a88a219ae647727d1b7e67c2dbe36d972">begin</a> ()</td></tr>
+<tr class="memdesc:a88a219ae647727d1b7e67c2dbe36d972"><td class="mdescLeft">&#160;</td><td class="mdescRight">Devuelve un iterador al inicio del diccionario.  <a href="#a88a219ae647727d1b7e67c2dbe36d972">Más...</a><br /></td></tr>
+<tr class="separator:a88a219ae647727d1b7e67c2dbe36d972"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29f90bee46581029b6ce496d4ea46683"><td class="memItemLeft" align="right" valign="top">iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlinear__map.html#a29f90bee46581029b6ce496d4ea46683">end</a> ()</td></tr>
+<tr class="memdesc:a29f90bee46581029b6ce496d4ea46683"><td class="mdescLeft">&#160;</td><td class="mdescRight">Devuelve un iterador a la posición pasando-el-último.  <a href="#a29f90bee46581029b6ce496d4ea46683">Más...</a><br /></td></tr>
+<tr class="separator:a29f90bee46581029b6ce496d4ea46683"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f3bef755dbfb788cfe653a3ba70c211"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlinear__map.html#a6f3bef755dbfb788cfe653a3ba70c211">begin</a> () const</td></tr>
+<tr class="memdesc:a6f3bef755dbfb788cfe653a3ba70c211"><td class="mdescLeft">&#160;</td><td class="mdescRight">Devuelve un iterador const al inicio del diccionario.  <a href="#a6f3bef755dbfb788cfe653a3ba70c211">Más...</a><br /></td></tr>
+<tr class="separator:a6f3bef755dbfb788cfe653a3ba70c211"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20a63149ca91f200c2ff3ea25bd0ad97"><td class="memItemLeft" align="right" valign="top">const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlinear__map.html#a20a63149ca91f200c2ff3ea25bd0ad97">end</a> () const</td></tr>
+<tr class="memdesc:a20a63149ca91f200c2ff3ea25bd0ad97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Devuelve un iterador const a la posición pasando-el-último.  <a href="#a20a63149ca91f200c2ff3ea25bd0ad97">Más...</a><br /></td></tr>
+<tr class="separator:a20a63149ca91f200c2ff3ea25bd0ad97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac906ffa073c059c8ea5897b79c92c6f4"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlinear__map.html#ac906ffa073c059c8ea5897b79c92c6f4">count</a> (const K &amp;k) const</td></tr>
+<tr class="memdesc:ac906ffa073c059c8ea5897b79c92c6f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cantidad de apariciones de la clave.  <a href="#ac906ffa073c059c8ea5897b79c92c6f4">Más...</a><br /></td></tr>
+<tr class="separator:ac906ffa073c059c8ea5897b79c92c6f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a373f306f920941123cb47f6b77ed97ed"><td class="memItemLeft" align="right" valign="top">const S &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlinear__map.html#a373f306f920941123cb47f6b77ed97ed">at</a> (const K &amp;key) const</td></tr>
+<tr class="memdesc:a373f306f920941123cb47f6b77ed97ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Devuelve el significado relacionado con la clave.  <a href="#a373f306f920941123cb47f6b77ed97ed">Más...</a><br /></td></tr>
+<tr class="separator:a373f306f920941123cb47f6b77ed97ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a932198aa420701fb84af74434764be9d"><td class="memItemLeft" align="right" valign="top">size_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlinear__map.html#a932198aa420701fb84af74434764be9d">erase</a> (const K &amp;key)</td></tr>
+<tr class="memdesc:a932198aa420701fb84af74434764be9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Elimina el significado del diccionario. Devuelve la cantidad de elementos elminados.  <a href="#a932198aa420701fb84af74434764be9d">Más...</a><br /></td></tr>
+<tr class="separator:a932198aa420701fb84af74434764be9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9868e2ada8b775c57521506fe7dd24a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlinear__map.html">linear_map</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlinear__map.html#a9868e2ada8b775c57521506fe7dd24a7">operator=</a> (const <a class="el" href="classlinear__map.html">linear_map</a> &amp;other)</td></tr>
+<tr class="memdesc:a9868e2ada8b775c57521506fe7dd24a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operador asignación del diccionario.  <a href="#a9868e2ada8b775c57521506fe7dd24a7">Más...</a><br /></td></tr>
+<tr class="separator:a9868e2ada8b775c57521506fe7dd24a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3429a0dcc296c4098aef699e089073a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlinear__map.html#a3429a0dcc296c4098aef699e089073a1">operator==</a> (const <a class="el" href="classlinear__map.html">linear_map</a> &amp;other) const</td></tr>
+<tr class="memdesc:a3429a0dcc296c4098aef699e089073a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">True si los diccionarios son iguales.  <a href="#a3429a0dcc296c4098aef699e089073a1">Más...</a><br /></td></tr>
+<tr class="separator:a3429a0dcc296c4098aef699e089073a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Atributos privados</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader">Representación:</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>rep: <a class="el" href="classlinear__map.html" title="Módulo diccionario con inserción en O(1) ">linear_map(Clave, Significado)</a> <img class="formulaInl" alt="$\to$" src="form_7.png"/> bool<br />
+rep(d) <img class="formulaInl" alt="$\equiv$" src="form_8.png"/></p><ul>
+<li><img class="formulaInl" alt="$\forall$" src="form_5.png"/> (i, j : Nat) (0 <img class="formulaInl" alt="$\leq$" src="form_13.png"/> i, j &lt; long(_elems) <img class="formulaInl" alt="$\land$" src="form_1.png"/> <img class="formulaInl" alt="$\pi_1$" src="form_12.png"/>(_elems[i]) == <img class="formulaInl" alt="$\pi_1$" src="form_12.png"/>(_elems[j])) <img class="formulaInl" alt="$\Rightarrow$" src="form_9.png"/> i = j</li>
+</ul>
+<p><img class="formulaInl" alt="$\bullet$" src="form_16.png"/> [ <img class="formulaInl" alt="$\bullet$" src="form_16.png"/>] : Secu( <img class="formulaInl" alt="$\alpha$" src="form_17.png"/>) s <img class="formulaInl" alt="$\times$" src="form_18.png"/> Nat i <img class="formulaInl" alt="$\rightarrow$" src="form_19.png"/> <img class="formulaInl" alt="$\alpha$" src="form_17.png"/> {0 <img class="formulaInl" alt="$\leq$" src="form_13.png"/> i &lt; long(s)} <br />
+s[i] <img class="formulaInl" alt="$\equiv$" src="form_8.png"/> <b>if</b> i = 0 <b>then</b> prim(s) <b>else</b> fin(s)[i - 1] <b>fi</b> </p>
+<p>abs: <a class="el" href="classlinear__map.html" title="Módulo diccionario con inserción en O(1) ">linear_map(Clave, Significado)</a> <img class="formulaInl" alt="$\to$" src="form_7.png"/> Dicc(Clave, Significado)<br />
+abs(d) <img class="formulaInl" alt="$\equiv$" src="form_8.png"/> d' |</p><ul>
+<li><img class="formulaInl" alt="$\forall$" src="form_5.png"/> (c : Clave) def?(c, d') <img class="formulaInl" alt="$\Leftrightarrow$" src="form_6.png"/> <img class="formulaInl" alt="$\exists$" src="form_10.png"/> (t : tupla(Clave, Significado)) está?(t, _elems) <img class="formulaInl" alt="$\land$" src="form_1.png"/> P1(t) == c</li>
+<li><img class="formulaInl" alt="$\forall$" src="form_5.png"/> (t : tupla(Clave, Significado)) está?(t, _elems) <img class="formulaInl" alt="$\Rightarrow$" src="form_9.png"/> P2(t) == obtener(P1(t), d') </li>
+</ul>
+</div></td></tr>
+<tr class="memitem:aeb6846d41a9b28c5511b1ece965efe61"><td class="memItemLeft" align="right" valign="top"><a id="aeb6846d41a9b28c5511b1ece965efe61"></a>
+list&lt; pair&lt; const K, S &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_elems</b></td></tr>
+<tr class="separator:aeb6846d41a9b28c5511b1ece965efe61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><h3>template&lt;class K, class S&gt;<br />
+class linear_map&lt; K, S &gt;</h3>
+
+<p>Módulo diccionario con inserción en O(1) </p>
+<dl class="tparams"><dt>Parámetros del template</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">K</td><td>tipo paramétrico para la clave </td></tr>
+    <tr><td class="paramname">S</td><td>tipo paramétrico para el significado</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Se espera que K tenga:</p><ul>
+<li>operator==</li>
+<li>Constructor por copia</li>
+</ul>
+<p>Se espera que S tenga:</p><ul>
+<li>Constructor por copia</li>
+</ul>
+<p><b>se explica con</b> TAD Diccionario(K, S) </p>
+</div><h2 class="groupheader">Documentación del constructor y destructor</h2>
+<a id="a2343174c5c974fefcec889b0954debcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2343174c5c974fefcec889b0954debcf">&#9670;&nbsp;</a></span>linear_map() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class K , class S &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::<a class="el" href="classlinear__map.html">linear_map</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crea un diccionario vacio. </p>
+<dl class="section pre"><dt>Precondición</dt><dd>true </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><b class="paramname">this</b> = vacio</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(1)</dd>
+</dl>
+
+</div>
+</div>
+<a id="a29a92ea4bf65d4f5936b061ebb8309fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29a92ea4bf65d4f5936b061ebb8309fa">&#9670;&nbsp;</a></span>linear_map() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class K, class S&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::<a class="el" href="classlinear__map.html">linear_map</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor por copia. </p>
+<dl class="section pre"><dt>Precondición</dt><dd>true </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><b class="paramname">this</b> es una copia de other. No hay aliasing.</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(#claves(ohter) * (copy(Clave) + copy(Significado)))</dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de las funciones miembro</h2>
+<a id="ad528c5b74bb14cfe7170bffffce2e979"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad528c5b74bb14cfe7170bffffce2e979">&#9670;&nbsp;</a></span>at() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class K, class S &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">S &amp; <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::at </td>
+          <td>(</td>
+          <td class="paramtype">const K &amp;&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Devuelve el significado relacionado con la clave. </p>
+<p>El significado se devuelve por referencia modificable.</p>
+<dl class="section pre"><dt>Precondición</dt><dd>def?(key, <b class="paramname">this</b>) </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><b class="paramname">res</b> = obtener(<b class="paramname">this</b>, k)</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(#claves(<b class="paramname">this</b>))</dd>
+</dl>
+
+</div>
+</div>
+<a id="a373f306f920941123cb47f6b77ed97ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a373f306f920941123cb47f6b77ed97ed">&#9670;&nbsp;</a></span>at() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class K, class S &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const S &amp; <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::at </td>
+          <td>(</td>
+          <td class="paramtype">const K &amp;&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Devuelve el significado relacionado con la clave. </p>
+<p>El significado se devuelve por referencia no-modificable.</p>
+<dl class="section pre"><dt>Precondición</dt><dd>def?(key, <b class="paramname">this</b>) </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><b class="paramname">res</b> = obtener(<b class="paramname">this</b>, k)</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(#claves(<b class="paramname">this</b>))</dd>
+</dl>
+
+</div>
+</div>
+<a id="a88a219ae647727d1b7e67c2dbe36d972"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88a219ae647727d1b7e67c2dbe36d972">&#9670;&nbsp;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class K , class S &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::iterator <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Devuelve un iterador al inicio del diccionario. </p>
+<dl class="section pre"><dt>Precondición</dt><dd>true </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><b class="paramname">res</b> apunta al inicio del diccionario</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(1)</dd>
+</dl>
+
+</div>
+</div>
+<a id="a6f3bef755dbfb788cfe653a3ba70c211"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f3bef755dbfb788cfe653a3ba70c211">&#9670;&nbsp;</a></span>begin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class K , class S &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::const_iterator <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Devuelve un iterador const al inicio del diccionario. </p>
+<dl class="section pre"><dt>Precondición</dt><dd>true </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><b class="paramname">res</b> apunta al inicio del diccionario</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(1)</dd>
+</dl>
+
+</div>
+</div>
+<a id="ac906ffa073c059c8ea5897b79c92c6f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac906ffa073c059c8ea5897b79c92c6f4">&#9670;&nbsp;</a></span>count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class K, class S &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::count </td>
+          <td>(</td>
+          <td class="paramtype">const K &amp;&#160;</td>
+          <td class="paramname"><em>k</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Cantidad de apariciones de la clave. </p>
+<dl class="section pre"><dt>Precondición</dt><dd>true </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><b>if</b> def?(<b class="paramname">this</b>, k) <b>then</b> <b class="paramname">res</b> = 1 <b>else</b> <b class="paramname">res</b> = 0 <b>fi</b> </dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(#claves(<b class="paramname">this</b>) * cmp(Clave)</dd>
+</dl>
+
+</div>
+</div>
+<a id="af6a78e9c9189a3ab81d2aaa8a187c754"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6a78e9c9189a3ab81d2aaa8a187c754">&#9670;&nbsp;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class K, class S&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>True si el diccionario está vacío. </p>
+<dl class="section pre"><dt>Precondición</dt><dd>true </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><b class="paramname">res</b> = <img class="formulaInl" alt="$\emptyset$" src="form_4.png"/>?(claves(<b class="paramname">this</b>))</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(1)</dd>
+</dl>
+
+</div>
+</div>
+<a id="a29f90bee46581029b6ce496d4ea46683"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29f90bee46581029b6ce496d4ea46683">&#9670;&nbsp;</a></span>end() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class K , class S &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::iterator <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Devuelve un iterador a la posición pasando-el-último. </p>
+<dl class="section pre"><dt>Precondición</dt><dd>true </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><b class="paramname">res</b> apunta a la posición pasando-el-último</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(1)</dd>
+</dl>
+
+</div>
+</div>
+<a id="a20a63149ca91f200c2ff3ea25bd0ad97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20a63149ca91f200c2ff3ea25bd0ad97">&#9670;&nbsp;</a></span>end() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class K , class S &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::const_iterator <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Devuelve un iterador const a la posición pasando-el-último. </p>
+<dl class="section pre"><dt>Precondición</dt><dd>true </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><b class="paramname">res</b> apunta a la posición pasando-el-último</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(1)</dd>
+</dl>
+
+</div>
+</div>
+<a id="a932198aa420701fb84af74434764be9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a932198aa420701fb84af74434764be9d">&#9670;&nbsp;</a></span>erase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class K, class S &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::size_type <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype">const K &amp;&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Elimina el significado del diccionario. Devuelve la cantidad de elementos elminados. </p>
+<dl class="section pre"><dt>Precondición</dt><dd>d == <b class="paramname">this</b> <img class="formulaInl" alt="$\land$" src="form_1.png"/> def?(key, <b class="paramname">this</b>) </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><b class="paramname">this</b> == borrar(key, d) <img class="formulaInl" alt="$\land$" src="form_1.png"/> <b class="paramname">res</b> = 1</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(#claves(<b class="paramname">this</b>))</dd>
+</dl>
+
+</div>
+</div>
+<a id="a6f04a74f63434402f7198aaac798d9da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f04a74f63434402f7198aaac798d9da">&#9670;&nbsp;</a></span>fast_insert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class K, class S&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::iterator <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::fast_insert </td>
+          <td>(</td>
+          <td class="paramtype">const value_type &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Define una nueva relación en el diccionario. </p>
+<dl class="section pre"><dt>Precondición</dt><dd>d = <b class="paramname">this</b> <img class="formulaInl" alt="$\land$" src="form_1.png"/> <img class="formulaInl" alt="$\lnot$" src="form_2.png"/> def?( <img class="formulaInl" alt="$\pi_1$" src="form_12.png"/>(v), <b class="paramname">this</b>) </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><b class="paramname">this</b> = definir(d, <img class="formulaInl" alt="$\pi_1$" src="form_12.png"/>(v), <img class="formulaInl" alt="$\pi_2$" src="form_14.png"/>(v)) <img class="formulaInl" alt="$\land$" src="form_1.png"/> <b class="paramname">res</b> es un iterador que apunta a la relación recién definida</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(copy(v))</dd>
+</dl>
+
+</div>
+</div>
+<a id="a227924393723570ac58f79fd194aac61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a227924393723570ac58f79fd194aac61">&#9670;&nbsp;</a></span>find() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class K, class S &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::iterator <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::find </td>
+          <td>(</td>
+          <td class="paramtype">const K &amp;&#160;</td>
+          <td class="paramname"><em>k</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Devuelve un iterador relacionado a la clave buscada. End si no está definida. </p>
+<dl class="section pre"><dt>Precondición</dt><dd>true </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><ul>
+<li>def?(k, <b class="paramname">this</b>) <img class="formulaInl" alt="$\Rightarrow$" src="form_9.png"/> <img class="formulaInl" alt="$\pi_1$" src="form_12.png"/>(<b class="paramname">res</b>) = k <img class="formulaInl" alt="$\land$" src="form_1.png"/> <img class="formulaInl" alt="$\pi_2$" src="form_14.png"/>(<b class="paramname">res</b>) = obtener(k, <b class="paramname">this</b>) <img class="formulaInl" alt="$\lor$" src="form_11.png"/></li>
+<li>def?(k, <b class="paramname">this</b>) <img class="formulaInl" alt="$\Rightarrow$" src="form_9.png"/> <b class="paramname">res</b> es end</li>
+</ul>
+</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(#claves(<b class="paramname">this</b>))</dd>
+</dl>
+
+</div>
+</div>
+<a id="a99493e350f97f5c3932840a28406fd37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99493e350f97f5c3932840a28406fd37">&#9670;&nbsp;</a></span>find() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class K, class S &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::const_iterator <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::find </td>
+          <td>(</td>
+          <td class="paramtype">const K &amp;&#160;</td>
+          <td class="paramname"><em>k</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Devuelve un iterador const relacionado a la clave buscada. End si no está definida. </p>
+<dl class="section pre"><dt>Precondición</dt><dd>true </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><ul>
+<li>def?(k, <b class="paramname">this</b>) <img class="formulaInl" alt="$\Rightarrow$" src="form_9.png"/> <img class="formulaInl" alt="$\pi_1$" src="form_12.png"/>(<b class="paramname">res</b>) = k <img class="formulaInl" alt="$\land$" src="form_1.png"/> <img class="formulaInl" alt="$\pi_2$" src="form_14.png"/>(<b class="paramname">res</b>) = obtener(k, <b class="paramname">this</b>) <img class="formulaInl" alt="$\lor$" src="form_11.png"/></li>
+<li>def?(k, <b class="paramname">this</b>) <img class="formulaInl" alt="$\Rightarrow$" src="form_9.png"/> <b class="paramname">res</b> es end</li>
+</ul>
+</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(#claves(<b class="paramname">this</b>))</dd>
+</dl>
+
+</div>
+</div>
+<a id="a3631b2f824bbf4489943f0816464068e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3631b2f824bbf4489943f0816464068e">&#9670;&nbsp;</a></span>insert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class K, class S&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">pair&lt; typename <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::iterator, bool &gt; <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype">const value_type &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Define o redefine una relación en el diccionario. </p>
+<dl class="section pre"><dt>Precondición</dt><dd>d = <b class="paramname">this</b> </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><b class="paramname">this</b> = definir(d, <img class="formulaInl" alt="$\pi_1$" src="form_12.png"/>(v), <img class="formulaInl" alt="$\pi_2$" src="form_14.png"/>(v)) <img class="formulaInl" alt="$\land$" src="form_1.png"/> <b class="paramname">res</b> es una tupla con el primer elemento un iterador a la relación definida y el segúndo elemento indica si <img class="formulaInl" alt="$\pi_1$" src="form_12.png"/>(v) no era clave del diccionario</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(#claves(<b class="paramname">this</b>) + copy(v))</dd>
+</dl>
+
+</div>
+</div>
+<a id="a9868e2ada8b775c57521506fe7dd24a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9868e2ada8b775c57521506fe7dd24a7">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class K , class S &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt; &amp; <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Operador asignación del diccionario. </p>
+<dl class="section pre"><dt>Precondición</dt><dd>true </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><b class="paramname">this</b> == other <img class="formulaInl" alt="$\land$" src="form_1.png"/> <b class="paramname">res</b> es referencia a <b class="paramname">this</b></dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(#claves(<b class="paramname">this</b>) + #claves(other) * (copy(Clave) + copy(Significado)))</dd>
+</dl>
+
+</div>
+</div>
+<a id="a3429a0dcc296c4098aef699e089073a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3429a0dcc296c4098aef699e089073a1">&#9670;&nbsp;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class K , class S &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>True si los diccionarios son iguales. </p>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(#claves(<b class="paramname">this</b>) * #claves(other))</dd>
+</dl>
+
+</div>
+</div>
+<a id="a3236ab6c5afff15a94cbc932cba6934b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3236ab6c5afff15a94cbc932cba6934b">&#9670;&nbsp;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class K , class S &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::size_type <a class="el" href="classlinear__map.html">linear_map</a>&lt; K, S &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tamaño del diccionario. </p>
+<dl class="section pre"><dt>Precondición</dt><dd>true </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><b class="paramname">res</b> = #clave(<b class="paramname">this</b>)</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(1)</dd>
+</dl>
+
+</div>
+</div>
+<hr/>La documentación para esta clase fue generada a partir de los siguientes ficheros:<ul>
+<li>src/<a class="el" href="linear__map_8h_source.html">linear_map.h</a></li>
+<li>src/<a class="el" href="linear__map_8hpp_source.html">linear_map.hpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+</body>
+</html>

@@ -1,0 +1,248 @@
+\hypertarget{classBaseDeDatos_1_1join__iterator}{}\section{Referencia de la Clase Base\+De\+Datos\+:\+:join\+\_\+iterator}
+\label{classBaseDeDatos_1_1join__iterator}\index{Base\+De\+Datos\+::join\+\_\+iterator@{Base\+De\+Datos\+::join\+\_\+iterator}}
+
+
+Iterador de la unión de dos tablas por un campo en común.  
+
+
+
+
+{\ttfamily \#include $<$Base\+De\+Datos.\+h$>$}
+
+
+
+Diagrama de colaboración para Base\+De\+Datos\+:\+:join\+\_\+iterator\+:
+% FIG 0
+\subsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_adc9b154b654aee7d0c707b426c00170d}\label{classBaseDeDatos_1_1join__iterator_adc9b154b654aee7d0c707b426c00170d}} 
+{\bfseries join\+\_\+iterator} (const \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}} \&n)
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_a322bbd232068ad00b626c5f9c206842c}\label{classBaseDeDatos_1_1join__iterator_a322bbd232068ad00b626c5f9c206842c}} 
+\mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}} \& {\bfseries operator=} (const \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}} \&n)
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_a56c615f0381e5485ff6098268ee11679}\label{classBaseDeDatos_1_1join__iterator_a56c615f0381e5485ff6098268ee11679}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}} \&j) const
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_a7f035ba5bdc13cc1a5b092e806e5b13b}\label{classBaseDeDatos_1_1join__iterator_a7f035ba5bdc13cc1a5b092e806e5b13b}} 
+bool {\bfseries operator!=} (const \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}} \&j) const
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_a4eb39b012d8b9ff91e802647d4d808bd}\label{classBaseDeDatos_1_1join__iterator_a4eb39b012d8b9ff91e802647d4d808bd}} 
+\mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}} \& {\bfseries operator++} ()
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_ae9da8723dfb7175f3998b339f084fea1}\label{classBaseDeDatos_1_1join__iterator_ae9da8723dfb7175f3998b339f084fea1}} 
+\mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}} {\bfseries operator++} (int n)
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_a11dc274b4fccec0470740222a98f1079}\label{classBaseDeDatos_1_1join__iterator_a11dc274b4fccec0470740222a98f1079}} 
+const \mbox{\hyperlink{classRegistro}{Registro}} {\bfseries operator$\ast$} ()
+\end{DoxyCompactItemize}
+\subsection*{Métodos privados}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_a48e71e18ba7a2e758d1d668fa3c5b092}\label{classBaseDeDatos_1_1join__iterator_a48e71e18ba7a2e758d1d668fa3c5b092}} 
+{\bfseries join\+\_\+iterator} (\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$\+::const\+\_\+iterator a, int ind, \mbox{\hyperlink{classTabla_1_1const__iterador__registros}{Tabla\+::const\+\_\+iterador\+\_\+registros}} c, int sin, const \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$$>$ $\ast$e, const map$<$ int, \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$$>$ $\ast$g, const string \&f, const bool \&o, int t)
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_a5c2c5e0ac0dd48eda6a865893825f6e2}\label{classBaseDeDatos_1_1join__iterator_a5c2c5e0ac0dd48eda6a865893825f6e2}} 
+{\bfseries join\+\_\+iterator} (const bool \&b)
+\item 
+\mbox{\hyperlink{classRegistro}{Registro}} \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator_ab18c679b90081c47622e879ef8e5377c}{combinar\+Registro}} (\mbox{\hyperlink{classRegistro}{Registro}} r1, \mbox{\hyperlink{classRegistro}{Registro}} r2)
+\begin{DoxyCompactList}\small\item\em Crea el registro que es la unión del registro r1 con el r2 según el campo elegido Primero crea vectores con los campos y datos de cada registro (no duplicando el campo indexado) luego crea el registro con estos vectores y lo devuelve. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator_a2f86621f116760476b8c1704af4b184f}{poner\+En\+Fin}} ()
+\begin{DoxyCompactList}\small\item\em Setea punteros a null y final a true para indicar que llegó al final de la union de tablas. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator_a6b92163c76654697c82f11d634b885a7}{avanzar\+It\+Con\+Indice}} ()
+\begin{DoxyCompactList}\small\item\em Incrementa el iterador del \mbox{\hyperlink{classstring__map}{string\+\_\+map}} de pares (claves, registros) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator_a702f207cc0e5de5f81a20b244ae289a1}{avanzar\+It\+Sin\+Indice}} ()
+\begin{DoxyCompactList}\small\item\em Incrementa el iterador de la tabla que no está siendo recorrida por índice. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator_a92d071b625b37f77d15ee1b2dd82ae3d}{buscar\+Prox\+Coincidencia\+Str}} (string \&clave)
+\begin{DoxyCompactList}\small\item\em Busca nueva clave en el campo por el cual se hace el join, luego, busca coincidencias en la otra tabla. Si no encuentra ninguna, incrementa la tabla que no está siendo recorrida por índice y busca la nueva clave del próximo registro hasta llegar al final o a alguna coincidencia. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator_aaadfa593ce2a3e0e2ab80dca1925c7cc}{buscar\+Prox\+Coincidencia\+Nat}} (int \&clave)
+\begin{DoxyCompactList}\small\item\em Busca nueva clave en el campo por el cual se hace el join, luego, busca coincidencias en la otra tabla. Si no encuentra ninguna, incrementa la tabla que no está siendo recorrida por índice y busca la nueva clave del próximo registro hasta llegar al final o a alguna coincidencia. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator_af75048242013b8fac69633c2626715df}{set\+It\+En\+Nueva\+Clave\+Str}} (const string \&clave)
+\begin{DoxyCompactList}\small\item\em De tener coincidencia por clave, setea el iterador del dicc\+Claves\+Str al nuevo conjunto de registros. Actualiza la cantidad de registros. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator_a9aff1c7b280f0abcc05ffc4864a10ba5}{set\+It\+En\+Nueva\+Clave\+Nat}} (const int \&clave)
+\begin{DoxyCompactList}\small\item\em De tener coincidencia por clave, setea el iterador del dicc\+Claves\+Nat al nuevo conjunto de registros. Actualiza la cantidad de registros. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Atributos privados}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_aa662879b0ff610fee1fdcfa90fe65566}\label{classBaseDeDatos_1_1join__iterator_aa662879b0ff610fee1fdcfa90fe65566}} 
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$\+::const\+\_\+iterator $\ast$ {\bfseries it1}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_a6408fed210e97085361c6a079a209bd6}\label{classBaseDeDatos_1_1join__iterator_a6408fed210e97085361c6a079a209bd6}} 
+int {\bfseries cant\+\_\+reg\+\_\+por\+\_\+clave}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_ac9aeb19f9d131c3339845ceb0b766d5e}\label{classBaseDeDatos_1_1join__iterator_ac9aeb19f9d131c3339845ceb0b766d5e}} 
+\mbox{\hyperlink{classTabla_1_1const__iterador__registros}{Tabla\+::const\+\_\+iterador\+\_\+registros}} $\ast$ {\bfseries it2}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_ac2b09142b4a59ff641f7eb5e1cd9d8c7}\label{classBaseDeDatos_1_1join__iterator_ac2b09142b4a59ff641f7eb5e1cd9d8c7}} 
+int {\bfseries cant\+\_\+reg\+\_\+en\+\_\+tabla}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_aef13526352db3e9dc1c78e3fea681dcb}\label{classBaseDeDatos_1_1join__iterator_aef13526352db3e9dc1c78e3fea681dcb}} 
+const \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$ $>$ $\ast$ {\bfseries dicc\+Claves\+Str}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_ad7dd4cf63e115190ceab0998e3e0e5b3}\label{classBaseDeDatos_1_1join__iterator_ad7dd4cf63e115190ceab0998e3e0e5b3}} 
+const map$<$ int, \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$ $>$ $\ast$ {\bfseries dicc\+Claves\+Nat}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_a7500ea619b4be27f788b732470c7534b}\label{classBaseDeDatos_1_1join__iterator_a7500ea619b4be27f788b732470c7534b}} 
+string {\bfseries campo}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_acbe8226a9d381df2d2835a744f40e8a6}\label{classBaseDeDatos_1_1join__iterator_acbe8226a9d381df2d2835a744f40e8a6}} 
+bool {\bfseries final}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_a8f31e5204de670f02cc5aa3b5032a5d7}\label{classBaseDeDatos_1_1join__iterator_a8f31e5204de670f02cc5aa3b5032a5d7}} 
+bool {\bfseries orden}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_a603f3c4c84a41802956f4d0475ed3022}\label{classBaseDeDatos_1_1join__iterator_a603f3c4c84a41802956f4d0475ed3022}} 
+int {\bfseries tipo}
+\end{DoxyCompactItemize}
+\subsection*{Amigas}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_af1e840dbc460e53fa421d03b2da138e4}\label{classBaseDeDatos_1_1join__iterator_af1e840dbc460e53fa421d03b2da138e4}} 
+class {\bfseries Base\+De\+Datos}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_a172484163cb8b80140c3053a4c68e4da}\label{classBaseDeDatos_1_1join__iterator_a172484163cb8b80140c3053a4c68e4da}} 
+class {\bfseries Tabla}
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Iterador de la unión de dos tablas por un campo en común. 
+
+Se construye mediante el campo en común que tienen ambas tablas -\/al menos una tiene que tener índice-\/, al construirse toma como atributos (descriptos más abajo) el iterador a la tabla con índice (it1) y el iterador a la tabla sin indice (it2). El join iterator toma el primer registro de la tabla sin índice cuya clave en el campo por el cual se hace la unión tenga coincidencia en la tabla con índice. De esta manera se avanza it1 hasta que no haya más coincidencias por clave, momento en el cual se avanza it2 y se busca una coincidencia según la nueva clave. El proceso se repite hasta que no hay más coincidencias ni registros (cant\+\_\+reg\+\_\+por\+\_\+clave y cant\+\_\+reg\+\_\+en\+\_\+tabla serán 0 y final será true). Para saber que un \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}} llegó al final se verifica que final sea true.
+
+Atributos\+:
+
+
+\begin{DoxyParams}{Parámetros}
+{\em it1} & es el iterador al conjunto de registros por clave de la tabla con índice. \\
+\hline
+{\em it2} & es el iterador de la tabla sin índice. \\
+\hline
+{\em cant\+\_\+reg\+\_\+en\+\_\+tabla} & indica la cantidad restante de registros en la tabla sin indice, se decrementa a medida que avanza el iterador (it2). \\
+\hline
+{\em cant\+\_\+reg\+\_\+por\+\_\+clave} & es la cantidad restante de registros por clave de la tabla con índice. Se decrementa conforme it1 avanza. \\
+\hline
+{\em dicc\+Claves\+Str} & o dicc\+Claves\+Nat apuntan al índice de la tabla sobre el cual se hace el join, se usa la versión str o nat dependiendo del tipo de datos del campo. \\
+\hline
+{\em campo} & es el campo con el que se hace el join, es común a ambas tablas. \\
+\hline
+{\em final} & indica si se llegó al final del conjunto del join. \\
+\hline
+{\em orden} & determina el orden en el cual se unen los campos de cada tabla al dereferenciar el \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}}. \\
+\hline
+{\em tipo} & precisa si se trata de un \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}} hecho sobre un campo de datos Nat (valor 0) o Str (1). \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_a6b92163c76654697c82f11d634b885a7}\label{classBaseDeDatos_1_1join__iterator_a6b92163c76654697c82f11d634b885a7}} 
+\index{Base\+De\+Datos\+::join\+\_\+iterator@{Base\+De\+Datos\+::join\+\_\+iterator}!avanzar\+It\+Con\+Indice@{avanzar\+It\+Con\+Indice}}
+\index{avanzar\+It\+Con\+Indice@{avanzar\+It\+Con\+Indice}!Base\+De\+Datos\+::join\+\_\+iterator@{Base\+De\+Datos\+::join\+\_\+iterator}}
+\subsubsection{\texorpdfstring{avanzar\+It\+Con\+Indice()}{avanzarItConIndice()}}
+{\footnotesize\ttfamily void Base\+De\+Datos\+::join\+\_\+iterator\+::avanzar\+It\+Con\+Indice (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Incrementa el iterador del \mbox{\hyperlink{classstring__map}{string\+\_\+map}} de pares (claves, registros) 
+
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(S)
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_a702f207cc0e5de5f81a20b244ae289a1}\label{classBaseDeDatos_1_1join__iterator_a702f207cc0e5de5f81a20b244ae289a1}} 
+\index{Base\+De\+Datos\+::join\+\_\+iterator@{Base\+De\+Datos\+::join\+\_\+iterator}!avanzar\+It\+Sin\+Indice@{avanzar\+It\+Sin\+Indice}}
+\index{avanzar\+It\+Sin\+Indice@{avanzar\+It\+Sin\+Indice}!Base\+De\+Datos\+::join\+\_\+iterator@{Base\+De\+Datos\+::join\+\_\+iterator}}
+\subsubsection{\texorpdfstring{avanzar\+It\+Sin\+Indice()}{avanzarItSinIndice()}}
+{\footnotesize\ttfamily void Base\+De\+Datos\+::join\+\_\+iterator\+::avanzar\+It\+Sin\+Indice (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Incrementa el iterador de la tabla que no está siendo recorrida por índice. 
+
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_aaadfa593ce2a3e0e2ab80dca1925c7cc}\label{classBaseDeDatos_1_1join__iterator_aaadfa593ce2a3e0e2ab80dca1925c7cc}} 
+\index{Base\+De\+Datos\+::join\+\_\+iterator@{Base\+De\+Datos\+::join\+\_\+iterator}!buscar\+Prox\+Coincidencia\+Nat@{buscar\+Prox\+Coincidencia\+Nat}}
+\index{buscar\+Prox\+Coincidencia\+Nat@{buscar\+Prox\+Coincidencia\+Nat}!Base\+De\+Datos\+::join\+\_\+iterator@{Base\+De\+Datos\+::join\+\_\+iterator}}
+\subsubsection{\texorpdfstring{buscar\+Prox\+Coincidencia\+Nat()}{buscarProxCoincidenciaNat()}}
+{\footnotesize\ttfamily void Base\+De\+Datos\+::join\+\_\+iterator\+::buscar\+Prox\+Coincidencia\+Nat (\begin{DoxyParamCaption}\item[{int \&}]{clave }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Busca nueva clave en el campo por el cual se hace el join, luego, busca coincidencias en la otra tabla. Si no encuentra ninguna, incrementa la tabla que no está siendo recorrida por índice y busca la nueva clave del próximo registro hasta llegar al final o a alguna coincidencia. 
+
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(log(m))
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_a92d071b625b37f77d15ee1b2dd82ae3d}\label{classBaseDeDatos_1_1join__iterator_a92d071b625b37f77d15ee1b2dd82ae3d}} 
+\index{Base\+De\+Datos\+::join\+\_\+iterator@{Base\+De\+Datos\+::join\+\_\+iterator}!buscar\+Prox\+Coincidencia\+Str@{buscar\+Prox\+Coincidencia\+Str}}
+\index{buscar\+Prox\+Coincidencia\+Str@{buscar\+Prox\+Coincidencia\+Str}!Base\+De\+Datos\+::join\+\_\+iterator@{Base\+De\+Datos\+::join\+\_\+iterator}}
+\subsubsection{\texorpdfstring{buscar\+Prox\+Coincidencia\+Str()}{buscarProxCoincidenciaStr()}}
+{\footnotesize\ttfamily void Base\+De\+Datos\+::join\+\_\+iterator\+::buscar\+Prox\+Coincidencia\+Str (\begin{DoxyParamCaption}\item[{string \&}]{clave }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Busca nueva clave en el campo por el cual se hace el join, luego, busca coincidencias en la otra tabla. Si no encuentra ninguna, incrementa la tabla que no está siendo recorrida por índice y busca la nueva clave del próximo registro hasta llegar al final o a alguna coincidencia. 
+
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(S)
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_ab18c679b90081c47622e879ef8e5377c}\label{classBaseDeDatos_1_1join__iterator_ab18c679b90081c47622e879ef8e5377c}} 
+\index{Base\+De\+Datos\+::join\+\_\+iterator@{Base\+De\+Datos\+::join\+\_\+iterator}!combinar\+Registro@{combinar\+Registro}}
+\index{combinar\+Registro@{combinar\+Registro}!Base\+De\+Datos\+::join\+\_\+iterator@{Base\+De\+Datos\+::join\+\_\+iterator}}
+\subsubsection{\texorpdfstring{combinar\+Registro()}{combinarRegistro()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classRegistro}{Registro}} Base\+De\+Datos\+::join\+\_\+iterator\+::combinar\+Registro (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classRegistro}{Registro}}}]{r1,  }\item[{\mbox{\hyperlink{classRegistro}{Registro}}}]{r2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Crea el registro que es la unión del registro r1 con el r2 según el campo elegido Primero crea vectores con los campos y datos de cada registro (no duplicando el campo indexado) luego crea el registro con estos vectores y lo devuelve. 
+
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(C)
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_a2f86621f116760476b8c1704af4b184f}\label{classBaseDeDatos_1_1join__iterator_a2f86621f116760476b8c1704af4b184f}} 
+\index{Base\+De\+Datos\+::join\+\_\+iterator@{Base\+De\+Datos\+::join\+\_\+iterator}!poner\+En\+Fin@{poner\+En\+Fin}}
+\index{poner\+En\+Fin@{poner\+En\+Fin}!Base\+De\+Datos\+::join\+\_\+iterator@{Base\+De\+Datos\+::join\+\_\+iterator}}
+\subsubsection{\texorpdfstring{poner\+En\+Fin()}{ponerEnFin()}}
+{\footnotesize\ttfamily void Base\+De\+Datos\+::join\+\_\+iterator\+::poner\+En\+Fin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Setea punteros a null y final a true para indicar que llegó al final de la union de tablas. 
+
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_a9aff1c7b280f0abcc05ffc4864a10ba5}\label{classBaseDeDatos_1_1join__iterator_a9aff1c7b280f0abcc05ffc4864a10ba5}} 
+\index{Base\+De\+Datos\+::join\+\_\+iterator@{Base\+De\+Datos\+::join\+\_\+iterator}!set\+It\+En\+Nueva\+Clave\+Nat@{set\+It\+En\+Nueva\+Clave\+Nat}}
+\index{set\+It\+En\+Nueva\+Clave\+Nat@{set\+It\+En\+Nueva\+Clave\+Nat}!Base\+De\+Datos\+::join\+\_\+iterator@{Base\+De\+Datos\+::join\+\_\+iterator}}
+\subsubsection{\texorpdfstring{set\+It\+En\+Nueva\+Clave\+Nat()}{setItEnNuevaClaveNat()}}
+{\footnotesize\ttfamily void Base\+De\+Datos\+::join\+\_\+iterator\+::set\+It\+En\+Nueva\+Clave\+Nat (\begin{DoxyParamCaption}\item[{const int \&}]{clave }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+De tener coincidencia por clave, setea el iterador del dicc\+Claves\+Nat al nuevo conjunto de registros. Actualiza la cantidad de registros. 
+
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_1_1join__iterator_af75048242013b8fac69633c2626715df}\label{classBaseDeDatos_1_1join__iterator_af75048242013b8fac69633c2626715df}} 
+\index{Base\+De\+Datos\+::join\+\_\+iterator@{Base\+De\+Datos\+::join\+\_\+iterator}!set\+It\+En\+Nueva\+Clave\+Str@{set\+It\+En\+Nueva\+Clave\+Str}}
+\index{set\+It\+En\+Nueva\+Clave\+Str@{set\+It\+En\+Nueva\+Clave\+Str}!Base\+De\+Datos\+::join\+\_\+iterator@{Base\+De\+Datos\+::join\+\_\+iterator}}
+\subsubsection{\texorpdfstring{set\+It\+En\+Nueva\+Clave\+Str()}{setItEnNuevaClaveStr()}}
+{\footnotesize\ttfamily void Base\+De\+Datos\+::join\+\_\+iterator\+::set\+It\+En\+Nueva\+Clave\+Str (\begin{DoxyParamCaption}\item[{const string \&}]{clave }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+De tener coincidencia por clave, setea el iterador del dicc\+Claves\+Str al nuevo conjunto de registros. Actualiza la cantidad de registros. 
+
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}
+
+La documentación para esta clase fue generada a partir del siguiente fichero\+:\begin{DoxyCompactItemize}
+\item 
+src/Base\+De\+Datos.\+h\end{DoxyCompactItemize}

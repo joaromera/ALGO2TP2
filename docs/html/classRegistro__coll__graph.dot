@@ -1,0 +1,19 @@
+digraph "Registro"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="Registro",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _campos" ,fontname="Helvetica"];
+  Node2 [label="linear_set\< string \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classlinear__set.html"];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _elems" ,fontname="Helvetica"];
+  Node3 [label="linear_map\< string,\l bool \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classlinear__map.html"];
+  Node4 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _datos" ,fontname="Helvetica"];
+  Node4 [label="string_map\< Dato \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classstring__map.html"];
+  Node5 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" head" ,fontname="Helvetica"];
+  Node5 [label="string_map\< T \>::Nodo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structstring__map_1_1Nodo.html"];
+  Node5 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" padre" ,fontname="Helvetica"];
+  Node6 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" clave" ,fontname="Helvetica"];
+  Node6 [label="string",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node7 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" hijos" ,fontname="Helvetica"];
+  Node7 [label="vector\< string_map\l::Nodo *\>",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+}

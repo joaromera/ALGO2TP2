@@ -1,0 +1,16 @@
+digraph "Tabla"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="Tabla",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _tipos" ,fontname="Helvetica"];
+  Node2 [label="linear_map\< string,\l Dato \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classlinear__map.html"];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _registros" ,fontname="Helvetica"];
+  Node3 [label="linear_set\< Registro \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classlinear__set.html"];
+  Node4 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _elems" ,fontname="Helvetica"];
+  Node4 [label="linear_map\< Registro,\l bool \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classlinear__map.html"];
+  Node5 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _campos\n_claves" ,fontname="Helvetica"];
+  Node5 [label="linear_set\< string \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classlinear__set.html"];
+  Node6 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _elems" ,fontname="Helvetica"];
+  Node6 [label="linear_map\< string,\l bool \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classlinear__map.html"];
+}

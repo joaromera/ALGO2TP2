@@ -1,0 +1,579 @@
+\hypertarget{classBaseDeDatos}{}\section{Referencia de la Clase Base\+De\+Datos}
+\label{classBaseDeDatos}\index{Base\+De\+Datos@{Base\+De\+Datos}}
+
+
+Una base de datos es un administrador de tablas con funciones de búsqueda.  
+
+
+
+
+{\ttfamily \#include $<$Base\+De\+Datos.\+h$>$}
+
+
+
+Diagrama de colaboración para Base\+De\+Datos\+:
+% FIG 0
+\subsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}}
+\begin{DoxyCompactList}\small\item\em Iterador de la unión de dos tablas por un campo en común. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Tipos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_a6742a222e87623bc92a810a693fb337b}\label{classBaseDeDatos_a6742a222e87623bc92a810a693fb337b}} 
+typedef \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRestriccion}{Restriccion}} $>$ \mbox{\hyperlink{classBaseDeDatos_a6742a222e87623bc92a810a693fb337b}{Criterio}}
+\begin{DoxyCompactList}\small\item\em Criterio de búsqueda para una base de datos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBaseDeDatos_a85a4992b2d9d7ed072efa792384495b5}{Base\+De\+Datos}} ()
+\begin{DoxyCompactList}\small\item\em Inicializa una base de datos sin tablas. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBaseDeDatos_aee0685f94a16b05b2893b24349716292}{crear\+Tabla}} (const string \&nombre, const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ string $>$ \&claves, const vector$<$ string $>$ \&campos, const vector$<$ \mbox{\hyperlink{classDato}{Dato}} $>$ \&tipos)
+\begin{DoxyCompactList}\small\item\em Crea una nueva tabla en la base de datos. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBaseDeDatos_ada69808e7d6f26e34bab5b67ab4f5d05}{agregar\+Registro}} (const \mbox{\hyperlink{classRegistro}{Registro}} \&r, const string \&nombre)
+\begin{DoxyCompactList}\small\item\em Agrega un registro a la tabla parámetro. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ string $>$ \& \mbox{\hyperlink{classBaseDeDatos_a96678caace7a517e8fe588dc6f034655}{tablas}} () const
+\begin{DoxyCompactList}\small\item\em Devuelve el conjunto de tablas existentes en la base. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classTabla}{Tabla}} \& \mbox{\hyperlink{classBaseDeDatos_a79df27b9e08a8a90d787f548c588bc55}{dame\+Tabla}} (const string \&nombre) const
+\begin{DoxyCompactList}\small\item\em Devuelve la tabla asociada al nombre. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classBaseDeDatos_ab590044b6c13afc41208b897ae58a731}{uso\+\_\+criterio}} (const \mbox{\hyperlink{classBaseDeDatos_a6742a222e87623bc92a810a693fb337b}{Criterio}} \&criterio) const
+\begin{DoxyCompactList}\small\item\em Devuelve la cantidad de usos que tiene un criterio. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classBaseDeDatos_a1774752992ec793591659ca8f78b402c}{registro\+Valido}} (const \mbox{\hyperlink{classRegistro}{Registro}} \&r, const string \&nombre) const
+\begin{DoxyCompactList}\small\item\em Evalúa si un registro puede ingresarse en la tabla parámetro. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classBaseDeDatos_a651fd0ebcea08d24256a24021e5b8cae}{criterio\+Valido}} (const \mbox{\hyperlink{classBaseDeDatos_a6742a222e87623bc92a810a693fb337b}{Criterio}} \&c, const string \&nombre) const
+\begin{DoxyCompactList}\small\item\em Evalúa si un criterio puede aplicarse en la tabla parámetro. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classTabla}{Tabla}} \mbox{\hyperlink{classBaseDeDatos_aa0676f34e537e650095e55b3eef852cb}{busqueda}} (const \mbox{\hyperlink{classBaseDeDatos_a6742a222e87623bc92a810a693fb337b}{Criterio}} \&c, const string \&nombre)
+\begin{DoxyCompactList}\small\item\em Devuelve el resultado de buscar en una tabla con un criterio. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classBaseDeDatos_a6742a222e87623bc92a810a693fb337b}{Criterio}} $>$ \mbox{\hyperlink{classBaseDeDatos_a75256ad859e8d399865ff0e0f75ff103}{top\+\_\+criterios}} () const
+\begin{DoxyCompactList}\small\item\em Devuelve los criterios de máximo uso. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBaseDeDatos_aa2b4e6d28434657ab6cb4840b6fc89fb}{crear\+Indice}} (const string \&tabla, const string \&campo)
+\begin{DoxyCompactList}\small\item\em Crea indice en una tabla según uno de sus campos. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classBaseDeDatos_ad5073a4729746568ebe59810856258c2}{tiene\+Indice}} (const string \&tabla, const string \&campo)
+\begin{DoxyCompactList}\small\item\em Evalúa si una tabla tiene índice en el campo. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}} \mbox{\hyperlink{classBaseDeDatos_a90db1eea7c903c7c736abd45eea0e855}{join}} (const string \&tabla1, const string \&tabla2, const string \&campo)
+\begin{DoxyCompactList}\small\item\em Join de dos tablas designando un campo en común. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}} \mbox{\hyperlink{classBaseDeDatos_a9de9148caecec055823030aafc75a378}{join\+\_\+end}} ()
+\begin{DoxyCompactList}\small\item\em Devuelve un \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}} que indica el final de un join. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Métodos privados}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}} \mbox{\hyperlink{classBaseDeDatos_ae7f919baf45b942771bc8e9f2a8c733d}{join\+\_\+helper\+\_\+str}} (const string \&tabla1, const string \&tabla2, const string \&campo, const bool \&orden)
+\begin{DoxyCompactList}\small\item\em Join de dos tablas designando un campo en común. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classBaseDeDatos_af5f91277cf55ae19b0a9ae738bb05c4f}\label{classBaseDeDatos_af5f91277cf55ae19b0a9ae738bb05c4f}} 
+\mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}} {\bfseries join\+\_\+helper\+\_\+int} (const string \&tabla1, const string \&tabla2, const string \&campo, const bool \&orden)
+\end{DoxyCompactItemize}
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+list$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$ \& \mbox{\hyperlink{classBaseDeDatos_a4ed317871f794f90e6ab462257ebcd1e}{\+\_\+filtrar\+\_\+registros}} (const string \&campo, const \mbox{\hyperlink{classDato}{Dato}} \&valor, list$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$ \&registros, bool igualdad) const
+\begin{DoxyCompactList}\small\item\em Filtra la lista de registros parametro según el criterio. \end{DoxyCompactList}\item 
+list$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$ \& \mbox{\hyperlink{classBaseDeDatos_aa3ae194bb334159247078071808caa2d}{\+\_\+filtrar\+\_\+registros}} (const string \&campo, const \mbox{\hyperlink{classDato}{Dato}} \&valor, list$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$ \&registros) const
+\begin{DoxyCompactList}\small\item\em Filtra la lista de registros parametro según el criterio. \end{DoxyCompactList}\item 
+pair$<$ vector$<$ string $>$, vector$<$ \mbox{\hyperlink{classDato}{Dato}} $>$ $>$ \mbox{\hyperlink{classBaseDeDatos_ad5b99bf20095789ca5636bf0593ad8a5}{\+\_\+tipos\+\_\+tabla}} (const \mbox{\hyperlink{classTabla}{Tabla}} \&t)
+\begin{DoxyCompactList}\small\item\em Obtiene los campos y tipos de una tabla. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+\subsection*{Atributos privados}
+\begin{Indent}\textbf{ Representación}\par
+{\em rep\+: basededatos $\to$ bool~\newline
+rep(bd) $\equiv$
+\begin{DoxyItemize}
+\item \+\_\+nombres\+\_\+tablas = claves(\+\_\+tablas) $\land$
+\item $\forall$ (c \+: Criterio) c $\in$ claves(\+\_\+uso\+\_\+criterios) $\Rightarrow$
+\begin{DoxyItemize}
+\item (
+\begin{DoxyItemize}
+\item $\exists$ (n \+: string) n $\in$ \+\_\+nombres\+\_\+tablas
+\item $\land$ criterio\+Valido(c, n, db)
+\end{DoxyItemize}
+\item ) $\land$
+\item obtener(c, \+\_\+uso\+\_\+criterios) $>$ 0 $\land$
+\end{DoxyItemize}
+\item $\forall$ (t \+: tabla) t $\in$ claves(\+\_\+indices) $\Rightarrow$ t $\in$ claves(\+\_\+tablas) $\land$
+\item $\ast$ $\forall$ (c \+: campo) c $\in$ campos(t) $\Rightarrow$ c $\in$ claves(obtener(t, \+\_\+indices)) $\land$
+\item $\ast$ $\forall$ (d \+: dato) d $\in$ obtener(c, registros(t)) $\Rightarrow$ d $\in$ claves(obtener(c, obtener(t, \+\_\+indices))) $\land$
+\item $\ast$ $\forall$ (r \+: registro) r $\in$ registros(t) /\+I\+M\+P\+L\+I\+ES r $\in$ obtener(d, obtener(c, obtener(t, \+\_\+indices))))
+\item $\land$
+\item $\forall$ (t \+: tabla) t $\in$ claves(\+\_\+indices\+Num) $\Rightarrow$ t $\in$ claves(\+\_\+tablas) $\land$
+\item $\ast$ $\forall$ (c \+: campo) c $\in$ campos(t) $\Rightarrow$ c $\in$ claves(obtener(t, \+\_\+indices\+Num)) $\land$
+\item $\ast$ $\forall$ (d \+: dato) d $\in$ obtener(c, registros(t)) $\Rightarrow$ d $\in$ claves(obtener(c, obtener(t, \+\_\+indices\+Num))) $\land$
+\item $\ast$ $\forall$ (r \+: registro) r $\in$ registros(t) /\+I\+M\+P\+L\+I\+ES r $\in$ obtener(d, obtener(c, obtener(t, \+\_\+indices\+Num))))
+\end{DoxyItemize}
+
+abs\+: basededatos $\to$ \mbox{\hyperlink{classBaseDeDatos}{Base\+De\+Datos}}~\newline
+abs(bd) $\equiv$ bd\textquotesingle{} $|$
+\begin{DoxyItemize}
+\item \+\_\+nombres\+\_\+tablas = tablas(bd\textquotesingle{}) $\land$
+\item ( $\forall$ nt \+: string) nt $\in$ \+\_\+nombres\+\_\+tablas $\Rightarrow$
+\begin{DoxyItemize}
+\item obtener(nt, \+\_\+tablas) = dame\+Tabla(nt, bd\textquotesingle{}) $\land$
+\end{DoxyItemize}
+\item ( $\forall$ c \+: criterio)
+\begin{DoxyItemize}
+\item (uso\+Criterio(c, bd\textquotesingle{}) == 0 $\land$ $\lnot$ def?(c, \+\_\+uso\+\_\+criterios)) $\lor$
+\item (uso\+Criterio(c, db\textquotesingle{}) == obtener(c, \+\_\+uso\+\_\+criterios)) $\land$
+\end{DoxyItemize}
+\item ( $\forall$ c \+: campos),(t \+: tablas) $\Rightarrow$ tiene\+Indice?(c,t,bd) =
+\begin{DoxyItemize}
+\item def?(t, \+\_\+indices\+Num) $\land$ def?(c, obtener(t,\+\_\+indices\+Num)) $\land$ ( $\forall$ cl\+: claves) cl $\in$ c
+\item $\Rightarrow$ def?(cl, obtener(c, obtener(t,\+\_\+indices\+Num)) $\lor$
+\item def?(t, \+\_\+indices) $\land$ def?(c, obtener(t,\+\_\+indices)) $\land$ ( $\forall$ cl\+: claves) cl $\in$ c
+\item $\Rightarrow$ def?(cl, obtener(c, obtener(t,\+\_\+indices)) 
+\end{DoxyItemize}
+\end{DoxyItemize}}\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_ae93f3d0a8d138e5742c52b9f2294d2bd}\label{classBaseDeDatos_ae93f3d0a8d138e5742c52b9f2294d2bd}} 
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ string $>$ {\bfseries \+\_\+nombres\+\_\+tablas}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_a4dfd166b7a61aef87421b7d58db9bb05}\label{classBaseDeDatos_a4dfd166b7a61aef87421b7d58db9bb05}} 
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ \mbox{\hyperlink{classTabla}{Tabla}} $>$ {\bfseries \+\_\+tablas}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_acc03ee648f19ad950d399861cc263a30}\label{classBaseDeDatos_acc03ee648f19ad950d399861cc263a30}} 
+\mbox{\hyperlink{classlinear__map}{linear\+\_\+map}}$<$ \mbox{\hyperlink{classBaseDeDatos_a6742a222e87623bc92a810a693fb337b}{Criterio}}, int $>$ {\bfseries \+\_\+uso\+\_\+criterios}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_a7ad8b617ea2efe78488950fdf5bb35b0}\label{classBaseDeDatos_a7ad8b617ea2efe78488950fdf5bb35b0}} 
+\mbox{\hyperlink{classstring__map}{Index}} {\bfseries \+\_\+indices}
+\item 
+\mbox{\Hypertarget{classBaseDeDatos_a089326e486833e962a0fa1dd863ae71b}\label{classBaseDeDatos_a089326e486833e962a0fa1dd863ae71b}} 
+\mbox{\hyperlink{classstring__map}{Index\+Int}} {\bfseries \+\_\+indices\+Num}
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Descripción detallada}
+Una base de datos es un administrador de tablas con funciones de búsqueda. 
+
+Una base de datos permite administrar tablas identificadas por registro. Permite saber si se puede agegar un registro a una tabla y luego agregarlo. Permite realizar filtros del contenido de tablas mediante criterios de búsqueda. Además mantiene estadísticas del uso de los criterios.
+
+{\bfseries se explica con} T\+AD \mbox{\hyperlink{classBaseDeDatos}{Base\+De\+Datos}} 
+
+\subsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classBaseDeDatos_a85a4992b2d9d7ed072efa792384495b5}\label{classBaseDeDatos_a85a4992b2d9d7ed072efa792384495b5}} 
+\index{Base\+De\+Datos@{Base\+De\+Datos}!Base\+De\+Datos@{Base\+De\+Datos}}
+\index{Base\+De\+Datos@{Base\+De\+Datos}!Base\+De\+Datos@{Base\+De\+Datos}}
+\subsubsection{\texorpdfstring{Base\+De\+Datos()}{BaseDeDatos()}}
+{\footnotesize\ttfamily Base\+De\+Datos\+::\+Base\+De\+Datos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Inicializa una base de datos sin tablas. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} = nueva\+DB
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classBaseDeDatos_a4ed317871f794f90e6ab462257ebcd1e}\label{classBaseDeDatos_a4ed317871f794f90e6ab462257ebcd1e}} 
+\index{Base\+De\+Datos@{Base\+De\+Datos}!\+\_\+filtrar\+\_\+registros@{\+\_\+filtrar\+\_\+registros}}
+\index{\+\_\+filtrar\+\_\+registros@{\+\_\+filtrar\+\_\+registros}!Base\+De\+Datos@{Base\+De\+Datos}}
+\subsubsection{\texorpdfstring{\+\_\+filtrar\+\_\+registros()}{\_filtrar\_registros()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily list$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$ \& Base\+De\+Datos\+::\+\_\+filtrar\+\_\+registros (\begin{DoxyParamCaption}\item[{const string \&}]{campo,  }\item[{const \mbox{\hyperlink{classDato}{Dato}} \&}]{valor,  }\item[{list$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$ \&}]{registros,  }\item[{bool}]{igualdad }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Filtra la lista de registros parametro según el criterio. 
+
+El resultado tiene aliasing con el parámetro registros.
+
+\begin{DoxyPrecond}{Precondición}
+$\forall$ (r \+: \mbox{\hyperlink{classRegistro}{Registro}}) r $\in$ registros $\Rightarrow$ campo $\in$ campos(r) $\land$ tipo?(valor(campo, r)) = tipo?(valor) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = filtrar\+Registros\+Segun\+Restriccion( nueva(campo, valor, igualdad), registros) 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{classBaseDeDatos_aa3ae194bb334159247078071808caa2d}\label{classBaseDeDatos_aa3ae194bb334159247078071808caa2d}} 
+\index{Base\+De\+Datos@{Base\+De\+Datos}!\+\_\+filtrar\+\_\+registros@{\+\_\+filtrar\+\_\+registros}}
+\index{\+\_\+filtrar\+\_\+registros@{\+\_\+filtrar\+\_\+registros}!Base\+De\+Datos@{Base\+De\+Datos}}
+\subsubsection{\texorpdfstring{\+\_\+filtrar\+\_\+registros()}{\_filtrar\_registros()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily list$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$ \& Base\+De\+Datos\+::\+\_\+filtrar\+\_\+registros (\begin{DoxyParamCaption}\item[{const string \&}]{campo,  }\item[{const \mbox{\hyperlink{classDato}{Dato}} \&}]{valor,  }\item[{list$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$ \&}]{registros }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Filtra la lista de registros parametro según el criterio. 
+
+El resultado tiene aliasing con el parámetro registros.
+
+\begin{DoxyPrecond}{Precondición}
+$\forall$ (r \+: \mbox{\hyperlink{classRegistro}{Registro}}) r $\in$ registros $\Rightarrow$ campo $\in$ campos(r) $\land$ tipo?(valor(campo, r)) = tipo?(valor) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = filtrar\+Registros\+Segun\+Restriccion( nueva(campo, valor, true), registros) 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{classBaseDeDatos_ad5b99bf20095789ca5636bf0593ad8a5}\label{classBaseDeDatos_ad5b99bf20095789ca5636bf0593ad8a5}} 
+\index{Base\+De\+Datos@{Base\+De\+Datos}!\+\_\+tipos\+\_\+tabla@{\+\_\+tipos\+\_\+tabla}}
+\index{\+\_\+tipos\+\_\+tabla@{\+\_\+tipos\+\_\+tabla}!Base\+De\+Datos@{Base\+De\+Datos}}
+\subsubsection{\texorpdfstring{\+\_\+tipos\+\_\+tabla()}{\_tipos\_tabla()}}
+{\footnotesize\ttfamily pair$<$ vector$<$ string $>$, vector$<$ \mbox{\hyperlink{classDato}{Dato}} $>$ $>$ Base\+De\+Datos\+::\+\_\+tipos\+\_\+tabla (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classTabla}{Tabla}} \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Obtiene los campos y tipos de una tabla. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+( $\forall$ (c \+: Campo) está?(c, $\pi_1$({\bfseries res})) $\Leftrightarrow$ c $\in$ campos(t)) $\land$ \#(campos(t)) = long( $\pi_1$({\bfseries res})) $\land$ $\forall$ (i \+: Nat) 0 $\leq$ i $<$ \#(campos(t)) $\Rightarrow$ tipo?( $\pi_2$({\bfseries res})\mbox{[}i\mbox{]}) = tipo\+Campo( $\pi_1$({\bfseries res})\mbox{[}i\mbox{]}, t) 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{classBaseDeDatos_ada69808e7d6f26e34bab5b67ab4f5d05}\label{classBaseDeDatos_ada69808e7d6f26e34bab5b67ab4f5d05}} 
+\index{Base\+De\+Datos@{Base\+De\+Datos}!agregar\+Registro@{agregar\+Registro}}
+\index{agregar\+Registro@{agregar\+Registro}!Base\+De\+Datos@{Base\+De\+Datos}}
+\subsubsection{\texorpdfstring{agregar\+Registro()}{agregarRegistro()}}
+{\footnotesize\ttfamily void Base\+De\+Datos\+::agregar\+Registro (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classRegistro}{Registro}} \&}]{r,  }\item[{const string \&}]{nombre }\end{DoxyParamCaption})}
+
+
+
+Agrega un registro a la tabla parámetro. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em r} & \mbox{\hyperlink{classRegistro}{Registro}} a agregar \\
+\hline
+{\em nombre} & Nombre de la tabla donde se agrega el registro\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondición}
+db = {\bfseries this} $\land$ nombre $\in$ tablas({\bfseries this}) $\land$ puedo\+Insertar?(r, dame\+Tabla({\bfseries this})) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} = insertar\+Entrada(r, nombre, db)
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(copy(reg)) o $O$((L+log(m))$\ast$\+C+copy(reg))
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_aa0676f34e537e650095e55b3eef852cb}\label{classBaseDeDatos_aa0676f34e537e650095e55b3eef852cb}} 
+\index{Base\+De\+Datos@{Base\+De\+Datos}!busqueda@{busqueda}}
+\index{busqueda@{busqueda}!Base\+De\+Datos@{Base\+De\+Datos}}
+\subsubsection{\texorpdfstring{busqueda()}{busqueda()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTabla}{Tabla}} Base\+De\+Datos\+::busqueda (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classBaseDeDatos_a6742a222e87623bc92a810a693fb337b}{Criterio}} \&}]{c,  }\item[{const string \&}]{nombre }\end{DoxyParamCaption})}
+
+
+
+Devuelve el resultado de buscar en una tabla con un criterio. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em c} & Criterio de búsqueda utilizado. \\
+\hline
+{\em nombre} & Nombre de la tabla.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondición}
+nombre $\in$ tablas({\bfseries this}) $\land$ criterio\+Valido(c, nombre, {\bfseries this}) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = buscar(c, nombre, {\bfseries this})
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(T + cs $\ast$ cmp(\+Criterio) + cr $\ast$ n $\ast$ (C + L + copy(reg)))
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_aa2b4e6d28434657ab6cb4840b6fc89fb}\label{classBaseDeDatos_aa2b4e6d28434657ab6cb4840b6fc89fb}} 
+\index{Base\+De\+Datos@{Base\+De\+Datos}!crear\+Indice@{crear\+Indice}}
+\index{crear\+Indice@{crear\+Indice}!Base\+De\+Datos@{Base\+De\+Datos}}
+\subsubsection{\texorpdfstring{crear\+Indice()}{crearIndice()}}
+{\footnotesize\ttfamily void Base\+De\+Datos\+::crear\+Indice (\begin{DoxyParamCaption}\item[{const string \&}]{tabla,  }\item[{const string \&}]{campo }\end{DoxyParamCaption})}
+
+
+
+Crea indice en una tabla según uno de sus campos. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em tabla} & Nombre de la tabla. \\
+\hline
+{\em campo} & Nombre del campo de la tabla.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondición}
+db = {\bfseries this} $\land$ tabla $\in$ tablas({\bfseries this}) $\land$ campo $\in$ campos(tabla) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} = crear\+Indice(tabla, campo, db)
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(m $\ast$ (L + log(m)))
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_aee0685f94a16b05b2893b24349716292}\label{classBaseDeDatos_aee0685f94a16b05b2893b24349716292}} 
+\index{Base\+De\+Datos@{Base\+De\+Datos}!crear\+Tabla@{crear\+Tabla}}
+\index{crear\+Tabla@{crear\+Tabla}!Base\+De\+Datos@{Base\+De\+Datos}}
+\subsubsection{\texorpdfstring{crear\+Tabla()}{crearTabla()}}
+{\footnotesize\ttfamily void Base\+De\+Datos\+::crear\+Tabla (\begin{DoxyParamCaption}\item[{const string \&}]{nombre,  }\item[{const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ string $>$ \&}]{claves,  }\item[{const vector$<$ string $>$ \&}]{campos,  }\item[{const vector$<$ \mbox{\hyperlink{classDato}{Dato}} $>$ \&}]{tipos }\end{DoxyParamCaption})}
+
+
+
+Crea una nueva tabla en la base de datos. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em nombre} & Nombre identificador de la tabla \\
+\hline
+{\em claves} & Claves de la tabla a crear \\
+\hline
+{\em campos} & Campos de la tabla a crear \\
+\hline
+{\em tipos} & Tipos para los campos de la tabla a crear\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondición}
+db = {\bfseries this} $\land$ $\lnot$ (nombre $\in$ tablas({\bfseries this})) $\land$ $\land$ $\lnot$ $\emptyset$?(claves) $\land$ $\forall$ (c\+: campo) c $\in$ claves  c $\in$ campos $\land$ long(campos) = long(tipos) $\land$ sin\+Repetidos(campos) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries this} = agregar\+Tabla(nueva\+Tabla(claves, nuevo\+Registro(campos, tipos)), db)
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(C + S)
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_a651fd0ebcea08d24256a24021e5b8cae}\label{classBaseDeDatos_a651fd0ebcea08d24256a24021e5b8cae}} 
+\index{Base\+De\+Datos@{Base\+De\+Datos}!criterio\+Valido@{criterio\+Valido}}
+\index{criterio\+Valido@{criterio\+Valido}!Base\+De\+Datos@{Base\+De\+Datos}}
+\subsubsection{\texorpdfstring{criterio\+Valido()}{criterioValido()}}
+{\footnotesize\ttfamily bool Base\+De\+Datos\+::criterio\+Valido (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classBaseDeDatos_a6742a222e87623bc92a810a693fb337b}{Criterio}} \&}]{c,  }\item[{const string \&}]{nombre }\end{DoxyParamCaption}) const}
+
+
+
+Evalúa si un criterio puede aplicarse en la tabla parámetro. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em c} & Criterio a utilizar. \\
+\hline
+{\em nombre} & Nombre de la tabla.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondición}
+tabla $\in$ tablas({\bfseries this}) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = criterio\+Valido(c, nombre, {\bfseries this})
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(cr)
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_a79df27b9e08a8a90d787f548c588bc55}\label{classBaseDeDatos_a79df27b9e08a8a90d787f548c588bc55}} 
+\index{Base\+De\+Datos@{Base\+De\+Datos}!dame\+Tabla@{dame\+Tabla}}
+\index{dame\+Tabla@{dame\+Tabla}!Base\+De\+Datos@{Base\+De\+Datos}}
+\subsubsection{\texorpdfstring{dame\+Tabla()}{dameTabla()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classTabla}{Tabla}} \& Base\+De\+Datos\+::dame\+Tabla (\begin{DoxyParamCaption}\item[{const string \&}]{nombre }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve la tabla asociada al nombre. 
+
+La tabla se devuelve por referencia no modificable.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em nombre} & Nombre de la tabla buscada.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondición}
+nombre $\in$ tablas({\bfseries this}) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = dame\+Tabla(nombre, {\bfseries this})
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]O(\+L)
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_a90db1eea7c903c7c736abd45eea0e855}\label{classBaseDeDatos_a90db1eea7c903c7c736abd45eea0e855}} 
+\index{Base\+De\+Datos@{Base\+De\+Datos}!join@{join}}
+\index{join@{join}!Base\+De\+Datos@{Base\+De\+Datos}}
+\subsubsection{\texorpdfstring{join()}{join()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{Base\+De\+Datos\+::join\+\_\+iterator}} Base\+De\+Datos\+::join (\begin{DoxyParamCaption}\item[{const string \&}]{tabla1,  }\item[{const string \&}]{tabla2,  }\item[{const string \&}]{campo }\end{DoxyParamCaption})}
+
+
+
+Join de dos tablas designando un campo en común. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em tabla1} & Nombre de la tabla 1. \\
+\hline
+{\em tabla2} & Nombre de la tabla 2. \\
+\hline
+{\em campo} & Nombre del campo de las tablas para hacer el join.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondición}
+db = {\bfseries this} $\land$ tabla1 $\in$ tablas({\bfseries this}) $\land$ tabla2 $\in$ tablas({\bfseries this}) $\land$ campo $\in$ campos(tabla1) $\land$ campo $\in$ campos(tabla2) $\land$ tiene\+Indice?(tabla1, campo, db) $\lor$ tiene\+Indice?(tabla2, campo, db) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = Join(tabla1, tabla2, campo, db)
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(m $\ast$ (L+log(m))
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_a9de9148caecec055823030aafc75a378}\label{classBaseDeDatos_a9de9148caecec055823030aafc75a378}} 
+\index{Base\+De\+Datos@{Base\+De\+Datos}!join\+\_\+end@{join\+\_\+end}}
+\index{join\+\_\+end@{join\+\_\+end}!Base\+De\+Datos@{Base\+De\+Datos}}
+\subsubsection{\texorpdfstring{join\+\_\+end()}{join\_end()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{Base\+De\+Datos\+::join\+\_\+iterator}} Base\+De\+Datos\+::join\+\_\+end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Devuelve un \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{join\+\_\+iterator}} que indica el final de un join. 
+
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_ae7f919baf45b942771bc8e9f2a8c733d}\label{classBaseDeDatos_ae7f919baf45b942771bc8e9f2a8c733d}} 
+\index{Base\+De\+Datos@{Base\+De\+Datos}!join\+\_\+helper\+\_\+str@{join\+\_\+helper\+\_\+str}}
+\index{join\+\_\+helper\+\_\+str@{join\+\_\+helper\+\_\+str}!Base\+De\+Datos@{Base\+De\+Datos}}
+\subsubsection{\texorpdfstring{join\+\_\+helper\+\_\+str()}{join\_helper\_str()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classBaseDeDatos_1_1join__iterator}{Base\+De\+Datos\+::join\+\_\+iterator}} Base\+De\+Datos\+::join\+\_\+helper\+\_\+str (\begin{DoxyParamCaption}\item[{const string \&}]{tabla1,  }\item[{const string \&}]{tabla2,  }\item[{const string \&}]{campo,  }\item[{const bool \&}]{orden }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Join de dos tablas designando un campo en común. 
+
+\mbox{\hyperlink{classTabla}{Tabla}} 1 tiene índice.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em tabla1} & Nombre de la tabla 1. \\
+\hline
+{\em tabla2} & Nombre de la tabla 2. \\
+\hline
+{\em campo} & Nombre del campo de las tablas para hacer el join. \\
+\hline
+{\em orden} & indica el orden de las tablas, si la primera tiene indice o no.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondición}
+db = {\bfseries this} $\land$ tabla1 $\in$ tablas({\bfseries this}) $\land$ tabla2 $\in$ tablas({\bfseries this}) $\land$ campo $\in$ campos(tabla1) $\land$ campo $\in$ campos(tabla2) $\land$ tiene\+Indice?(tabla1, campo, db) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = Join(tabla1, tabla2, campo, db)
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(m $\ast$ (L+log(m))
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_a1774752992ec793591659ca8f78b402c}\label{classBaseDeDatos_a1774752992ec793591659ca8f78b402c}} 
+\index{Base\+De\+Datos@{Base\+De\+Datos}!registro\+Valido@{registro\+Valido}}
+\index{registro\+Valido@{registro\+Valido}!Base\+De\+Datos@{Base\+De\+Datos}}
+\subsubsection{\texorpdfstring{registro\+Valido()}{registroValido()}}
+{\footnotesize\ttfamily bool Base\+De\+Datos\+::registro\+Valido (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classRegistro}{Registro}} \&}]{r,  }\item[{const string \&}]{nombre }\end{DoxyParamCaption}) const}
+
+
+
+Evalúa si un registro puede ingresarse en la tabla parámetro. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em r} & \mbox{\hyperlink{classRegistro}{Registro}} a ingresar en la tabla. \\
+\hline
+{\em nombre} & Nombre de la tabla.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondición}
+nombre $\in$ tablas({\bfseries this}) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = puedo\+Insertar?(r, dame\+Tabla(nombre, {\bfseries this}))
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(C+(c$\ast$n$\ast$L))
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_a96678caace7a517e8fe588dc6f034655}\label{classBaseDeDatos_a96678caace7a517e8fe588dc6f034655}} 
+\index{Base\+De\+Datos@{Base\+De\+Datos}!tablas@{tablas}}
+\index{tablas@{tablas}!Base\+De\+Datos@{Base\+De\+Datos}}
+\subsubsection{\texorpdfstring{tablas()}{tablas()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ string $>$ \& Base\+De\+Datos\+::tablas (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve el conjunto de tablas existentes en la base. 
+
+El conjunto de nombres se devuelve por referencia no-\/modificable.
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = tablas({\bfseries this})
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_ad5073a4729746568ebe59810856258c2}\label{classBaseDeDatos_ad5073a4729746568ebe59810856258c2}} 
+\index{Base\+De\+Datos@{Base\+De\+Datos}!tiene\+Indice@{tiene\+Indice}}
+\index{tiene\+Indice@{tiene\+Indice}!Base\+De\+Datos@{Base\+De\+Datos}}
+\subsubsection{\texorpdfstring{tiene\+Indice()}{tieneIndice()}}
+{\footnotesize\ttfamily bool Base\+De\+Datos\+::tiene\+Indice (\begin{DoxyParamCaption}\item[{const string \&}]{tabla,  }\item[{const string \&}]{campo }\end{DoxyParamCaption})}
+
+
+
+Evalúa si una tabla tiene índice en el campo. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em tabla} & Nombre de la tabla. \\
+\hline
+{\em campo} & Nombre del campo de la tabla.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondición}
+db = {\bfseries this} $\land$ tabla $\in$ tablas({\bfseries this}) $\land$ campo $\in$ campos(tabla) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = tiene\+Indice?(tabla, campo, db)
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(L)
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_a75256ad859e8d399865ff0e0f75ff103}\label{classBaseDeDatos_a75256ad859e8d399865ff0e0f75ff103}} 
+\index{Base\+De\+Datos@{Base\+De\+Datos}!top\+\_\+criterios@{top\+\_\+criterios}}
+\index{top\+\_\+criterios@{top\+\_\+criterios}!Base\+De\+Datos@{Base\+De\+Datos}}
+\subsubsection{\texorpdfstring{top\+\_\+criterios()}{top\_criterios()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classBaseDeDatos_a6742a222e87623bc92a810a693fb337b}{Base\+De\+Datos\+::\+Criterio}} $>$ Base\+De\+Datos\+::top\+\_\+criterios (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve los criterios de máximo uso. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+$\forall$ (c \+: Criterio) \mbox{[}c $\in$ {\bfseries res} $\Leftrightarrow$ $\forall$ (c\textquotesingle{} \+: Criterio) uso\+Criterio(c, db) $>$= uso\+Criterio(c\textquotesingle{}, db)\mbox{]}
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(cs $\ast$ copy(\+Criterio))
+\end{DoxyDescription}\mbox{\Hypertarget{classBaseDeDatos_ab590044b6c13afc41208b897ae58a731}\label{classBaseDeDatos_ab590044b6c13afc41208b897ae58a731}} 
+\index{Base\+De\+Datos@{Base\+De\+Datos}!uso\+\_\+criterio@{uso\+\_\+criterio}}
+\index{uso\+\_\+criterio@{uso\+\_\+criterio}!Base\+De\+Datos@{Base\+De\+Datos}}
+\subsubsection{\texorpdfstring{uso\+\_\+criterio()}{uso\_criterio()}}
+{\footnotesize\ttfamily int Base\+De\+Datos\+::uso\+\_\+criterio (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classBaseDeDatos_a6742a222e87623bc92a810a693fb337b}{Criterio}} \&}]{criterio }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve la cantidad de usos que tiene un criterio. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em criterio} & Criterio por el cual se consulta.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondición}
+nombre $\in$ tablas({\bfseries this}) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = uso\+Criterio(criterio, {\bfseries this})
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(\#cs $\ast$ cmp(\+Criterio))
+\end{DoxyDescription}
+
+La documentación para esta clase fue generada a partir de los siguientes ficheros\+:\begin{DoxyCompactItemize}
+\item 
+src/Base\+De\+Datos.\+h\item 
+src/Base\+De\+Datos.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,155 @@
+\hypertarget{classRegistro}{}\section{Referencia de la Clase Registro}
+\label{classRegistro}\index{Registro@{Registro}}
+
+
+Representa un registro de una tabla.  
+
+
+
+
+{\ttfamily \#include $<$Registro.\+h$>$}
+
+
+
+Diagrama de colaboración para Registro\+:
+% FIG 0
+\subsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classRegistro_af3717314d0e658a463ffd8ac5b073441}{Registro}} (const vector$<$ string $>$ \&\mbox{\hyperlink{classRegistro_a6c6e8fbd5aa47acd14597f240b32c95e}{campos}}, const vector$<$ \mbox{\hyperlink{classDato}{Dato}} $>$ \&datos)
+\begin{DoxyCompactList}\small\item\em Genera un nuevo registro con los campos y valores designados. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classDato}{Dato}} \& \mbox{\hyperlink{classRegistro_a2b61358029430c966c18c742eda61d1d}{dato}} (const string \&campo) const
+\begin{DoxyCompactList}\small\item\em Devuelve el dato asociado a un campo. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ string $>$ \& \mbox{\hyperlink{classRegistro_a6c6e8fbd5aa47acd14597f240b32c95e}{campos}} () const
+\begin{DoxyCompactList}\small\item\em Devuelve los campos definidos en un registro. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ \mbox{\hyperlink{classDato}{Dato}} $>$ \& \mbox{\hyperlink{classRegistro_af3f9eaec87fdf153f2c98c410bd987be}{campos\+Datos}} () const
+\begin{DoxyCompactList}\small\item\em Devuelve diccionario (campos, datos) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Atributos privados}
+\begin{Indent}\textbf{ Representación}\par
+{\em rep\+: registro $\to$ bool~\newline
+rep(d) $\equiv$
+\begin{DoxyItemize}
+\item \+\_\+campos = claves(\+\_\+datos)
+\end{DoxyItemize}
+
+abs\+: registro $\to$ \mbox{\hyperlink{classRegistro}{Registro}}~\newline
+abs(r) $\equiv$ r\textquotesingle{} $|$
+\begin{DoxyItemize}
+\item campos(r\textquotesingle{}) = \+\_\+campos $\land$
+\item $\forall$ (c \+: string) c  \+\_\+campos $\Rightarrow$ valor(c, r\textquotesingle{}) = valor(c, \+\_\+datos) 
+\end{DoxyItemize}}\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRegistro_ad6c12d81cb20086a4642f4b85fe8063b}\label{classRegistro_ad6c12d81cb20086a4642f4b85fe8063b}} 
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ string $>$ {\bfseries \+\_\+campos}
+\item 
+\mbox{\Hypertarget{classRegistro_aa23f2dcc0afcca1c5c00b5272f4c1b20}\label{classRegistro_aa23f2dcc0afcca1c5c00b5272f4c1b20}} 
+\mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ \mbox{\hyperlink{classDato}{Dato}} $>$ {\bfseries \+\_\+datos}
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Amigas}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRegistro_a66788288d92ef16b5a3aab86ae6d87fc}\label{classRegistro_a66788288d92ef16b5a3aab86ae6d87fc}} 
+ostream \& {\bfseries operator$<$$<$} (ostream \&, const \mbox{\hyperlink{classRegistro}{Registro}} \&)
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Representa un registro de una tabla. 
+
+Un registro asocia campos identificados con un string con valores específicos.
+
+{\bfseries se explica con} T\+AD Diccionario(string, Dato) 
+
+\subsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classRegistro_af3717314d0e658a463ffd8ac5b073441}\label{classRegistro_af3717314d0e658a463ffd8ac5b073441}} 
+\index{Registro@{Registro}!Registro@{Registro}}
+\index{Registro@{Registro}!Registro@{Registro}}
+\subsubsection{\texorpdfstring{Registro()}{Registro()}}
+{\footnotesize\ttfamily Registro\+::\+Registro (\begin{DoxyParamCaption}\item[{const vector$<$ string $>$ \&}]{campos,  }\item[{const vector$<$ \mbox{\hyperlink{classDato}{Dato}} $>$ \&}]{datos }\end{DoxyParamCaption})}
+
+
+
+Genera un nuevo registro con los campos y valores designados. 
+
+\begin{DoxyPrecond}{Precondición}
+long(campos) = long(datos) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = nuevo\+Registro(campos, datos)
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(long(campos) $\ast$ (copy(campo) + copy(dato)))
+\end{DoxyDescription}
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classRegistro_a6c6e8fbd5aa47acd14597f240b32c95e}\label{classRegistro_a6c6e8fbd5aa47acd14597f240b32c95e}} 
+\index{Registro@{Registro}!campos@{campos}}
+\index{campos@{campos}!Registro@{Registro}}
+\subsubsection{\texorpdfstring{campos()}{campos()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ string $>$ \& Registro\+::campos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve los campos definidos en un registro. 
+
+El conjunto de campos se devuelve por referencia
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = campos({\bfseries this})
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classRegistro_af3f9eaec87fdf153f2c98c410bd987be}\label{classRegistro_af3f9eaec87fdf153f2c98c410bd987be}} 
+\index{Registro@{Registro}!campos\+Datos@{campos\+Datos}}
+\index{campos\+Datos@{campos\+Datos}!Registro@{Registro}}
+\subsubsection{\texorpdfstring{campos\+Datos()}{camposDatos()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classstring__map}{string\+\_\+map}}$<$ \mbox{\hyperlink{classDato}{Dato}} $>$ \& Registro\+::campos\+Datos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve diccionario (campos, datos) 
+
+El diccionario se devuelve por referencia
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = ({\bfseries this})
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classRegistro_a2b61358029430c966c18c742eda61d1d}\label{classRegistro_a2b61358029430c966c18c742eda61d1d}} 
+\index{Registro@{Registro}!dato@{dato}}
+\index{dato@{dato}!Registro@{Registro}}
+\subsubsection{\texorpdfstring{dato()}{dato()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classDato}{Dato}} \& Registro\+::dato (\begin{DoxyParamCaption}\item[{const string \&}]{campo }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve el dato asociado a un campo. 
+
+Devuelve el dato por referencia no modificable.
+
+\begin{DoxyPrecond}{Precondición}
+campo  campos({\bfseries this}) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} = valor(campo, {\bfseries this})
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(S)
+\end{DoxyDescription}
+
+La documentación para esta clase fue generada a partir de los siguientes ficheros\+:\begin{DoxyCompactItemize}
+\item 
+src/Registro.\+h\item 
+src/Registro.\+cpp\end{DoxyCompactItemize}

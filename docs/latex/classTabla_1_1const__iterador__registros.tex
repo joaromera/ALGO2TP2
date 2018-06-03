@@ -1,0 +1,175 @@
+\hypertarget{classTabla_1_1const__iterador__registros}{}\section{Referencia de la Clase Tabla\+:\+:const\+\_\+iterador\+\_\+registros}
+\label{classTabla_1_1const__iterador__registros}\index{Tabla\+::const\+\_\+iterador\+\_\+registros@{Tabla\+::const\+\_\+iterador\+\_\+registros}}
+
+
+Iterador de los registros de una tabla.  
+
+
+
+
+{\ttfamily \#include $<$const\+\_\+iterador\+\_\+registros.\+h$>$}
+
+
+
+Diagrama de colaboración para Tabla\+:\+:const\+\_\+iterador\+\_\+registros\+:
+% FIG 0
+\subsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTabla_1_1const__iterador__registros_a904a84af50ced6c3d9e77e10d6e5192a}{const\+\_\+iterador\+\_\+registros}} (const \mbox{\hyperlink{classTabla_1_1const__iterador__registros}{const\+\_\+iterador\+\_\+registros}} \&o\+\_\+it)
+\begin{DoxyCompactList}\small\item\em Constructor por copia del iterador. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classRegistro}{Registro}} \& \mbox{\hyperlink{classTabla_1_1const__iterador__registros_a821dca3f8ddeb2e3eb4142b1a73b31dd}{operator$\ast$}} () const
+\begin{DoxyCompactList}\small\item\em Desreferencia el puntero. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classRegistro}{Registro}} $\ast$ \mbox{\hyperlink{classTabla_1_1const__iterador__registros_aa3ceabec92850b9bd3b4d5d704390aba}{operator-\/$>$}} () const
+\begin{DoxyCompactList}\small\item\em Operador flechita. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classTabla_1_1const__iterador__registros}{const\+\_\+iterador\+\_\+registros}} \& \mbox{\hyperlink{classTabla_1_1const__iterador__registros_a396373a330a7c56e3112df2bcccef885}{operator++}} ()
+\begin{DoxyCompactList}\small\item\em Avanza el iterador una posición. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classTabla_1_1const__iterador__registros_acca3075015ddaa2e02fd9c79db55e70d}{operator==}} (const \mbox{\hyperlink{classTabla_1_1const__iterador__registros}{const\+\_\+iterador\+\_\+registros}} \&o\+\_\+it) const
+\begin{DoxyCompactList}\small\item\em Comparación entre iteradores. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classTabla_1_1const__iterador__registros_a745133488ec23a775322844c4d6dda58}{operator!=}} (const \mbox{\hyperlink{classTabla_1_1const__iterador__registros}{const\+\_\+iterador\+\_\+registros}} \&o\+\_\+it) const
+\begin{DoxyCompactList}\small\item\em Comparación entre iteradores. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Métodos privados}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classTabla_1_1const__iterador__registros_a8dde708af2d71cf5dabfd3b42d15284f}\label{classTabla_1_1const__iterador__registros_a8dde708af2d71cf5dabfd3b42d15284f}} 
+{\bfseries const\+\_\+iterador\+\_\+registros} (const \mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$\+::const\+\_\+iterator)
+\end{DoxyCompactItemize}
+\subsection*{Atributos privados}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classTabla_1_1const__iterador__registros_ab650d9f113456460fca266d31dffa484}\label{classTabla_1_1const__iterador__registros_ab650d9f113456460fca266d31dffa484}} 
+\mbox{\hyperlink{classlinear__set}{linear\+\_\+set}}$<$ \mbox{\hyperlink{classRegistro}{Registro}} $>$\+::const\+\_\+iterator {\bfseries it\+\_\+registro}
+\end{DoxyCompactItemize}
+\subsection*{Amigas}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classTabla_1_1const__iterador__registros_a172484163cb8b80140c3053a4c68e4da}\label{classTabla_1_1const__iterador__registros_a172484163cb8b80140c3053a4c68e4da}} 
+class {\bfseries Tabla}
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Iterador de los registros de una tabla. 
+
+\subsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classTabla_1_1const__iterador__registros_a904a84af50ced6c3d9e77e10d6e5192a}\label{classTabla_1_1const__iterador__registros_a904a84af50ced6c3d9e77e10d6e5192a}} 
+\index{Tabla\+::const\+\_\+iterador\+\_\+registros@{Tabla\+::const\+\_\+iterador\+\_\+registros}!const\+\_\+iterador\+\_\+registros@{const\+\_\+iterador\+\_\+registros}}
+\index{const\+\_\+iterador\+\_\+registros@{const\+\_\+iterador\+\_\+registros}!Tabla\+::const\+\_\+iterador\+\_\+registros@{Tabla\+::const\+\_\+iterador\+\_\+registros}}
+\subsubsection{\texorpdfstring{const\+\_\+iterador\+\_\+registros()}{const\_iterador\_registros()}}
+{\footnotesize\ttfamily Tabla\+::const\+\_\+iterador\+\_\+registros\+::const\+\_\+iterador\+\_\+registros (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classTabla_1_1const__iterador__registros}{const\+\_\+iterador\+\_\+registros}} \&}]{o\+\_\+it }\end{DoxyParamCaption})}
+
+
+
+Constructor por copia del iterador. 
+
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classTabla_1_1const__iterador__registros_a745133488ec23a775322844c4d6dda58}\label{classTabla_1_1const__iterador__registros_a745133488ec23a775322844c4d6dda58}} 
+\index{Tabla\+::const\+\_\+iterador\+\_\+registros@{Tabla\+::const\+\_\+iterador\+\_\+registros}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Tabla\+::const\+\_\+iterador\+\_\+registros@{Tabla\+::const\+\_\+iterador\+\_\+registros}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool Tabla\+::const\+\_\+iterador\+\_\+registros\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classTabla_1_1const__iterador__registros}{const\+\_\+iterador\+\_\+registros}} \&}]{o\+\_\+it }\end{DoxyParamCaption}) const}
+
+
+
+Comparación entre iteradores. 
+
+\begin{DoxyPrecond}{Precondición}
+ambos iteradores refieren a la misma colección 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+true sii los iteradores no apuntan al mismo elemento
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classTabla_1_1const__iterador__registros_a821dca3f8ddeb2e3eb4142b1a73b31dd}\label{classTabla_1_1const__iterador__registros_a821dca3f8ddeb2e3eb4142b1a73b31dd}} 
+\index{Tabla\+::const\+\_\+iterador\+\_\+registros@{Tabla\+::const\+\_\+iterador\+\_\+registros}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Tabla\+::const\+\_\+iterador\+\_\+registros@{Tabla\+::const\+\_\+iterador\+\_\+registros}}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classRegistro}{Registro}} \& Tabla\+::const\+\_\+iterador\+\_\+registros\+::operator$\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Desreferencia el puntero. 
+
+El valor devuelto tiene aliasing dentro de la colección.
+
+\begin{DoxyPrecond}{Precondición}
+El iterador no debe estar en la posición pasando-\/el-\/último. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+El valor resultado es una referencia constante al valor apuntado.
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classTabla_1_1const__iterador__registros_a396373a330a7c56e3112df2bcccef885}\label{classTabla_1_1const__iterador__registros_a396373a330a7c56e3112df2bcccef885}} 
+\index{Tabla\+::const\+\_\+iterador\+\_\+registros@{Tabla\+::const\+\_\+iterador\+\_\+registros}!operator++@{operator++}}
+\index{operator++@{operator++}!Tabla\+::const\+\_\+iterador\+\_\+registros@{Tabla\+::const\+\_\+iterador\+\_\+registros}}
+\subsubsection{\texorpdfstring{operator++()}{operator++()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTabla_1_1const__iterador__registros}{Tabla\+::const\+\_\+iterador\+\_\+registros}} \& Tabla\+::const\+\_\+iterador\+\_\+registros\+::operator++ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Avanza el iterador una posición. 
+
+\begin{DoxyPrecond}{Precondición}
+El iterador no debe estar en la posición pasando-\/el-\/último. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} es una referencia a {\bfseries this}. {\bfseries this} apunta a la posición siguiente.
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classTabla_1_1const__iterador__registros_aa3ceabec92850b9bd3b4d5d704390aba}\label{classTabla_1_1const__iterador__registros_aa3ceabec92850b9bd3b4d5d704390aba}} 
+\index{Tabla\+::const\+\_\+iterador\+\_\+registros@{Tabla\+::const\+\_\+iterador\+\_\+registros}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!Tabla\+::const\+\_\+iterador\+\_\+registros@{Tabla\+::const\+\_\+iterador\+\_\+registros}}
+\subsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classRegistro}{Registro}} $\ast$ Tabla\+::const\+\_\+iterador\+\_\+registros\+::operator-\/$>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Operador flechita. 
+
+El valor devuelvo tiene aliasing dentro de la colección.
+
+\begin{DoxyPrecond}{Precondición}
+El iterador no debe estar en la posición pasando-\/el-\/último. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+El valor resultado es un puntero al valor apuntado.
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}\mbox{\Hypertarget{classTabla_1_1const__iterador__registros_acca3075015ddaa2e02fd9c79db55e70d}\label{classTabla_1_1const__iterador__registros_acca3075015ddaa2e02fd9c79db55e70d}} 
+\index{Tabla\+::const\+\_\+iterador\+\_\+registros@{Tabla\+::const\+\_\+iterador\+\_\+registros}!operator==@{operator==}}
+\index{operator==@{operator==}!Tabla\+::const\+\_\+iterador\+\_\+registros@{Tabla\+::const\+\_\+iterador\+\_\+registros}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Tabla\+::const\+\_\+iterador\+\_\+registros\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classTabla_1_1const__iterador__registros}{const\+\_\+iterador\+\_\+registros}} \&}]{o\+\_\+it }\end{DoxyParamCaption}) const}
+
+
+
+Comparación entre iteradores. 
+
+\begin{DoxyPrecond}{Precondición}
+ambos iteradores refieren a la misma colección 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+true sii los iteradores apuntan al mismo elemento
+\end{DoxyPostcond}
+
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}
+
+La documentación para esta clase fue generada a partir de los siguientes ficheros\+:\begin{DoxyCompactItemize}
+\item 
+src/const\+\_\+iterador\+\_\+registros.\+h\item 
+src/const\+\_\+iterador\+\_\+registros.\+cpp\end{DoxyCompactItemize}

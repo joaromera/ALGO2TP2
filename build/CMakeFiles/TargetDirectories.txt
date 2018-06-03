@@ -1,0 +1,17 @@
+/Users/joajoa/Documents/UBA/ALGO 2/TPs/TP2/build/CMakeFiles/install/strip.dir
+/Users/joajoa/Documents/UBA/ALGO 2/TPs/TP2/build/CMakeFiles/install.dir
+/Users/joajoa/Documents/UBA/ALGO 2/TPs/TP2/build/CMakeFiles/rebuild_cache.dir
+/Users/joajoa/Documents/UBA/ALGO 2/TPs/TP2/build/CMakeFiles/edit_cache.dir
+/Users/joajoa/Documents/UBA/ALGO 2/TPs/TP2/build/CMakeFiles/list_install_components.dir
+/Users/joajoa/Documents/UBA/ALGO 2/TPs/TP2/build/CMakeFiles/doc_doxygen.dir
+/Users/joajoa/Documents/UBA/ALGO 2/TPs/TP2/build/CMakeFiles/correrTests_sol.dir
+/Users/joajoa/Documents/UBA/ALGO 2/TPs/TP2/build/CMakeFiles/install/local.dir
+/Users/joajoa/Documents/UBA/ALGO 2/TPs/TP2/build/CMakeFiles/correrTests.dir
+/Users/joajoa/Documents/UBA/ALGO 2/TPs/TP2/build/tests/google-test/CMakeFiles/install/local.dir
+/Users/joajoa/Documents/UBA/ALGO 2/TPs/TP2/build/tests/google-test/CMakeFiles/list_install_components.dir
+/Users/joajoa/Documents/UBA/ALGO 2/TPs/TP2/build/tests/google-test/CMakeFiles/rebuild_cache.dir
+/Users/joajoa/Documents/UBA/ALGO 2/TPs/TP2/build/tests/google-test/CMakeFiles/edit_cache.dir
+/Users/joajoa/Documents/UBA/ALGO 2/TPs/TP2/build/tests/google-test/CMakeFiles/install/strip.dir
+/Users/joajoa/Documents/UBA/ALGO 2/TPs/TP2/build/tests/google-test/CMakeFiles/install.dir
+/Users/joajoa/Documents/UBA/ALGO 2/TPs/TP2/build/tests/google-test/CMakeFiles/gtest_main.dir
+/Users/joajoa/Documents/UBA/ALGO 2/TPs/TP2/build/tests/google-test/CMakeFiles/gtest.dir

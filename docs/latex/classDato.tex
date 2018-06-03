@@ -1,0 +1,207 @@
+\hypertarget{classDato}{}\section{Referencia de la Clase Dato}
+\label{classDato}\index{Dato@{Dato}}
+
+
+Representa un \mbox{\hyperlink{classDato}{Dato}} de una Base de Datos.  
+
+
+
+
+{\ttfamily \#include $<$Dato.\+h$>$}
+
+
+
+Diagrama de colaboración para Dato\+:
+% FIG 0
+\subsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDato_aeb115751623b17f5cc61199c45dd6fb4}{Dato}} (int \mbox{\hyperlink{classDato_a77c0d9e6acfa7b69d3a7afbe6c24066b}{valor\+Nat}})
+\begin{DoxyCompactList}\small\item\em Constructor de dato con valor nat. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDato_a3b8e8b3472eee6374487378e865e3428}{Dato}} (const string \&\mbox{\hyperlink{classDato_aeba738995483557ab6bdd9b677f6da63}{valor\+Str}})
+\begin{DoxyCompactList}\small\item\em Constructor de dato con valor string. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDato_ac249a298a8ebc465af56bfc816ed03f4}{es\+Nat}} () const
+\begin{DoxyCompactList}\small\item\em True si el dato es de tipo nat. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDato_a068bb78e76cf0a1388d9bdec4e509355}{es\+String}} () const
+\begin{DoxyCompactList}\small\item\em True si el dato es de tipo string. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classDato_aeba738995483557ab6bdd9b677f6da63}{valor\+Str}} () const
+\begin{DoxyCompactList}\small\item\em El valor del dato. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classDato_a77c0d9e6acfa7b69d3a7afbe6c24066b}{valor\+Nat}} () const
+\begin{DoxyCompactList}\small\item\em El valor del dato. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Atributos privados}
+\begin{Indent}\textbf{ Representación}\par
+{\em rep\+: dato $\to$ bool~\newline
+rep(d) $\equiv$
+\begin{DoxyItemize}
+\item \+\_\+es\+Nat $\Rightarrow$ \+\_\+valor\+Str = \char`\"{}\char`\"{} $\lor$ $\lnot$ \+\_\+es\+Nat $\Rightarrow$ \+\_\+valor\+Nat = 0
+\end{DoxyItemize}
+
+abs\+: dato $\to$ \mbox{\hyperlink{classDato}{Dato}}~\newline
+abs(d) $\equiv$ d\textquotesingle{} $|$
+\begin{DoxyItemize}
+\item Nat?(d\textquotesingle{}) = d.\+\_\+es\+Nat $\land$
+\item Nat?(d\textquotesingle{}) $\Rightarrow$ valor\+Nat(d) = d.\+\_\+valor\+Nat $\land$
+\item Nat?(d\textquotesingle{}) $\Rightarrow$ valor\+Str(d) = d.\+\_\+valor\+Str 
+\end{DoxyItemize}}\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classDato_a117b034b0acbfb4b602ab5445855f3f1}\label{classDato_a117b034b0acbfb4b602ab5445855f3f1}} 
+int \mbox{\hyperlink{classDato_a117b034b0acbfb4b602ab5445855f3f1}{\+\_\+valor\+Nat}}
+\begin{DoxyCompactList}\small\item\em Valor cuando el dato es nat. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classDato_a4abdad075253c04b649282227a01bbed}\label{classDato_a4abdad075253c04b649282227a01bbed}} 
+string \mbox{\hyperlink{classDato_a4abdad075253c04b649282227a01bbed}{\+\_\+valor\+Str}}
+\begin{DoxyCompactList}\small\item\em Valor cuando el dato es nat. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classDato_a43a0578f47ccb55da86088491f862bf9}\label{classDato_a43a0578f47ccb55da86088491f862bf9}} 
+bool \mbox{\hyperlink{classDato_a43a0578f47ccb55da86088491f862bf9}{\+\_\+es\+Nat}}
+\begin{DoxyCompactList}\small\item\em Define si el dato es nat. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Amigas}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classDato_a394289679728bdcb20171c43449894c1}\label{classDato_a394289679728bdcb20171c43449894c1}} 
+bool \mbox{\hyperlink{classDato_a394289679728bdcb20171c43449894c1}{operator$<$}} (const \mbox{\hyperlink{classDato}{Dato}} \&, const \mbox{\hyperlink{classDato}{Dato}} \&)
+\begin{DoxyCompactList}\small\item\em Comparador de datos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Representa un \mbox{\hyperlink{classDato}{Dato}} de una Base de Datos. 
+
+{\bfseries se explica con} T\+AD \mbox{\hyperlink{classDato}{Dato}} 
+
+\subsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classDato_aeb115751623b17f5cc61199c45dd6fb4}\label{classDato_aeb115751623b17f5cc61199c45dd6fb4}} 
+\index{Dato@{Dato}!Dato@{Dato}}
+\index{Dato@{Dato}!Dato@{Dato}}
+\subsubsection{\texorpdfstring{Dato()}{Dato()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Dato\+::\+Dato (\begin{DoxyParamCaption}\item[{int}]{valor\+Nat }\end{DoxyParamCaption})}
+
+
+
+Constructor de dato con valor nat. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em valor\+Nat} & valor natural del dato\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} $=_{\rm obs}$ dato\+Nat(valor\+Nat) 
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}
+\end{DoxyPostcond}
+\mbox{\Hypertarget{classDato_a3b8e8b3472eee6374487378e865e3428}\label{classDato_a3b8e8b3472eee6374487378e865e3428}} 
+\index{Dato@{Dato}!Dato@{Dato}}
+\index{Dato@{Dato}!Dato@{Dato}}
+\subsubsection{\texorpdfstring{Dato()}{Dato()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Dato\+::\+Dato (\begin{DoxyParamCaption}\item[{const string \&}]{valor\+Str }\end{DoxyParamCaption})}
+
+
+
+Constructor de dato con valor string. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em valor\+Str} & valor string del dato\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} $=_{\rm obs}$ dato\+Str(valor\+Str) 
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}
+\end{DoxyPostcond}
+
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classDato_ac249a298a8ebc465af56bfc816ed03f4}\label{classDato_ac249a298a8ebc465af56bfc816ed03f4}} 
+\index{Dato@{Dato}!es\+Nat@{es\+Nat}}
+\index{es\+Nat@{es\+Nat}!Dato@{Dato}}
+\subsubsection{\texorpdfstring{es\+Nat()}{esNat()}}
+{\footnotesize\ttfamily bool Dato\+::es\+Nat (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+True si el dato es de tipo nat. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} $=_{\rm obs}$ Nat?({\bfseries this}) 
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}
+\end{DoxyPostcond}
+\mbox{\Hypertarget{classDato_a068bb78e76cf0a1388d9bdec4e509355}\label{classDato_a068bb78e76cf0a1388d9bdec4e509355}} 
+\index{Dato@{Dato}!es\+String@{es\+String}}
+\index{es\+String@{es\+String}!Dato@{Dato}}
+\subsubsection{\texorpdfstring{es\+String()}{esString()}}
+{\footnotesize\ttfamily bool Dato\+::es\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+True si el dato es de tipo string. 
+
+\begin{DoxyPrecond}{Precondición}
+true 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} $=_{\rm obs}$ String?({\bfseries this}) 
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}
+\end{DoxyPostcond}
+\mbox{\Hypertarget{classDato_a77c0d9e6acfa7b69d3a7afbe6c24066b}\label{classDato_a77c0d9e6acfa7b69d3a7afbe6c24066b}} 
+\index{Dato@{Dato}!valor\+Nat@{valor\+Nat}}
+\index{valor\+Nat@{valor\+Nat}!Dato@{Dato}}
+\subsubsection{\texorpdfstring{valor\+Nat()}{valorNat()}}
+{\footnotesize\ttfamily int Dato\+::valor\+Nat (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+El valor del dato. 
+
+Devuelve el valor por copia.
+
+\begin{DoxyPrecond}{Precondición}
+Nat?({\bfseries this}) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} $=_{\rm obs}$ valor\+Nat({\bfseries this}) 
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}
+\end{DoxyPostcond}
+\mbox{\Hypertarget{classDato_aeba738995483557ab6bdd9b677f6da63}\label{classDato_aeba738995483557ab6bdd9b677f6da63}} 
+\index{Dato@{Dato}!valor\+Str@{valor\+Str}}
+\index{valor\+Str@{valor\+Str}!Dato@{Dato}}
+\subsubsection{\texorpdfstring{valor\+Str()}{valorStr()}}
+{\footnotesize\ttfamily string Dato\+::valor\+Str (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+El valor del dato. 
+
+Devuelve el valor por copia.
+
+\begin{DoxyPrecond}{Precondición}
+String?({\bfseries this}) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondición}
+{\bfseries res} $=_{\rm obs}$ valor\+Str({\bfseries this}) 
+\begin{DoxyDescription}
+\item[Complejidad Temporal]$O$(1)
+\end{DoxyDescription}
+\end{DoxyPostcond}
+
+
+La documentación para esta clase fue generada a partir de los siguientes ficheros\+:\begin{DoxyCompactItemize}
+\item 
+src/Dato.\+h\item 
+src/Dato.\+cpp\end{DoxyCompactItemize}

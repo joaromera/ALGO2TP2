@@ -1,0 +1,500 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>TP2 AED2 - 2C-2017: Referencia de la Clase string_map&lt; T &gt;::const_iterator</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">TP2 AED2 - 2C-2017
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="classstring__map.html">string_map</a></li><li class="navelem"><a class="el" href="classstring__map_1_1const__iterator.html">const_iterator</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Tipos públicos</a> &#124;
+<a href="#pub-methods">Métodos públicos</a> &#124;
+<a href="#pri-methods">Métodos privados</a> &#124;
+<a href="#pri-attribs">Atributos privados</a> &#124;
+<a href="#friends">Amigas</a> &#124;
+<a href="classstring__map_1_1const__iterator-members.html">Lista de todos los miembros</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia de la Clase string_map&lt; T &gt;::const_iterator</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+Diagrama de colaboración para string_map&lt; T &gt;::const_iterator:</div>
+<div class="dyncontent">
+<div class="center"><img src="classstring__map_1_1const__iterator__coll__graph.png" border="0" usemap="#string__map_3_01T_01_4_1_1const__iterator_coll__map" alt="Collaboration graph"/></div>
+<!-- MAP 0 -->
+<center><span class="legend">[<a href="graph_legend.html">significado de colores y flechas</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Tipos públicos</h2></td></tr>
+<tr class="memitem:a6882fb8fcbb3532951ef0103c9667671"><td class="memItemLeft" align="right" valign="top"><a id="a6882fb8fcbb3532951ef0103c9667671"></a>
+typedef string&#160;</td><td class="memItemRight" valign="bottom"><b>key_type</b></td></tr>
+<tr class="separator:a6882fb8fcbb3532951ef0103c9667671"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addfcd00ec18f40476d39ee806cffa28e"><td class="memItemLeft" align="right" valign="top"><a id="addfcd00ec18f40476d39ee806cffa28e"></a>
+typedef T&#160;</td><td class="memItemRight" valign="bottom"><b>mapped_type</b></td></tr>
+<tr class="separator:addfcd00ec18f40476d39ee806cffa28e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dd6d12d1ea5aa99beb524f2f26bde10"><td class="memItemLeft" align="right" valign="top"><a id="a9dd6d12d1ea5aa99beb524f2f26bde10"></a>
+typedef std::pair&lt; const key_type, mapped_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b></td></tr>
+<tr class="separator:a9dd6d12d1ea5aa99beb524f2f26bde10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Métodos públicos</h2></td></tr>
+<tr class="memitem:a6c7cbae47a985db380135c930a7a507f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstring__map_1_1const__iterator.html#a6c7cbae47a985db380135c930a7a507f">const_iterator</a> ()</td></tr>
+<tr class="memdesc:a6c7cbae47a985db380135c930a7a507f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor por defecto del iterador.  <a href="#a6c7cbae47a985db380135c930a7a507f">Más...</a><br /></td></tr>
+<tr class="separator:a6c7cbae47a985db380135c930a7a507f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae604ca320da8c0ed635bdf7cf70dc62b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstring__map_1_1const__iterator.html#ae604ca320da8c0ed635bdf7cf70dc62b">const_iterator</a> (const <a class="el" href="classstring__map_1_1const__iterator.html">const_iterator</a> &amp;n)</td></tr>
+<tr class="memdesc:ae604ca320da8c0ed635bdf7cf70dc62b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor por copia del iterador.  <a href="#ae604ca320da8c0ed635bdf7cf70dc62b">Más...</a><br /></td></tr>
+<tr class="separator:ae604ca320da8c0ed635bdf7cf70dc62b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af77133bc617118fa4fd8b28cebb6c01e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstring__map_1_1const__iterator.html">const_iterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstring__map_1_1const__iterator.html#af77133bc617118fa4fd8b28cebb6c01e">operator=</a> (const <a class="el" href="classstring__map_1_1const__iterator.html">const_iterator</a> &amp;n)</td></tr>
+<tr class="memdesc:af77133bc617118fa4fd8b28cebb6c01e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operador de asignacion.  <a href="#af77133bc617118fa4fd8b28cebb6c01e">Más...</a><br /></td></tr>
+<tr class="separator:af77133bc617118fa4fd8b28cebb6c01e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac383d9e25f6acb73964f39293a9d93a7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstring__map_1_1const__iterator.html#ac383d9e25f6acb73964f39293a9d93a7">operator==</a> (const <a class="el" href="classstring__map_1_1const__iterator.html">const_iterator</a> &amp;n) const</td></tr>
+<tr class="memdesc:ac383d9e25f6acb73964f39293a9d93a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operador de comparacion.  <a href="#ac383d9e25f6acb73964f39293a9d93a7">Más...</a><br /></td></tr>
+<tr class="separator:ac383d9e25f6acb73964f39293a9d93a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37795e1ca2aea1271315d4c244fff188"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstring__map_1_1const__iterator.html#a37795e1ca2aea1271315d4c244fff188">operator!=</a> (const <a class="el" href="classstring__map_1_1const__iterator.html">const_iterator</a> &amp;n) const</td></tr>
+<tr class="memdesc:a37795e1ca2aea1271315d4c244fff188"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operador de comparacion.  <a href="#a37795e1ca2aea1271315d4c244fff188">Más...</a><br /></td></tr>
+<tr class="separator:a37795e1ca2aea1271315d4c244fff188"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89c1052c14532e8a7ef1e0bb5846b27a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstring__map_1_1const__iterator.html">const_iterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstring__map_1_1const__iterator.html#a89c1052c14532e8a7ef1e0bb5846b27a">operator++</a> ()</td></tr>
+<tr class="memdesc:a89c1052c14532e8a7ef1e0bb5846b27a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Avanza el iterador una posición.  <a href="#a89c1052c14532e8a7ef1e0bb5846b27a">Más...</a><br /></td></tr>
+<tr class="separator:a89c1052c14532e8a7ef1e0bb5846b27a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4da309759fa2dd7d73eeef070b9ec0e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstring__map_1_1const__iterator.html">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstring__map_1_1const__iterator.html#ac4da309759fa2dd7d73eeef070b9ec0e">operator++</a> (int n)</td></tr>
+<tr class="memdesc:ac4da309759fa2dd7d73eeef070b9ec0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Avanza el iterador n posiciones.  <a href="#ac4da309759fa2dd7d73eeef070b9ec0e">Más...</a><br /></td></tr>
+<tr class="separator:ac4da309759fa2dd7d73eeef070b9ec0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab66744c4e3de4aebf417e40b3f0142e6"><td class="memItemLeft" align="right" valign="top">const value_type &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstring__map_1_1const__iterator.html#ab66744c4e3de4aebf417e40b3f0142e6">operator*</a> () const</td></tr>
+<tr class="memdesc:ab66744c4e3de4aebf417e40b3f0142e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Desreferencia el puntero.  <a href="#ab66744c4e3de4aebf417e40b3f0142e6">Más...</a><br /></td></tr>
+<tr class="separator:ab66744c4e3de4aebf417e40b3f0142e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc35ff68cf856fc4cdaacf5b41c37714"><td class="memItemLeft" align="right" valign="top">const value_type *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstring__map_1_1const__iterator.html#acc35ff68cf856fc4cdaacf5b41c37714">operator-&gt;</a> () const</td></tr>
+<tr class="memdesc:acc35ff68cf856fc4cdaacf5b41c37714"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operador flechita.  <a href="#acc35ff68cf856fc4cdaacf5b41c37714">Más...</a><br /></td></tr>
+<tr class="separator:acc35ff68cf856fc4cdaacf5b41c37714"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Métodos privados</h2></td></tr>
+<tr class="memitem:a9e7b24c524e269c5e910615e77548f01"><td class="memItemLeft" align="right" valign="top"><a id="a9e7b24c524e269c5e910615e77548f01"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator</b> (<a class="el" href="structstring__map_1_1Nodo.html">Nodo</a> *n)</td></tr>
+<tr class="separator:a9e7b24c524e269c5e910615e77548f01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98572c0b99cff2264bb5553ef421ce3a"><td class="memItemLeft" align="right" valign="top"><a id="a98572c0b99cff2264bb5553ef421ce3a"></a>
+<a class="el" href="classstring__map.html">string_map</a>&lt; T &gt;::<a class="el" href="structstring__map_1_1Nodo.html">Nodo</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>proximoAbajo</b> (<a class="el" href="structstring__map_1_1Nodo.html">Nodo</a> *n)</td></tr>
+<tr class="separator:a98572c0b99cff2264bb5553ef421ce3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23d6f9adf4ae7cc86a881b06461d74ed"><td class="memItemLeft" align="right" valign="top"><a id="a23d6f9adf4ae7cc86a881b06461d74ed"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>buscarNodoAbajo</b> (<a class="el" href="structstring__map_1_1Nodo.html">Nodo</a> *&amp;n)</td></tr>
+<tr class="separator:a23d6f9adf4ae7cc86a881b06461d74ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cec9e2ef862d583aedeeb3f84c3eecc"><td class="memItemLeft" align="right" valign="top"><a id="a4cec9e2ef862d583aedeeb3f84c3eecc"></a>
+<a class="el" href="classstring__map.html">string_map</a>&lt; T &gt;::<a class="el" href="structstring__map_1_1Nodo.html">Nodo</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>proximoArriba</b> (<a class="el" href="structstring__map_1_1Nodo.html">Nodo</a> *n)</td></tr>
+<tr class="separator:a4cec9e2ef862d583aedeeb3f84c3eecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac28338d0b33ae631ec9bf4b3b49e851d"><td class="memItemLeft" align="right" valign="top"><a id="ac28338d0b33ae631ec9bf4b3b49e851d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>buscarNodoArriba</b> (<a class="el" href="structstring__map_1_1Nodo.html">Nodo</a> *&amp;n)</td></tr>
+<tr class="separator:ac28338d0b33ae631ec9bf4b3b49e851d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Atributos privados</h2></td></tr>
+<tr class="memitem:a6c5add96e5bd5706460a422a5596a992"><td class="memItemLeft" align="right" valign="top"><a id="a6c5add96e5bd5706460a422a5596a992"></a>
+<a class="el" href="structstring__map_1_1Nodo.html">Nodo</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>nodo</b></td></tr>
+<tr class="separator:a6c5add96e5bd5706460a422a5596a992"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Amigas</h2></td></tr>
+<tr class="memitem:a70a1267e13829b1e5be02846caf0ee84"><td class="memItemLeft" align="right" valign="top"><a id="a70a1267e13829b1e5be02846caf0ee84"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>string_map</b></td></tr>
+<tr class="separator:a70a1267e13829b1e5be02846caf0ee84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentación del constructor y destructor</h2>
+<a id="a6c7cbae47a985db380135c930a7a507f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c7cbae47a985db380135c930a7a507f">&#9670;&nbsp;</a></span>const_iterator() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classstring__map.html">string_map</a>&lt; T &gt;::const_iterator::const_iterator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor por defecto del iterador. </p>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(1)</dd>
+</dl>
+
+</div>
+</div>
+<a id="ae604ca320da8c0ed635bdf7cf70dc62b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae604ca320da8c0ed635bdf7cf70dc62b">&#9670;&nbsp;</a></span>const_iterator() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classstring__map.html">string_map</a>&lt; T &gt;::const_iterator::const_iterator </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classstring__map_1_1const__iterator.html">const_iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor por copia del iterador. </p>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(1)</dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de las funciones miembro</h2>
+<a id="a37795e1ca2aea1271315d4c244fff188"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37795e1ca2aea1271315d4c244fff188">&#9670;&nbsp;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classstring__map.html">string_map</a>&lt; T &gt;::const_iterator::operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classstring__map_1_1const__iterator.html">const_iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Operador de comparacion. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">&lt;strong</td><td>class="paramname"&gt;n</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section pre"><dt>Precondición</dt><dd>true </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd>res != (first(par(nodo)) = first(par(<b class="paramname">n</b>.nodo)) <img class="formulaInl" alt="$\land$" src="form_1.png"/> first(par(nodo)) = first(par(<b class="paramname">n</b>.nodo)))</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(1)</dd>
+</dl>
+
+</div>
+</div>
+<a id="ab66744c4e3de4aebf417e40b3f0142e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab66744c4e3de4aebf417e40b3f0142e6">&#9670;&nbsp;</a></span>operator*()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const value_type&amp; <a class="el" href="classstring__map.html">string_map</a>&lt; T &gt;::const_iterator::operator* </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Desreferencia el puntero. </p>
+<p>El valor devuelto tiene aliasing dentro de la colección.</p>
+<dl class="section pre"><dt>Precondición</dt><dd>El iterador no debe estar en la posición pasando-el-último. </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd>El valor resultado es una referencia constante al valor apuntado.</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(1)</dd>
+</dl>
+
+</div>
+</div>
+<a id="a89c1052c14532e8a7ef1e0bb5846b27a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89c1052c14532e8a7ef1e0bb5846b27a">&#9670;&nbsp;</a></span>operator++() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classstring__map_1_1const__iterator.html">const_iterator</a>&amp; <a class="el" href="classstring__map.html">string_map</a>&lt; T &gt;::const_iterator::operator++ </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Avanza el iterador una posición. </p>
+<dl class="section pre"><dt>Precondición</dt><dd>El iterador no debe estar en la posición pasando-el-último. </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><b class="paramname">res</b> es una referencia a <b class="paramname">this</b>. <b class="paramname">this</b> apunta a la posición siguiente.</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(S)</dd>
+</dl>
+
+</div>
+</div>
+<a id="ac4da309759fa2dd7d73eeef070b9ec0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4da309759fa2dd7d73eeef070b9ec0e">&#9670;&nbsp;</a></span>operator++() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classstring__map_1_1const__iterator.html">const_iterator</a> <a class="el" href="classstring__map.html">string_map</a>&lt; T &gt;::const_iterator::operator++ </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Avanza el iterador n posiciones. </p>
+<dl class="section pre"><dt>Precondición</dt><dd>El iterador no debe estar en la posición pasando-el-ante-n-último. </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd><b class="paramname">res</b> es una referencia a <b class="paramname">this</b>. <b class="paramname">this</b> apunta a la posición siguienten veces.</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(S)</dd>
+</dl>
+
+</div>
+</div>
+<a id="acc35ff68cf856fc4cdaacf5b41c37714"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc35ff68cf856fc4cdaacf5b41c37714">&#9670;&nbsp;</a></span>operator-&gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const value_type* <a class="el" href="classstring__map.html">string_map</a>&lt; T &gt;::const_iterator::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Operador flechita. </p>
+<p>El valor devuelvo tiene aliasing dentro de la colección.</p>
+<dl class="section pre"><dt>Precondición</dt><dd>El iterador no debe estar en la posición pasando-el-último. </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd>El valor resultado es un puntero al valor apuntado.</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(1)</dd>
+</dl>
+
+</div>
+</div>
+<a id="af77133bc617118fa4fd8b28cebb6c01e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af77133bc617118fa4fd8b28cebb6c01e">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classstring__map_1_1const__iterator.html">const_iterator</a>&amp; <a class="el" href="classstring__map.html">string_map</a>&lt; T &gt;::const_iterator::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classstring__map_1_1const__iterator.html">const_iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Operador de asignacion. </p>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(sn)</dd>
+</dl>
+
+</div>
+</div>
+<a id="ac383d9e25f6acb73964f39293a9d93a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac383d9e25f6acb73964f39293a9d93a7">&#9670;&nbsp;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classstring__map.html">string_map</a>&lt; T &gt;::const_iterator::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classstring__map_1_1const__iterator.html">const_iterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Operador de comparacion. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">&lt;strong</td><td>class="paramname"&gt;n</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section pre"><dt>Precondición</dt><dd>true </dd></dl>
+<dl class="section post"><dt>Postcondición</dt><dd>res == (first(par(nodo)) = first(par(<b class="paramname">n</b>.nodo)) <img class="formulaInl" alt="$\land$" src="form_1.png"/> first(par(nodo)) = first(par(<b class="paramname">n</b>.nodo)))</dd></dl>
+<dl class="section complexity">
+<dt>Complejidad Temporal</dt>
+<dd><img class="formulaInl" alt="$O$" src="form_0.png"/>(1)</dd>
+</dl>
+
+</div>
+</div>
+<hr/>La documentación para esta clase fue generada a partir de los siguientes ficheros:<ul>
+<li>src/<a class="el" href="string__map_8h_source.html">string_map.h</a></li>
+<li>src/<a class="el" href="string__map_8hpp_source.html">string_map.hpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+</body>
+</html>
