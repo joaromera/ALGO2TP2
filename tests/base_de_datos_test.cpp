@@ -1,5 +1,5 @@
 #include "../src/BaseDeDatos.h"
-#include "../src/Dato.h"
+#include "../src/Datum.h"
 #include "gtest/gtest.h"
 #include <algorithm>
 #include <vector>
@@ -37,7 +37,7 @@ TEST(test_basicos, tabla_alumnos) {
     BaseDeDatos db;
 
     vector<string> campos_alumnos({"LU", "Ano", "Nombre", "DNI"});
-    vector<Dato> tipos_alumnos = {tipoNat, tipoNat, tipoStr, tipoStr};
+    vector<Datum> tipos_alumnos = {tipoNat, tipoNat, tipoStr, tipoStr};
     linear_set<string> claves_alumnos = {"LU", "Ano"};
 
     db.crearTabla("alumnos", claves_alumnos, campos_alumnos, tipos_alumnos);
@@ -70,7 +70,7 @@ class DBAlumnos : public ::testing::Test {
 protected:
     typedef linear_set<string> Claves;
     typedef vector<string> Campos;
-    typedef vector<Dato> Tipos;
+    typedef vector<Datum> Tipos;
 
     struct DefinicionTabla {
         DefinicionTabla(Claves _claves, Campos _campos, Tipos _tipos)
@@ -128,8 +128,8 @@ protected:
 
         Registro r_join_libretas_alumnos = Registro(
                 {"LU_N", "LU_A", "LU", "Nombre", "Editor", "OS"},
-                {Dato(lu_n), Dato(lu_a), Dato(lu), Dato(nombre), Dato(editor),
-                 Dato(os)});
+                {Datum(lu_n), Datum(lu_a), Datum(lu), Datum(nombre), Datum(editor),
+                 Datum(os)});
         join_libretas_alumnos.agregarRegistro(r_join_libretas_alumnos);
 
         for (auto mat : mts) {
@@ -140,14 +140,14 @@ protected:
 
             Registro r_join_libretas_materias = Registro(
                     {"LU_N", "LU_A", "LU", "Materia"},
-                    {Dato(lu_n), Dato(lu_a), Dato(lu), Dato(mat)});
+                    {Datum(lu_n), Datum(lu_a), Datum(lu), Datum(mat)});
             join_libretas_materias.agregarRegistro(r_join_libretas_materias);
 
         }
     }
 
     Registro registro(const DefinicionTabla &def,
-                      const vector<Dato> &valores) {
+                      const vector<Datum> &valores) {
         return Registro(def.campos, valores);
     }
 
@@ -188,10 +188,10 @@ protected:
         cargarAlumno(5, 2, "Hipster", "Vim", "macOS", {"AED3"});
 
         db.agregarRegistro(Registro({"LU", "Egreso"},
-                                    {Dato("100/70"), Dato(75)}),
+                                    {Datum("100/70"), Datum(75)}),
                            "ex_alumnos");
         db.agregarRegistro(Registro({"LU", "Egreso"},
-                                    {Dato("102/70"), Dato(75)}),
+                                    {Datum("102/70"), Datum(75)}),
                            "ex_alumnos");
     }
 
@@ -252,16 +252,16 @@ TEST_F(DBAlumnos, agregar_registro) {
 
     vector<Registro> regs = {alu1, alu2, alu3};
 
-    for (int i = 0; i < regs.size(); i++) { // Voy agregando de a uno
+    for (size_t i = 0; i < regs.size(); i++) { // Voy agregando de a uno
         EXPECT_EQ(db.dameTabla("libretas").registros().size(), cant_libretas + i);
-        for (int j = i; j < regs.size(); j++) { // Antes de agregar faltan el resto
+        for (size_t j = i; j < regs.size(); j++) { // Antes de agregar faltan el resto
             EXPECT_FALSE(db.dameTabla("libretas").registros().count(regs[j]));
         }
         db.agregarRegistro(regs[i], "libretas");
         // Ahora no falta el agregado
         EXPECT_TRUE(db.dameTabla("libretas").registros().count(regs[i]));
         // Pero siguen faltando los otros
-        for (int j = i + 1; j < regs.size(); j++) {
+        for (size_t j = i + 1; j < regs.size(); j++) {
             EXPECT_FALSE(db.dameTabla("libretas").registros().count(regs[j]));
         }
         // Se actualizó la cantidad de registros
@@ -749,24 +749,24 @@ TEST_F(DBAlumnos, join_repetidos_ambos) {
      * | 2 | 2 | C |
      * | 3 | 2 | C |
      */
-    db2.agregarRegistro(Registro({"X", "Y"}, {Dato(1), Dato(1)}), "T1");
-    db2.agregarRegistro(Registro({"X", "Y"}, {Dato(2), Dato(2)}), "T1");
-    db2.agregarRegistro(Registro({"X", "Y"}, {Dato(3), Dato(2)}), "T1");
-    db2.agregarRegistro(Registro({"X", "Y"}, {Dato(4), Dato(0)}), "T1");
-    db2.agregarRegistro(Registro({"Y", "Z"}, {Dato(1), Dato("A")}), "T2");
-    db2.agregarRegistro(Registro({"Y", "Z"}, {Dato(1), Dato("B")}), "T2");
-    db2.agregarRegistro(Registro({"Y", "Z"}, {Dato(2), Dato("C")}), "T2");
+    db2.agregarRegistro(Registro({"X", "Y"}, {Datum(1), Datum(1)}), "T1");
+    db2.agregarRegistro(Registro({"X", "Y"}, {Datum(2), Datum(2)}), "T1");
+    db2.agregarRegistro(Registro({"X", "Y"}, {Datum(3), Datum(2)}), "T1");
+    db2.agregarRegistro(Registro({"X", "Y"}, {Datum(4), Datum(0)}), "T1");
+    db2.agregarRegistro(Registro({"Y", "Z"}, {Datum(1), Datum("A")}), "T2");
+    db2.agregarRegistro(Registro({"Y", "Z"}, {Datum(1), Datum("B")}), "T2");
+    db2.agregarRegistro(Registro({"Y", "Z"}, {Datum(2), Datum("C")}), "T2");
 
     Tabla t_join = Tabla({"X", "Y", "Z"}, {"X", "Y", "Z"},
                          {tipoNat, tipoNat, tipoStr});
     t_join.agregarRegistro(Registro({"X", "Y", "Z"},
-                                    {Dato(1), Dato(1), Dato("A")}));
+                                    {Datum(1), Datum(1), Datum("A")}));
     t_join.agregarRegistro(Registro({"X", "Y", "Z"},
-                                    {Dato(1), Dato(1), Dato("B")}));
+                                    {Datum(1), Datum(1), Datum("B")}));
     t_join.agregarRegistro(Registro({"X", "Y", "Z"},
-                                    {Dato(2), Dato(2), Dato("C")}));
+                                    {Datum(2), Datum(2), Datum("C")}));
     t_join.agregarRegistro(Registro({"X", "Y", "Z"},
-                                    {Dato(3), Dato(2), Dato("C")}));
+                                    {Datum(3), Datum(2), Datum("C")}));
 
     db2.crearIndice("T1", "Y");
     db2.crearIndice("T2", "Y");
@@ -803,18 +803,18 @@ TEST_F(DBAlumnos, join_campos_repetidos) {
      * | 3 | 2 | C |
      *
      */
-    db2.agregarRegistro(Registro({"X", "Y"}, {Dato(1), Dato(1)}), "T1");
-    db2.agregarRegistro(Registro({"X", "Y"}, {Dato(2), Dato(2)}), "T1");
-    db2.agregarRegistro(Registro({"X", "Y", "Z"}, {Dato(1), Dato(1), Dato("A")}), "T2");
-    db2.agregarRegistro(Registro({"X", "Y", "Z"}, {Dato(3), Dato(2), Dato("C")}), "T2");
+    db2.agregarRegistro(Registro({"X", "Y"}, {Datum(1), Datum(1)}), "T1");
+    db2.agregarRegistro(Registro({"X", "Y"}, {Datum(2), Datum(2)}), "T1");
+    db2.agregarRegistro(Registro({"X", "Y", "Z"}, {Datum(1), Datum(1), Datum("A")}), "T2");
+    db2.agregarRegistro(Registro({"X", "Y", "Z"}, {Datum(3), Datum(2), Datum("C")}), "T2");
 
     Tabla t_join_a = Tabla({"X", "Y", "Z"}, {"X", "Y", "Z"}, {tipoNat, tipoNat, tipoStr});
-    t_join_a.agregarRegistro(Registro({"X", "Y", "Z"}, {Dato(1), Dato(1), Dato("A")}));
-    t_join_a.agregarRegistro(Registro({"X", "Y", "Z"}, {Dato(2), Dato(2), Dato("C")}));
+    t_join_a.agregarRegistro(Registro({"X", "Y", "Z"}, {Datum(1), Datum(1), Datum("A")}));
+    t_join_a.agregarRegistro(Registro({"X", "Y", "Z"}, {Datum(2), Datum(2), Datum("C")}));
 
     Tabla t_join_b = Tabla({"X", "Y", "Z"}, {"X", "Y", "Z"}, {tipoNat, tipoNat, tipoStr});
-    t_join_b.agregarRegistro(Registro({"X", "Y", "Z"}, {Dato(1), Dato(1), Dato("A")}));
-    t_join_b.agregarRegistro(Registro({"X", "Y", "Z"}, {Dato(3), Dato(2), Dato("C")}));
+    t_join_b.agregarRegistro(Registro({"X", "Y", "Z"}, {Datum(1), Datum(1), Datum("A")}));
+    t_join_b.agregarRegistro(Registro({"X", "Y", "Z"}, {Datum(3), Datum(2), Datum("C")}));
 
     db2.crearIndice("T1", "X");
     db2.crearIndice("T2", "Z");

@@ -2,7 +2,7 @@
 #define RESTRICCION_H
 
 #include <string>
-#include "Dato.h"
+#include "Datum.h"
 
 /**
  * @brief Representa una restricción de la base de datos.
@@ -21,7 +21,7 @@ public:
      *
      * \complexity{\O(L)}
      */
-    Restriccion(const string& campo, const Dato& dato, bool igual);
+    Restriccion(const std::string& campo, const Datum& dato, bool igual);
 
     /**
      * @brief Observador campo
@@ -33,7 +33,7 @@ public:
      *
      * \complexity{\O(1)}
      */
-    const string& campo() const;
+    const std::string& campo() const;
 
     /**
      * @brief Observador dato
@@ -45,7 +45,7 @@ public:
      *
      * \complexity{\O(1)}
      */
-    const Dato& dato() const;
+    const Datum& dato() const;
 
     /**
      * @brief Observador porIgual
@@ -73,8 +73,8 @@ private:
      */
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     /** @{ */
-    string _campo;
-    Dato _dato;
+    std::string _campo;
+    Datum _dato;
     bool _igual;
     /** @} */
    
@@ -83,9 +83,9 @@ private:
 bool operator==(const Restriccion& r1, const Restriccion& r2);
 bool operator<(const Restriccion& r1, const Restriccion& r2);
 
-Restriccion Rig(const string& campo, const string& valor);
-Restriccion Rig(const string& campo, const int& valor);
-Restriccion Rdif(const string& campo, const string& valor);
-Restriccion Rdif(const string& campo, const int& valor);
+Restriccion Rig(const std::string& campo, const std::string& valor);
+Restriccion Rig(const std::string& campo, const int& valor);
+Restriccion Rdif(const std::string& campo, const std::string& valor);
+Restriccion Rdif(const std::string& campo, const int& valor);
 
 #endif 

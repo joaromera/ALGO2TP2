@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/Dato.h"
+#include "../src/Datum.h"
 #include "../src/Registro.h"
 
 using namespace std;

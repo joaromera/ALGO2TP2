@@ -25,7 +25,7 @@ protected:
 
         vector<string> string_keys = {"Haciendo", "palmas", "arriba", "y",
                                       "arriba", "ese", "coro"};
-        for (int i = 0; i < string_keys.size(); i++) {
+        for (size_t i = 0; i < string_keys.size(); i++) {
             string_set.insert(string_keys[i]);
         }
     }

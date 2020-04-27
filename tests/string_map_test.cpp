@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <list>
 #include "../src/string_map.h"
-#include "../src/Dato.h"
+#include "../src/Datum.h"
 
 TEST(string_map_test, memory_leak) {
     string_map<int> m1;
@@ -40,34 +40,34 @@ TEST(string_map_test, print) {
     m1["aba"] = 5;
     m1["abb"] = 6;
     m1["aaaa"] = 0;
-    cout << endl;
-    cout << "El string map es: " << endl;
+    std::cout << std::endl;
+    std::cout << "El string map es: " << std::endl;
     for (auto p : m1) {
-        cout << p.first << " " << p.second << endl;
+        std::cout << p.first << " " << p.second << std::endl;
     }
     m1.erase(in.first); // borro (ab, 4)
-    cout << endl;
-    cout << "Borro par (ab,4)" << endl;
+    std::cout << std::endl;
+    std::cout << "Borro par (ab,4)" << std::endl;
     for (auto p : m1) {
-        cout << p.first << " " << p.second << endl;
+        std::cout << p.first << " " << p.second << std::endl;
     }
     m1.erase(m1.begin());
-    cout << endl;
-    cout << "Borro primer par (a,1)" << endl;
+    std::cout << std::endl;
+    std::cout << "Borro primer par (a,1)" << std::endl;
     for (auto p : m1) {
-        cout << p.first << " " << p.second << endl;
+        std::cout << p.first << " " << p.second << std::endl;
     }
-    cout << endl;
-    cout << "Borro todos, uno por uno" << endl;
+    std::cout << std::endl;
+    std::cout << "Borro todos, uno por uno" << std::endl;
     m1.erase(m1.begin());
     m1.erase(m1.begin());
     m1.erase(m1.begin());
     m1.erase(m1.begin());
     m1.erase(m1.begin());
     for (auto p : m1) {
-        cout << "No debería imprimirse" << endl;
+        std::cout << "No debería imprimirse" << std::endl;
     }
-    cout << "Fin" << endl << endl;
+    std::cout << "Fin" << std::endl << std::endl;
 }
 
 TEST(string_map_test, test_constructor) {
@@ -284,9 +284,9 @@ TEST(string_map_test, test_iterator) {
 }
 
 TEST(string_map_test, no_default) {
-  string_map<Dato> dato_map;
-  dato_map.insert(make_pair("March", datoStr("March")));
-  dato_map.insert(make_pair("EvilMarch", datoNat(-1000)));
+  string_map<Datum> dato_map;
+  dato_map.insert(std::make_pair("March", datoStr("March")));
+  dato_map.insert(std::make_pair("EvilMarch", datoNat(-1000)));
 
   EXPECT_NE(dato_map.find("March"), dato_map.end());
   EXPECT_NE(dato_map.find("EvilMarch"), dato_map.end());

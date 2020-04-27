@@ -10,7 +10,6 @@
 #include "linear_map.h"
 #include "linear_set.h"
 #include "string_map.h"
-#include "utils.h"
 #include <map>
 
 using namespace std;
@@ -253,7 +252,7 @@ public:
          *
          * \complexity{\O(n * [L + log(m)])}
          */
-        join_iterator operator++(int n) {
+        join_iterator operator++(int) {
             auto copia = *this;
             ++*this;
             return copia;
@@ -305,7 +304,7 @@ public:
             }
         };
 
-        join_iterator(const bool &b) : it1(nullptr), cant_reg_por_clave(0),
+        join_iterator(const bool &) : it1(nullptr), cant_reg_por_clave(0),
                                        it2(nullptr), cant_reg_en_tabla(0),
                                        diccClavesStr(nullptr), diccClavesNat(nullptr),
                                        campo(""), final(true), orden(true), tipo(0) {};
@@ -331,7 +330,7 @@ public:
         */
         Registro combinarRegistro(Registro r1, Registro r2) {
             vector<string> combCampos;
-            vector<Dato> combDatos;
+            vector<Datum> combDatos;
 
             for (auto c : r1.campos()) {
                 combCampos.push_back(c);
@@ -492,7 +491,7 @@ public:
      * \complexity{\O(C + S)}
      */
     void crearTabla(const string &nombre, const linear_set<string> &claves,
-                    const vector<string> &campos, const vector<Dato> &tipos);
+                    const vector<string> &campos, const vector<Datum> &tipos);
 
     /**
      * @brief Agrega un registro a la tabla parámetro
@@ -706,7 +705,7 @@ private:
      * \post \P{res} = filtrarRegistrosSegunRestriccion(
      *       nueva(campo, valor, igualdad), registros)
      */
-    list<Registro> &_filtrar_registros(const string &campo, const Dato &valor,
+    list<Registro> &_filtrar_registros(const string &campo, const Datum &valor,
                                        list<Registro> &registros,
                                        bool igualdad) const;
 
@@ -720,7 +719,7 @@ private:
      * \post \P{res} = filtrarRegistrosSegunRestriccion(
      *       nueva(campo, valor, true), registros)
      */
-    list<Registro> &_filtrar_registros(const string &campo, const Dato &valor,
+    list<Registro> &_filtrar_registros(const string &campo, const Datum &valor,
                                        list<Registro> &registros) const;
 
     /**
@@ -732,7 +731,7 @@ private:
      *       \LAND \FORALL (i : Nat) 0 \LEQ i < #(campos(t)) \IMPLIES
      *       tipo?(\P2(\P{res})[i]) = tipoCampo(\P1(\P{res})[i], t)
      */
-    pair<vector<string>, vector<Dato> > _tipos_tabla(const Tabla &t);
+    pair<vector<string>, vector<Datum> > _tipos_tabla(const Tabla &t);
     /** @} */
 
     /**

@@ -1,24 +1,15 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <algorithm>
 #include <iostream>
-#include <vector>
 #include <list>
-
-template<class T>
-bool pertenece(T x, vector<T> v) {
-    for (int i = 0; i < v.size(); ++i) {
-        if (x == v[i]) {
-            return true;
-        }
-    }
-    return false;
-}
+#include <vector>
 
 template<class T>
 bool subset(vector<T> v1, vector<T> v2) {
     for (int i = 0; i < v1.size(); ++i) {
-        if (not pertenece(v1[i], v2)) {
+        if (std::find(v2.cbegin(), v2.cend(), v1[i]) == v2.cend()) {
             return false;
         }
     }

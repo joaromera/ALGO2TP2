@@ -9,7 +9,7 @@ BaseDeDatos::BaseDeDatos() {
 void BaseDeDatos::crearTabla(const string &nombre,
                              const linear_set<string> &claves,
                              const vector<string> &campos,
-                             const vector<Dato> &tipos) {
+                             const vector<Datum> &tipos) {
     _nombres_tablas.fast_insert(nombre);
     _tablas.insert(make_pair(nombre, Tabla(claves, campos, tipos)));
 }
@@ -62,13 +62,13 @@ bool BaseDeDatos::registroValido(const Registro &r,
 }
 
 list<Registro> &
-BaseDeDatos::_filtrar_registros(const string &campo, const Dato &valor,
+BaseDeDatos::_filtrar_registros(const string &campo, const Datum &valor,
                                 list<Registro> &registros) const {
     return _filtrar_registros(campo, valor, registros, true);
 }
 
 list<Registro> &BaseDeDatos::_filtrar_registros(const string &campo,
-                                                const Dato &valor,
+                                                const Datum &valor,
                                                 list<Registro> &registros,
                                                 bool igualdad) const {
     auto iter = registros.begin();
@@ -83,9 +83,9 @@ list<Registro> &BaseDeDatos::_filtrar_registros(const string &campo,
     return registros;
 }
 
-pair<vector<string>, vector<Dato> > BaseDeDatos::_tipos_tabla(const Tabla &t) {
+pair<vector<string>, vector<Datum> > BaseDeDatos::_tipos_tabla(const Tabla &t) {
     vector<string> res_campos;
-    vector<Dato> res_tipos;
+    vector<Datum> res_tipos;
     for (auto c : t.campos()) {
         res_campos.push_back(c);
         res_tipos.push_back(t.tipoCampo(c));

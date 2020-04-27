@@ -1,12 +1,12 @@
 #include "Restriccion.h"
 #include <tuple>
 
-Restriccion::Restriccion(const string &campo, const Dato &dato, bool igual)
+Restriccion::Restriccion(const std::string &campo, const Datum &dato, bool igual)
     : _campo(campo), _dato(dato), _igual(igual){};
 
-const string &Restriccion::campo() const { return _campo; }
+const std::string &Restriccion::campo() const { return _campo; }
 
-const Dato &Restriccion::dato() const { return _dato; }
+const Datum &Restriccion::dato() const { return _dato; }
 
 const bool &Restriccion::igual() const { return _igual; }
 
@@ -20,15 +20,15 @@ bool operator<(const Restriccion &r1, const Restriccion &r2) {
           make_tuple(r2.campo(), r2.dato(), r2.igual()));
 }
 
-Restriccion Rig(const string &campo, const string &valor) {
+Restriccion Rig(const std::string &campo, const std::string &valor) {
   return Restriccion(campo, datoStr(valor), true);
 }
-Restriccion Rig(const string &campo, const int &valor) {
+Restriccion Rig(const std::string &campo, const int &valor) {
   return Restriccion(campo, datoNat(valor), true);
 }
-Restriccion Rdif(const string &campo, const string &valor) {
+Restriccion Rdif(const std::string &campo, const std::string &valor) {
   return Restriccion(campo, datoStr(valor), false);
 }
-Restriccion Rdif(const string &campo, const int &valor) {
+Restriccion Rdif(const std::string &campo, const int &valor) {
   return Restriccion(campo, datoNat(valor), false);
 }

@@ -129,7 +129,7 @@ public:
          *
          * \complexity{\O(1)}
          */
-        iterator operator++(int n) {
+        iterator operator++(int) {
             auto copia = *this;
             ++*this;
             return copia;
@@ -273,7 +273,7 @@ public:
          *
          * \complexity{\O(S)}
          */
-        const_iterator operator++(int n) {
+        const_iterator operator++(int) {
             auto copia = *this;
             ++*this;
             return copia;

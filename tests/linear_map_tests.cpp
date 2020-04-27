@@ -4,7 +4,7 @@
 #include <list>
 #include "../src/linear_map.h"
 #include "../src/linear_map.h"
-#include "../src/Dato.h"
+#include "../src/Datum.h"
 
 using namespace std;
 
@@ -18,7 +18,7 @@ protected:
     my_map<int, int> inversed;
     my_map<int, int> smaller;
     my_map<string, int> string_map;
-    my_map<string, Dato> datos;
+    my_map<string, Datum> datos;
 
     void SetUp() {
         for (int i = 0; i < 5; i++) {
@@ -34,7 +34,7 @@ protected:
         };
         for (int i = 0; i < string_keys.size(); i++) {
             string_map.insert(make_pair(string_keys[i], i));
-            datos.insert(make_pair(string_keys[i], Dato(string_keys[i])));
+            datos.insert(make_pair(string_keys[i], Datum(string_keys[i])));
         }
     }
 };

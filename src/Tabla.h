@@ -5,7 +5,7 @@
 
 #include "linear_map.h"
 #include "linear_set.h"
-#include "Dato.h"
+#include "Datum.h"
 #include "Registro.h"
 #include "string_map.h"
 
@@ -48,7 +48,7 @@ public:
      *
      * \complexity{\O(long(campos) * (copy(campo) + copy(dato)))}
      */
-    Tabla(const linear_set<string> &claves, const vector<string> &campos, const vector<Dato> &tipos);
+    Tabla(const linear_set<string> &claves, const vector<string> &campos, const vector<Datum> &tipos);
 
     /**
      * @brief Inserta un nuevo registro en la tabla.
@@ -86,7 +86,7 @@ public:
      *
      * \complexity{\O(#(campos(\P{this})) * cmp(campo)}
      */
-    const Dato &tipoCampo(const string &campo) const;
+    const Datum &tipoCampo(const string &campo) const;
 
     /**
      * @brief Subconjunto de campos que son clave
@@ -179,7 +179,7 @@ private:
     /** @{ */
     linear_set<string> _claves;
     linear_set<string> _campos;
-    linear_map<string, Dato> _tipos;
+    linear_map<string, Datum> _tipos;
     linear_set<Registro> _registros;
     /** }@ */
 };
