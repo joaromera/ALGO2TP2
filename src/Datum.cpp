@@ -27,19 +27,6 @@ int Datum::valorNat() const
   return _valorNat;
 }
 
-Datum datoNat(int valorNat)
-{
-  return Datum(valorNat);
-}
-
-Datum datoStr(std::string valorStr)
-{
-  return Datum(valorStr);
-}
-
-Datum tipoNat = datoNat(0);
-Datum tipoStr = datoStr("");
-
 bool operator==(const Datum &d1, const Datum &d2)
 {
   if (d1.esNat() == d2.esNat())

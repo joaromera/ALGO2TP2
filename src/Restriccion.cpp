@@ -21,14 +21,14 @@ bool operator<(const Restriccion &r1, const Restriccion &r2) {
 }
 
 Restriccion Rig(const std::string &campo, const std::string &valor) {
-  return Restriccion(campo, datoStr(valor), true);
+  return Restriccion(campo, Datum(valor), true);
 }
 Restriccion Rig(const std::string &campo, const int &valor) {
-  return Restriccion(campo, datoNat(valor), true);
+  return Restriccion(campo, Datum(valor), true);
 }
 Restriccion Rdif(const std::string &campo, const std::string &valor) {
-  return Restriccion(campo, datoStr(valor), false);
+  return Restriccion(campo, Datum(valor), false);
 }
 Restriccion Rdif(const std::string &campo, const int &valor) {
-  return Restriccion(campo, datoNat(valor), false);
+  return Restriccion(campo, Datum(valor), false);
 }

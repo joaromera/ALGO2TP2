@@ -21,14 +21,6 @@ private:
   friend bool operator<(const Datum &, const Datum &);
 };
 
-Datum datoNat(int valorNat);
-
-Datum datoStr(std::string valorStr);
-
-extern Datum tipoNat;
-
-extern Datum tipoStr;
-
 bool operator==(const Datum &, const Datum &);
 
 bool operator!=(const Datum &, const Datum &);
