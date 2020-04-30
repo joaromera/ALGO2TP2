@@ -1,5 +1,4 @@
 #pragma once
-
 #include <vector>
 #include <iostream>
 #include "Datum.h"
@@ -10,7 +9,6 @@
 class Registro
 {
 public:
-
   Registro(const std::vector<std::string> &campos, const std::vector<Datum> &datos);
 
   const Datum &dato(const std::string &campo) const;
@@ -18,11 +16,10 @@ public:
   const string_map<Datum> &camposDatos() const;
 
 private:
-
   linear_set<std::string> _campos;
   string_map<Datum> _datos;
-  friend ostream &operator<<(ostream &, const Registro &);
+  friend std::ostream &operator<<(std::ostream &, const Registro &);
 };
 
 bool operator==(const Registro &, const Registro &);
-ostream &operator<<(ostream &, const Registro &);
+std::ostream &operator<<(std::ostream &, const Registro &);

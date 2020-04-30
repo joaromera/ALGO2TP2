@@ -9,7 +9,7 @@ Registro::Registro(const std::vector<std::string> &campos, const std::vector<Dat
   }
 }
 
-const Datum &Registro::dato(const std::string &campo) const
+const Datum& Registro::dato(const std::string &campo) const
 {
   return _datos.at(campo);
 }
@@ -26,16 +26,14 @@ const string_map<Datum> &Registro::camposDatos() const
 
 bool operator==(const Registro &r1, const Registro &r2)
 {
-  string_map<Datum> reg1 = r1.camposDatos();
-  string_map<Datum> reg2 = r2.camposDatos();
-  return reg1 == reg2;
+  return r1.camposDatos() == r2.camposDatos();
 }
 
-ostream &operator<<(ostream &os, const Registro &r)
+std::ostream &operator<<(std::ostream &os, const Registro &r)
 {
   os << "{ ";
   int count = r.campos().size();
-  for (auto v : r.campos())
+  for (const auto& v : r.campos())
   {
     os << r._datos.at(v);
     count--;
