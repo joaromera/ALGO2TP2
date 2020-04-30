@@ -91,8 +91,7 @@ bool operator==(const Table &t1, const Table &t2)
   }
   else
   {
-    linear_set<std::string> cs = t1.campos();
-    for (auto c : cs)
+    for (const auto& c : t1.campos())
     {
       if (t1.tipoCampo(c).esNat() != t2.tipoCampo(c).esNat()) { return false; }
     }
