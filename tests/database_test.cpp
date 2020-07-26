@@ -128,31 +128,31 @@ protected:
     string lu = to_string(lu_n) + '/' + to_string(lu_a);
     Record r_libretas = Record(
       { "LU_N", "LU_A", "LU" }, { Datum(lu_n), Datum(lu_a), Datum(lu) });
-    libretas.agregarRegistro(r_libretas);
+    libretas.addRecord(r_libretas);
     db.agregarRegistro(r_libretas, "libretas");
 
     Record r_alumno = Record(
       { "LU", "Nombre", "Editor", "OS" },
       { Datum(lu), Datum(nombre), Datum(editor), Datum(os) });
-    alumnos.agregarRegistro(r_alumno);
+    alumnos.addRecord(r_alumno);
     db.agregarRegistro(r_alumno, "alumnos");
 
     Record r_join_libretas_alumnos = Record(
       { "LU_N", "LU_A", "LU", "Nombre", "Editor", "OS" },
       { Datum(lu_n), Datum(lu_a), Datum(lu), Datum(nombre), Datum(editor), Datum(os) });
-    join_libretas_alumnos.agregarRegistro(r_join_libretas_alumnos);
+    join_libretas_alumnos.addRecord(r_join_libretas_alumnos);
 
     for (auto mat : mts)
     {
       Record r_materia = Record(
         { "LU", "Materia" }, { Datum(lu), Datum(mat) });
-      materias.agregarRegistro(r_materia);
+      materias.addRecord(r_materia);
       db.agregarRegistro(r_materia, "materias");
 
       Record r_join_libretas_materias = Record(
         { "LU_N", "LU_A", "LU", "Materia" },
         { Datum(lu_n), Datum(lu_a), Datum(lu), Datum(mat) });
-      join_libretas_materias.agregarRegistro(r_join_libretas_materias);
+      join_libretas_materias.addRecord(r_join_libretas_materias);
     }
   }
 
@@ -207,11 +207,11 @@ protected:
 
 // Lista de tests:
 // ## Agregar registro
-// * Agregar un, dos, tres registros (✓)
+// * Agregar un, dos, tres records (✓)
 // ## Validar registro
-// * Record inválido por campos (✓)
+// * Record inválido por columns (✓)
 // * Record inválido por tipos (✓)
-// * Record invalido por claves (✓)
+// * Record invalido por keys (✓)
 // * Record valido si todo ok (✓)
 // ## Búsqueda
 // * Búsqueda devuelve Table equivalente (✓)
@@ -239,7 +239,7 @@ protected:
 // * Join sin repetidos (✓)
 // * Join repetidos un lado (✓)
 // * Join repetidos dos lados (✓)
-// * Join campos repetidos (✓)
+// * Join columns repetidos (✓)
 
 TEST_F(DBAlumnos, init)
 {
@@ -258,27 +258,27 @@ TEST_F(DBAlumnos, agregar_registro)
   Record alu3 = registro(def_libretas,
     { Datum(12), Datum(10), Datum("12/10") });
 
-  int cant_libretas = db.dameTabla("libretas").registros().size();
+  int cant_libretas = db.dameTabla("libretas").records().size();
 
   vector<Record> regs = { alu1, alu2, alu3 };
 
   for (size_t i = 0; i < regs.size(); i++)
   {// Voy agregando de a uno
-    EXPECT_EQ(db.dameTabla("libretas").registros().size(), cant_libretas + i);
+    EXPECT_EQ(db.dameTabla("libretas").records().size(), cant_libretas + i);
     for (size_t j = i; j < regs.size(); j++)
     {// Antes de agregar faltan el resto
-      EXPECT_FALSE(db.dameTabla("libretas").registros().count(regs[j]));
+      EXPECT_FALSE(db.dameTabla("libretas").records().count(regs[j]));
     }
     db.agregarRegistro(regs[i], "libretas");
     // Ahora no falta el agregado
-    EXPECT_TRUE(db.dameTabla("libretas").registros().count(regs[i]));
+    EXPECT_TRUE(db.dameTabla("libretas").records().count(regs[i]));
     // Pero siguen faltando los otros
     for (size_t j = i + 1; j < regs.size(); j++)
     {
-      EXPECT_FALSE(db.dameTabla("libretas").registros().count(regs[j]));
+      EXPECT_FALSE(db.dameTabla("libretas").records().count(regs[j]));
     }
-    // Se actualizó la cantidad de registros
-    EXPECT_EQ(db.dameTabla("libretas").registros().size(),
+    // Se actualizó la cantidad de records
+    EXPECT_EQ(db.dameTabla("libretas").records().size(),
       cant_libretas + 1 + i);
   }
 }
@@ -286,7 +286,7 @@ TEST_F(DBAlumnos, agregar_registro)
 // ## Validar registro
 TEST_F(DBAlumnos, validar_registro)
 {
-  // Record inválido por faltar campos
+  // Record inválido por faltar columns
   EXPECT_FALSE(db.registroValido(Record({ "LU_N", "LU_A" },
                                    { Datum{ 0 }, Datum{ 0 } }),
     "libretas"));
@@ -311,7 +311,7 @@ TEST_F(DBAlumnos, validar_registro)
                                    { Datum{ "" }, Datum{ "" }, Datum{ 0 }, Datum{ "" } }),
     "alumnos"));
 
-  // Record invalido por claves
+  // Record invalido por keys
   EXPECT_FALSE(
     db.registroValido(Record({ "LU_N", "LU_A", "LU" },
                         { Datum(1), Datum(90), Datum("1/90") }),
@@ -355,190 +355,190 @@ TEST_F(DBAlumnos, busqueda_base)
 {
   // Incluye búsqueda igual simple
   Table res = db.busqueda({ Rig("LU", "1/90") }, "alumnos");
-  EXPECT_EQ(res.registros().size(), 1);
-  EXPECT_EQ(res.campos(), alumnos.campos());
-  EXPECT_EQ(res.claves(), alumnos.claves());
-  EXPECT_TRUE(incluye(alumnos.registros().begin(),
-    alumnos.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 1);
+  EXPECT_EQ(res.columns(), alumnos.columns());
+  EXPECT_EQ(res.keys(), alumnos.keys());
+  EXPECT_TRUE(incluye(alumnos.records().begin(),
+    alumnos.records().end(),
+    res.records().begin(),
+    res.records().end()));
 
   res = db.busqueda({ Rig("LU_A", 90) }, "libretas");
-  EXPECT_EQ(res.registros().size(), 2);
-  EXPECT_EQ(res.campos(), libretas.campos());
-  EXPECT_EQ(res.claves(), libretas.claves());
-  EXPECT_TRUE(incluye(libretas.registros().begin(),
-    libretas.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 2);
+  EXPECT_EQ(res.columns(), libretas.columns());
+  EXPECT_EQ(res.keys(), libretas.keys());
+  EXPECT_TRUE(incluye(libretas.records().begin(),
+    libretas.records().end(),
+    res.records().begin(),
+    res.records().end()));
 
   res = db.busqueda({ Rig("Materia", "AED2") }, "materias");
-  EXPECT_EQ(res.registros().size(), 3);
-  EXPECT_EQ(res.campos(), materias.campos());
-  EXPECT_EQ(res.claves(), materias.claves());
-  EXPECT_TRUE(incluye(materias.registros().begin(),
-    materias.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 3);
+  EXPECT_EQ(res.columns(), materias.columns());
+  EXPECT_EQ(res.keys(), materias.keys());
+  EXPECT_TRUE(incluye(materias.records().begin(),
+    materias.records().end(),
+    res.records().begin(),
+    res.records().end()));
 }
 
 TEST_F(DBAlumnos, busqueda_distinto_simple)
 {
   Table res = db.busqueda({ Rdif("LU_A", 80) }, "libretas");
-  EXPECT_EQ(res.registros().size(), 4);
-  EXPECT_TRUE(incluye(libretas.registros().begin(),
-    libretas.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 4);
+  EXPECT_TRUE(incluye(libretas.records().begin(),
+    libretas.records().end(),
+    res.records().begin(),
+    res.records().end()));
 
   res = db.busqueda({ Rdif("Editor", "Vim") }, "alumnos");
-  EXPECT_EQ(res.registros().size(), 2);
-  EXPECT_TRUE(incluye(alumnos.registros().begin(),
-    alumnos.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 2);
+  EXPECT_TRUE(incluye(alumnos.records().begin(),
+    alumnos.records().end(),
+    res.records().begin(),
+    res.records().end()));
 }
 
 TEST_F(DBAlumnos, busqueda_igual_doble)
 {
   Table res = db.busqueda({ Rig("LU_N", 1), Rig("LU_A", 90) },
     "libretas");
-  EXPECT_EQ(res.registros().size(), 1);
-  EXPECT_TRUE(incluye(libretas.registros().begin(),
-    libretas.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 1);
+  EXPECT_TRUE(incluye(libretas.records().begin(),
+    libretas.records().end(),
+    res.records().begin(),
+    res.records().end()));
 
   // Otro orden
   res = db.busqueda({ Rig("LU_A", 90), Rig("LU_N", 1) },
     "libretas");
-  EXPECT_EQ(res.registros().size(), 1);
-  EXPECT_TRUE(incluye(libretas.registros().begin(),
-    libretas.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 1);
+  EXPECT_TRUE(incluye(libretas.records().begin(),
+    libretas.records().end(),
+    res.records().begin(),
+    res.records().end()));
 
   res = db.busqueda({ Rig("Editor", "Vim"), Rig("OS", "Linux") },
     "alumnos");
-  EXPECT_EQ(res.registros().size(), 2);
-  EXPECT_TRUE(incluye(alumnos.registros().begin(),
-    alumnos.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 2);
+  EXPECT_TRUE(incluye(alumnos.records().begin(),
+    alumnos.records().end(),
+    res.records().begin(),
+    res.records().end()));
 
   res = db.busqueda({ Rig("OS", "macOS"), Rig("Editor", "Vim") },
     "alumnos");
-  EXPECT_EQ(res.registros().size(), 3);
-  EXPECT_TRUE(incluye(alumnos.registros().begin(),
-    alumnos.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 3);
+  EXPECT_TRUE(incluye(alumnos.records().begin(),
+    alumnos.records().end(),
+    res.records().begin(),
+    res.records().end()));
 }
 
 TEST_F(DBAlumnos, busqueda_distinto_doble)
 {
   Table res = db.busqueda({ Rdif("LU_N", 1), Rdif("LU_A", 90) },
     "libretas");
-  EXPECT_EQ(res.registros().size(), 5);
-  EXPECT_TRUE(incluye(libretas.registros().begin(),
-    libretas.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 5);
+  EXPECT_TRUE(incluye(libretas.records().begin(),
+    libretas.records().end(),
+    res.records().begin(),
+    res.records().end()));
 
   // Otro orden
   res = db.busqueda({ Rdif("LU_A", 90), Rdif("LU_N", 1) },
     "libretas");
-  EXPECT_EQ(res.registros().size(), 5);
-  EXPECT_TRUE(incluye(libretas.registros().begin(),
-    libretas.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 5);
+  EXPECT_TRUE(incluye(libretas.records().begin(),
+    libretas.records().end(),
+    res.records().begin(),
+    res.records().end()));
 
   res = db.busqueda({ Rdif("Editor", "Vim"), Rdif("OS", "Linux") },
     "alumnos");
-  EXPECT_EQ(res.registros().size(), 2);
-  EXPECT_TRUE(incluye(alumnos.registros().begin(),
-    alumnos.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 2);
+  EXPECT_TRUE(incluye(alumnos.records().begin(),
+    alumnos.records().end(),
+    res.records().begin(),
+    res.records().end()));
 
   res = db.busqueda({ Rdif("OS", "Win"), Rdif("Editor", "Vim") },
     "alumnos");
-  EXPECT_EQ(res.registros().size(), 0);
-  EXPECT_TRUE(incluye(alumnos.registros().begin(),
-    alumnos.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 0);
+  EXPECT_TRUE(incluye(alumnos.records().begin(),
+    alumnos.records().end(),
+    res.records().begin(),
+    res.records().end()));
 
   res = db.busqueda({ Rdif("OS", "macOS"), Rdif("Editor", "Vim") },
     "alumnos");
-  EXPECT_EQ(res.registros().size(), 2);
-  EXPECT_TRUE(incluye(alumnos.registros().begin(),
-    alumnos.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 2);
+  EXPECT_TRUE(incluye(alumnos.records().begin(),
+    alumnos.records().end(),
+    res.records().begin(),
+    res.records().end()));
 }
 
 TEST_F(DBAlumnos, busqueda_igual_distinto)
 {
   Table res = db.busqueda({ Rig("Editor", "Vim"), Rdif("OS", "macOS") },
     "alumnos");
-  EXPECT_EQ(res.registros().size(), 2);
-  EXPECT_TRUE(incluye(alumnos.registros().begin(),
-    alumnos.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 2);
+  EXPECT_TRUE(incluye(alumnos.records().begin(),
+    alumnos.records().end(),
+    res.records().begin(),
+    res.records().end()));
 
   res = db.busqueda({ Rig("OS", "Linux"), Rdif("Nombre", "March") },
     "alumnos");
-  EXPECT_EQ(res.registros().size(), 1);
-  EXPECT_TRUE(incluye(alumnos.registros().begin(),
-    alumnos.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 1);
+  EXPECT_TRUE(incluye(alumnos.records().begin(),
+    alumnos.records().end(),
+    res.records().begin(),
+    res.records().end()));
 
   res = db.busqueda({ Rdif("OS", "Linux"), Rig("Nombre", "March") },
     "alumnos");
-  EXPECT_EQ(res.registros().size(), 0);
-  EXPECT_TRUE(incluye(alumnos.registros().begin(),
-    alumnos.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 0);
+  EXPECT_TRUE(incluye(alumnos.records().begin(),
+    alumnos.records().end(),
+    res.records().begin(),
+    res.records().end()));
 
   res = db.busqueda({ Rdif("OS", "macOS"), Rig("Editor", "Vim") },
     "alumnos");
-  EXPECT_EQ(res.registros().size(), 2);
-  EXPECT_TRUE(incluye(alumnos.registros().begin(),
-    alumnos.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 2);
+  EXPECT_TRUE(incluye(alumnos.records().begin(),
+    alumnos.records().end(),
+    res.records().begin(),
+    res.records().end()));
 }
 
 TEST_F(DBAlumnos, busqueda_igual_distinto_doble)
 {
   Table res = db.busqueda({ Rig("Editor", "Vim"), Rdif("OS", "macOS"), Rig("Nombre", "March") },
     "alumnos");
-  EXPECT_EQ(res.registros().size(), 1);
-  EXPECT_TRUE(incluye(alumnos.registros().begin(),
-    alumnos.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 1);
+  EXPECT_TRUE(incluye(alumnos.records().begin(),
+    alumnos.records().end(),
+    res.records().begin(),
+    res.records().end()));
 
   res = db.busqueda({ Rig("OS", "Win"), Rdif("Nombre", "March"), Rig("Editor", "CLion") },
     "alumnos");
-  EXPECT_EQ(res.registros().size(), 1);
-  EXPECT_TRUE(incluye(alumnos.registros().begin(),
-    alumnos.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 1);
+  EXPECT_TRUE(incluye(alumnos.records().begin(),
+    alumnos.records().end(),
+    res.records().begin(),
+    res.records().end()));
 
   res = db.busqueda({ Rdif("Nombre", "Crack"), Rig("OS", "macOS"), Rig("Editor", "Vim") },
     "alumnos");
-  EXPECT_EQ(res.registros().size(), 3);
-  EXPECT_TRUE(incluye(alumnos.registros().begin(),
-    alumnos.registros().end(),
-    res.registros().begin(),
-    res.registros().end()));
+  EXPECT_EQ(res.records().size(), 3);
+  EXPECT_TRUE(incluye(alumnos.records().begin(),
+    alumnos.records().end(),
+    res.records().begin(),
+    res.records().end()));
 }
 
 // ## Criterio Válido
@@ -712,7 +712,7 @@ TEST_F(DBAlumnos, crit_doble_otro_bool)
 // * Join sin repetidos
 // * Join repetidos un lado
 // * Join repetidos dos lados
-// * Join campos repetidos
+// * Join columns repetidos
 
 TEST_F(DBAlumnos, join_vacio)
 {
@@ -736,10 +736,10 @@ TEST_F(DBAlumnos, join_sin_repetidos)
     count++;
   }
 
-  EXPECT_EQ(count, db.dameTabla("libretas").registros().size());
+  EXPECT_EQ(count, db.dameTabla("libretas").records().size());
   begin = db.join("libretas", "alumnos", "LU");
   linear_set<Record> join(begin, end);
-  EXPECT_EQ(join, join_libretas_alumnos.registros());
+  EXPECT_EQ(join, join_libretas_alumnos.records());
 }
 
 TEST_F(DBAlumnos, join_repetidos_uno)
@@ -755,7 +755,7 @@ TEST_F(DBAlumnos, join_repetidos_uno)
   }
 
   linear_set<Record> join(begin, end);
-  EXPECT_EQ(join, join_libretas_materias.registros());
+  EXPECT_EQ(join, join_libretas_materias.records());
 }
 
 TEST_F(DBAlumnos, join_repetidos_ambos)
@@ -787,13 +787,13 @@ TEST_F(DBAlumnos, join_repetidos_ambos)
   db2.agregarRegistro(Record({ "Y", "Z" }, { Datum(2), Datum("C") }), "T2");
 
   Table t_join = Table({ "X", "Y", "Z" }, { "X", "Y", "Z" }, { Datum{ 0 }, Datum{ 0 }, Datum{ "" } });
-  t_join.agregarRegistro(Record({ "X", "Y", "Z" },
+  t_join.addRecord(Record({ "X", "Y", "Z" },
     { Datum(1), Datum(1), Datum("A") }));
-  t_join.agregarRegistro(Record({ "X", "Y", "Z" },
+  t_join.addRecord(Record({ "X", "Y", "Z" },
     { Datum(1), Datum(1), Datum("B") }));
-  t_join.agregarRegistro(Record({ "X", "Y", "Z" },
+  t_join.addRecord(Record({ "X", "Y", "Z" },
     { Datum(2), Datum(2), Datum("C") }));
-  t_join.agregarRegistro(Record({ "X", "Y", "Z" },
+  t_join.addRecord(Record({ "X", "Y", "Z" },
     { Datum(3), Datum(2), Datum("C") }));
 
   db2.crearIndice("T1", "Y");
@@ -808,7 +808,7 @@ TEST_F(DBAlumnos, join_repetidos_ambos)
   }
 
   linear_set<Record> join(begin, end);
-  EXPECT_EQ(join, t_join.registros());
+  EXPECT_EQ(join, t_join.records());
 }
 
 TEST_F(DBAlumnos, join_campos_repetidos)
@@ -839,12 +839,12 @@ TEST_F(DBAlumnos, join_campos_repetidos)
   db2.agregarRegistro(Record({ "X", "Y", "Z" }, { Datum(3), Datum(2), Datum("C") }), "T2");
 
   Table t_join_a = Table({ "X", "Y", "Z" }, { "X", "Y", "Z" }, { Datum{ 0 }, Datum{ 0 }, Datum{ "" } });
-  t_join_a.agregarRegistro(Record({ "X", "Y", "Z" }, { Datum(1), Datum(1), Datum("A") }));
-  t_join_a.agregarRegistro(Record({ "X", "Y", "Z" }, { Datum(2), Datum(2), Datum("C") }));
+  t_join_a.addRecord(Record({ "X", "Y", "Z" }, { Datum(1), Datum(1), Datum("A") }));
+  t_join_a.addRecord(Record({ "X", "Y", "Z" }, { Datum(2), Datum(2), Datum("C") }));
 
   Table t_join_b = Table({ "X", "Y", "Z" }, { "X", "Y", "Z" }, { Datum{ 0 }, Datum{ 0 }, Datum{ "" } });
-  t_join_b.agregarRegistro(Record({ "X", "Y", "Z" }, { Datum(1), Datum(1), Datum("A") }));
-  t_join_b.agregarRegistro(Record({ "X", "Y", "Z" }, { Datum(3), Datum(2), Datum("C") }));
+  t_join_b.addRecord(Record({ "X", "Y", "Z" }, { Datum(1), Datum(1), Datum("A") }));
+  t_join_b.addRecord(Record({ "X", "Y", "Z" }, { Datum(3), Datum(2), Datum("C") }));
 
   db2.crearIndice("T1", "X");
   db2.crearIndice("T2", "Z");
@@ -853,11 +853,11 @@ TEST_F(DBAlumnos, join_campos_repetidos)
   auto end = db2.join_end();
 
   linear_set<Record> join(begin, end);
-  EXPECT_EQ(join, t_join_a.registros());
+  EXPECT_EQ(join, t_join_a.records());
 
   begin = db2.join("T2", "T1", "Y");
   end = db2.join_end();
 
   linear_set<Record> join_b(begin, end);
-  EXPECT_EQ(join_b, t_join_b.registros());
+  EXPECT_EQ(join_b, t_join_b.records());
 }

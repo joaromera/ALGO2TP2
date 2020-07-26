@@ -51,7 +51,7 @@ TEST(registro_test, ig_obs)
   Record r5({ "LU", "LU_A" }, { Datum(2), Datum("a") });
   EXPECT_FALSE(r1 == r5);
 
-  // Más campos
+  // Más columns
   Record r6({ "LU", "LU_A", "Nombre" },
     { Datum(2), Datum("a"), Datum("b") });
   EXPECT_FALSE(r1 == r6);

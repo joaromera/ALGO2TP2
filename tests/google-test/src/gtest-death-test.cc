@@ -1287,7 +1287,7 @@ int GetStatusFileDescriptor(unsigned int parent_process_id,
 }
 # endif  // GTEST_OS_WINDOWS
 
-// Returns a newly created InternalRunDeathTestFlag object with fields
+// Returns a newly created InternalRunDeathTestFlag object with columns
 // initialized from the GTEST_FLAG(internal_run_death_test) flag if
 // the flag is specified; otherwise returns NULL.
 InternalRunDeathTestFlag* ParseInternalRunDeathTestFlag() {
@@ -1312,7 +1312,7 @@ InternalRunDeathTestFlag* ParseInternalRunDeathTestFlag() {
       || !ParseNaturalNumber(fields[2], &index)
       || !ParseNaturalNumber(fields[3], &parent_process_id)
       || !ParseNaturalNumber(fields[4], &write_handle_as_size_t)
-      || !ParseNaturalNumber(fields[5], &event_handle_as_size_t)) {
+      || !ParseNaturalNumber(columns[5], &event_handle_as_size_t)) {
     DeathTestAbort("Bad --gtest_internal_run_death_test flag: " +
                    GTEST_FLAG(internal_run_death_test));
   }

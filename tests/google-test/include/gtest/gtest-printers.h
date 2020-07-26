@@ -73,7 +73,7 @@
 //   // pointer and the NUL-terminated string for a (const or not) char pointer.
 //   void ::testing::internal::UniversalPrint(const T& value, ostream*);
 //
-//   // Prints the fields of a tuple tersely to a string vector, one
+//   // Prints the columns of a tuple tersely to a string vector, one
 //   // element for each field. Tuple support must be enabled in
 //   // gtest-port.h.
 //   std::vector<string> UniversalTersePrintTupleFieldsToStrings(
@@ -606,7 +606,7 @@ void PrintTupleTo(const T& t, ::std::ostream* os);
 // which are packed as tuples.
 
 // Overloaded PrintTo() for tuples of various arities.  We support
-// tuples of up-to 10 fields.  The following implementation works
+// tuples of up-to 10 columns.  The following implementation works
 // regardless of whether tr1::tuple is implemented using the
 // non-standard variadic template feature or not.
 
@@ -923,15 +923,15 @@ const size_t TuplePolicy< ::std::tuple<Types...> >::tuple_size;
 #if GTEST_HAS_TR1_TUPLE || GTEST_HAS_STD_TUPLE_
 // This helper template allows PrintTo() for tuples and
 // UniversalTersePrintTupleFieldsToStrings() to be defined by
-// induction on the number of tuple fields.  The idea is that
+// induction on the number of tuple columns.  The idea is that
 // TuplePrefixPrinter<N>::PrintPrefixTo(t, os) prints the first N
-// fields in tuple t, and can be defined in terms of
+// columns in tuple t, and can be defined in terms of
 // TuplePrefixPrinter<N - 1>.
 //
 // The inductive case.
 template <size_t N>
 struct TuplePrefixPrinter {
-  // Prints the first N fields of a tuple.
+  // Prints the first N columns of a tuple.
   template <typename Tuple>
   static void PrintPrefixTo(const Tuple& t, ::std::ostream* os) {
     TuplePrefixPrinter<N - 1>::PrintPrefixTo(t, os);
@@ -945,7 +945,7 @@ struct TuplePrefixPrinter {
         ::Print(TuplePolicy<Tuple>::template get<N - 1>(t), os);
   }
 
-  // Tersely prints the first N fields of a tuple to a string vector,
+  // Tersely prints the first N columns of a tuple to a string vector,
   // one element for each field.
   template <typename Tuple>
   static void TersePrintPrefixToStrings(const Tuple& t, Strings* strings) {
@@ -975,7 +975,7 @@ void PrintTupleTo(const Tuple& t, ::std::ostream* os) {
   *os << ")";
 }
 
-// Prints the fields of a tuple tersely to a string vector, one
+// Prints the columns of a tuple tersely to a string vector, one
 // element for each field.  See the comment before
 // UniversalTersePrint() for how we define "tersely".
 template <typename Tuple>

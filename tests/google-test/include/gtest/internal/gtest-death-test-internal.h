@@ -259,7 +259,7 @@ class InternalRunDeathTestFlag {
   GTEST_DISALLOW_COPY_AND_ASSIGN_(InternalRunDeathTestFlag);
 };
 
-// Returns a newly created InternalRunDeathTestFlag object with fields
+// Returns a newly created InternalRunDeathTestFlag object with columns
 // initialized from the GTEST_FLAG(internal_run_death_test) flag if
 // the flag is specified; otherwise returns NULL.
 InternalRunDeathTestFlag* ParseInternalRunDeathTestFlag();

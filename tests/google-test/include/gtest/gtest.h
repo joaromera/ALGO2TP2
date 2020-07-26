@@ -747,7 +747,7 @@ class GTEST_API_ TestInfo {
     test_info->result_.Clear();
   }
 
-  // These fields are immutable properties of the test.
+  // These columns are immutable properties of the test.
   const std::string test_case_name_;     // Test case name
   const std::string name_;               // Test name
   // Name of the parameter type, or NULL if this is not a typed or a

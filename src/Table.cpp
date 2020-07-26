@@ -2,106 +2,110 @@
 
 using namespace Db::Types;
 
-Table::Table(const linear_set<std::string> &claves, const std::vector<std::string> &campos, const std::vector<Datum> &tipos) : _claves(claves)
+Table::Table(const linear_set<std::string> &keys, const std::vector<std::string> &columns, const std::vector<Datum> &types)
+  : _keys(keys)
 {
-  for (size_t i = 0; i < campos.size(); i++)
+  for (size_t i = 0; i < columns.size(); ++i)
   {
-    _tipos.fast_insert(std::make_pair(campos[i], tipos[i]));
-    _campos.fast_insert(campos[i]);
+    _types.fast_insert(std::make_pair(columns[i], types[i]));
+    _columns.fast_insert(columns[i]);
   }
 }
 
-Table::const_iterator Table::agregarRegistro(const Record &r)
+Table::const_iterator Table::addRecord(const Record &r)
 {
-  return Table::const_iterator(linear_set<Record>::const_iterator(_registros.fast_insert(r)));
+  return Table::const_iterator(linear_set<Record>::const_iterator(_records.fast_insert(r)));
 }
 
-const linear_set<std::string> &Table::campos() const
+const linear_set<std::string> &Table::columns() const
 {
-  return _campos;
+  return _columns;
 }
 
-const linear_set<std::string> &Table::claves() const
+const linear_set<std::string> &Table::keys() const
 {
-  return _claves;
+  return _keys;
 }
 
-const Datum &Table::tipoCampo(const std::string &campo) const
+const Datum &Table::columnType(const std::string &column) const
 {
-  return _tipos.at(campo);
+  return _types.at(column);
 }
 
-const linear_set<Record> &Table::registros() const
+const linear_set<Record> &Table::records() const
 {
-  return _registros;
+  return _records;
 }
 
-Table::const_iterator Table::registros_begin() const
+Table::const_iterator Table::begin() const
 {
-  return Table::const_iterator(_registros.begin());
+  return Table::const_iterator(_records.begin());
 }
 
-Table::const_iterator Table::registros_end() const
+Table::const_iterator Table::end() const
 {
-  return Table::const_iterator(_registros.end());
+  return Table::const_iterator(_records.end());
 }
 
-int Table::cant_registros() const
+size_t Table::size() const
 {
-  return _registros.size();
+  return _records.size();
 }
 
-Table::const_iterator::const_iterator(const const_iterator &o_it) : it_registro(o_it.it_registro) {}
+Table::const_iterator::const_iterator(const const_iterator &o_it) : record_iterator(o_it.record_iterator) {}
 
 const Record &Table::const_iterator::operator*() const
 {
-  return *it_registro;
+  return *record_iterator;
 }
 
 const Record *Table::const_iterator::operator->() const
 {
-  return &(*it_registro);
+  return &(*record_iterator);
 }
 
 Table::const_iterator &Table::const_iterator::operator++()
 {
-  ++it_registro;
+  ++record_iterator;
   return *this;
 }
 
-bool Table::const_iterator::operator==(const Table::const_iterator &o_it) const
+bool Table::const_iterator::operator==(const Table::const_iterator &it) const
 {
-  return it_registro == o_it.it_registro;
+  return record_iterator == it.record_iterator;
 }
 
-bool Table::const_iterator::operator!=(const Table::const_iterator &o_it) const
+bool Table::const_iterator::operator!=(const Table::const_iterator &it) const
 {
-  return not(it_registro == o_it.it_registro);
+  return not(record_iterator == it.record_iterator);
 }
 
-Table::const_iterator::const_iterator(const linear_set<Record>::const_iterator _it_registro) : it_registro(_it_registro) {}
-
-bool operator==(const Table &t1, const Table &t2)
+Table::const_iterator::const_iterator(const linear_set<Record>::const_iterator record_it)
+  : record_iterator(record_it)
 {
-  if (t1.campos() != t2.campos())
+}
+
+bool operator==(const Table &lhs, const Table &rhs)
+{
+  if (lhs.columns() != rhs.columns())
   {
     return false;
   }
-  else if (t1.claves() != t2.claves())
+  else if (lhs.keys() != rhs.keys())
   {
     return false;
   }
   else
   {
-    for (const auto& c : t1.campos())
+    for (const auto& c : lhs.columns())
     {
-      if (t1.tipoCampo(c).esNat() != t2.tipoCampo(c).esNat()) { return false; }
+      if (lhs.columnType(c).esNat() != rhs.columnType(c).esNat()) { return false; }
     }
-    return t1.registros() == t2.registros();
   }
+  return lhs.records() == rhs.records();
 }
 
-bool operator!=(const Table &t1, const Table &t2)
+bool operator!=(const Table &lhs, const Table &rhs)
 {
-  return !(t1 == t2);
+  return !(lhs == rhs);
 }

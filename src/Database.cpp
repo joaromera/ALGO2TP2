@@ -19,7 +19,7 @@ void Database::crearTabla(const std::string &nombre,
 void Database::agregarRegistro(const Record &r, const std::string &nombre)
 {
   Table &t = _tablas.at(nombre);
-  t.agregarRegistro(r);
+  t.addRecord(r);
   for (const auto& c : r.campos())
   {
     if (tieneIndice(nombre, c))
@@ -59,17 +59,17 @@ bool Database::registroValido(const Record &r,
   const std::string &nombre) const
 {
   const Table &t = _tablas.at(nombre);
-  if (t.campos().size() != r.campos().size()) return false;
+  if (t.columns().size() != r.campos().size()) return false;
   for (const auto& c : r.camposDatos())
   {
-    if (t.campos().count(c.first) == 0) return false;
-    if (t.tipoCampo(c.first).esNat() != c.second.esNat()) return false;
+    if (t.columns().count(c.first) == 0) return false;
+    if (t.columnType(c.first).esNat() != c.second.esNat()) return false;
   }
-  for (const auto& rt : t.registros())
+  for (const auto& rt : t.records())
   {
     int coincidencias = 0;
-    int claves_en_t = t.claves().size();
-    for (const auto& c : t.claves())
+    int claves_en_t = t.keys().size();
+    for (const auto& c : t.keys())
     {
       if (r.dato(c) == rt.dato(c)) coincidencias++;
     }
@@ -107,10 +107,10 @@ std::pair<std::vector<std::string>, std::vector<Datum>> Database::_tipos_tabla(c
 {
   std::vector<std::string> res_campos;
   std::vector<Datum> res_tipos;
-  for (const auto& c : t.campos())
+  for (const auto& c : t.columns())
   {
     res_campos.push_back(c);
-    res_tipos.push_back(t.tipoCampo(c));
+    res_tipos.push_back(t.columnType(c));
   }
   return std::make_pair(res_campos, res_tipos);
 }
@@ -120,8 +120,8 @@ bool Database::criterioValido(const Criterio &c, const std::string &nombre) cons
   const Table &t = _tablas.at(nombre);
   for (const auto& restriccion : c)
   {
-    if (!t.campos().count(restriccion.campo())) return false;
-    if (t.tipoCampo(restriccion.campo()).esNat() != restriccion.dato().esNat()) return false;
+    if (!t.columns().count(restriccion.campo())) return false;
+    if (t.columnType(restriccion.campo()).esNat() != restriccion.dato().esNat()) return false;
   }
   return true;
 }
@@ -139,15 +139,15 @@ Table Database::busqueda(const Database::Criterio &c, const std::string &nombre)
 
   const Table &ref = dameTabla(nombre);
   auto campos_datos = _tipos_tabla(ref);
-  Table res(ref.claves(), campos_datos.first, campos_datos.second);
-  std::list<Record> regs(ref.registros().begin(), ref.registros().end());
+  Table res(ref.keys(), campos_datos.first, campos_datos.second);
+  std::list<Record> regs(ref.records().begin(), ref.records().end());
   for (const auto& restriccion : c)
   {
     _filtrar_registros(restriccion.campo(), restriccion.dato(), regs, restriccion.igual());
   }
   for (const auto& r : regs)
   {
-    res.agregarRegistro(r);
+    res.addRecord(r);
   }
   return res;
 }
@@ -173,7 +173,7 @@ linear_set<Database::Criterio> Database::top_criterios() const
 
 void Database::crearIndice(const std::string &tabla, const std::string &campo)
 {
-  linear_set<Record> reg = dameTabla(tabla).registros();
+  linear_set<Record> reg = dameTabla(tabla).records();
   for (const auto& r : reg)
   {
     if (r.dato(campo).esNat())
@@ -199,7 +199,7 @@ Database::join_iterator Database::join(const std::string &tabla1, const std::str
   if (!primeraConIndice)
   {
     mismoOrden = false;
-    if (dameTabla(tabla1).tipoCampo(campo).esNat())
+    if (dameTabla(tabla1).columnType(campo).esNat())
     {
       return join_helper_int(tabla2, tabla1, campo, mismoOrden);
     }
@@ -208,7 +208,7 @@ Database::join_iterator Database::join(const std::string &tabla1, const std::str
       return join_helper_str(tabla2, tabla1, campo, mismoOrden);
     }
   }
-  if (dameTabla(tabla1).tipoCampo(campo).esNat())
+  if (dameTabla(tabla1).columnType(campo).esNat())
   {
     return join_helper_int(tabla1, tabla2, campo, mismoOrden);
   }
@@ -222,8 +222,8 @@ Database::join_iterator Database::join_helper_str(const std::string &tabla1, con
 {
   const Table &t2 = dameTabla(tabla2);
   int tipo = 0;
-  auto it2 = t2.registros_begin();
-  int cant_reg_it2 = t2.cant_registros();
+  auto it2 = t2.begin();
+  int cant_reg_it2 = t2.size();
   std::string clave = (*it2).dato(campo).valorStr();
 
   auto it = _indices[tabla1].at(campo).find(clave);
@@ -247,7 +247,7 @@ Database::join_iterator Database::join_helper_str(const std::string &tabla1, con
   auto diccClaves = &_indices[tabla1].at(campo);
   auto it_tabla_con_indice = _indices[tabla1].at(campo).at(clave).begin();
   unsigned long cant_reg_por_indice = _indices[tabla1].at(campo).at(clave).size();
-  auto it_tabla_sin_indice = t2.registros_begin();
+  auto it_tabla_sin_indice = t2.begin();
 
   return join_iterator(it_tabla_con_indice, cant_reg_por_indice, it_tabla_sin_indice, cant_reg_it2, diccClaves, nullptr, campo, orden, tipo);
 }
@@ -256,8 +256,8 @@ Database::join_iterator Database::join_helper_int(const std::string &tabla1, con
 {
   const Table &t2 = dameTabla(tabla2);
   int tipo = 1;
-  auto it2 = t2.registros_begin();
-  int cant_reg_it2 = t2.cant_registros();
+  auto it2 = t2.begin();
+  int cant_reg_it2 = t2.size();
   int clave = (*it2).dato(campo).valorNat();
 
   auto it = _indicesNum[tabla1].at(campo).find(clave)->second.begin();
@@ -281,7 +281,7 @@ Database::join_iterator Database::join_helper_int(const std::string &tabla1, con
   auto diccClaves = &_indicesNum[tabla1].at(campo);
   auto it_tabla_con_indice = _indicesNum[tabla1].at(campo).at(clave).begin();
   unsigned long cant_reg_por_indice = _indicesNum[tabla1].at(campo).at(clave).size();
-  auto it_tabla_sin_indice = t2.registros_begin();
+  auto it_tabla_sin_indice = t2.begin();
 
   return join_iterator(it_tabla_con_indice, cant_reg_por_indice, it_tabla_sin_indice, cant_reg_it2, nullptr, diccClaves, campo, orden, tipo);
 }
