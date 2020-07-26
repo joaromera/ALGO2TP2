@@ -1,5 +1,5 @@
 #pragma once
-#include "Registro.h"
+#include "Record.h"
 #include "Restriccion.h"
 #include "Table.h"
 #include <utility>
@@ -10,10 +10,12 @@
 #include "string_map.h"
 #include <map>
 
-typedef string_map<string_map<string_map<linear_set<Registro>>>> Index;
-typedef string_map<string_map<std::map<int, linear_set<Registro>>>> IndexInt;
+using namespace Db::Types;
 
-class BaseDeDatos
+typedef string_map<string_map<string_map<linear_set<Record>>>> Index;
+typedef string_map<string_map<std::map<int, linear_set<Record>>>> IndexInt;
+
+class Database
 {
 public:
   class join_iterator
@@ -60,8 +62,8 @@ public:
         {
           it2 = nullptr;
         }
-        it1 = std::make_shared<linear_set<Registro>::const_iterator>(*n.it1);
-        it2 = std::make_shared<Table::const_iterador_registros>(*n.it2);
+        it1 = std::make_shared<linear_set<Record>::const_iterator>(*n.it1);
+        it2 = std::make_shared<Table::const_iterator>(*n.it2);
         cant_reg_por_clave = n.cant_reg_por_clave;
         cant_reg_en_tabla = n.cant_reg_en_tabla;
         diccClavesStr = n.diccClavesStr;
@@ -93,8 +95,8 @@ public:
         {
           it2 = nullptr;
         }
-        it1 = std::make_shared<linear_set<Registro>::const_iterator>(*n.it1);
-        it2 = std::make_shared<Table::const_iterador_registros>(*n.it2);
+        it1 = std::make_shared<linear_set<Record>::const_iterator>(*n.it1);
+        it2 = std::make_shared<Table::const_iterator>(*n.it2);
         ;
         diccClavesStr = n.diccClavesStr;
         diccClavesNat = n.diccClavesNat;
@@ -173,30 +175,30 @@ public:
       return copia;
     }
 
-    const Registro operator*()
+    const Record operator*()
     {
       if (orden)
       {
-        Registro nuevo = combinarRegistro(**it1, **it2);
+        Record nuevo = combinarRegistro(**it1, **it2);
         return nuevo;
       }
       else
       {
-        Registro nuevo = combinarRegistro(**it2, **it1);
+        Record nuevo = combinarRegistro(**it2, **it1);
         return nuevo;
       }
     }
 
-    friend class BaseDeDatos;
+    friend class Database;
     friend class Table;
 
   private:
-    join_iterator(linear_set<Registro>::const_iterator a,
+    join_iterator(linear_set<Record>::const_iterator a,
       int ind,
-      Table::const_iterador_registros c,
+      Table::const_iterator c,
       int sin,
-      const string_map<linear_set<Registro>> *e,
-      const std::map<int, linear_set<Registro>> *g,
+      const string_map<linear_set<Record>> *e,
+      const std::map<int, linear_set<Record>> *g,
       const std::string &f,
       const bool &o,
       int t) : cant_reg_por_clave(ind),
@@ -206,13 +208,13 @@ public:
     {
       if (t == 0)
       {// es string
-        it1 = std::make_shared<linear_set<Registro>::const_iterator>(a);
-        it2 = std::make_shared<Table::const_iterador_registros>(c);
+        it1 = std::make_shared<linear_set<Record>::const_iterator>(a);
+        it2 = std::make_shared<Table::const_iterator>(c);
       }
       else
       {// es nat
-        it1 = std::make_shared<linear_set<Registro>::const_iterator>(a);
-        it2 = std::make_shared<Table::const_iterador_registros>(c);
+        it1 = std::make_shared<linear_set<Record>::const_iterator>(a);
+        it2 = std::make_shared<Table::const_iterator>(c);
       }
     };
 
@@ -221,18 +223,18 @@ public:
                                   diccClavesStr(nullptr), diccClavesNat(nullptr),
                                   campo(""), final(true), orden(true), tipo(0){};
 
-    std::shared_ptr<linear_set<Registro>::const_iterator> it1;
+    std::shared_ptr<linear_set<Record>::const_iterator> it1;
     int cant_reg_por_clave;
-    std::shared_ptr<Table::const_iterador_registros> it2;
+    std::shared_ptr<Table::const_iterator> it2;
     int cant_reg_en_tabla;
-    const string_map<linear_set<Registro>> *diccClavesStr;
-    const std::map<int, linear_set<Registro>> *diccClavesNat;
+    const string_map<linear_set<Record>> *diccClavesStr;
+    const std::map<int, linear_set<Record>> *diccClavesNat;
     std::string campo;
     bool final;
     bool orden;
     int tipo;
 
-    Registro combinarRegistro(const Registro& r1, const Registro& r2)
+    Record combinarRegistro(const Record & r1, const Record & r2)
     {
       std::vector<std::string> combCampos;
       std::vector<Datum> combDatos;
@@ -252,7 +254,7 @@ public:
         }
       }
 
-      return Registro(combCampos, combDatos);
+      return Record(combCampos, combDatos);
     }
 
     void ponerEnFin()
@@ -327,24 +329,24 @@ public:
 
     void setItEnNuevaClaveStr(const std::string &clave)
     {
-      it1 = std::make_shared<linear_set<Registro>::const_iterator>(diccClavesStr->at(clave).begin());
+      it1 = std::make_shared<linear_set<Record>::const_iterator>(diccClavesStr->at(clave).begin());
       cant_reg_por_clave = diccClavesStr->at(clave).size();
     }
 
     void setItEnNuevaClaveNat(const int &clave)
     {
-      it1 = std::make_shared<linear_set<Registro>::const_iterator>(diccClavesNat->at(clave).begin());
+      it1 = std::make_shared<linear_set<Record>::const_iterator>(diccClavesNat->at(clave).begin());
       cant_reg_por_clave = diccClavesNat->at(clave).size();
     }
   };
 
   typedef linear_set<Restriccion> Criterio;
 
-  BaseDeDatos();
+  Database();
 
   void crearTabla(const std::string &nombre, const linear_set<std::string> &claves, const std::vector<std::string> &campos, const std::vector<Datum> &tipos);
 
-  void agregarRegistro(const Registro &r, const std::string &nombre);
+  void agregarRegistro(const Record &r, const std::string &nombre);
 
   const linear_set<std::string> &tablas() const;
 
@@ -352,7 +354,7 @@ public:
 
   int uso_criterio(const Criterio &criterio) const;
 
-  bool registroValido(const Registro &r, const std::string &nombre) const;
+  bool registroValido(const Record &r, const std::string &nombre) const;
 
   bool criterioValido(const Criterio &c, const std::string &nombre) const;
 
@@ -375,9 +377,9 @@ private:
   Index _indices;
   IndexInt _indicesNum;
 
-  std::list<Registro> &_filtrar_registros(const std::string &campo, const Datum &valor, std::list<Registro> &registros, bool igualdad) const;
+  std::list<Record> &_filtrar_registros(const std::string &campo, const Datum &valor, std::list<Record> &registros, bool igualdad) const;
 
-  std::list<Registro> &_filtrar_registros(const std::string &campo, const Datum &valor, std::list<Registro> &registros) const;
+  std::list<Record> &_filtrar_registros(const std::string &campo, const Datum &valor, std::list<Record> &registros) const;
 
   std::pair<std::vector<std::string>, std::vector<Datum>> _tipos_tabla(const Table &t);
 

@@ -87,7 +87,7 @@ private:
       return rt;
     }
 
-    bool operator<(const std::unique_ptr<entity> &rhs) const
+    bool operator<(const std::unique_ptr<entity> &rhs) const override
     {
       return data_ < dynamic_cast<entity_impl<value_type>*>(rhs.get())->data_;
     }

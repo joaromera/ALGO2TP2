@@ -1,11 +1,13 @@
-#include "BaseDeDatos.h"
+#include "Database.h"
 #include <list>
 #include <tuple>
 #include <algorithm>
 
-BaseDeDatos::BaseDeDatos() {};
+using namespace Db::Types;
 
-void BaseDeDatos::crearTabla(const std::string &nombre,
+Database::Database() {};
+
+void Database::crearTabla(const std::string &nombre,
   const linear_set<std::string> &claves,
   const std::vector<std::string> &campos,
   const std::vector<Datum> &tipos)
@@ -14,7 +16,7 @@ void BaseDeDatos::crearTabla(const std::string &nombre,
   _tablas.insert(make_pair(nombre, Table(claves, campos, tipos)));
 }
 
-void BaseDeDatos::agregarRegistro(const Registro &r, const std::string &nombre)
+void Database::agregarRegistro(const Record &r, const std::string &nombre)
 {
   Table &t = _tablas.at(nombre);
   t.agregarRegistro(r);
@@ -34,14 +36,14 @@ void BaseDeDatos::agregarRegistro(const Registro &r, const std::string &nombre)
   }
 }
 
-const linear_set<std::string> &BaseDeDatos::tablas() const { return _nombres_tablas; }
+const linear_set<std::string> &Database::tablas() const { return _nombres_tablas; }
 
-const Table &BaseDeDatos::dameTabla(const std::string &nombre) const
+const Table &Database::dameTabla(const std::string &nombre) const
 {
   return _tablas.at(nombre);
 }
 
-int BaseDeDatos::uso_criterio(const BaseDeDatos::Criterio &criterio) const
+int Database::uso_criterio(const Database::Criterio &criterio) const
 {
   if (_uso_criterios.count(criterio))
   {
@@ -53,7 +55,7 @@ int BaseDeDatos::uso_criterio(const BaseDeDatos::Criterio &criterio) const
   }
 }
 
-bool BaseDeDatos::registroValido(const Registro &r,
+bool Database::registroValido(const Record &r,
   const std::string &nombre) const
 {
   const Table &t = _tablas.at(nombre);
@@ -76,15 +78,15 @@ bool BaseDeDatos::registroValido(const Registro &r,
   return true;
 }
 
-std::list<Registro> &
-  BaseDeDatos::_filtrar_registros(const std::string &campo, const Datum &valor, std::list<Registro> &registros) const
+std::list<Record> &
+  Database::_filtrar_registros(const std::string &campo, const Datum &valor, std::list<Record> &registros) const
 {
   return _filtrar_registros(campo, valor, registros, true);
 }
 
-std::list<Registro> &BaseDeDatos::_filtrar_registros(const std::string &campo,
+std::list<Record> &Database::_filtrar_registros(const std::string &campo,
   const Datum &valor,
-  std::list<Registro> &registros,
+  std::list<Record> &registros,
   bool igualdad) const
 {
   auto iter = registros.begin();
@@ -101,7 +103,7 @@ std::list<Registro> &BaseDeDatos::_filtrar_registros(const std::string &campo,
   return registros;
 }
 
-std::pair<std::vector<std::string>, std::vector<Datum>> BaseDeDatos::_tipos_tabla(const Table &t)
+std::pair<std::vector<std::string>, std::vector<Datum>> Database::_tipos_tabla(const Table &t)
 {
   std::vector<std::string> res_campos;
   std::vector<Datum> res_tipos;
@@ -113,7 +115,7 @@ std::pair<std::vector<std::string>, std::vector<Datum>> BaseDeDatos::_tipos_tabl
   return std::make_pair(res_campos, res_tipos);
 }
 
-bool BaseDeDatos::criterioValido(const Criterio &c, const std::string &nombre) const
+bool Database::criterioValido(const Criterio &c, const std::string &nombre) const
 {
   const Table &t = _tablas.at(nombre);
   for (const auto& restriccion : c)
@@ -124,7 +126,7 @@ bool BaseDeDatos::criterioValido(const Criterio &c, const std::string &nombre) c
   return true;
 }
 
-Table BaseDeDatos::busqueda(const BaseDeDatos::Criterio &c, const std::string &nombre)
+Table Database::busqueda(const Database::Criterio &c, const std::string &nombre)
 {
   if (_uso_criterios.count(c))
   {
@@ -138,7 +140,7 @@ Table BaseDeDatos::busqueda(const BaseDeDatos::Criterio &c, const std::string &n
   const Table &ref = dameTabla(nombre);
   auto campos_datos = _tipos_tabla(ref);
   Table res(ref.claves(), campos_datos.first, campos_datos.second);
-  std::list<Registro> regs(ref.registros().begin(), ref.registros().end());
+  std::list<Record> regs(ref.registros().begin(), ref.registros().end());
   for (const auto& restriccion : c)
   {
     _filtrar_registros(restriccion.campo(), restriccion.dato(), regs, restriccion.igual());
@@ -150,7 +152,7 @@ Table BaseDeDatos::busqueda(const BaseDeDatos::Criterio &c, const std::string &n
   return res;
 }
 
-linear_set<BaseDeDatos::Criterio> BaseDeDatos::top_criterios() const
+linear_set<Database::Criterio> Database::top_criterios() const
 {
   linear_set<Criterio> ret;
   int max = 0;
@@ -169,9 +171,9 @@ linear_set<BaseDeDatos::Criterio> BaseDeDatos::top_criterios() const
   return ret;
 }
 
-void BaseDeDatos::crearIndice(const std::string &tabla, const std::string &campo)
+void Database::crearIndice(const std::string &tabla, const std::string &campo)
 {
-  linear_set<Registro> reg = dameTabla(tabla).registros();
+  linear_set<Record> reg = dameTabla(tabla).registros();
   for (const auto& r : reg)
   {
     if (r.dato(campo).esNat())
@@ -185,12 +187,12 @@ void BaseDeDatos::crearIndice(const std::string &tabla, const std::string &campo
   }
 }
 
-bool BaseDeDatos::tieneIndice(const std::string &tabla, const std::string &campo)
+bool Database::tieneIndice(const std::string &tabla, const std::string &campo)
 {
   return _indices[tabla].count(campo) >= 1 || _indicesNum[tabla].count(campo) >= 1;
 }
 
-BaseDeDatos::join_iterator BaseDeDatos::join(const std::string &tabla1, const std::string &tabla2, const std::string &campo)
+Database::join_iterator Database::join(const std::string &tabla1, const std::string &tabla2, const std::string &campo)
 {
   bool mismoOrden = true;
   bool primeraConIndice = tieneIndice(tabla1, campo);
@@ -216,7 +218,7 @@ BaseDeDatos::join_iterator BaseDeDatos::join(const std::string &tabla1, const st
   }
 }
 
-BaseDeDatos::join_iterator BaseDeDatos::join_helper_str(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden)
+Database::join_iterator Database::join_helper_str(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden)
 {
   const Table &t2 = dameTabla(tabla2);
   int tipo = 0;
@@ -250,7 +252,7 @@ BaseDeDatos::join_iterator BaseDeDatos::join_helper_str(const std::string &tabla
   return join_iterator(it_tabla_con_indice, cant_reg_por_indice, it_tabla_sin_indice, cant_reg_it2, diccClaves, nullptr, campo, orden, tipo);
 }
 
-BaseDeDatos::join_iterator BaseDeDatos::join_helper_int(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden)
+Database::join_iterator Database::join_helper_int(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden)
 {
   const Table &t2 = dameTabla(tabla2);
   int tipo = 1;
@@ -284,7 +286,7 @@ BaseDeDatos::join_iterator BaseDeDatos::join_helper_int(const std::string &tabla
   return join_iterator(it_tabla_con_indice, cant_reg_por_indice, it_tabla_sin_indice, cant_reg_it2, nullptr, diccClaves, campo, orden, tipo);
 }
 
-BaseDeDatos::join_iterator BaseDeDatos::join_end()
+Database::join_iterator Database::join_end()
 {
   return join_iterator(true);
 }

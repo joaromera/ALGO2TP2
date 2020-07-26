@@ -3,6 +3,9 @@
 #include <iostream>
 #include <utility>
 
+namespace Db {
+namespace Types {
+
 template<class K, class S>
 class linear_map
 {
@@ -27,10 +30,7 @@ public:
 
   S &at(const K &key);
 
-  bool empty() const
-  {
-    return _elems.empty();
-  }
+  bool empty() const;
 
   iterator find(const K &k);
 
@@ -58,7 +58,10 @@ private:
   std::list<std::pair<const K, S>> _elems;
 };
 
-template<class K, class S>
-std::ostream &operator<<(std::ostream &os, const linear_map<K, S> &m);
+  template<class K, class S>
+  std::ostream &operator<<(std::ostream &os, const linear_map<K, S> &m);
+
+} // namespace Types
+} // namespace Db
 
 #include "linear_map.hpp"

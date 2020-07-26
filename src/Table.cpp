@@ -1,5 +1,7 @@
 #include "Table.h"
 
+using namespace Db::Types;
+
 Table::Table(const linear_set<std::string> &claves, const std::vector<std::string> &campos, const std::vector<Datum> &tipos) : _claves(claves)
 {
   for (size_t i = 0; i < campos.size(); i++)
@@ -9,9 +11,9 @@ Table::Table(const linear_set<std::string> &claves, const std::vector<std::strin
   }
 }
 
-Table::const_iterador_registros Table::agregarRegistro(const Registro &r)
+Table::const_iterator Table::agregarRegistro(const Record &r)
 {
-  return Table::const_iterador_registros(linear_set<Registro>::const_iterator(_registros.fast_insert(r)));
+  return Table::const_iterator(linear_set<Record>::const_iterator(_registros.fast_insert(r)));
 }
 
 const linear_set<std::string> &Table::campos() const
@@ -29,19 +31,19 @@ const Datum &Table::tipoCampo(const std::string &campo) const
   return _tipos.at(campo);
 }
 
-const linear_set<Registro> &Table::registros() const
+const linear_set<Record> &Table::registros() const
 {
   return _registros;
 }
 
-Table::const_iterador_registros Table::registros_begin() const
+Table::const_iterator Table::registros_begin() const
 {
-  return Table::const_iterador_registros(_registros.begin());
+  return Table::const_iterator(_registros.begin());
 }
 
-Table::const_iterador_registros Table::registros_end() const
+Table::const_iterator Table::registros_end() const
 {
-  return Table::const_iterador_registros(_registros.end());
+  return Table::const_iterator(_registros.end());
 }
 
 int Table::cant_registros() const
@@ -49,35 +51,35 @@ int Table::cant_registros() const
   return _registros.size();
 }
 
-Table::const_iterador_registros::const_iterador_registros(const const_iterador_registros &o_it) : it_registro(o_it.it_registro) {}
+Table::const_iterator::const_iterator(const const_iterator &o_it) : it_registro(o_it.it_registro) {}
 
-const Registro &Table::const_iterador_registros::operator*() const
+const Record &Table::const_iterator::operator*() const
 {
   return *it_registro;
 }
 
-const Registro *Table::const_iterador_registros::operator->() const
+const Record *Table::const_iterator::operator->() const
 {
   return &(*it_registro);
 }
 
-Table::const_iterador_registros &Table::const_iterador_registros::operator++()
+Table::const_iterator &Table::const_iterator::operator++()
 {
   ++it_registro;
   return *this;
 }
 
-bool Table::const_iterador_registros::operator==(const Table::const_iterador_registros &o_it) const
+bool Table::const_iterator::operator==(const Table::const_iterator &o_it) const
 {
   return it_registro == o_it.it_registro;
 }
 
-bool Table::const_iterador_registros::operator!=(const Table::const_iterador_registros &o_it) const
+bool Table::const_iterator::operator!=(const Table::const_iterator &o_it) const
 {
   return not(it_registro == o_it.it_registro);
 }
 
-Table::const_iterador_registros::const_iterador_registros(const linear_set<Registro>::const_iterator _it_registro) : it_registro(_it_registro) {}
+Table::const_iterator::const_iterator(const linear_set<Record>::const_iterator _it_registro) : it_registro(_it_registro) {}
 
 bool operator==(const Table &t1, const Table &t2)
 {

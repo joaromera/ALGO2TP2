@@ -3,6 +3,8 @@
 #include "../src/string_map.h"
 #include "../src/Datum.h"
 
+using namespace Db::Types;
+
 TEST(string_map_test, memory_leak)
 {
   string_map<int> m1;
@@ -30,6 +32,7 @@ TEST(string_map_test, joaco_test)
   m1.erase("!@");
 }
 
+/**
 TEST(string_map_test, print)
 {
   string_map<int> m1, m2;
@@ -77,6 +80,7 @@ TEST(string_map_test, print)
   std::cout << "Fin" << std::endl
             << std::endl;
 }
+**/
 
 TEST(string_map_test, test_constructor)
 {

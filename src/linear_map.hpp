@@ -4,6 +4,9 @@
 #include <map>
 #include <utility>
 
+namespace Db {
+namespace Types {
+
 template<class K, class S>
 linear_map<K, S>::linear_map() : _elems() {}
 
@@ -80,6 +83,13 @@ size_t linear_map<K, S>::count(const K &k) const
 {
   return find(k) != _elems.end();
 }
+
+template<class K, class S>
+bool linear_map<K, S>::empty() const
+{
+  return _elems.empty();
+}
+
 
 template<class K, class S>
 bool linear_map<K, S>::operator==(const linear_map<K, S> &other) const
@@ -160,3 +170,6 @@ std::ostream &operator<<(std::ostream &os, const linear_map<K, S> &m)
   os << " }";
   return os;
 }
+
+} // namespace Types
+} // namespace Db

@@ -5,6 +5,7 @@
 #include "../src/Datum.h"
 
 using namespace std;
+using namespace Db::Types;
 
 template<class K, class S>
 using my_map = linear_map<K, S>;
@@ -34,7 +35,7 @@ protected:
     vector<string> string_keys = {
       "Haciendo", "palmas", "arriba"
     };
-    for (int i = 0; i < string_keys.size(); i++)
+    for (size_t i = 0; i < string_keys.size(); i++)
     {
       string_map.insert(make_pair(string_keys[i], i));
       Datum datum (string_keys[i]);

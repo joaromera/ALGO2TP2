@@ -4,6 +4,9 @@
 #include <string>
 #include <vector>
 
+namespace Db {
+namespace Types {
+
 template<typename T>
 class string_map
 {
@@ -276,5 +279,9 @@ private:
   void borrar(Nodo *&n);
   void copiarHijos(Nodo *head, Nodo *other);
 };
+
+} // namespace Types
+} // namespace Db
+
 
 #include "string_map.hpp"

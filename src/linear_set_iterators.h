@@ -1,6 +1,9 @@
 #pragma once
 #include <iostream>
 
+namespace Db {
+namespace Types {
+
 // const_iterator methods
 
 template<typename T>
@@ -88,3 +91,6 @@ bool linear_set<T>::iterator::operator!=(const linear_set<T>::iterator &other) c
 {
   return !(*this == other);
 }
+
+} // namespace Types
+} // namespace Db

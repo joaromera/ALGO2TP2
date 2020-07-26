@@ -3,6 +3,9 @@
 #include <ostream>
 #include "linear_map.h"
 
+namespace Db {
+namespace Types {
+
 template<typename T>
 class linear_set
 {
@@ -117,6 +120,9 @@ private:
 
 template<class T>
 std::ostream &operator<<(std::ostream &, const linear_set<T> &);
+
+} // namespace Types
+} // namespace Db
 
 #include "linear_set.hpp"
 #include "linear_set_iterators.h"

@@ -1,5 +1,4 @@
 #include "gtest/gtest.h"
-
 #include "../src/Datum.h"
 
 TEST(dato_test, generadores)

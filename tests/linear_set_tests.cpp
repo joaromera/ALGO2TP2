@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <algorithm>
 #include "../src/linear_set.h"
-#include "../src/Registro.h"
+#include "../src/Record.h"
 
 template<class T>
 using my_set = linear_set<T>;
@@ -142,9 +142,9 @@ TEST_F(SetTest, algorithm_copy)
   linear_set<int> in = { 1, 2, 3, 4 };
   std::list<int> out(in.begin(), in.end());
 
-  linear_set<Registro> in_regs = { Registro({ "LU" }, { Datum("123/45") }),
-    Registro({ "LU" }, { Datum("124/45") }) };
-  std::list<Registro> out_regs;
+  linear_set<Record> in_regs = { Record({ "LU" }, { Datum("123/45") }),
+    Record({ "LU" }, { Datum("124/45") }) };
+  std::list<Record> out_regs;
   copy(in.begin(), in.end(), out.begin());
 }
 

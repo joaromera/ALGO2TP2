@@ -1,7 +1,9 @@
 #include <iostream>
-#include "Registro.h"
+#include "Record.h"
 
-Registro::Registro(const std::vector<std::string> &campos, const std::vector<Datum> &datos) : _campos(campos.begin(), campos.end())
+using namespace Db::Types;
+
+Record::Record(const std::vector<std::string> &campos, const std::vector<Datum> &datos) : _campos(campos.begin(), campos.end())
 {
   for (size_t i = 0; i < campos.size(); i++)
   {
@@ -9,27 +11,27 @@ Registro::Registro(const std::vector<std::string> &campos, const std::vector<Dat
   }
 }
 
-const Datum& Registro::dato(const std::string &campo) const
+const Datum&Record::dato(const std::string &campo) const
 {
   return _datos.at(campo);
 }
 
-const linear_set<std::string> &Registro::campos() const
+const linear_set<std::string> &Record::campos() const
 {
   return _campos;
 }
 
-const string_map<Datum> &Registro::camposDatos() const
+const string_map<Datum> &Record::camposDatos() const
 {
   return _datos;
 }
 
-bool operator==(const Registro &r1, const Registro &r2)
+bool operator==(const Record &r1, const Record &r2)
 {
   return r1.camposDatos() == r2.camposDatos();
 }
 
-std::ostream &operator<<(std::ostream &os, const Registro &r)
+std::ostream &operator<<(std::ostream &os, const Record &r)
 {
   os << "{ ";
   int count = r.campos().size();

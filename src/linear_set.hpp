@@ -1,5 +1,8 @@
 #pragma once
 
+namespace Db {
+namespace Types {
+
 template<class T>
 linear_set<T>::linear_set() : _elems(){};
 
@@ -18,7 +21,7 @@ linear_set<T>::linear_set(InputIt first, InputIt last)
 {
   for (auto it = first; it != last; ++it)
   {
-    _elems.insert(make_pair(*it, true));
+    _elems.insert(std::make_pair(*it, true));
   }
 }
 
@@ -151,3 +154,6 @@ std::ostream &operator<<(std::ostream &os, const linear_set<T> &s)
   os << " }";
   return os;
 }
+
+} // namespace Types
+} // namespace Db

@@ -2,6 +2,9 @@
 
 #include <utility>
 
+namespace Db {
+namespace Types {
+
 template<typename T>
 string_map<T>::string_map()
 {
@@ -557,3 +560,6 @@ typename string_map<T>::iterator string_map<T>::erase(iterator pos)
     return pos;
   }
 }
+
+} // namespace Types
+} // namespace Db
