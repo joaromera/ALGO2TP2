@@ -26,32 +26,33 @@ public:
     self_ = datum.self_->copy();
   }
 
-  Datum &operator=(const Datum &lhs)
+  Datum &operator=(const Datum &rhs)
   {
-    self_ = lhs.self_->copy();
+    self_ = rhs.self_->copy();
     return *this;
   }
 
-  bool esNat() const
+  bool isInteger() const
   {
     return dynamic_cast<entity_impl<int> *>(self_.get()) != nullptr;
   }
 
-  bool esString() const
+  bool isString() const
   {
     return dynamic_cast<entity_impl<std::string> *>(self_.get()) != nullptr;
   }
 
-  std::string valorStr() const
+  std::string stringValue() const
   {
     std::string value;
 
     try
     {
-      if (esString())
+      if (isString())
         value = (dynamic_cast<entity_impl<std::string> *>(self_.get()))->data_;
 
-    } catch (std::exception &e)
+    }
+    catch (std::exception &e)
     {
       throw e;
     }
@@ -59,16 +60,17 @@ public:
     return value;
   }
 
-  int valorNat() const
+  int integerValue() const
   {
     int value = 0;
 
     try
     {
-      if (esNat())
+      if (isInteger())
         value = (dynamic_cast<entity_impl<int> *>(self_.get()))->data_;
 
-    } catch (std::exception &e)
+    }
+    catch (std::exception &e)
     {
       throw e;
     }
@@ -77,6 +79,7 @@ public:
   }
 
 private:
+
   struct entity
   {
     virtual ~entity() = default;
@@ -113,15 +116,15 @@ public:
 
   bool operator==(const Datum &rhs) const
   {
-    if (esNat() == rhs.esNat())
+    if (isInteger() == rhs.isInteger())
     {
-      if (esNat())
+      if (isInteger())
       {
-        return valorNat() == rhs.valorNat();
+        return integerValue() == rhs.integerValue();
       }
       else
       {
-        return valorStr() == rhs.valorStr();
+        return stringValue() == rhs.stringValue();
       }
     }
     return false;
@@ -139,13 +142,13 @@ public:
 
   friend std::ostream &operator<<(std::ostream &os, const Datum &datum)
   {
-    if (datum.esNat())
+    if (datum.isInteger())
     {
-      os << std::to_string(datum.valorNat());
+      os << std::to_string(datum.integerValue());
     }
     else
     {
-      os << datum.valorStr();
+      os << datum.stringValue();
     }
     return os;
   }

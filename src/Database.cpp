@@ -24,13 +24,13 @@ void Database::agregarRegistro(const Record &r, const std::string &nombre)
   {
     if (tieneIndice(nombre, c))
     {
-      if (r.dato(c).esNat())
+      if (r.dato(c).isInteger())
       {
-        _indicesNum[nombre][c][r.dato(c).valorNat()].insert(r);
+        _indicesNum[nombre][c][r.dato(c).integerValue()].insert(r);
       }
       else
       {
-        _indices[nombre][c][r.dato(c).valorStr()].insert(r);
+        _indices[nombre][c][r.dato(c).stringValue()].insert(r);
       }
     }
   }
@@ -63,7 +63,7 @@ bool Database::registroValido(const Record &r,
   for (const auto& c : r.camposDatos())
   {
     if (t.columns().count(c.first) == 0) return false;
-    if (t.columnType(c.first).esNat() != c.second.esNat()) return false;
+    if (t.columnType(c.first).isInteger() != c.second.isInteger()) return false;
   }
   for (const auto& rt : t.records())
   {
@@ -121,7 +121,7 @@ bool Database::criterioValido(const Criterio &c, const std::string &nombre) cons
   for (const auto& restriccion : c)
   {
     if (!t.columns().count(restriccion.column())) return false;
-    if (t.columnType(restriccion.column()).esNat() != restriccion.datum().esNat()) return false;
+    if (t.columnType(restriccion.column()).isInteger() != restriccion.datum().isInteger()) return false;
   }
   return true;
 }
@@ -176,13 +176,13 @@ void Database::crearIndice(const std::string &tabla, const std::string &campo)
   linear_set<Record> reg = dameTabla(tabla).records();
   for (const auto& r : reg)
   {
-    if (r.dato(campo).esNat())
+    if (r.dato(campo).isInteger())
     {
-      _indicesNum[tabla][campo][r.dato(campo).valorNat()].insert(r);
+      _indicesNum[tabla][campo][r.dato(campo).integerValue()].insert(r);
     }
     else
     {
-      _indices[tabla][campo][r.dato(campo).valorStr()].insert(r);
+      _indices[tabla][campo][r.dato(campo).stringValue()].insert(r);
     }
   }
 }
@@ -199,7 +199,7 @@ Database::join_iterator Database::join(const std::string &tabla1, const std::str
   if (!primeraConIndice)
   {
     mismoOrden = false;
-    if (dameTabla(tabla1).columnType(campo).esNat())
+    if (dameTabla(tabla1).columnType(campo).isInteger())
     {
       return join_helper_int(tabla2, tabla1, campo, mismoOrden);
     }
@@ -208,7 +208,7 @@ Database::join_iterator Database::join(const std::string &tabla1, const std::str
       return join_helper_str(tabla2, tabla1, campo, mismoOrden);
     }
   }
-  if (dameTabla(tabla1).columnType(campo).esNat())
+  if (dameTabla(tabla1).columnType(campo).isInteger())
   {
     return join_helper_int(tabla1, tabla2, campo, mismoOrden);
   }
@@ -224,7 +224,7 @@ Database::join_iterator Database::join_helper_str(const std::string &tabla1, con
   int tipo = 0;
   auto it2 = t2.begin();
   int cant_reg_it2 = t2.size();
-  std::string clave = (*it2).dato(campo).valorStr();
+  std::string clave = (*it2).dato(campo).stringValue();
 
   auto it = _indices[tabla1].at(campo).find(clave);
   auto it_end = _indices[tabla1].at(campo).end();
@@ -232,7 +232,7 @@ Database::join_iterator Database::join_helper_str(const std::string &tabla1, con
   // Busca primer coincidencia entre las dos tablas
   while (cant_reg_it2 != 0 && it == it_end)
   {
-    clave = (*it2).dato(campo).valorStr();
+    clave = (*it2).dato(campo).stringValue();
     it = _indices[tabla1].at(campo).find(clave);
     it_end = _indices[tabla1].at(campo).end();
     if (it == it_end)
@@ -258,7 +258,7 @@ Database::join_iterator Database::join_helper_int(const std::string &tabla1, con
   int tipo = 1;
   auto it2 = t2.begin();
   int cant_reg_it2 = t2.size();
-  int clave = (*it2).dato(campo).valorNat();
+  int clave = (*it2).dato(campo).integerValue();
 
   auto it = _indicesNum[tabla1].at(campo).find(clave)->second.begin();
   auto it_end = _indicesNum[tabla1].at(campo).find(clave)->second.end();
@@ -266,7 +266,7 @@ Database::join_iterator Database::join_helper_int(const std::string &tabla1, con
   // Busca primer coincidencia entre las dos tablas
   while (cant_reg_it2 != 0 && it == it_end)
   {
-    clave = (*it2).dato(campo).valorNat();
+    clave = (*it2).dato(campo).integerValue();
     it = _indicesNum[tabla1].at(campo).find(clave)->second.begin();
     it_end = _indicesNum[tabla1].at(campo).find(clave)->second.end();
     if (it == it_end)

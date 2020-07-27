@@ -70,9 +70,9 @@ TEST(my_map, insert)
 
 TEST_F(MapTest, size)
 {
-  EXPECT_EQ(smaller.size(), 3);
-  EXPECT_EQ(ordered.size(), 5);
-  EXPECT_EQ(inversed.size(), 5);
+  EXPECT_EQ(smaller.size(), (size_t) 3);
+  EXPECT_EQ(ordered.size(), (size_t) 5);
+  EXPECT_EQ(inversed.size(), (size_t) 5);
 }
 
 TEST_F(MapTest, at)
@@ -91,19 +91,19 @@ TEST_F(MapTest, copy)
   auto copy_string = string_map;
   auto copy_datos = datos;
 
-  EXPECT_EQ(copy_smaller.size(), 3);
-  EXPECT_EQ(copy_ordered.size(), 5);
-  EXPECT_EQ(copy_string.size(), 3);
-  EXPECT_EQ(copy_datos.size(), 3);
+  EXPECT_EQ(copy_smaller.size(), (size_t) 3);
+  EXPECT_EQ(copy_ordered.size(), (size_t) 5);
+  EXPECT_EQ(copy_string.size(), (size_t) 3);
+  EXPECT_EQ(copy_datos.size(), (size_t) 3);
 }
 
 TEST_F(MapTest, count)
 {
   for (int i = -5; i < 10; i++)
   {
-    EXPECT_EQ(smaller.count(i), not(i < 0 or i > 2));
-    EXPECT_EQ(ordered.count(i), not(i < 0 or i > 4));
-    EXPECT_EQ(inversed.count(i), not(i < 0 or i > 4));
+    EXPECT_EQ(smaller.count(i), !(i < 0 || i > 2));
+    EXPECT_EQ(ordered.count(i), !(i < 0 || i > 4));
+    EXPECT_EQ(inversed.count(i), !(i < 0 || i > 4));
   }
 }
 
@@ -111,9 +111,9 @@ TEST_F(MapTest, erase_by_key)
 {
   auto copy = ordered;
   EXPECT_TRUE(copy.count(3));
-  EXPECT_EQ(copy.erase(3), 1);
+  EXPECT_EQ(copy.erase(3), (size_t) 1);
   EXPECT_FALSE(copy.count(3));
-  EXPECT_EQ(copy.size(), 4);
+  EXPECT_EQ(copy.size(), (size_t) 4);
 }
 
 TEST_F(MapTest, iterator)

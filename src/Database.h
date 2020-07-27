@@ -150,13 +150,13 @@ public:
         {
           if (tipo == 0)
           {
-            std::string clave = (*it2)->dato(campo).valorStr();
+            std::string clave = (*it2)->dato(campo).stringValue();
             buscarProxCoincidenciaStr(clave);
             return *this;
           }
           else
           {
-            int clave = (*it2)->dato(campo).valorNat();
+            int clave = (*it2)->dato(campo).integerValue();
             buscarProxCoincidenciaNat(clave);
             return *this;
           }
@@ -283,7 +283,7 @@ public:
     {
       while (cant_reg_en_tabla != 0 && diccClavesStr->count(clave) == 0)
       {
-        clave = (*it2)->dato(campo).valorStr();
+        clave = (*it2)->dato(campo).stringValue();
         if (diccClavesStr->count(clave) == 0)
         {
           avanzarItSinIndice();
@@ -307,7 +307,7 @@ public:
     {
       while (cant_reg_en_tabla != 0 && diccClavesNat->count(clave) == 0)
       {
-        clave = (*it2)->dato(campo).valorNat();
+        clave = (*it2)->dato(campo).integerValue();
         if (diccClavesNat->count(clave) == 0)
         {
           avanzarItSinIndice();

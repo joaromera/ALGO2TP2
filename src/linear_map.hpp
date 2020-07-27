@@ -105,16 +105,17 @@ bool linear_map<K, S>::operator==(const linear_map<K, S> &other) const
 }
 
 template<class K, class S>
-typename linear_map<K, S>::size_type linear_map<K, S>::erase(const K &key)
+bool linear_map<K, S>::erase(const K &key)
 {
   for (auto it = _elems.begin(); it != _elems.end(); it++)
   {
     if (it->first == key)
     {
       _elems.erase(it);
-      return 1;
+      return true;
     }
   }
+  return false;
 }
 
 template<class K, class S>

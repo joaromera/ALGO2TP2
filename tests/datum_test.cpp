@@ -9,28 +9,28 @@ TEST(dato_test, generadores)
 
 TEST(dato_test, esNat)
 {
-  EXPECT_EQ(Datum(5).esNat(), true);
-  EXPECT_EQ(Datum(100).esNat(), true);
-  EXPECT_EQ(Datum("").esNat(), false);
-  EXPECT_EQ(Datum("hola").esNat(), false);
+  EXPECT_EQ(Datum(5).isInteger(), true);
+  EXPECT_EQ(Datum(100).isInteger(), true);
+  EXPECT_EQ(Datum("").isInteger(), false);
+  EXPECT_EQ(Datum("hola").isInteger(), false);
 }
 
 TEST(dato_test, esString)
 {
-  EXPECT_EQ(Datum("hola").esString(), true);
-  EXPECT_EQ(Datum("chau").esString(), true);
-  EXPECT_EQ(Datum(10).esString(), false);
-  EXPECT_EQ(Datum(5).esString(), false);
+  EXPECT_EQ(Datum("hola").isString(), true);
+  EXPECT_EQ(Datum("chau").isString(), true);
+  EXPECT_EQ(Datum(10).isString(), false);
+  EXPECT_EQ(Datum(5).isString(), false);
 }
 
 TEST(dato_test, valores)
 {
-  EXPECT_EQ(Datum(10).valorNat(), 10);
-  EXPECT_EQ(Datum(5).valorNat(), 5);
-  EXPECT_EQ(Datum(100).valorNat(), 100);
-  EXPECT_EQ(Datum("").valorStr(), "");
-  EXPECT_EQ(Datum("hola").valorStr(), "hola");
-  EXPECT_EQ(Datum("chau").valorStr(), "chau");
+  EXPECT_EQ(Datum(10).integerValue(), 10);
+  EXPECT_EQ(Datum(5).integerValue(), 5);
+  EXPECT_EQ(Datum(100).integerValue(), 100);
+  EXPECT_EQ(Datum("").stringValue(), "");
+  EXPECT_EQ(Datum("hola").stringValue(), "hola");
+  EXPECT_EQ(Datum("chau").stringValue(), "chau");
 }
 
 TEST(dato_test, igobs)

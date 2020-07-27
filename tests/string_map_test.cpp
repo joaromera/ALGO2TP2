@@ -32,56 +32,6 @@ TEST(string_map_test, joaco_test)
   m1.erase("!@");
 }
 
-/**
-TEST(string_map_test, print)
-{
-  string_map<int> m1, m2;
-  m1["a"] = 1;
-  m1["aa"] = 2;
-  m1["aaa"] = 3;
-  std::pair<std::string, int> in;
-  in.first = "ab";
-  in.second = 4;
-  m1.insert(in);
-  m1["aba"] = 5;
-  m1["abb"] = 6;
-  m1["aaaa"] = 0;
-  std::cout << std::endl;
-  std::cout << "El string map es: " << std::endl;
-  for (auto p : m1)
-  {
-    std::cout << p.first << " " << p.second << std::endl;
-  }
-  m1.erase(in.first);// borro (ab, 4)
-  std::cout << std::endl;
-  std::cout << "Borro par (ab,4)" << std::endl;
-  for (auto p : m1)
-  {
-    std::cout << p.first << " " << p.second << std::endl;
-  }
-  m1.erase(m1.begin());
-  std::cout << std::endl;
-  std::cout << "Borro primer par (a,1)" << std::endl;
-  for (auto p : m1)
-  {
-    std::cout << p.first << " " << p.second << std::endl;
-  }
-  std::cout << std::endl;
-  std::cout << "Borro todos, uno por uno" << std::endl;
-  m1.erase(m1.begin());
-  m1.erase(m1.begin());
-  m1.erase(m1.begin());
-  m1.erase(m1.begin());
-  m1.erase(m1.begin());
-  for (auto p : m1)
-  {
-    std::cout << "No debería imprimirse" << std::endl;
-  }
-  std::cout << "Fin" << std::endl
-            << std::endl;
-}
-**/
-
 TEST(string_map_test, test_constructor)
 {
   string_map<int> m1, m2;
@@ -93,24 +43,24 @@ TEST(string_map_test, test_definir)
 {
   string_map<int> m;
   EXPECT_TRUE(m.empty());
-  EXPECT_EQ(m.size(), 0);
+  EXPECT_EQ(m.size(), (size_t) 0);
   EXPECT_FALSE(m.count(""));
   m["hola"] = 3;
   EXPECT_FALSE(m.count(""));
-  EXPECT_EQ(m.size(), 1);
+  EXPECT_EQ(m.size(), (size_t) 1);
   EXPECT_FALSE(m.empty());
   EXPECT_TRUE(m.count("hola"));
   EXPECT_FALSE(m.count("hol"));
   EXPECT_FALSE(m.count("holas"));
   m["ho"] = 1;
   EXPECT_FALSE(m.count(""));
-  EXPECT_EQ(m.size(), 2);
+  EXPECT_EQ(m.size(), (size_t) 2);
   EXPECT_TRUE(m.count("hola"));
   EXPECT_TRUE(m.count("ho"));
   EXPECT_FALSE(m.count("hol"));
   EXPECT_FALSE(m.count("h"));
   m[""] = 0;
-  EXPECT_EQ(m.size(), 3);
+  EXPECT_EQ(m.size(), (size_t) 3);
   EXPECT_TRUE(m.count("hola"));
   EXPECT_TRUE(m.count("ho"));
   EXPECT_TRUE(m.count(""));
@@ -270,7 +220,7 @@ TEST(string_map_test, test_iterator)
   EXPECT_EQ(l3, l4);
 
   // Borro 1ra key: debe apuntar a la siguiente (en este caso una subrama)
-  EXPECT_EQ(m1.erase("aaaa"), 1);
+  EXPECT_TRUE(m1.erase("aaaa"));
 
   auto it = m1.find("aaaab");
   it = m1.erase(it);

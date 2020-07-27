@@ -1,8 +1,8 @@
 #include "Filter.h"
 #include <tuple>
 
-Filter::Filter(const std::string &campo, const Datum &dato, bool igual)
-  : _column(campo), _datum(dato), _equals(igual)
+Filter::Filter(const std::string &column, const Datum &datum, bool equals)
+  : _column(column), _datum(datum), _equals(equals)
 {
 };
 

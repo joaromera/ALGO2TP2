@@ -73,11 +73,11 @@ TEST_F(SetTest, empty)
 
 TEST_F(SetTest, size)
 {
-  EXPECT_EQ(empty.size(), 0);
-  EXPECT_EQ(ordered.size(), 5);
-  EXPECT_EQ(inversed.size(), 5);
-  EXPECT_EQ(smaller.size(), 3);
-  EXPECT_EQ(string_set.size(), 6);
+  EXPECT_EQ(empty.size(), (size_t) 0);
+  EXPECT_EQ(ordered.size(), (size_t) 5);
+  EXPECT_EQ(inversed.size(), (size_t) 5);
+  EXPECT_EQ(smaller.size(), (size_t) 3);
+  EXPECT_EQ(string_set.size(), (size_t) 6);
 }
 
 TEST_F(SetTest, copy)
@@ -86,9 +86,9 @@ TEST_F(SetTest, copy)
   auto copy_ordered = ordered;
   auto copy_string = string_set;
 
-  EXPECT_EQ(copy_empty.size(), 0);
-  EXPECT_EQ(copy_ordered.size(), 5);
-  EXPECT_EQ(copy_string.size(), 6);
+  EXPECT_EQ(copy_empty.size(), (size_t) 0);
+  EXPECT_EQ(copy_ordered.size(), (size_t) 5);
+  EXPECT_EQ(copy_string.size(), (size_t) 6);
 }
 
 TEST_F(SetTest, iterator)
@@ -152,9 +152,9 @@ TEST_F(SetTest, erase_by_key)
 {
   auto copy = ordered;
   EXPECT_TRUE(copy.count(3));
-  EXPECT_EQ(copy.erase(3), 1);
+  EXPECT_TRUE(copy.erase(3));
   EXPECT_FALSE(copy.count(3));
-  EXPECT_EQ(copy.size(), 4);
+  EXPECT_EQ(copy.size(), (size_t) 4);
 }
 
 TEST_F(SetTest, iterator_find_test)
@@ -193,7 +193,7 @@ TEST_F(SetTest, insert_by_iterator)
 TEST_F(SetTest, erase_by_iterator)
 {
   auto m1 = ordered;
-  EXPECT_EQ(m1.erase(1), 1);
+  EXPECT_TRUE(m1.erase(1));
   EXPECT_EQ(m1.find(1), m1.end());
-  EXPECT_EQ(m1.erase(4), 1);
+  EXPECT_TRUE(m1.erase(4));
 }

@@ -45,33 +45,33 @@ TEST_F(TablaTests, claves)
 
 TEST_F(TablaTests, tipoCampo)
 {
-  EXPECT_EQ(t.columnType("LU").esNat(), true);
-  EXPECT_EQ(t.columnType("LU").esString(), false);
-  EXPECT_EQ(t.columnType("Nombre").esNat(), false);
-  EXPECT_EQ(t.columnType("Nombre").esString(), true);
+  EXPECT_EQ(t.columnType("LU").isInteger(), true);
+  EXPECT_EQ(t.columnType("LU").isString(), false);
+  EXPECT_EQ(t.columnType("Nombre").isInteger(), false);
+  EXPECT_EQ(t.columnType("Nombre").isString(), true);
 }
 
 TEST_F(TablaTests, registros)
 {
   Table t3({}, {}, {});
-  EXPECT_EQ(t3.size(), 0);
+  EXPECT_EQ(t3.size(), (size_t) 0);
 
   std::vector<std::string> campos = { "LU", "LU_A", "Nombre", "Carrera" };
   Record r1(campos, std::vector<Datum>({ Datum(181), Datum(2017), Datum("March"), Datum("Comp") }));
   Record r2(campos, { Datum(182), Datum(2015), Datum("Ariana"), Datum("Mate") });
   Record r3(campos, { Datum(12), Datum(2005), Datum("Juan"), Datum("Biol") });
 
-  EXPECT_EQ(t.size(), 0);
+  EXPECT_EQ(t.size(), (size_t) 0);
   t.addRecord(r1);
-  EXPECT_EQ(t.size(), 1);
+  EXPECT_EQ(t.size(), (size_t) 1);
   EXPECT_EQ(*(t.records().begin()), r1);
   t.addRecord(r2);
-  EXPECT_EQ(t.size(), 2);
+  EXPECT_EQ(t.size(), (size_t) 2);
   EXPECT_TRUE(std::find(t.records().begin(), t.records().end(), r1) != t.records().end());
   EXPECT_TRUE(std::find(t.records().begin(), t.records().end(), r2) != t.records().end());
   EXPECT_FALSE(std::find(t.records().begin(), t.records().end(), r3) != t.records().end());
   t.addRecord(r3);
-  EXPECT_EQ(t.size(), 3);
+  EXPECT_EQ(t.size(), (size_t) 3);
   EXPECT_TRUE(std::find(t.records().begin(), t.records().end(), r1) != t.records().end());
   EXPECT_TRUE(std::find(t.records().begin(), t.records().end(), r2) != t.records().end());
   EXPECT_TRUE(std::find(t.records().begin(), t.records().end(), r3) != t.records().end());

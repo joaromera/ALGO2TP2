@@ -23,12 +23,12 @@ TEST(registro_test, dato)
 {
   Record r({ "LU", "LU_A", "Nombre", "Carrera" }, { Datum(182), Datum(18), Datum("March"), Datum("Computacion") });
 
-  EXPECT_EQ(r.dato("LU").esNat(), true);
-  EXPECT_EQ(r.dato("LU").esString(), false);
-  EXPECT_EQ(r.dato("LU").valorNat(), 182);
-  EXPECT_EQ(r.dato("Nombre").esNat(), false);
-  EXPECT_EQ(r.dato("Nombre").esString(), true);
-  EXPECT_EQ(r.dato("Nombre").valorStr(), "March");
+  EXPECT_EQ(r.dato("LU").isInteger(), true);
+  EXPECT_EQ(r.dato("LU").isString(), false);
+  EXPECT_EQ(r.dato("LU").integerValue(), 182);
+  EXPECT_EQ(r.dato("Nombre").isInteger(), false);
+  EXPECT_EQ(r.dato("Nombre").isString(), true);
+  EXPECT_EQ(r.dato("Nombre").stringValue(), "March");
 }
 
 TEST(registro_test, ig_obs)

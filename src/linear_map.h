@@ -48,7 +48,7 @@ public:
 
   const S &at(const K &key) const;
 
-  size_type erase(const K &key);
+  bool erase(const K &key);
 
   linear_map &operator=(const linear_map &other);
 
