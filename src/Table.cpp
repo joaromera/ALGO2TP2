@@ -77,7 +77,7 @@ bool Table::const_iterator::operator==(const Table::const_iterator &it) const
 
 bool Table::const_iterator::operator!=(const Table::const_iterator &it) const
 {
-  return not(record_iterator == it.record_iterator);
+  return !(record_iterator == it.record_iterator);
 }
 
 Table::const_iterator::const_iterator(const linear_set<Record>::const_iterator record_it)

@@ -8,7 +8,7 @@ namespace Types {
 template<typename T>
 string_map<T>::string_map()
 {
-  head = new Nodo;
+  head = new Node;
 }
 
 template<typename T>
@@ -19,16 +19,16 @@ string_map<T>::~string_map()
 }
 
 template<typename T>
-void string_map<T>::borrar(Nodo *&n)
+void string_map<T>::borrar(Node *&n)
 {
-  // Recursivamente recorre todos los hijos del nodo, liberando memoria y seteando a nullptr
-  Nodo *node = n;
+  // Recursivamente recorre todos los children del node, liberando memoria y seteando a nullptr
+  Node *node = n;
   for (int i = 0; i < 128; i++)
   {
-    if (node->hijos[i] != nullptr)
+    if (node->children[i] != nullptr)
     {
-      borrar(node->hijos[i]);
-      node->hijos[i] = nullptr;
+      borrar(node->children[i]);
+      node->children[i] = nullptr;
       node->cantHijos--;
     }
   }
@@ -38,9 +38,9 @@ void string_map<T>::borrar(Nodo *&n)
     node->par = nullptr;
     cantClaves--;
   }
-  if (node->padre != nullptr)
+  if (node->parent != nullptr)
   {
-    node->padre = nullptr;
+    node->parent = nullptr;
   }
   delete node;
   node = nullptr;
@@ -49,28 +49,28 @@ void string_map<T>::borrar(Nodo *&n)
 template<typename T>
 string_map<T>::string_map(const string_map &p)
 {
-  head = new Nodo;
-  head->clave = p.head->clave;
+  head = new Node;
+  head->key = p.head->key;
   cantClaves = p.cantClaves;
   copiarHijos(head, p.head);
 }
 
 template<typename T>
-void string_map<T>::copiarHijos(Nodo *head, Nodo *other)
+void string_map<T>::copiarHijos(Node *head, Node *other)
 {
   if (other != nullptr)
   {
     for (int i = 0; i < 128; i++)
     {
-      if (other->hijos[i] != nullptr)
+      if (other->children[i] != nullptr)
       {
         head->cantHijos++;
-        head->hijos[i] = new Nodo;
-        head->hijos[i]->padre = head;
-        copiarHijos(head->hijos[i], other->hijos[i]);
+        head->children[i] = new Node;
+        head->children[i]->parent = head;
+        copiarHijos(head->children[i], other->children[i]);
       }
     }
-    head->clave = other->clave;
+    head->key = other->key;
     if (other->par != nullptr)
     {
       key_type key = other->par->first;
@@ -94,7 +94,7 @@ string_map<T> &string_map<T>::operator=(const string_map &p)
     if (p.head->par != nullptr) { head->par = new value_type(p.head->par->first, p.head->par->second); }
     copiarHijos(head, p.head);
   }
-  head->clave = p.head->clave;
+  head->key = p.head->key;
   cantClaves = p.cantClaves;
 
   return *this;
@@ -125,60 +125,60 @@ bool string_map<T>::operator!=(const string_map &otro) const
 }
 
 template<typename T>
-typename string_map<T>::Nodo *string_map<T>::iterator::proximoAbajo(Nodo *n)
+typename string_map<T>::Node *string_map<T>::iterator::proximoAbajo(Node *n)
 {
-  // Busca recursivamente el primer nodo no nulo y con par definido
+  // Busca recursivamente el primer node no nulo y con par definido
   // Si no hay ninguno n -> nullptr
-  Nodo *tmp = n;
+  Node *tmp = n;
   buscarNodoAbajo(tmp);
   return tmp;
 }
 
 template<typename T>
-void string_map<T>::iterator::buscarNodoAbajo(Nodo *&n)
+void string_map<T>::iterator::buscarNodoAbajo(Node *&n)
 {
-  // Busca recursivamente el primer nodo no nulo y con par definido
+  // Busca recursivamente el primer node no nulo y con par definido
   // Si no hay ninguno n -> nullptr
   int i = 0;
-  while (i < 128 && n->hijos[i] == nullptr) i++;
+  while (i < 128 && n->children[i] == nullptr) i++;
   if (i == 128)
   {
     n = nullptr;
   }
-  else if (n->hijos[i]->par != nullptr)
+  else if (n->children[i]->par != nullptr)
   {
-    n = n->hijos[i];
+    n = n->children[i];
   }
   else
   {
-    n = n->hijos[i];
+    n = n->children[i];
     buscarNodoAbajo(n);
   }
 }
 
 template<typename T>
-typename string_map<T>::Nodo *string_map<T>::iterator::proximoArriba(Nodo *n)
+typename string_map<T>::Node *string_map<T>::iterator::proximoArriba(Node *n)
 {
-  // Busca recursivamente el primer nodo no nulo y con par definido
+  // Busca recursivamente el primer node no nulo y con par definido
   // Si no hay ninguno n -> nullptr
-  Nodo *tmp = n;
+  Node *tmp = n;
   buscarNodoArriba(tmp);
   return tmp;
 }
 
 template<typename T>
-void string_map<T>::iterator::buscarNodoArriba(Nodo *&n)
+void string_map<T>::iterator::buscarNodoArriba(Node *&n)
 {
-  if (n->padre == nullptr) n = nullptr;
+  if (n->parent == nullptr) n = nullptr;
   if (n != nullptr)
   {
-    Nodo *proximo = n->padre;
-    char clave = n->clave.back();
+    Node *proximo = n->parent;
+    char clave = n->key.back();
     int i = clave + 1;
-    while (i < 128 && proximo->hijos[i] == nullptr) i++;
+    while (i < 128 && proximo->children[i] == nullptr) i++;
     if (i != 128)
     {
-      n = proximo->hijos[i];
+      n = proximo->children[i];
       if (n->par == nullptr)
       {
         buscarNodoAbajo(n);
@@ -193,61 +193,61 @@ void string_map<T>::iterator::buscarNodoArriba(Nodo *&n)
 }
 
 template<typename T>
-typename string_map<T>::Nodo *string_map<T>::const_iterator::proximoAbajo(Nodo *n)
+typename string_map<T>::Node *string_map<T>::const_iterator::proximoAbajo(Node *n)
 {
-  // Busca recursivamente el primer nodo no nulo y con par definido
+  // Busca recursivamente el primer node no nulo y con par definido
   // Si no hay ninguno n -> nullptr
-  Nodo *tmp = n;
+  Node *tmp = n;
   buscarNodoAbajo(tmp);
   return tmp;
 }
 
 template<typename T>
-void string_map<T>::const_iterator::buscarNodoAbajo(Nodo *&n)
+void string_map<T>::const_iterator::buscarNodoAbajo(Node *&n)
 {
-  // Busca recursivamente el primer nodo no nulo y con par definido
+  // Busca recursivamente el primer node no nulo y con par definido
   // Si no hay ninguno n -> nullptr
   int i = 0;
-  while (i < 128 && n->hijos[i] == nullptr) i++;
+  while (i < 128 && n->children[i] == nullptr) i++;
   if (i == 128)
   {
     n = nullptr;
   }
-  else if (n->hijos[i]->par != nullptr)
+  else if (n->children[i]->par != nullptr)
   {
-    n = n->hijos[i];
+    n = n->children[i];
   }
   else
   {
-    n = n->hijos[i];
+    n = n->children[i];
     buscarNodoAbajo(n);
   }
 }
 
 template<typename T>
-typename string_map<T>::Nodo *string_map<T>::const_iterator::proximoArriba(Nodo *n)
+typename string_map<T>::Node *string_map<T>::const_iterator::proximoArriba(Node *n)
 {
-  // Busca recursivamente el primer nodo no nulo y con par definido
+  // Busca recursivamente el primer node no nulo y con par definido
   // Si no hay ninguno n -> nullptr
-  Nodo *tmp = n;
+  Node *tmp = n;
   buscarNodoArriba(tmp);
   return tmp;
 }
 
 template<typename T>
-void string_map<T>::const_iterator::buscarNodoArriba(Nodo *&n)
+void string_map<T>::const_iterator::buscarNodoArriba(Node *&n)
 {
   // Busca los hermanos mayores lexicograficamente de n
-  if (n->padre == nullptr) n = nullptr;
+  if (n->parent == nullptr) n = nullptr;
   if (n != nullptr)
   {
-    Nodo *proximo = n->padre;
-    char clave = n->clave.back();
+    Node *proximo = n->parent;
+    char clave = n->key.back();
     int i = clave + 1;
-    while (i < 128 && proximo->hijos[i] == nullptr) i++;
+    while (i < 128 && proximo->children[i] == nullptr) i++;
     if (i != 128)
     {
-      n = proximo->hijos[i];
+      n = proximo->children[i];
       if (n->par == nullptr)
       {
         buscarNodoAbajo(n);
@@ -264,19 +264,19 @@ void string_map<T>::const_iterator::buscarNodoArriba(Nodo *&n)
 template<typename T>
 size_t string_map<T>::count(const key_type &key) const
 {
-  Nodo *walk = head;
+  Node *walk = head;
   for (const char& c : key)
   {
-    if (walk->hijos[int(c)] == nullptr)
+    if (walk->children[int(c)] == nullptr)
     {
       return 0;
     }
     else
     {
-      walk = walk->hijos[int(c)];
+      walk = walk->children[int(c)];
     }
   }
-  if (walk->clave == key && walk->par != nullptr)
+  if (walk->key == key && walk->par != nullptr)
   {
     return 1;
   }
@@ -301,20 +301,20 @@ bool string_map<T>::empty() const
 template<typename T>
 typename string_map<T>::mapped_type &string_map<T>::operator[](const key_type &key)
 {
-  Nodo *temp = head;
+  Node *temp = head;
   for (auto it = key.begin(); it < key.end(); it++)
   {
-    if (temp->hijos[int(*it)] == nullptr)
+    if (temp->children[int(*it)] == nullptr)
     {
       temp->cantHijos++;
-      Nodo *nuevo = new Nodo;
-      temp->hijos[int(*it)] = nuevo;
-      temp->hijos[int(*it)]->padre = temp;
+      Node *nuevo = new Node;
+      temp->children[int(*it)] = nuevo;
+      temp->children[int(*it)]->parent = temp;
     }
-    temp = temp->hijos[int(*it)];
-    temp->clave = *it;
+    temp = temp->children[int(*it)];
+    temp->key = *it;
   }
-  temp->clave = key;
+  temp->key = key;
   if (temp->par == nullptr)
   {
     temp->par = new value_type(key, T());
@@ -327,14 +327,14 @@ template<typename T>
 typename string_map<T>::mapped_type &string_map<T>::at(const key_type &key)
 {
   auto it = find(key);
-  return it.nodo->par->second;
+  return it.node->par->second;
 }
 
 template<typename T>
 const typename string_map<T>::mapped_type &string_map<T>::at(const key_type &key) const
 {
   auto it = find(key);
-  return it.nodo->par->second;
+  return it.node->par->second;
 }
 
 template<typename T>
@@ -344,7 +344,7 @@ void string_map<T>::clear()
   {
     borrar(head);
   }
-  head = new Nodo;
+  head = new Node;
   cantClaves = 0;
 }
 
@@ -352,12 +352,12 @@ template<typename T>
 typename string_map<T>::iterator string_map<T>::begin()
 {
   if (empty()) return end();
-  Nodo *walk = head;
+  Node *walk = head;
   while (walk->par == nullptr)
   {
     int i = 0;
-    while (i < 128 && walk->hijos[i] == nullptr) i++;
-    if (walk->hijos[i] != nullptr) walk = walk->hijos[i];
+    while (i < 128 && walk->children[i] == nullptr) i++;
+    if (walk->children[i] != nullptr) walk = walk->children[i];
   }
   auto it = iterator(walk);
   return it;
@@ -373,12 +373,12 @@ template<typename T>
 typename string_map<T>::const_iterator string_map<T>::begin() const
 {
   if (empty()) return end();
-  Nodo *walk = head;
+  Node *walk = head;
   while (walk->par == nullptr)
   {
     int i = 0;
-    while (i < 128 && walk->hijos[i] == nullptr) i++;
-    if (walk->hijos[i] != nullptr) walk = walk->hijos[i];
+    while (i < 128 && walk->children[i] == nullptr) i++;
+    if (walk->children[i] != nullptr) walk = walk->children[i];
   }
   auto it = const_iterator(walk);
   return it;
@@ -405,16 +405,16 @@ typename string_map<T>::const_iterator string_map<T>::cend() const
 template<typename T>
 typename string_map<T>::iterator string_map<T>::find(const key_type &key)
 {
-  Nodo *temp = head;
+  Node *temp = head;
   for (auto it = key.begin(); it < key.end(); it++)
   {
-    if (temp->hijos[int(*it)] == nullptr)
+    if (temp->children[int(*it)] == nullptr)
     {
       return end();
     }
     else
     {
-      temp = temp->hijos[int(*it)];
+      temp = temp->children[int(*it)];
     }
   }
   return iterator(temp);
@@ -423,16 +423,16 @@ typename string_map<T>::iterator string_map<T>::find(const key_type &key)
 template<typename T>
 typename string_map<T>::const_iterator string_map<T>::find(const key_type &key) const
 {
-  Nodo *temp = head;
+  Node *temp = head;
   for (auto it = key.begin(); it < key.end(); it++)
   {
-    if (temp->hijos[int(*it)] == nullptr)
+    if (temp->children[int(*it)] == nullptr)
     {
       return this->end();
     }
     else
     {
-      temp = temp->hijos[int(*it)];
+      temp = temp->children[int(*it)];
     }
   }
   return const_iterator(temp);
@@ -443,43 +443,43 @@ std::pair<typename string_map<T>::iterator, bool> string_map<T>::insert(const st
 {
   std::pair<iterator, bool> finish;
   bool mod = false;
-  Nodo *current = head;
-  std::string clave = value.first;
+  Node *current = head;
+  std::string tmpKey = value.first;
 
-  for (auto it = clave.begin(); it < clave.end() - 1; it++)
+  for (auto it = tmpKey.begin(); it < tmpKey.end() - 1; it++)
   {
-    if (current->hijos[int(*it)] != nullptr)
+    if (current->children[int(*it)] != nullptr)
     {
-      current = current->hijos[int(*it)];
+      current = current->children[int(*it)];
     }
     else
     {
       current->cantHijos += 1;
-      current->hijos[int(*it)] = new Nodo;
-      current->hijos[int(*it)]->padre = current;
-      current = current->hijos[int(*it)];
-      current->clave = *it;
+      current->children[int(*it)] = new Node;
+      current->children[int(*it)]->parent = current;
+      current = current->children[int(*it)];
+      current->key = *it;
     }
   }
 
-  char c = clave.back();
+  char c = tmpKey.back();
 
-  if (current->hijos[int(c)] == nullptr)
+  if (current->children[int(c)] == nullptr)
   {
     cantClaves += 1;
     current->cantHijos += 1;
-    current->hijos[int(c)] = new Nodo;
+    current->children[int(c)] = new Node;
   }
   else
   {
     mod = true;
   }
 
-  current->hijos[int(c)]->par = new value_type(clave, value.second);
-  current->hijos[int(c)]->clave = clave;
-  current->hijos[int(c)]->padre = current;
+  current->children[int(c)]->par = new value_type(tmpKey, value.second);
+  current->children[int(c)]->key = tmpKey;
+  current->children[int(c)]->parent = current;
 
-  iterator it = iterator(current->hijos[int(c)]);
+  iterator it = iterator(current->children[int(c)]);
   finish.first = it;
   finish.second = mod;
   return finish;
@@ -489,23 +489,23 @@ template<typename T>
 typename string_map<T>::size_type string_map<T>::erase(const string_map<T>::key_type &key)
 {
   auto it = this->find(key);
-  Nodo *walk = it.nodo;
+  Node *walk = it.node;
   int eliminados = 0;
 
   delete walk->par;
   walk->par = nullptr;
-  walk->clave = key.back();
+  walk->key = key.back();
   cantClaves--;
   eliminados++;
 
   if (walk->cantHijos > 0) return eliminados;
 
-  Nodo *actualizar = walk->padre;
-  while (actualizar->cantHijos == 0 && actualizar->par == nullptr && actualizar->padre != nullptr)
+  Node *actualizar = walk->parent;
+  while (actualizar->cantHijos == 0 && actualizar->par == nullptr && actualizar->parent != nullptr)
   {
-    actualizar->padre->hijos[int(actualizar->clave.back())] = nullptr;
-    actualizar->padre->cantHijos -= 1;
-    actualizar = actualizar->padre;
+    actualizar->parent->children[int(actualizar->key.back())] = nullptr;
+    actualizar->parent->cantHijos -= 1;
+    actualizar = actualizar->parent;
   }
 
   return eliminados;
@@ -514,37 +514,37 @@ typename string_map<T>::size_type string_map<T>::erase(const string_map<T>::key_
 template<typename T>
 typename string_map<T>::iterator string_map<T>::erase(iterator pos)
 {
-  std::string clave = pos.nodo->clave;
-  if (pos.nodo->cantHijos == 0)
+  std::string clave = pos.node->key;
+  if (pos.node->cantHijos == 0)
   {
 
-    Nodo *nodoaborrar = pos.nodo;
-    Nodo *padredelnodo = pos.nodo->padre;
+    Node *nodoaborrar = pos.node;
+    Node *padredelnodo = pos.node->parent;
 
     delete nodoaborrar->par;
     nodoaborrar->par = nullptr;
-    nodoaborrar->clave = clave.back();
+    nodoaborrar->key = clave.back();
 
     pos++;
 
     delete nodoaborrar;
     nodoaborrar = nullptr;
 
-    padredelnodo->hijos[int(clave.back())] = nullptr;
+    padredelnodo->children[int(clave.back())] = nullptr;
     padredelnodo->cantHijos -= 1;
-    clave = padredelnodo->clave;
-    Nodo *actualizar = padredelnodo;
+    clave = padredelnodo->key;
+    Node *actualizar = padredelnodo;
     padredelnodo = nullptr;
 
-    while (actualizar->cantHijos == 0 && actualizar->par == nullptr && actualizar->padre != nullptr)
+    while (actualizar->cantHijos == 0 && actualizar->par == nullptr && actualizar->parent != nullptr)
     {
-      actualizar = actualizar->padre;
+      actualizar = actualizar->parent;
 
-      delete actualizar->hijos[int(clave.back())];
-      actualizar->hijos[int(clave.back())] = nullptr;
+      delete actualizar->children[int(clave.back())];
+      actualizar->children[int(clave.back())] = nullptr;
       actualizar->cantHijos -= 1;
 
-      clave = actualizar->clave;
+      clave = actualizar->key;
     }
     actualizar = nullptr;
     cantClaves -= 1;
@@ -552,9 +552,9 @@ typename string_map<T>::iterator string_map<T>::erase(iterator pos)
   }
   else
   {
-    delete pos.nodo->par;
-    pos.nodo->par = nullptr;
-    pos.nodo->clave = clave.back();
+    delete pos.node->par;
+    pos.node->par = nullptr;
+    pos.node->key = clave.back();
     cantClaves -= 1;
     pos++;
     return pos;

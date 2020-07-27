@@ -17,7 +17,7 @@ public:
   typedef size_t size_type;
 
 private:
-  struct Nodo;
+  struct Node;
 
 public:
   class iterator
@@ -27,38 +27,35 @@ public:
     typedef T mapped_type;
     typedef std::pair<const key_type, mapped_type> value_type;
 
-    iterator()
-    {
-      nodo = nullptr;
-    }
+    iterator() = default;
 
     iterator(const iterator &n)
     {
-      nodo = n.nodo;
+      node = n.node;
     }
 
     iterator &operator=(const iterator &n)
     {
-      nodo = n.nodo;
+      node = n.node;
       return *this;
     }
 
     ~iterator()
     {
-      nodo = nullptr;
+      node = nullptr;
     }
 
     bool operator==(const iterator &n) const
     {
-      if (nodo == nullptr || n.nodo == nullptr)
+      if (node == nullptr || n.node == nullptr)
       {
-        return nodo == n.nodo;
+        return node == n.node;
       }
-      if (nodo->par == nullptr || n.nodo->par == nullptr)
+      if (node->par == nullptr || n.node->par == nullptr)
       {
-        return nodo->par == n.nodo->par;
+        return node->par == n.node->par;
       }
-      return *(nodo->par) == *(n.nodo->par);
+      return *(node->par) == *(n.node->par);
     }
 
     bool operator!=(const iterator &n) const
@@ -68,16 +65,16 @@ public:
 
     iterator &operator++()
     {
-      Nodo *nu = proximoAbajo(nodo);
+      Node *nu = proximoAbajo(node);
       if (nu != nullptr)
       {
-        nodo = nu;
+        node = nu;
         return *this;
       }
       else
       {
-        nu = proximoArriba(nodo);
-        nodo = nu;
+        nu = proximoArriba(node);
+        node = nu;
         return *this;
       }
     }
@@ -91,24 +88,24 @@ public:
 
     value_type &operator*() const
     {
-      return *nodo->par;
+      return *node->par;
     }
 
     value_type *operator->() const
     {
-      return nodo->par;
+      return node->par;
     }
 
     friend class string_map;
 
   private:
-    iterator(Nodo *n) : nodo(n){};
-    Nodo *nodo;
+    iterator(Node *n) : node(n){};
+    Node* node = nullptr;
 
-    typename string_map<T>::Nodo *proximoAbajo(Nodo *n);
-    void buscarNodoAbajo(Nodo *&n);
-    typename string_map<T>::Nodo *proximoArriba(Nodo *n);
-    void buscarNodoArriba(Nodo *&n);
+    typename string_map<T>::Node *proximoAbajo(Node *n);
+    void buscarNodoAbajo(Node *&n);
+    typename string_map<T>::Node *proximoArriba(Node *n);
+    void buscarNodoArriba(Node *&n);
   };
 
   class const_iterator
@@ -118,38 +115,35 @@ public:
     typedef T mapped_type;
     typedef std::pair<const key_type, mapped_type> value_type;
 
-    const_iterator()
-    {
-      nodo = nullptr;
-    }
+    const_iterator() = default;
 
     const_iterator(const const_iterator &n)
     {
-      nodo = n.nodo;
+      node = n.node;
     }
 
     ~const_iterator()
     {
-      nodo = nullptr;
+      node = nullptr;
     }
 
     const_iterator &operator=(const const_iterator &n)
     {
-      nodo = n.nodo;
+      node = n.node;
       return *this;
     }
 
     bool operator==(const const_iterator &n) const
     {
-      if (nodo == nullptr || n.nodo == nullptr)
+      if (node == nullptr || n.node == nullptr)
       {
-        return nodo == n.nodo;
+        return node == n.node;
       }
-      if (nodo->par == nullptr || n.nodo->par == nullptr)
+      if (node->par == nullptr || n.node->par == nullptr)
       {
-        return nodo->par == n.nodo->par;
+        return node->par == n.node->par;
       }
-      return *(nodo->par) == *(n.nodo->par);
+      return *(node->par) == *(n.node->par);
     }
 
     bool operator!=(const const_iterator &n) const
@@ -159,16 +153,16 @@ public:
 
     const_iterator &operator++()
     {
-      Nodo *nu = proximoAbajo(nodo);
+      Node *nu = proximoAbajo(node);
       if (nu != nullptr)
       {
-        nodo = nu;
+        node = nu;
         return *this;
       }
       else
       {
-        nu = proximoArriba(nodo);
-        nodo = nu;
+        nu = proximoArriba(node);
+        node = nu;
         return *this;
       }
     }
@@ -182,25 +176,24 @@ public:
 
     const value_type &operator*() const
     {
-      return *nodo->par;
+      return *node->par;
     }
 
     const value_type *operator->() const
     {
-      return nodo->par;
+      return node->par;
     }
 
     friend class string_map;
 
   private:
-    const_iterator(Nodo *n) : nodo(n) {}
+    const_iterator(Node *n) : node(n) {}
+    Node *node = nullptr;
 
-    Nodo *nodo;
-
-    typename string_map<T>::Nodo *proximoAbajo(Nodo *n);
-    void buscarNodoAbajo(Nodo *&n);
-    typename string_map<T>::Nodo *proximoArriba(Nodo *n);
-    void buscarNodoArriba(Nodo *&n);
+    typename string_map<T>::Node *proximoAbajo(Node *n);
+    void buscarNodoAbajo(Node *&n);
+    typename string_map<T>::Node *proximoArriba(Node *n);
+    void buscarNodoArriba(Node *&n);
   };
 
   string_map();
@@ -250,34 +243,34 @@ public:
   iterator erase(iterator pos);
 
 private:
-  struct Nodo
+  struct Node
   {
-    std::string clave;
-    Nodo *padre;
-    std::vector<Nodo *> hijos;
+    std::string key;
+    Node *parent;
+    std::vector<Node *> children;
     int cantHijos;
     value_type *par;
 
-    Nodo() : clave(), padre(nullptr), hijos(128, nullptr), cantHijos(), par(nullptr) {}
+    Node() : key(), parent(nullptr), children(128, nullptr), cantHijos(), par(nullptr) {}
 
-    Nodo(const Nodo &n) : clave(n.clave), padre(n.padre), hijos(n.hijos), cantHijos(n.cantHijos), par(n.par) {}
+    Node(const Node &n) : key(n.key), parent(n.parent), children(n.children), cantHijos(n.cantHijos), par(n.par) {}
 
-    bool operator==(const Nodo &rhs) const
+    bool operator==(const Node &rhs) const
     {
-      return clave == rhs.clave && padre == rhs.padre && hijos == rhs.hijos && cantHijos == rhs.cantHijos && par == rhs.par;
+      return key == rhs.key && parent == rhs.parent && children == rhs.children && cantHijos == rhs.cantHijos && par == rhs.par;
     }
 
-    bool operator!=(const Nodo &rhs) const
+    bool operator!=(const Node &rhs) const
     {
       return !(rhs == *this);
     }
   };
 
-  Nodo* head = nullptr;
+  Node * head = nullptr;
   size_t cantClaves = 0;
 
-  void borrar(Nodo *&n);
-  void copiarHijos(Nodo *head, Nodo *other);
+  void borrar(Node *&n);
+  void copiarHijos(Node *head, Node *other);
 };
 
 } // namespace Types

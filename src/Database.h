@@ -1,6 +1,6 @@
 #pragma once
 #include "Record.h"
-#include "Restriccion.h"
+#include "Filter.h"
 #include "Table.h"
 #include <utility>
 #include <list>
@@ -340,7 +340,7 @@ public:
     }
   };
 
-  typedef linear_set<Restriccion> Criterio;
+  typedef linear_set<Filter> Criterio;
 
   Database();
 

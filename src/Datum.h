@@ -44,24 +44,36 @@ public:
 
   std::string valorStr() const
   {
+    std::string value;
+
     try
     {
-      if (esString()) return (dynamic_cast<entity_impl<std::string> *>(self_.get()))->data_;
+      if (esString())
+        value = (dynamic_cast<entity_impl<std::string> *>(self_.get()))->data_;
+
     } catch (std::exception &e)
     {
       throw e;
     }
+
+    return value;
   }
 
   int valorNat() const
   {
+    int value = 0;
+
     try
     {
-      if (esNat()) return (dynamic_cast<entity_impl<int> *>(self_.get()))->data_;
+      if (esNat())
+        value = (dynamic_cast<entity_impl<int> *>(self_.get()))->data_;
+
     } catch (std::exception &e)
     {
       throw e;
     }
+
+    return value;
   }
 
 private:

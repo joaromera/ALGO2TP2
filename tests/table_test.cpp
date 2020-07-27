@@ -101,7 +101,7 @@ TEST_F(TablaTests, igobs)
   EXPECT_EQ(t1, t2);// Claves != columns
 
   t2 = Table({ "Nombre" }, { "LU", "Nombre" }, { Datum(""), Datum("") });
-  EXPECT_NE(t1, t2);// Cambio clave
+  EXPECT_NE(t1, t2);// Cambio key
 
   t1 = Table({ "LU" }, { "Nombre", "LU" }, { Datum(""), Datum("") });
   t2 = Table({ "LU" }, { "LU", "Nombre" }, { Datum(""), Datum("") });
@@ -109,15 +109,15 @@ TEST_F(TablaTests, igobs)
 
   t1 = Table({ "Nombre" }, { "Nombre", "LU" }, { Datum(""), Datum("") });
   t2 = Table({ "Nombre" }, { "LU", "Nombre" }, { Datum(""), Datum("") });
-  EXPECT_EQ(t1, t2);//  Campos distinto orden + otra clave
+  EXPECT_EQ(t1, t2);//  Campos distinto orden + otra key
 
   t1 = Table({ "Nombre" }, { "Nombre", "LU" }, { Datum(""), Datum(0) });
   t2 = Table({ "Nombre" }, { "LU", "Nombre" }, { Datum(""), Datum("") });
-  EXPECT_NE(t1, t2);//  Campos distinto orden + distinto tipo no clave
+  EXPECT_NE(t1, t2);//  Campos distinto orden + distinto tipo no key
 
   t1 = Table({ "LU" }, { "Nombre", "LU" }, { Datum(""), Datum(0) });
   t2 = Table({ "LU" }, { "LU", "Nombre" }, { Datum(""), Datum("") });
-  EXPECT_NE(t1, t2);//  Campos distinto orden + distinto tipo clave
+  EXPECT_NE(t1, t2);//  Campos distinto orden + distinto tipo key
 
   t1 = Table({ "Nombre" }, { "Nombre", "LU" }, { Datum(""), Datum("") });
   t2 = Table({ "Nombre" }, { "LU", "Nombre" }, { Datum(""), Datum("") });
@@ -173,6 +173,6 @@ TEST(tabla_test, iteraremos)
 
 //  for (auto it = t.begin(); it != t.end(); ++it)
 //  {
-//    std::cout << it->dato("LU") << std::endl;
+//    std::cout << it->datum("LU") << std::endl;
 //  }
 }

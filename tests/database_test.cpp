@@ -215,12 +215,12 @@ protected:
 // * Record valido si todo ok (✓)
 // ## Búsqueda
 // * Búsqueda devuelve Table equivalente (✓)
-// * Búsqueda por igual (✓)
+// * Búsqueda por equals (✓)
 // * Búsqueda por distinto (✓)
-// * Búsqueda doble igual (✓)
+// * Búsqueda doble equals (✓)
 // * Búsqueda doble distinto (✓)
-// * Búsqueda igual distinto (✓)
-// * Búsqueda doble igual distinto (✓)
+// * Búsqueda equals distinto (✓)
+// * Búsqueda doble equals distinto (✓)
 // ## Criterio Válido
 // * Criterio simple, inválido por nombre (✓)
 // * Criterio simple, inválido por tipo (✓)
@@ -353,9 +353,9 @@ TEST_F(DBAlumnos, validar_registro)
 // ## Búsqueda
 TEST_F(DBAlumnos, busqueda_base)
 {
-  // Incluye búsqueda igual simple
+  // Incluye búsqueda equals simple
   Table res = db.busqueda({ Rig("LU", "1/90") }, "alumnos");
-  EXPECT_EQ(res.records().size(), 1);
+  EXPECT_EQ(res.records().size(), (size_t) 1);
   EXPECT_EQ(res.columns(), alumnos.columns());
   EXPECT_EQ(res.keys(), alumnos.keys());
   EXPECT_TRUE(incluye(alumnos.records().begin(),
@@ -364,7 +364,7 @@ TEST_F(DBAlumnos, busqueda_base)
     res.records().end()));
 
   res = db.busqueda({ Rig("LU_A", 90) }, "libretas");
-  EXPECT_EQ(res.records().size(), 2);
+  EXPECT_EQ(res.records().size(), (size_t) 2);
   EXPECT_EQ(res.columns(), libretas.columns());
   EXPECT_EQ(res.keys(), libretas.keys());
   EXPECT_TRUE(incluye(libretas.records().begin(),
@@ -373,7 +373,7 @@ TEST_F(DBAlumnos, busqueda_base)
     res.records().end()));
 
   res = db.busqueda({ Rig("Materia", "AED2") }, "materias");
-  EXPECT_EQ(res.records().size(), 3);
+  EXPECT_EQ(res.records().size(), (size_t) 3);
   EXPECT_EQ(res.columns(), materias.columns());
   EXPECT_EQ(res.keys(), materias.keys());
   EXPECT_TRUE(incluye(materias.records().begin(),
@@ -385,14 +385,14 @@ TEST_F(DBAlumnos, busqueda_base)
 TEST_F(DBAlumnos, busqueda_distinto_simple)
 {
   Table res = db.busqueda({ Rdif("LU_A", 80) }, "libretas");
-  EXPECT_EQ(res.records().size(), 4);
+  EXPECT_EQ(res.records().size(), (size_t) 4);
   EXPECT_TRUE(incluye(libretas.records().begin(),
     libretas.records().end(),
     res.records().begin(),
     res.records().end()));
 
   res = db.busqueda({ Rdif("Editor", "Vim") }, "alumnos");
-  EXPECT_EQ(res.records().size(), 2);
+  EXPECT_EQ(res.records().size(), (size_t) 2);
   EXPECT_TRUE(incluye(alumnos.records().begin(),
     alumnos.records().end(),
     res.records().begin(),
@@ -403,7 +403,7 @@ TEST_F(DBAlumnos, busqueda_igual_doble)
 {
   Table res = db.busqueda({ Rig("LU_N", 1), Rig("LU_A", 90) },
     "libretas");
-  EXPECT_EQ(res.records().size(), 1);
+  EXPECT_EQ(res.records().size(), (size_t) 1);
   EXPECT_TRUE(incluye(libretas.records().begin(),
     libretas.records().end(),
     res.records().begin(),
@@ -412,7 +412,7 @@ TEST_F(DBAlumnos, busqueda_igual_doble)
   // Otro orden
   res = db.busqueda({ Rig("LU_A", 90), Rig("LU_N", 1) },
     "libretas");
-  EXPECT_EQ(res.records().size(), 1);
+  EXPECT_EQ(res.records().size(), (size_t) 1);
   EXPECT_TRUE(incluye(libretas.records().begin(),
     libretas.records().end(),
     res.records().begin(),
@@ -420,7 +420,7 @@ TEST_F(DBAlumnos, busqueda_igual_doble)
 
   res = db.busqueda({ Rig("Editor", "Vim"), Rig("OS", "Linux") },
     "alumnos");
-  EXPECT_EQ(res.records().size(), 2);
+  EXPECT_EQ(res.records().size(), (size_t) 2);
   EXPECT_TRUE(incluye(alumnos.records().begin(),
     alumnos.records().end(),
     res.records().begin(),
@@ -428,7 +428,7 @@ TEST_F(DBAlumnos, busqueda_igual_doble)
 
   res = db.busqueda({ Rig("OS", "macOS"), Rig("Editor", "Vim") },
     "alumnos");
-  EXPECT_EQ(res.records().size(), 3);
+  EXPECT_EQ(res.records().size(), (size_t) 3);
   EXPECT_TRUE(incluye(alumnos.records().begin(),
     alumnos.records().end(),
     res.records().begin(),
@@ -439,7 +439,7 @@ TEST_F(DBAlumnos, busqueda_distinto_doble)
 {
   Table res = db.busqueda({ Rdif("LU_N", 1), Rdif("LU_A", 90) },
     "libretas");
-  EXPECT_EQ(res.records().size(), 5);
+  EXPECT_EQ(res.records().size(), (size_t) 5);
   EXPECT_TRUE(incluye(libretas.records().begin(),
     libretas.records().end(),
     res.records().begin(),
@@ -448,7 +448,7 @@ TEST_F(DBAlumnos, busqueda_distinto_doble)
   // Otro orden
   res = db.busqueda({ Rdif("LU_A", 90), Rdif("LU_N", 1) },
     "libretas");
-  EXPECT_EQ(res.records().size(), 5);
+  EXPECT_EQ(res.records().size(), (size_t) 5);
   EXPECT_TRUE(incluye(libretas.records().begin(),
     libretas.records().end(),
     res.records().begin(),
@@ -456,7 +456,7 @@ TEST_F(DBAlumnos, busqueda_distinto_doble)
 
   res = db.busqueda({ Rdif("Editor", "Vim"), Rdif("OS", "Linux") },
     "alumnos");
-  EXPECT_EQ(res.records().size(), 2);
+  EXPECT_EQ(res.records().size(), (size_t) 2);
   EXPECT_TRUE(incluye(alumnos.records().begin(),
     alumnos.records().end(),
     res.records().begin(),
@@ -464,7 +464,7 @@ TEST_F(DBAlumnos, busqueda_distinto_doble)
 
   res = db.busqueda({ Rdif("OS", "Win"), Rdif("Editor", "Vim") },
     "alumnos");
-  EXPECT_EQ(res.records().size(), 0);
+  EXPECT_EQ(res.records().size(), (size_t) 0);
   EXPECT_TRUE(incluye(alumnos.records().begin(),
     alumnos.records().end(),
     res.records().begin(),
@@ -472,7 +472,7 @@ TEST_F(DBAlumnos, busqueda_distinto_doble)
 
   res = db.busqueda({ Rdif("OS", "macOS"), Rdif("Editor", "Vim") },
     "alumnos");
-  EXPECT_EQ(res.records().size(), 2);
+  EXPECT_EQ(res.records().size(), (size_t) 2);
   EXPECT_TRUE(incluye(alumnos.records().begin(),
     alumnos.records().end(),
     res.records().begin(),
@@ -483,7 +483,7 @@ TEST_F(DBAlumnos, busqueda_igual_distinto)
 {
   Table res = db.busqueda({ Rig("Editor", "Vim"), Rdif("OS", "macOS") },
     "alumnos");
-  EXPECT_EQ(res.records().size(), 2);
+  EXPECT_EQ(res.records().size(), (size_t) 2);
   EXPECT_TRUE(incluye(alumnos.records().begin(),
     alumnos.records().end(),
     res.records().begin(),
@@ -491,7 +491,7 @@ TEST_F(DBAlumnos, busqueda_igual_distinto)
 
   res = db.busqueda({ Rig("OS", "Linux"), Rdif("Nombre", "March") },
     "alumnos");
-  EXPECT_EQ(res.records().size(), 1);
+  EXPECT_EQ(res.records().size(), (size_t) 1);
   EXPECT_TRUE(incluye(alumnos.records().begin(),
     alumnos.records().end(),
     res.records().begin(),
@@ -499,7 +499,7 @@ TEST_F(DBAlumnos, busqueda_igual_distinto)
 
   res = db.busqueda({ Rdif("OS", "Linux"), Rig("Nombre", "March") },
     "alumnos");
-  EXPECT_EQ(res.records().size(), 0);
+  EXPECT_EQ(res.records().size(), (size_t) 0);
   EXPECT_TRUE(incluye(alumnos.records().begin(),
     alumnos.records().end(),
     res.records().begin(),
@@ -507,7 +507,7 @@ TEST_F(DBAlumnos, busqueda_igual_distinto)
 
   res = db.busqueda({ Rdif("OS", "macOS"), Rig("Editor", "Vim") },
     "alumnos");
-  EXPECT_EQ(res.records().size(), 2);
+  EXPECT_EQ(res.records().size(), (size_t) 2);
   EXPECT_TRUE(incluye(alumnos.records().begin(),
     alumnos.records().end(),
     res.records().begin(),
@@ -518,7 +518,7 @@ TEST_F(DBAlumnos, busqueda_igual_distinto_doble)
 {
   Table res = db.busqueda({ Rig("Editor", "Vim"), Rdif("OS", "macOS"), Rig("Nombre", "March") },
     "alumnos");
-  EXPECT_EQ(res.records().size(), 1);
+  EXPECT_EQ(res.records().size(), (size_t) 1);
   EXPECT_TRUE(incluye(alumnos.records().begin(),
     alumnos.records().end(),
     res.records().begin(),
@@ -526,7 +526,7 @@ TEST_F(DBAlumnos, busqueda_igual_distinto_doble)
 
   res = db.busqueda({ Rig("OS", "Win"), Rdif("Nombre", "March"), Rig("Editor", "CLion") },
     "alumnos");
-  EXPECT_EQ(res.records().size(), 1);
+  EXPECT_EQ(res.records().size(), (size_t) 1);
   EXPECT_TRUE(incluye(alumnos.records().begin(),
     alumnos.records().end(),
     res.records().begin(),
@@ -534,7 +534,7 @@ TEST_F(DBAlumnos, busqueda_igual_distinto_doble)
 
   res = db.busqueda({ Rdif("Nombre", "Crack"), Rig("OS", "macOS"), Rig("Editor", "Vim") },
     "alumnos");
-  EXPECT_EQ(res.records().size(), 3);
+  EXPECT_EQ(res.records().size(), (size_t) 3);
   EXPECT_TRUE(incluye(alumnos.records().begin(),
     alumnos.records().end(),
     res.records().begin(),
@@ -729,7 +729,7 @@ TEST_F(DBAlumnos, join_sin_repetidos)
   auto end = db.join_end();
   linear_set<string> nuevos_campos({ "LU_N", "LU_A", "LU", "Nombre", "Editor", "OS" });
 
-  int count = 0;
+  size_t count = 0;
   for (auto it = begin; it != end; it++)
   {
     EXPECT_EQ((*it).campos(), nuevos_campos);

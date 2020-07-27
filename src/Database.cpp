@@ -120,8 +120,8 @@ bool Database::criterioValido(const Criterio &c, const std::string &nombre) cons
   const Table &t = _tablas.at(nombre);
   for (const auto& restriccion : c)
   {
-    if (!t.columns().count(restriccion.campo())) return false;
-    if (t.columnType(restriccion.campo()).esNat() != restriccion.dato().esNat()) return false;
+    if (!t.columns().count(restriccion.column())) return false;
+    if (t.columnType(restriccion.column()).esNat() != restriccion.datum().esNat()) return false;
   }
   return true;
 }
@@ -143,7 +143,7 @@ Table Database::busqueda(const Database::Criterio &c, const std::string &nombre)
   std::list<Record> regs(ref.records().begin(), ref.records().end());
   for (const auto& restriccion : c)
   {
-    _filtrar_registros(restriccion.campo(), restriccion.dato(), regs, restriccion.igual());
+    _filtrar_registros(restriccion.column(), restriccion.datum(), regs, restriccion.equals());
   }
   for (const auto& r : regs)
   {

@@ -269,7 +269,7 @@ TEST(string_map_test, test_iterator)
     l3.push_back(p.second);
   EXPECT_EQ(l3, l4);
 
-  // Borro 1ra clave: debe apuntar a la siguiente (en este caso una subrama)
+  // Borro 1ra key: debe apuntar a la siguiente (en este caso una subrama)
   EXPECT_EQ(m1.erase("aaaa"), 1);
 
   auto it = m1.find("aaaab");
@@ -283,7 +283,7 @@ TEST(string_map_test, test_iterator)
   EXPECT_EQ(it->first, "aaaba");
   EXPECT_EQ(it->second, 24);
 
-  // borro ultima clave de una subrama: debe devolver la de rama siguiente pasando por la raiz
+  // borro ultima key de una subrama: debe devolver la de rama siguiente pasando por la raiz
   it = m1.find("aabba");
   it = m1.erase(it);
   /**
@@ -293,7 +293,7 @@ TEST(string_map_test, test_iterator)
      */
   EXPECT_EQ(it, m1.find("hola"));
 
-  // borro ultima clave: debe devolver end()
+  // borro ultima key: debe devolver end()
   EXPECT_EQ(m1.erase(m1.find("mundo")), m1.end());
   /**
      * m1:  .-a-a-a-b-a[24]
