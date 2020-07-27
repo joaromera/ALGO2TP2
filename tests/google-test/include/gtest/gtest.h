@@ -94,7 +94,7 @@ GTEST_DECLARE_bool_(break_on_failure);
 // and logs them as failures.
 GTEST_DECLARE_bool_(catch_exceptions);
 
-// This flag enables using colors in terminal output. Available values are
+// This flag enables using colors in terminal output. Available columns are
 // "yes" to enable colors, "no" (disable colors), or "auto" (the default)
 // to let Google Test decide.
 GTEST_DECLARE_string_(color);
@@ -586,7 +586,7 @@ class GTEST_API_ TestResult {
   // Adds a test property to the list. The property is validated and may add
   // a non-fatal failure if invalid (e.g., if it conflicts with reserved
   // key names). If a property is already recorded for the same key, the
-  // value will be updated, rather than storing multiple values for the same
+  // value will be updated, rather than storing multiple columns for the same
   // key.  xml_element specifies the element for which the property is being
   // recorded and is used for validation.
   void RecordProperty(const std::string& xml_element,
@@ -614,7 +614,7 @@ class GTEST_API_ TestResult {
   void Clear();
 
   // Protects mutable state of the property vector and of owned
-  // properties, whose values may be updated.
+  // properties, whose columns may be updated.
   internal::Mutex test_properites_mutex_;
 
   // The vector of TestPartResults
@@ -1883,9 +1883,9 @@ class TestWithParam : public Test, public WithParamInterface<T> {
 //    * {ASSERT|EXPECT}_GE(v1, v2): Tests that v1 >= v2
 //
 // When they are not, Google Test prints both the tested expressions and
-// their actual values.  The values must be compatible built-in types,
+// their actual values.  The columns must be compatible built-in types,
 // or you will get a compiler error.  By "compatible" we mean that the
-// values can be compared by the respective operator.
+// columns can be compared by the respective operator.
 //
 // Note:
 //
@@ -2013,9 +2013,9 @@ class TestWithParam : public Test, public WithParamInterface<T> {
 // Macros for comparing floating-point numbers.
 //
 //    * {ASSERT|EXPECT}_FLOAT_EQ(val1, val2):
-//         Tests that two float values are almost equal.
+//         Tests that two float columns are almost equal.
 //    * {ASSERT|EXPECT}_DOUBLE_EQ(val1, val2):
-//         Tests that two double values are almost equal.
+//         Tests that two double columns are almost equal.
 //    * {ASSERT|EXPECT}_NEAR(v1, v2, abs_error):
 //         Tests that v1 and v2 are within the given distance to each other.
 //
@@ -2048,7 +2048,7 @@ class TestWithParam : public Test, public WithParamInterface<T> {
   ASSERT_PRED_FORMAT3(::testing::internal::DoubleNearPredFormat, \
                       val1, val2, abs_error)
 
-// These predicate format functions work on floating-point values, and
+// These predicate format functions work on floating-point columns, and
 // can be used in {ASSERT|EXPECT}_PRED_FORMAT2*(), e.g.
 //
 //   EXPECT_PRED_FORMAT2(testing::DoubleLE, Foo(), 5.0);
@@ -2172,7 +2172,7 @@ bool StaticAssertTypeEq() {
 // ::testing::Test>() here to get the type ID of testing::Test.  This
 // is to work around a suspected linker bug when using Google Test as
 // a framework on Mac OS X.  The bug causes GetTypeId<
-// ::testing::Test>() to return different values depending on whether
+// ::testing::Test>() to return different columns depending on whether
 // the call is from the Google Test framework itself or from user test
 // code.  GetTestTypeId() is guaranteed to always return the same
 // value, as it always calls GetTypeId<>() from the Google Test

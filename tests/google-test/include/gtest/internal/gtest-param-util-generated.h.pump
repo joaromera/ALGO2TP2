@@ -103,7 +103,7 @@ $for j [[
 # if GTEST_HAS_COMBINE
 // INTERNAL IMPLEMENTATION - DO NOT USE IN USER CODE.
 //
-// Generates values from the Cartesian product of values produced
+// Generates values from the Cartesian product of columns produced
 // by the argument generators.
 //
 $range i 2..maxtuple

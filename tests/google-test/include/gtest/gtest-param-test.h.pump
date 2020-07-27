@@ -214,7 +214,7 @@ namespace testing {
 // INSTANTIATE_TEST_CASE_P(TestSequence, FooTest, Values(3, 5, 8));
 //
 
-// Range() returns generators providing sequences of values in a range.
+// Range() returns generators providing sequences of columns in a range.
 //
 // Synopsis:
 // Range(start, end)

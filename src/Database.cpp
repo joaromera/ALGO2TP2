@@ -20,17 +20,17 @@ void Database::agregarRegistro(const Record &r, const std::string &nombre)
 {
   Table &t = _tablas.at(nombre);
   t.addRecord(r);
-  for (const auto& c : r.campos())
+  for (const auto& c : r.columns())
   {
     if (tieneIndice(nombre, c))
     {
-      if (r.dato(c).isInteger())
+      if (r.value(c).isInteger())
       {
-        _indicesNum[nombre][c][r.dato(c).integerValue()].insert(r);
+        _indicesNum[nombre][c][r.value(c).value<int>()].insert(r);
       }
       else
       {
-        _indices[nombre][c][r.dato(c).stringValue()].insert(r);
+        _indices[nombre][c][r.value(c).value<std::string>()].insert(r);
       }
     }
   }
@@ -59,8 +59,8 @@ bool Database::registroValido(const Record &r,
   const std::string &nombre) const
 {
   const Table &t = _tablas.at(nombre);
-  if (t.columns().size() != r.campos().size()) return false;
-  for (const auto& c : r.camposDatos())
+  if (t.columns().size() != r.columns().size()) return false;
+  for (const auto& c : r.columnValues())
   {
     if (t.columns().count(c.first) == 0) return false;
     if (t.columnType(c.first).isInteger() != c.second.isInteger()) return false;
@@ -71,7 +71,7 @@ bool Database::registroValido(const Record &r,
     int claves_en_t = t.keys().size();
     for (const auto& c : t.keys())
     {
-      if (r.dato(c) == rt.dato(c)) coincidencias++;
+      if (r.value(c) == rt.value(c)) coincidencias++;
     }
     if (claves_en_t - coincidencias == 0) return false;
   }
@@ -94,7 +94,7 @@ std::list<Record> &Database::_filtrar_registros(const std::string &campo,
   {
     auto now = iter;
     iter++;
-    if ((!igualdad) ^ now->dato(campo) != valor)
+    if ((!igualdad) ^ now->value(campo) != valor)
     {
       registros.erase(now);
     }
@@ -176,13 +176,13 @@ void Database::crearIndice(const std::string &tabla, const std::string &campo)
   linear_set<Record> reg = dameTabla(tabla).records();
   for (const auto& r : reg)
   {
-    if (r.dato(campo).isInteger())
+    if (r.value(campo).isInteger())
     {
-      _indicesNum[tabla][campo][r.dato(campo).integerValue()].insert(r);
+      _indicesNum[tabla][campo][r.value(campo).value<int>()].insert(r);
     }
     else
     {
-      _indices[tabla][campo][r.dato(campo).stringValue()].insert(r);
+      _indices[tabla][campo][r.value(campo).value<std::string>()].insert(r);
     }
   }
 }
@@ -224,7 +224,7 @@ Database::join_iterator Database::join_helper_str(const std::string &tabla1, con
   int tipo = 0;
   auto it2 = t2.begin();
   int cant_reg_it2 = t2.size();
-  std::string clave = (*it2).dato(campo).stringValue();
+  std::string clave = (*it2).value(campo).value<std::string>();
 
   auto it = _indices[tabla1].at(campo).find(clave);
   auto it_end = _indices[tabla1].at(campo).end();
@@ -232,7 +232,7 @@ Database::join_iterator Database::join_helper_str(const std::string &tabla1, con
   // Busca primer coincidencia entre las dos tablas
   while (cant_reg_it2 != 0 && it == it_end)
   {
-    clave = (*it2).dato(campo).stringValue();
+    clave = (*it2).value(campo).value<std::string>();
     it = _indices[tabla1].at(campo).find(clave);
     it_end = _indices[tabla1].at(campo).end();
     if (it == it_end)
@@ -258,7 +258,7 @@ Database::join_iterator Database::join_helper_int(const std::string &tabla1, con
   int tipo = 1;
   auto it2 = t2.begin();
   int cant_reg_it2 = t2.size();
-  int clave = (*it2).dato(campo).integerValue();
+  int clave = (*it2).value(campo).value<int>();
 
   auto it = _indicesNum[tabla1].at(campo).find(clave)->second.begin();
   auto it_end = _indicesNum[tabla1].at(campo).find(clave)->second.end();
@@ -266,7 +266,7 @@ Database::join_iterator Database::join_helper_int(const std::string &tabla1, con
   // Busca primer coincidencia entre las dos tablas
   while (cant_reg_it2 != 0 && it == it_end)
   {
-    clave = (*it2).dato(campo).integerValue();
+    clave = (*it2).value(campo).value<int>();
     it = _indicesNum[tabla1].at(campo).find(clave)->second.begin();
     it_end = _indicesNum[tabla1].at(campo).find(clave)->second.end();
     if (it == it_end)

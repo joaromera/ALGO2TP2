@@ -121,7 +121,7 @@ INSTANTIATE_TEST_CASE_P(InstantiationName,
 // You can use these names in --gtest_filter.
 //
 // This statement will instantiate all tests from FooTest again, each
-// with parameter values "cat" and "dog":
+// with parameter columns "cat" and "dog":
 
 const char* pets[] = {"cat", "dog"};
 INSTANTIATE_TEST_CASE_P(AnotherInstantiationName, FooTest, ValuesIn(pets));
@@ -204,7 +204,7 @@ namespace testing {
 // for each element in the sequence produced by the generator.
 //
 // In the following sample, tests from test case FooTest are instantiated
-// each three times with parameter values 3, 5, and 8:
+// each three times with parameter columns 3, 5, and 8:
 //
 // class FooTest : public TestWithParam<int> { ... };
 //
@@ -215,14 +215,14 @@ namespace testing {
 // INSTANTIATE_TEST_CASE_P(TestSequence, FooTest, Values(3, 5, 8));
 //
 
-// Range() returns generators providing sequences of values in a range.
+// Range() returns generators providing sequences of columns in a range.
 //
 // Synopsis:
 // Range(start, end)
-//   - returns a generator producing a sequence of values {start, start+1,
+//   - returns a generator producing a sequence of columns {start, start+1,
 //     start+2, ..., }.
 // Range(start, end, step)
-//   - returns a generator producing a sequence of values {start, start+step,
+//   - returns a generator producing a sequence of columns {start, start+step,
 //     start+step+step, ..., }.
 // Notes:
 //   * The generated sequences never include end. For example, Range(1, 5)
@@ -264,19 +264,19 @@ internal::ParamGenerator<T> Range(T start, T end) {
 //     a range [begin, end) defined by a pair of STL-style iterators. These
 //     iterators can also be plain C pointers.
 //
-// Please note that ValuesIn copies the values from the containers
+// Please note that ValuesIn copies the columns from the containers
 // passed in and keeps them to generate tests in RUN_ALL_TESTS().
 //
 // Examples:
 //
 // This instantiates tests from test case StringTest
-// each with C-string values of "foo", "bar", and "baz":
+// each with C-string columns of "foo", "bar", and "baz":
 //
 // const char* strings[] = {"foo", "bar", "baz"};
 // INSTANTIATE_TEST_CASE_P(StringSequence, SrtingTest, ValuesIn(strings));
 //
 // This instantiates tests from test case StlStringTest
-// each with STL strings with values "a" and "b":
+// each with STL strings with columns "a" and "b":
 //
 // ::std::vector< ::std::string> GetParameterStrings() {
 //   ::std::vector< ::std::string> v;
@@ -291,7 +291,7 @@ internal::ParamGenerator<T> Range(T start, T end) {
 //
 //
 // This will also instantiate tests from CharTest
-// each with parameter values 'a' and 'b':
+// each with parameter columns 'a' and 'b':
 //
 // ::std::list<char> GetParameterChars() {
 //   ::std::list<char> list;
@@ -333,12 +333,12 @@ internal::ParamGenerator<typename Container::value_type> ValuesIn(
 //   - returns a generator producing sequences with elements v1, v2, ..., vN.
 //
 // For example, this instantiates tests from test case BarTest each
-// with values "one", "two", and "three":
+// with columns "one", "two", and "three":
 //
 // INSTANTIATE_TEST_CASE_P(NumSequence, BarTest, Values("one", "two", "three"));
 //
-// This instantiates tests from test case BazTest each with values 1, 2, 3.5.
-// The exact type of values will depend on the type of parameter in BazTest.
+// This instantiates tests from test case BazTest each with columns 1, 2, 3.5.
+// The exact type of columns will depend on the type of parameter in BazTest.
 //
 // INSTANTIATE_TEST_CASE_P(FloatingNumbers, BazTest, Values(1, 2, 3.5));
 //
@@ -1223,7 +1223,7 @@ inline internal::ParamGenerator<bool> Bool() {
 
 # if GTEST_HAS_COMBINE
 // Combine() allows the user to combine two or more sequences to produce
-// values of a Cartesian product of those sequences' elements.
+// columns of a Cartesian product of those sequences' elements.
 //
 // Synopsis:
 // Combine(gen1, gen2, ..., genN)
@@ -1240,7 +1240,7 @@ inline internal::ParamGenerator<bool> Bool() {
 // Example:
 //
 // This will instantiate tests in test case AnimalTest each one with
-// the parameter values tuple("cat", BLACK), tuple("cat", WHITE),
+// the parameter columns tuple("cat", BLACK), tuple("cat", WHITE),
 // tuple("dog", BLACK), and tuple("dog", WHITE):
 //
 // enum Color { BLACK, GRAY, WHITE };
@@ -1259,7 +1259,7 @@ inline internal::ParamGenerator<bool> Bool() {
 // class FlagDependentTest
 //     : public testing::TestWithParam<tuple<bool, bool> > {
 //   virtual void SetUp() {
-//     // Assigns external_flag_1 and external_flag_2 values from the tuple.
+//     // Assigns external_flag_1 and external_flag_2 columns from the tuple.
 //     tie(external_flag_1, external_flag_2) = GetParam();
 //   }
 // };

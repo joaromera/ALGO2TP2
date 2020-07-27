@@ -157,7 +157,7 @@ inline int GetNextRandomSeed(int seed) {
   return (next_seed > kMaxRandomSeed) ? 1 : next_seed;
 }
 
-// This class saves the values of all Google Test flags in its c'tor, and
+// This class saves the columns of all Google Test flags in its c'tor, and
 // restores them in its d'tor.
 class GTestFlagSaver {
  public:
@@ -204,7 +204,7 @@ class GTestFlagSaver {
   }
 
  private:
-  // Fields for saving the original values of flags.
+  // Fields for saving the original columns of flags.
   bool also_run_disabled_tests_;
   bool break_on_failure_;
   bool catch_exceptions_;
@@ -243,7 +243,7 @@ GTEST_API_ std::string CodePointToUtf8(UInt32 code_point);
 // If the string contains code points that are not valid Unicode code points
 // (i.e. outside of Unicode range U+0 to U+10FFFF) they will be output
 // as '(Invalid Unicode 0xXXXXXXXX)'. If the string is in UTF16 encoding
-// and contains invalid UTF-16 surrogate pairs, values in those pairs
+// and contains invalid UTF-16 surrogate pairs, columns in those pairs
 // will be encoded as individual Unicode characters from Basic Normal Plane.
 GTEST_API_ std::string WideStringToUtf8(const wchar_t* str, int num_chars);
 
@@ -254,7 +254,7 @@ GTEST_API_ std::string WideStringToUtf8(const wchar_t* str, int num_chars);
 void WriteToShardStatusFileIfNeeded();
 
 // Checks whether sharding is enabled by examining the relevant
-// environment variable values. If the variables are present,
+// environment variable columns. If the variables are present,
 // but inconsistent (e.g., shard_index >= total_shards), prints
 // an error and exits. If in_subprocess_for_death_test, sharding is
 // disabled because it must only be applied to the original test
@@ -778,7 +778,7 @@ class GTEST_API_ UnitTestImpl {
   void ConfigureStreamingOutput();
 #endif
 
-  // Performs initialization dependent upon flag values obtained in
+  // Performs initialization dependent upon flag columns obtained in
   // ParseGoogleTestFlagsOnly.  Is called from InitGoogleTest after the call to
   // ParseGoogleTestFlagsOnly.  In case a user neglects to call InitGoogleTest
   // this function is also called from RunAllTests.  Since this function can be

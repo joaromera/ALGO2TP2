@@ -205,42 +205,6 @@ protected:
   }
 };
 
-// Lista de tests:
-// ## Agregar registro
-// * Agregar un, dos, tres records (✓)
-// ## Validar registro
-// * Record inválido por columns (✓)
-// * Record inválido por tipos (✓)
-// * Record invalido por keys (✓)
-// * Record valido si todo ok (✓)
-// ## Búsqueda
-// * Búsqueda devuelve Table equivalente (✓)
-// * Búsqueda por equals (✓)
-// * Búsqueda por distinto (✓)
-// * Búsqueda doble equals (✓)
-// * Búsqueda doble distinto (✓)
-// * Búsqueda equals distinto (✓)
-// * Búsqueda doble equals distinto (✓)
-// ## Criterio Válido
-// * Criterio simple, inválido por nombre (✓)
-// * Criterio simple, inválido por tipo (✓)
-// * Criterio doble, inválido por nombre (✓)
-// * Criterio doble, inválido por tipo (✓)
-// ## Uso Criterio
-// * Uso un criterio (✓)
-// * Uso criterio perm (✓)
-// * Uso criterio parecido pero distinto bool (✓)
-// * Uso criterio doble parecido pero distinto bool (✓)
-// ## Indice
-// * Crear índice
-// * Observador índice
-// ## Join
-// * Join vacío (✓)
-// * Join sin repetidos (✓)
-// * Join repetidos un lado (✓)
-// * Join repetidos dos lados (✓)
-// * Join columns repetidos (✓)
-
 TEST_F(DBAlumnos, init)
 {
   EXPECT_EQ(libretas, db.dameTabla("libretas"));
@@ -732,7 +696,7 @@ TEST_F(DBAlumnos, join_sin_repetidos)
   size_t count = 0;
   for (auto it = begin; it != end; it++)
   {
-    EXPECT_EQ((*it).campos(), nuevos_campos);
+    EXPECT_EQ((*it).columns(), nuevos_campos);
     count++;
   }
 
@@ -751,7 +715,7 @@ TEST_F(DBAlumnos, join_repetidos_uno)
   linear_set<string> nuevos_campos({ "LU_N", "LU_A", "LU", "Materia" });
   for (auto it = begin; it != end; it++)
   {
-    EXPECT_EQ((*it).campos(), nuevos_campos);
+    EXPECT_EQ((*it).columns(), nuevos_campos);
   }
 
   linear_set<Record> join(begin, end);
@@ -804,7 +768,7 @@ TEST_F(DBAlumnos, join_repetidos_ambos)
   linear_set<string> nuevos_campos({ "X", "Y", "Z" });
   for (auto it = begin; it != end; it++)
   {
-    EXPECT_EQ((*it).campos(), nuevos_campos);
+    EXPECT_EQ((*it).columns(), nuevos_campos);
   }
 
   linear_set<Record> join(begin, end);

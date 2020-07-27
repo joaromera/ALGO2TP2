@@ -42,40 +42,10 @@ public:
     return dynamic_cast<entity_impl<std::string> *>(self_.get()) != nullptr;
   }
 
-  std::string stringValue() const
+  template<typename T>
+  T value() const
   {
-    std::string value;
-
-    try
-    {
-      if (isString())
-        value = (dynamic_cast<entity_impl<std::string> *>(self_.get()))->data_;
-
-    }
-    catch (std::exception &e)
-    {
-      throw e;
-    }
-
-    return value;
-  }
-
-  int integerValue() const
-  {
-    int value = 0;
-
-    try
-    {
-      if (isInteger())
-        value = (dynamic_cast<entity_impl<int> *>(self_.get()))->data_;
-
-    }
-    catch (std::exception &e)
-    {
-      throw e;
-    }
-
-    return value;
+    return (dynamic_cast<entity_impl<T> *>(self_.get()))->data_;
   }
 
 private:
@@ -120,11 +90,11 @@ public:
     {
       if (isInteger())
       {
-        return integerValue() == rhs.integerValue();
+        return value<int>() == rhs.value<int>();
       }
       else
       {
-        return stringValue() == rhs.stringValue();
+        return value<std::string>() == rhs.value<std::string>();
       }
     }
     return false;
@@ -144,11 +114,11 @@ public:
   {
     if (datum.isInteger())
     {
-      os << std::to_string(datum.integerValue());
+      os << std::to_string(datum.value<int>());
     }
     else
     {
-      os << datum.stringValue();
+      os << datum.value<std::string>();
     }
     return os;
   }

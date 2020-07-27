@@ -3155,7 +3155,7 @@ class ValueArray50 {
 # if GTEST_HAS_COMBINE
 // INTERNAL IMPLEMENTATION - DO NOT USE IN USER CODE.
 //
-// Generates values from the Cartesian product of values produced
+// Generates values from the Cartesian product of columns produced
 // by the argument generators.
 //
 template <typename T1, typename T2>

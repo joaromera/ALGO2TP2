@@ -25,12 +25,12 @@ TEST(dato_test, esString)
 
 TEST(dato_test, valores)
 {
-  EXPECT_EQ(Datum(10).integerValue(), 10);
-  EXPECT_EQ(Datum(5).integerValue(), 5);
-  EXPECT_EQ(Datum(100).integerValue(), 100);
-  EXPECT_EQ(Datum("").stringValue(), "");
-  EXPECT_EQ(Datum("hola").stringValue(), "hola");
-  EXPECT_EQ(Datum("chau").stringValue(), "chau");
+  EXPECT_EQ(Datum(10).value<int>(), 10);
+  EXPECT_EQ(Datum(5).value<int>(), 5);
+  EXPECT_EQ(Datum(100).value<int>(), 100);
+  EXPECT_EQ(Datum("").value<std::string>(), "");
+  EXPECT_EQ(Datum("hola").value<std::string>(), "hola");
+  EXPECT_EQ(Datum("chau").value<std::string>(), "chau");
 }
 
 TEST(dato_test, igobs)

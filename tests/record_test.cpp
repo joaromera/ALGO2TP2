@@ -15,20 +15,20 @@ TEST(registro_test, campos)
   Record r({ "A", "B", "C" }, { Datum(1), Datum(2), Datum(3) });
   Record r2({}, {});
 
-  EXPECT_EQ(r.campos(), linear_set<string>({ "A", "B", "C" }));
-  EXPECT_EQ(r2.campos(), linear_set<string>());
+  EXPECT_EQ(r.columns(), linear_set<string>({ "A", "B", "C" }));
+  EXPECT_EQ(r2.columns(), linear_set<string>());
 }
 
 TEST(registro_test, dato)
 {
   Record r({ "LU", "LU_A", "Nombre", "Carrera" }, { Datum(182), Datum(18), Datum("March"), Datum("Computacion") });
 
-  EXPECT_EQ(r.dato("LU").isInteger(), true);
-  EXPECT_EQ(r.dato("LU").isString(), false);
-  EXPECT_EQ(r.dato("LU").integerValue(), 182);
-  EXPECT_EQ(r.dato("Nombre").isInteger(), false);
-  EXPECT_EQ(r.dato("Nombre").isString(), true);
-  EXPECT_EQ(r.dato("Nombre").stringValue(), "March");
+  EXPECT_EQ(r.value("LU").isInteger(), true);
+  EXPECT_EQ(r.value("LU").isString(), false);
+  EXPECT_EQ(r.value("LU").value<int>(), 182);
+  EXPECT_EQ(r.value("Nombre").isInteger(), false);
+  EXPECT_EQ(r.value("Nombre").isString(), true);
+  EXPECT_EQ(r.value("Nombre").value<std::string>(), "March");
 }
 
 TEST(registro_test, ig_obs)

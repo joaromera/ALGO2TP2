@@ -42,7 +42,7 @@
 
 namespace testing {
 
-// This flag controls the style of death tests.  Valid values are "threadsafe",
+// This flag controls the style of death tests.  Valid columns are "threadsafe",
 // meaning that the death test child process will re-execute the test binary
 // from the start, running only a single death test, or "fast",
 // meaning that the child process will execute the test logic immediately

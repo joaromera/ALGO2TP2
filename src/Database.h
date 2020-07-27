@@ -150,13 +150,13 @@ public:
         {
           if (tipo == 0)
           {
-            std::string clave = (*it2)->dato(campo).stringValue();
+            std::string clave = (*it2)->value(campo).value<std::string>();
             buscarProxCoincidenciaStr(clave);
             return *this;
           }
           else
           {
-            int clave = (*it2)->dato(campo).integerValue();
+            int clave = (*it2)->value(campo).value<int>();
             buscarProxCoincidenciaNat(clave);
             return *this;
           }
@@ -239,18 +239,18 @@ public:
       std::vector<std::string> combCampos;
       std::vector<Datum> combDatos;
 
-      for (const auto& c : r1.campos())
+      for (const auto& c : r1.columns())
       {
         combCampos.emplace_back(c);
-        combDatos.emplace_back(r1.dato(c));
+        combDatos.emplace_back(r1.value(c));
       }
 
-      for (const auto& c : r2.campos())
+      for (const auto& c : r2.columns())
       {
-        if (r1.campos().count(c) == 0 && c != campo)
+        if (r1.columns().count(c) == 0 && c != campo)
         {
           combCampos.emplace_back(c);
-          combDatos.emplace_back(r2.dato(c));
+          combDatos.emplace_back(r2.value(c));
         }
       }
 
@@ -283,7 +283,7 @@ public:
     {
       while (cant_reg_en_tabla != 0 && diccClavesStr->count(clave) == 0)
       {
-        clave = (*it2)->dato(campo).stringValue();
+        clave = (*it2)->value(campo).value<std::string>();
         if (diccClavesStr->count(clave) == 0)
         {
           avanzarItSinIndice();
@@ -307,7 +307,7 @@ public:
     {
       while (cant_reg_en_tabla != 0 && diccClavesNat->count(clave) == 0)
       {
-        clave = (*it2)->dato(campo).integerValue();
+        clave = (*it2)->value(campo).value<int>();
         if (diccClavesNat->count(clave) == 0)
         {
           avanzarItSinIndice();

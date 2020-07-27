@@ -106,7 +106,7 @@ GTEST_API_ extern const char kStackTraceMarker[];
 
 // Two overloaded helpers for checking at compile time whether an
 // expression is a null pointer literal (i.e. NULL or any 0-valued
-// compile-time integral constant).  Their return values have
+// compile-time integral constant).  Their return columns have
 // different sizes, so we can use sizeof() to test which version is
 // picked by the compiler.  These helpers have no implementations, as
 // we only need their signatures.
@@ -205,7 +205,7 @@ GTEST_API_ std::string DiffStrings(const std::string& left,
 // (e.g. ASSERT_EQ, EXPECT_STREQ, etc) failure.
 //
 // The first four parameters are the expressions used in the assertion
-// and their values, as strings.  For example, for ASSERT_EQ(foo, bar)
+// and their columns, as strings.  For example, for ASSERT_EQ(foo, bar)
 // where foo is 5 and bar is 6, we have:
 //
 //   expected_expression: "foo"
@@ -424,7 +424,7 @@ typedef FloatingPoint<double> Double;
 // test fixture classes in the same test case, we need to assign
 // unique IDs to fixture classes and compare them.  The TypeId type is
 // used to hold such IDs.  The user should treat TypeId as an opaque
-// type: the only operation allowed on TypeId values is to compare
+// type: the only operation allowed on TypeId columns is to compare
 // them for equality using the == operator.
 typedef const void* TypeId;
 
@@ -440,7 +440,7 @@ class TypeIdHelper {
 template <typename T>
 bool TypeIdHelper<T>::dummy_ = false;
 
-// GetTypeId<T>() returns the ID of type T.  Different values will be
+// GetTypeId<T>() returns the ID of type T.  Different columns will be
 // returned for different types.  Calling the function twice with the
 // same type argument is guaranteed to return the same ID.
 template <typename T>
@@ -625,7 +625,7 @@ class TypeParameterizedTest {
  public:
   // 'index' is the index of the test in the type list 'Types'
   // specified in INSTANTIATE_TYPED_TEST_CASE_P(Prefix, TestCase,
-  // Types).  Valid values for 'index' are [0, N - 1] where N is the
+  // Types).  Valid columns for 'index' are [0, N - 1] where N is the
   // length of Types.
   static bool Register(const char* prefix,
                        CodeLocation code_location,
@@ -951,7 +951,7 @@ template<> struct EnableIf<true> { typedef void type; };  // NOLINT
 
 // ArrayEq() compares two k-dimensional native arrays using the
 // elements' operator==, where k can be any integer >= 0.  When k is
-// 0, ArrayEq() degenerates into comparing a single pair of values.
+// 0, ArrayEq() degenerates into comparing a single pair of columns.
 
 template <typename T, typename U>
 bool ArrayEq(const T* lhs, size_t size, const U* rhs);

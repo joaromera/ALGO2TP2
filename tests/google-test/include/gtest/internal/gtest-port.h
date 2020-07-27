@@ -903,7 +903,7 @@ using ::std::tuple_size;
   type(type const &);\
   GTEST_DISALLOW_ASSIGN_(type)
 
-// Tell the compiler to warn about unused return values for functions declared
+// Tell the compiler to warn about unused return columns for functions declared
 // with this macro.  The macro should be used on function declarations
 // following the argument list:
 //
@@ -1191,7 +1191,7 @@ class scoped_ptr {
 class GTEST_API_ RE {
  public:
   // A copy constructor is required by the Standard to initialize object
-  // references from r-values.
+  // references from r-columns.
   RE(const RE& other) { Init(other.pattern()); }
 
   // Constructs an RE from a string.
@@ -1783,7 +1783,7 @@ class ThreadLocalBase {
 
 // Maps a thread to a set of ThreadLocals that have values instantiated on that
 // thread and notifies them when the thread exits.  A ThreadLocal instance is
-// expected to persist until all threads it has values on have terminated.
+// expected to persist until all threads it has columns on have terminated.
 class GTEST_API_ ThreadLocalRegistry {
  public:
   // Registers thread_local_instance as having value on the current thread.
@@ -2149,7 +2149,7 @@ class ThreadLocal {
     GTEST_DISALLOW_COPY_AND_ASSIGN_(InstanceValueHolderFactory);
   };
 
-  // A key pthreads uses for looking up per-thread values.
+  // A key pthreads uses for looking up per-thread columns.
   const pthread_key_t key_;
   scoped_ptr<ValueHolderFactory> default_factory_;
 
@@ -2493,7 +2493,7 @@ template <size_t size>
 class TypeWithSize {
  public:
   // This prevents the user from using TypeWithSize<N> with incorrect
-  // values of N.
+  // columns of N.
   typedef void UInt;
 };
 

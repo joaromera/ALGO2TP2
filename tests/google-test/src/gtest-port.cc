@@ -481,7 +481,7 @@ class ThreadLocalRegistryImpl {
   // In a particular thread, maps a ThreadLocal object to its value.
   typedef std::map<const ThreadLocalBase*,
                    linked_ptr<ThreadLocalValueHolderBase> > ThreadLocalValues;
-  // Stores all ThreadIdToThreadLocals having values in a thread, indexed by
+  // Stores all ThreadIdToThreadLocals having columns in a thread, indexed by
   // thread's ID.
   typedef std::map<DWORD, ThreadLocalValues> ThreadIdToThreadLocals;
 

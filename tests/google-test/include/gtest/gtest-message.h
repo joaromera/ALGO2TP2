@@ -60,7 +60,7 @@ namespace testing {
 //
 // Typical usage:
 //
-//   1. You stream a bunch of values to a Message object.
+//   1. You stream a bunch of columns to a Message object.
 //      It will remember the text in a stringstream.
 //   2. Then you stream the Message object to an ostream.
 //      This causes the text in the Message to be streamed
@@ -167,7 +167,7 @@ class GTEST_API_ Message {
     return *this;
   }
 
-  // Instead of 1/0, we want to see true/false for bool values.
+  // Instead of 1/0, we want to see true/false for bool columns.
   Message& operator <<(bool b) {
     return *this << (b ? "true" : "false");
   }

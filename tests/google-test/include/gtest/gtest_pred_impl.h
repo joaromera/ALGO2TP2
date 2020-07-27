@@ -48,7 +48,7 @@
 //   ...
 //
 // where pred_format is a function or functor that takes n (in the
-// case of ASSERT_PRED_FORMATn) values and their source expression
+// case of ASSERT_PRED_FORMATn) columns and their source expression
 // text, and returns a testing::AssertionResult.  See the definition
 // of ASSERT_EQ in gtest.h for an example.
 //
@@ -60,7 +60,7 @@
 //   ...
 //
 // where pred is an n-ary function or functor that returns bool,
-// and the values v1, v2, ..., must support the << operator for
+// and the columns v1, v2, ..., must support the << operator for
 // streaming to std::ostream.
 //
 // We also define the EXPECT_* variations.

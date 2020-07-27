@@ -3,41 +3,41 @@
 
 using namespace Db::Types;
 
-Record::Record(const std::vector<std::string> &campos, const std::vector<Datum> &datos) : _campos(campos.begin(), campos.end())
+Record::Record(const std::vector<std::string> &columns, const std::vector<Datum> &values) : _columns(columns.begin(), columns.end())
 {
-  for (size_t i = 0; i < campos.size(); i++)
+  for (size_t i = 0; i < columns.size(); i++)
   {
-    _datos.insert(make_pair(campos[i], datos[i]));
+    _values.insert(make_pair(columns[i], values[i]));
   }
 }
 
-const Datum&Record::dato(const std::string &campo) const
+const Datum&Record::value(const std::string &column) const
 {
-  return _datos.at(campo);
+  return _values.at(column);
 }
 
-const linear_set<std::string> &Record::campos() const
+const linear_set<std::string> &Record::columns() const
 {
-  return _campos;
+  return _columns;
 }
 
-const string_map<Datum> &Record::camposDatos() const
+const string_map<Datum> &Record::columnValues() const
 {
-  return _datos;
+  return _values;
 }
 
 bool operator==(const Record &r1, const Record &r2)
 {
-  return r1.camposDatos() == r2.camposDatos();
+  return r1.columnValues() == r2.columnValues();
 }
 
 std::ostream &operator<<(std::ostream &os, const Record &r)
 {
   os << "{ ";
-  int count = r.campos().size();
-  for (const auto& v : r.campos())
+  int count = r.columns().size();
+  for (const auto& v : r.columns())
   {
-    os << r._datos.at(v);
+    os << r._values.at(v);
     count--;
     if (count)
     {

@@ -79,7 +79,6 @@ public:
 
   linear_set(std::initializer_list<value_type> init);
 
-
   template<class InputIt>
   linear_set(InputIt first, InputIt last);
 
@@ -94,7 +93,6 @@ public:
   bool empty() const;
 
   size_type size() const;
-
 
   size_type erase(const T &x);
 

@@ -218,7 +218,7 @@ GTEST_DEFINE_bool_(
 GTEST_DEFINE_string_(
     color,
     internal::StringFromGTestEnv("color", "auto"),
-    "Whether to use colors in the output.  Valid values: yes, no, "
+    "Whether to use colors in the output.  Valid columns: yes, no, "
     "and auto.  'auto' means to use colors if the output is "
     "being sent to a terminal and the TERM environment variable "
     "is set to a terminal type that supports colors.");
@@ -613,7 +613,7 @@ namespace internal {
 // instead of GetTypeId< ::testing::Test>() to get the type ID of
 // testing::Test.  This is to work around a suspected linker bug when
 // using Google Test as a framework on Mac OS X.  The bug causes
-// GetTypeId< ::testing::Test>() to return different values depending
+// GetTypeId< ::testing::Test>() to return different columns depending
 // on whether the call is from the Google Test framework itself or
 // from user test code.  GetTestTypeId() is guaranteed to always
 // return the same value, as it always calls GetTypeId<>() from the
@@ -1264,7 +1264,7 @@ std::string CreateUnifiedDiff(const std::vector<std::string>& left,
 
 namespace {
 
-// The string representation of the values received in EqFailure() are already
+// The string representation of the columns received in EqFailure() are already
 // escaped. Split them on escaped '\n' boundaries. Leave all other escaped
 // characters the same.
 std::vector<std::string> SplitEscapedString(const std::string& str) {
@@ -1296,7 +1296,7 @@ std::vector<std::string> SplitEscapedString(const std::string& str) {
 // (e.g. ASSERT_EQ, EXPECT_STREQ, etc) failure.
 //
 // The first four parameters are the expressions used in the assertion
-// and their values, as strings.  For example, for ASSERT_EQ(foo, bar)
+// and their columns, as strings.  For example, for ASSERT_EQ(foo, bar)
 // where foo is 5 and bar is 6, we have:
 //
 //   lhs_expression: "foo"
@@ -1816,7 +1816,7 @@ inline UInt32 CreateCodePointFromUtf16SurrogatePair(wchar_t first,
 // If the string contains code points that are not valid Unicode code points
 // (i.e. outside of Unicode range U+0 to U+10FFFF) they will be output
 // as '(Invalid Unicode 0xXXXXXXXX)'. If the string is in UTF16 encoding
-// and contains invalid UTF-16 surrogate pairs, values in those pairs
+// and contains invalid UTF-16 surrogate pairs, columns in those pairs
 // will be encoded as individual Unicode characters from Basic Normal Plane.
 std::string WideStringToUtf8(const wchar_t* str, int num_chars) {
   if (num_chars == -1)
@@ -4428,7 +4428,7 @@ void UnitTestImpl::ConfigureStreamingOutput() {
 }
 #endif  // GTEST_CAN_STREAM_RESULTS_
 
-// Performs initialization dependent upon flag values obtained in
+// Performs initialization dependent upon flag columns obtained in
 // ParseGoogleTestFlagsOnly.  Is called from InitGoogleTest after the call to
 // ParseGoogleTestFlagsOnly.  In case a user neglects to call InitGoogleTest
 // this function is also called from RunAllTests.  Since this function can be
@@ -4707,7 +4707,7 @@ void WriteToShardStatusFileIfNeeded() {
 }
 
 // Checks whether sharding is enabled by examining the relevant
-// environment variable values. If the variables are present,
+// environment variable columns. If the variables are present,
 // but inconsistent (i.e., shard_index >= total_shards), prints
 // an error and exits. If in_subprocess_for_death_test, sharding is
 // disabled because it must only be applied to the original test

@@ -148,7 +148,7 @@ TEST(tabla_test, it_registro)
   t.addRecord(r1);
 
   EXPECT_EQ(*t.begin(), r1);
-  EXPECT_EQ(t.begin()->dato("LU"), Datum("123/01"));
+  EXPECT_EQ(t.begin()->value("LU"), Datum("123/01"));
   EXPECT_EQ(++t.begin(), t.end());
 
   Record r2({ "LU", "Nombre" }, { Datum("123/02"), Datum("Gerva") });
@@ -170,9 +170,4 @@ TEST(tabla_test, iteraremos)
   t.addRecord(r2);
   t.addRecord(r3);
   linear_set<Record> r_set = to_set(t.begin(), t.end());
-
-//  for (auto it = t.begin(); it != t.end(); ++it)
-//  {
-//    std::cout << it->datum("LU") << std::endl;
-//  }
 }
