@@ -99,7 +99,7 @@ bool operator==(const Table &lhs, const Table &rhs)
   {
     for (const auto& c : lhs.columns())
     {
-      if (lhs.columnType(c).isInteger() != rhs.columnType(c).isInteger()) { return false; }
+      if (lhs.columnType(c) != rhs.columnType(c)) { return false; }
     }
   }
   return lhs.records() == rhs.records();
