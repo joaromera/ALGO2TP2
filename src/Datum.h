@@ -48,56 +48,9 @@ public:
     return (dynamic_cast<entity_impl<T> *>(self_.get()))->data_;
   }
 
-private:
-
-  struct entity
-  {
-    virtual ~entity() = default;
-    virtual std::unique_ptr<entity> copy() = 0;
-    virtual bool operator<(const std::unique_ptr<entity> &rhs) const = 0;
-  };
-
-  template<typename T>
-  struct entity_impl final : entity
-  {
-    typedef T value_type;
-
-    entity_impl(T t) : data_(std::move(t)) {}
-
-    ~entity_impl() = default;
-
-    std::unique_ptr<entity> copy() override
-    {
-      std::unique_ptr<entity> rt = std::make_unique<entity_impl<T>>(data_);
-      return rt;
-    }
-
-    bool operator<(const std::unique_ptr<entity> &rhs) const override
-    {
-      return data_ < dynamic_cast<entity_impl<value_type>*>(rhs.get())->data_;
-    }
-
-    T data_;
-  };
-
-  std::unique_ptr<entity> self_;
-
-public:
-
   bool operator==(const Datum &rhs) const
   {
-    if (isInteger() == rhs.isInteger())
-    {
-      if (isInteger())
-      {
-        return value<int>() == rhs.value<int>();
-      }
-      else
-      {
-        return value<std::string>() == rhs.value<std::string>();
-      }
-    }
-    return false;
+    return self_->operator==(rhs.self_);
   }
 
   bool operator!=(const Datum &rhs) const
@@ -122,4 +75,52 @@ public:
     }
     return os;
   }
+
+private:
+
+  struct entity
+  {
+    virtual ~entity() = default;
+    virtual std::unique_ptr<entity> copy() = 0;
+    virtual bool operator<(const std::unique_ptr<entity> &rhs) const = 0;
+    virtual bool operator==(const std::unique_ptr<entity> &rhs) const = 0;
+  };
+
+  template<typename T>
+  struct entity_impl final : entity
+  {
+    entity_impl(T t) : data_(std::move(t)) {}
+
+    ~entity_impl() = default;
+
+    std::unique_ptr<entity> copy() override
+    {
+      std::unique_ptr<entity> rt = std::make_unique<entity_impl<T>>(data_);
+      return rt;
+    }
+
+    bool operator<(const std::unique_ptr<entity> &rhs) const override
+    {
+      try
+      {
+        auto rhs_casted = dynamic_cast<entity_impl<T>*>(rhs.get());
+        return data_ < rhs_casted->data_;
+      }
+      catch (const std::exception& e)
+      {
+        throw e.what();
+      }
+    }
+
+    bool operator==(const std::unique_ptr<entity> &rhs) const override
+    {
+      auto rhs_casted = dynamic_cast<entity_impl<T>*>(rhs.get());
+      if (rhs_casted == nullptr) return false;
+      return data_ == rhs_casted->data_;
+    }
+
+    T data_;
+  };
+
+  std::unique_ptr<entity> self_;
 };
