@@ -4,7 +4,7 @@ namespace Db {
 namespace Types {
 
 template<class T>
-linear_set<T>::linear_set() : _elems(){};
+linear_set<T>::linear_set() : _elems() {}
 
 template<class T>
 linear_set<T>::linear_set(std::initializer_list<value_type> init)

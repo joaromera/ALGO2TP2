@@ -5,7 +5,7 @@
 
 using namespace Db::Types;
 
-Database::Database() {};
+Database::Database() {}
 
 void Database::crearTabla(const std::string &nombre,
   const linear_set<std::string> &claves,
@@ -94,7 +94,7 @@ std::list<Record> &Database::_filtrar_registros(const std::string &campo,
   {
     auto now = iter;
     iter++;
-    if ((!igualdad) ^ now->value(campo) != valor)
+    if (((!igualdad) ^ now->value(campo)) != valor)
     {
       registros.erase(now);
     }
