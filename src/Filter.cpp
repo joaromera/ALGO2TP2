@@ -4,7 +4,7 @@
 Filter::Filter(const std::string &column, const Datum &datum, bool equals)
   : _column(column), _datum(datum), _equals(equals)
 {
-};
+}
 
 const std::string &Filter::column() const { return _column; }
 

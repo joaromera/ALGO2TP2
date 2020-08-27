@@ -48,7 +48,7 @@ bool linear_set<T>::const_iterator::operator!=(const linear_set<T>::const_iterat
 template<typename T>
 linear_set<T>::const_iterator::const_iterator(
   const typename linear_map<T, bool>::const_iterator &_it)
-  : it(_it){};
+  : it(_it) {}
 
 
 // iterator methods
@@ -59,7 +59,7 @@ linear_set<T>::iterator::iterator(const typename linear_set<T>::iterator &other)
 
 template<typename T>
 linear_set<T>::iterator::iterator(const typename linear_map<T, bool>::iterator &_it)
-  : it(_it){};
+  : it(_it) {}
 
 template<typename T>
 typename linear_set<T>::iterator &linear_set<T>::iterator::operator++()
