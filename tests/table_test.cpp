@@ -11,7 +11,11 @@ linear_set<Record> to_set(Table::const_iterator begin, Table::const_iterator end
 class TablaTests : public ::testing::Test
 {
 protected:
-  TablaTests() : t({ "LU", "LU_A" }, { "LU", "LU_A", "Nombre", "Carrera" }, { Datum(0), Datum(0), Datum(""), Datum("") }), t2({ "Cod" }, { "Cod", "Carrera" }, { Datum(0), Datum("") }){};
+  TablaTests()
+    : t({ "LU", "LU_A" }, { "LU", "LU_A", "Nombre", "Carrera" }, { Datum(0), Datum(0), Datum(""), Datum("") })
+    , t2({ "Cod" }, { "Cod", "Carrera" }, { Datum(0), Datum("") })
+  {
+  }
 
   Table t;
   Table t2;
