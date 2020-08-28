@@ -15,4 +15,3 @@ script:
   - cmake --build . -- -j2
   - make all
   - ./correrTests
-  - ./correrTests_sol
