@@ -242,7 +242,7 @@ Database::join_iterator Database::join_helper_str(const std::string &tabla1, con
     }
   }
 
-  if (cant_reg_it2 == 0) return join_iterator(true);
+  if (cant_reg_it2 == 0) return join_iterator();
 
   auto diccClaves = &_indices[tabla1].at(campo);
   auto it_tabla_con_indice = _indices[tabla1].at(campo).at(clave).begin();
@@ -276,7 +276,7 @@ Database::join_iterator Database::join_helper_int(const std::string &tabla1, con
     }
   }
 
-  if (cant_reg_it2 == 0) return join_iterator(true);
+  if (cant_reg_it2 == 0) return join_iterator();
 
   auto diccClaves = &_indicesNum[tabla1].at(campo);
   auto it_tabla_con_indice = _indicesNum[tabla1].at(campo).at(clave).begin();
@@ -288,5 +288,5 @@ Database::join_iterator Database::join_helper_int(const std::string &tabla1, con
 
 Database::join_iterator Database::join_end()
 {
-  return join_iterator(true);
+  return join_iterator();
 }

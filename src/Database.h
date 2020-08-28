@@ -23,14 +23,6 @@ public:
   public:
     join_iterator()
     {
-      cant_reg_en_tabla = 0;
-      cant_reg_por_clave = 0;
-      diccClavesStr = nullptr;
-      diccClavesNat = nullptr;
-      campo = "";
-      isFinal = true;
-      orden = true;
-      tipo = 0;
     }
 
     join_iterator(const join_iterator &n)
@@ -210,23 +202,18 @@ public:
         it1 = std::make_shared<linear_set<Record>::const_iterator>(a);
         it2 = std::make_shared<Table::const_iterator>(c);
       }
-    };
+    }
 
-    join_iterator(const bool &) : it1(nullptr), cant_reg_por_clave(0),
-                                  it2(nullptr), cant_reg_en_tabla(0),
-                                  diccClavesStr(nullptr), diccClavesNat(nullptr),
-                                  campo(""), isFinal(true), orden(true), tipo(0){};
-
-    std::shared_ptr<linear_set<Record>::const_iterator> it1;
-    int cant_reg_por_clave;
-    std::shared_ptr<Table::const_iterator> it2;
-    int cant_reg_en_tabla;
-    const string_map<linear_set<Record>> *diccClavesStr;
-    const std::map<int, linear_set<Record>> *diccClavesNat;
-    std::string campo;
-    bool isFinal;
-    bool orden;
-    int tipo;
+    std::shared_ptr<linear_set<Record>::const_iterator> it1 {nullptr};
+    std::shared_ptr<Table::const_iterator> it2 {nullptr};
+    int cant_reg_por_clave {0};
+    int cant_reg_en_tabla {0};
+    const string_map<linear_set<Record>> *diccClavesStr {nullptr};
+    const std::map<int, linear_set<Record>> *diccClavesNat {nullptr};
+    std::string campo {""};
+    bool isFinal {true};
+    bool orden {true};
+    int tipo {0};
 
     Record combinarRegistro(const Record & r1, const Record & r2)
     {
