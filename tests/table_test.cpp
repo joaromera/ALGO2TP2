@@ -8,10 +8,10 @@ linear_set<Record> to_set(Table::const_iterator begin, Table::const_iterator end
   return res;
 }
 
-class TablaTests : public ::testing::Test
+class TableTests : public ::testing::Test
 {
 protected:
-  TablaTests()
+  TableTests()
     : t({ "LU", "LU_A" }, { "LU", "LU_A", "Nombre", "Carrera" }, { Datum(0), Datum(0), Datum(""), Datum("") })
     , t2({ "Cod" }, { "Cod", "Carrera" }, { Datum(0), Datum("") })
   {
@@ -23,28 +23,23 @@ protected:
 
 TEST(tabla_test, crear)
 {
-  Table t({ "LU", "LU_A" },
-    { "LU", "LU_A", "Nombre", "Carrera" },
-    { Datum(0), Datum(0), Datum(""), Datum("") });
-  Table t2({ "Cod" },
-    { "Cod", "Carrera" },
-    { Datum(0), Datum("") });
+  Table t({ "LU", "LU_A" }, { "LU", "LU_A", "Nombre", "Carrera" },{ Datum(0), Datum(0), Datum(""), Datum("") });
+  Table t2({ "Cod" },{ "Cod", "Carrera" },{ Datum(0), Datum("") });
 }
 
-TEST_F(TablaTests, campos)
+TEST_F(TableTests, campos)
 {
-  EXPECT_EQ(t.columns(),
-    linear_set<std::string>({ "LU", "LU_A", "Nombre", "Carrera" }));
+  EXPECT_EQ(t.columns(),linear_set<std::string>({ "LU", "LU_A", "Nombre", "Carrera" }));
   EXPECT_EQ(t2.columns(), linear_set<std::string>({ "Cod", "Carrera" }));
 }
 
-TEST_F(TablaTests, claves)
+TEST_F(TableTests, claves)
 {
   EXPECT_EQ(t.keys(), linear_set<std::string>({ "LU", "LU_A" }));
   EXPECT_EQ(t2.keys(), linear_set<std::string>({ "Cod" }));
 }
 
-TEST_F(TablaTests, tipoCampo)
+TEST_F(TableTests, tipoCampo)
 {
   EXPECT_EQ(t.columnType("LU").isInteger(), true);
   EXPECT_EQ(t.columnType("LU").isString(), false);
@@ -52,7 +47,7 @@ TEST_F(TablaTests, tipoCampo)
   EXPECT_EQ(t.columnType("Nombre").isString(), true);
 }
 
-TEST_F(TablaTests, registros)
+TEST_F(TableTests, registros)
 {
   Table t3({}, {}, {});
   EXPECT_EQ(t3.size(), (size_t) 0);
@@ -78,7 +73,7 @@ TEST_F(TablaTests, registros)
   EXPECT_TRUE(std::find(t.records().begin(), t.records().end(), r3) != t.records().end());
 }
 
-TEST_F(TablaTests, agregarRegistro)
+TEST_F(TableTests, agregarRegistro)
 {
   EXPECT_TRUE(t2.records().empty());
   EXPECT_EQ(t2.begin(), t2.end());
@@ -91,7 +86,7 @@ TEST_F(TablaTests, agregarRegistro)
   EXPECT_EQ(++rIt1, t2.end());
 }
 
-TEST_F(TablaTests, igobs)
+TEST_F(TableTests, igobs)
 {
   Table t1({ "LU" }, { "LU" }, { Datum("") });
   Table t2({ "LU" }, { "LU" }, { Datum("") });
