@@ -70,8 +70,6 @@ public:
 
     ~join_iterator()
     {
-      stringKeys = nullptr;
-      integerKeys = nullptr;
     }
 
     bool operator==(const join_iterator &j) const
@@ -101,14 +99,14 @@ public:
         {
           if (tipo == 0)
           {
-            std::string clave = (*it2)->value(campo).value<std::string>();
-            findNextMatchByString(clave);
+            auto key = (*it2)->value(campo).value<std::string>();
+            findNextMatchByString(key);
             return *this;
           }
           else
           {
-            int clave = (*it2)->value(campo).value<int>();
-            findNextMatchByInteger(clave);
+            auto key = (*it2)->value(campo).value<int>();
+            findNextMatchByInteger(key);
             return *this;
           }
         }
@@ -140,8 +138,8 @@ public:
       Table::const_iterator c,
       int ind,
       int sin,
-      const string_map<linear_set<Record>> *e,
-      const std::map<int, linear_set<Record>> *g,
+      std::shared_ptr<string_map<linear_set<Record>>> e,
+      std::shared_ptr<std::map<int, linear_set<Record>>> g,
       const std::string &f,
       const bool &o,
       int t)
@@ -170,8 +168,8 @@ public:
     std::shared_ptr<Table::const_iterator> it2 {nullptr};
     int tableRecordCountByKey{0};
     int tableRecordCount{0};
-    const string_map<linear_set<Record>> *stringKeys{nullptr};
-    const std::map<int, linear_set<Record>> *integerKeys{nullptr};
+    std::shared_ptr<string_map<linear_set<Record>>> stringKeys {nullptr};
+    std::shared_ptr<std::map<int, linear_set<Record>>> integerKeys {nullptr};
     std::string campo {""};
     bool isFinal {true};
     bool orden {true};
@@ -204,10 +202,10 @@ public:
     {
       it1.reset();
       it2.reset();
-      campo = "";
+      integerKeys.reset();
+      stringKeys.reset();
       isFinal = true;
-      integerKeys = nullptr;
-      stringKeys = nullptr;
+      campo = "";
     }
 
     void incrementIteratorWithIndex()
