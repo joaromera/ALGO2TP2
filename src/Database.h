@@ -154,12 +154,12 @@ public:
       , orden(o)
       , tipo(t)
     {
-      if (t == 0) // es string
+      if (t == 0) // string
       {
         it1 = std::make_shared<linear_set<Record>::const_iterator>(a);
         it2 = std::make_shared<Table::const_iterator>(c);
       }
-      else // es nat
+      else // integer
       {
         it1 = std::make_shared<linear_set<Record>::const_iterator>(a);
         it2 = std::make_shared<Table::const_iterator>(c);
@@ -227,11 +227,9 @@ public:
       while (tableRecordCount != 0 && stringKeys->count(key) == 0)
       {
         key = (*it2)->value(campo).value<std::string>();
-        if (stringKeys->count(key) == 0)
-        {
-          incrementIteratorWithoutIndex();
-        }
+        if (stringKeys->count(key) == 0) incrementIteratorWithoutIndex();
       }
+
       if (tableRecordCount == 0)
       {
         advanceToEnd();
@@ -251,10 +249,7 @@ public:
       while (tableRecordCount != 0 && integerKeys->count(key) == 0)
       {
         key = (*it2)->value(campo).value<int>();
-        if (integerKeys->count(key) == 0)
-        {
-          incrementIteratorWithoutIndex();
-        }
+        if (integerKeys->count(key) == 0) incrementIteratorWithoutIndex();
       }
 
       if (tableRecordCount == 0)
