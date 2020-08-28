@@ -7,6 +7,9 @@ correrTests_sol
 tp2.cbp
 tests/google-test/libgtest_main.a
 tests/google-test/libgtest.a
+tests/google-test/CMakeFiles/
+tests/google-test/Makefile
+tests/google-test/cmake_install.cmake
 
 # Created by https://www.toptal.com/developers/gitignore/api/cmake
 # Edit at https://www.toptal.com/developers/gitignore?templates=cmake
@@ -29,5 +32,3 @@ _deps
 *-prefix/
 
 # End of https://www.toptal.com/developers/gitignore/api/cmake
-
-tests/google-test/CMakeFiles/
