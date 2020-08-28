@@ -23,23 +23,19 @@ public:
   public:
     join_iterator()
     {
-      it1 = nullptr;
-      it2 = nullptr;
       cant_reg_en_tabla = 0;
       cant_reg_por_clave = 0;
       diccClavesStr = nullptr;
       diccClavesNat = nullptr;
       campo = "";
-      final = true;
+      isFinal = true;
       orden = true;
       tipo = 0;
     }
 
     join_iterator(const join_iterator &n)
     {
-      it1 = nullptr;
-      it2 = nullptr;
-      if (n.final)
+      if (n.isFinal)
       {
         it1 = nullptr;
         it2 = nullptr;
@@ -48,7 +44,7 @@ public:
         diccClavesStr = nullptr;
         diccClavesNat = nullptr;
         campo = "";
-        final = true;
+        isFinal = true;
         orden = true;
         tipo = 0;
       }
@@ -69,7 +65,7 @@ public:
         diccClavesStr = n.diccClavesStr;
         diccClavesNat = n.diccClavesNat;
         campo = n.campo;
-        final = n.final;
+        isFinal = n.isFinal;
         orden = n.orden;
         tipo = n.tipo;
       }
@@ -77,13 +73,13 @@ public:
 
     join_iterator &operator=(const join_iterator &n)
     {
-      if (n.final == true)
+      if (n.isFinal == true)
       {
         it1 = nullptr;
         it2 = nullptr;
         diccClavesNat = nullptr;
         diccClavesStr = nullptr;
-        final = true;
+        isFinal = true;
       }
       else
       {
@@ -101,7 +97,7 @@ public:
         diccClavesStr = n.diccClavesStr;
         diccClavesNat = n.diccClavesNat;
         campo = n.campo;
-        final = n.final;
+        isFinal = n.isFinal;
         cant_reg_en_tabla = n.cant_reg_en_tabla;
         cant_reg_por_clave = n.cant_reg_por_clave;
         orden = n.orden;
@@ -112,15 +108,13 @@ public:
 
     ~join_iterator()
     {
-      it1 = nullptr;
-      it2 = nullptr;
       diccClavesStr = nullptr;
       diccClavesNat = nullptr;
     }
 
     bool operator==(const join_iterator &j) const
     {
-      if (final == j.final)
+      if (isFinal == j.isFinal)
       {
         return true;
       }
@@ -204,7 +198,7 @@ public:
       int t) : cant_reg_por_clave(ind),
                cant_reg_en_tabla(sin),
                diccClavesStr(e), diccClavesNat(g),
-               campo(f), final(false), orden(o), tipo(t)
+               campo(f), isFinal(false), orden(o), tipo(t)
     {
       if (t == 0)
       {// es string
@@ -221,7 +215,7 @@ public:
     join_iterator(const bool &) : it1(nullptr), cant_reg_por_clave(0),
                                   it2(nullptr), cant_reg_en_tabla(0),
                                   diccClavesStr(nullptr), diccClavesNat(nullptr),
-                                  campo(""), final(true), orden(true), tipo(0){};
+                                  campo(""), isFinal(true), orden(true), tipo(0){};
 
     std::shared_ptr<linear_set<Record>::const_iterator> it1;
     int cant_reg_por_clave;
@@ -230,7 +224,7 @@ public:
     const string_map<linear_set<Record>> *diccClavesStr;
     const std::map<int, linear_set<Record>> *diccClavesNat;
     std::string campo;
-    bool final;
+    bool isFinal;
     bool orden;
     int tipo;
 
@@ -262,7 +256,7 @@ public:
       it1 = nullptr;
       it2 = nullptr;
       campo = "";
-      final = true;
+      isFinal = true;
       diccClavesNat = nullptr;
       diccClavesStr = nullptr;
     }
