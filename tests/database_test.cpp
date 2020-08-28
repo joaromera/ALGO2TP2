@@ -12,7 +12,7 @@ bool isIncluded(Iterator begin_a, Iterator end_a, Iterator begin_b, Iterator end
 {
   return all_of(begin_b, end_b, [&] (const auto &value) {
       return find(begin_a, end_a, value) != end_a;
-    });
+  });
 }
 
 TEST(BasicTests, NewDatabaseIsEmpty)
