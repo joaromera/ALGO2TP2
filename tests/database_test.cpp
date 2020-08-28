@@ -10,9 +10,9 @@ using namespace std;
 template<class Iterator>
 bool isIncluded(Iterator begin_a, Iterator end_a, Iterator begin_b, Iterator end_b)
 {
-  for (auto it = begin_b; it != end_b; ++it)
+  for ( ; begin_b != end_b; ++begin_b)
   {
-    if (find(begin_a, end_a, *it) == end_a) return false;
+    if (find(begin_a, end_a, *begin_b) == end_a) return false;
   }
   return true;
 }
