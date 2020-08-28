@@ -1,35 +1,44 @@
-# Base De Datos
+# Database with Trie Search Tree
 
 [![Build Status](https://travis-ci.com/joaromera/algo2tp2.svg?branch=master)](https://travis-ci.com/joaromera/algo2tp2)
 
-## Algoritmos y Estructuras de Datos 2 - Trabajo Práctico 2
+## Introduction
 
-El enunciado se encuentra en la carpeta *docs*
-Todo el código generado para el trabajo está en *src*
-Puede importarse el repositorio en CLion y correr los tests.
+This project was done in the context of the subject _Algorithms and Data Structures 2_. Its goal was to exercise writing _abstract data types_ with their _formal specification_, and providing an implementation to them in C++ using our own data structures.
 
-El trabajo consistió en implementar una base de datos con una funcionalidad mínima de crear tablas, ingresar datos y poder hacer joins entre distintas tablas.
+To keep this project interesting, to me at least, I'm currently working towards these goals:
 
-# Para empezar 
+1. Move to `C++17`.
+2. Follow C++ best practices and core guidelines.
+3. Improve the testing done with `Google Test`.
+4. Set a CI pipeline with `Travis` for building and testing. Get coverage with `Codecov`.
+5. Use tools from the ecosystem: `cppcheck`, `clang-format`, `clang-tidy`, `valgrind`.
 
-Es necesario bajar el código del este repositorio. Esto puede hacerse
-utilizando directamente `git` o alternativamente bajando el proyecto como un
-`zip`. Se recomienda la primera opción que se explica a continuación.
+---
 
-1. `git clone https://git.exactas.uba.ar/mmiguel/aed2-2c2017-tp2.git`
-2. (Opcional) Desde CLion, ir a File -> Import Project, "Open Project".
- Una vez que termina la carga del proyecto, para correr los tests, 
- elegir "correrTests" desde la esquina superior derecha y 
- hacer click en el botón Play.
- 
-# Cómo correr los tests desde la línea de comandos (si no usan CLion)
+### Documents
 
-1. mkdir build && cd build
-2. cmake ..
-3. make
-4. ./correrTests
+The original problem set is [here](docs/tp2_enunciado.pdf) (spanish only).
 
-Para volver a compilar, simplemente correr "make" de nuevo.
+Formal specification can be found [here](docs/tp2_especificacion.pdf). This is also spanish only, but it is worth to take a look at the degree of formality the project aimed to.
 
-En caso de que no funcione correctamente la compilación, pueden borrar 
-el directorio "build" y volver a realizar los 4 pasos.
+I used `Doxygen` to document the code base. The generated html is [here](docs/html/index.html). Unfortunately, it's outdated.
+
+## What to look for... 👀
+
+Probably the most interesting place to look at is the implementation of [Datum.h](src/Datum.h). This is the type that stores the values of each _cell_ in the database. I've drawn some inspiration from _Sean Parent's Better Code_ talk [Better Code: Runtime Polymorphism](https://www.youtube.com/watch?v=QGcVXgEVMJg) (also visit Sean Parent's [site](https://sean-parent.stlab.cc/) for more information on his papers and talks). There's still a lot to improve but the exercise was definitely worth the effort.
+
+The implementation of the [Trie](https://en.wikipedia.org/wiki/Trie) search tree: [string_map.h](src/string_map.h) and [string_map.hpp](src/string_map.hpp).
+
+## How to run
+
+Execute the following lines in the repo's root:
+
+```bash
+mkdir build && cd build
+cmake ..
+make
+./correrTests
+```
+
+---
