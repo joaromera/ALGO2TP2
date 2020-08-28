@@ -24,7 +24,7 @@ TEST(BasicTests, NewDatabaseIsEmpty)
 TEST(BasicTests, UsingCriteriaWithEmptyDatabaseIsFalse)
 {
   Database db;
-  EXPECT_FALSE(db.uso_criterio(Database::Criterio()));
+  EXPECT_FALSE(db.uso_criterio(Database::Filters()));
 }
 
 TEST(BasicTests, BasicTableOperationsInDatabase)
@@ -427,7 +427,7 @@ TEST_F(DBAlumnos, busqueda_igual_distinto_doble)
                          res.records().end()));
 }
 
-// ## Criterio Válido
+// ## Filters Válido
 TEST_F(DBAlumnos, crit_simple_nombre)
 {
   // ==
@@ -508,61 +508,61 @@ TEST_F(DBAlumnos, crit_doble_tipo)
     "alumnos"));
 }
 
-// ## Uso Criterio
+// ## Uso Filters
 TEST_F(DBAlumnos, uso_un_criterio)
 {
   db.busqueda({ Rig("OS", "A") }, "alumnos");
   EXPECT_EQ(db.uso_criterio({ Rig("OS", "A") }), 1);
   EXPECT_EQ(db.top_criterios(),
-    linear_set<Database::Criterio>({ { Rig("OS", "A") } }));
+    linear_set<Database::Filters>({ { Rig("OS", "A") } }));
   db.busqueda({ Rig("OS", "A") }, "alumnos");
   EXPECT_EQ(db.uso_criterio({ Rig("OS", "A") }), 2);
   EXPECT_EQ(db.top_criterios(),
-    linear_set<Database::Criterio>({ { Rig("OS", "A") } }));
+    linear_set<Database::Filters>({ { Rig("OS", "A") } }));
 
   db.busqueda({ Rig("LU_A", 1) }, "libretas");
   EXPECT_EQ(db.uso_criterio({ Rig("LU_A", 1) }), 1);
   EXPECT_EQ(db.top_criterios(),
-    linear_set<Database::Criterio>({ { Rig("OS", "A") } }));
+    linear_set<Database::Filters>({ { Rig("OS", "A") } }));
 
   db.busqueda({ Rig("LU_A", 1) }, "libretas");
   EXPECT_EQ(db.uso_criterio({ Rig("LU_A", 1) }), 2);
   EXPECT_EQ(db.top_criterios(),
-    linear_set<Database::Criterio>({ { Rig("OS", "A") },
+    linear_set<Database::Filters>({ { Rig("OS", "A") },
       { Rig("LU_A", 1) } }));
   db.busqueda({ Rig("LU_A", 1) }, "libretas");
   EXPECT_EQ(db.uso_criterio({ Rig("LU_A", 1) }), 3);
   EXPECT_EQ(db.top_criterios(),
-    linear_set<Database::Criterio>({ { Rig("LU_A", 1) } }));
+    linear_set<Database::Filters>({ { Rig("LU_A", 1) } }));
 }
 
 TEST_F(DBAlumnos, uso_un_criterio_perm)
 {
-  Database::Criterio c = { Rig("OS", "A"), Rig("Editor", "Vim") };
-  Database::Criterio c_perm = { Rig("Editor", "Vim"), Rig("OS", "A") };
-  Database::Criterio c_sim = { Rig("OS", "A") };
+  Database::Filters c = { Rig("OS", "A"), Rig("Editor", "Vim") };
+  Database::Filters c_perm = { Rig("Editor", "Vim"), Rig("OS", "A") };
+  Database::Filters c_sim = { Rig("OS", "A") };
   db.busqueda(c, "alumnos");
   EXPECT_EQ(db.uso_criterio(c), 1);
   EXPECT_EQ(db.uso_criterio(c_sim), 0);
   EXPECT_EQ(db.top_criterios(),
-    linear_set<Database::Criterio>({ c }));
+    linear_set<Database::Filters>({ c }));
 
   db.busqueda(c_perm, "alumnos");
   EXPECT_EQ(db.uso_criterio(c), 2);
   EXPECT_EQ(db.uso_criterio(c_sim), 0);
   EXPECT_EQ(db.top_criterios(),
-    linear_set<Database::Criterio>({ c }));
+    linear_set<Database::Filters>({ c }));
 
   db.busqueda(c_sim, "alumnos");
   EXPECT_EQ(db.uso_criterio(c_sim), 1);
   EXPECT_EQ(db.top_criterios(),
-    linear_set<Database::Criterio>({ c }));
+    linear_set<Database::Filters>({ c }));
 }
 
 TEST_F(DBAlumnos, crit_otro_bool)
 {
-  Database::Criterio c = { Rig("OS", "A") };
-  Database::Criterio c_inv = { Rdif("OS", "A") };
+  Database::Filters c = { Rig("OS", "A") };
+  Database::Filters c_inv = { Rdif("OS", "A") };
 
   EXPECT_EQ(db.uso_criterio(c), 0);
   EXPECT_EQ(db.uso_criterio(c_inv), 0);
@@ -578,8 +578,8 @@ TEST_F(DBAlumnos, crit_otro_bool)
 
 TEST_F(DBAlumnos, crit_doble_otro_bool)
 {
-  Database::Criterio c = { Rig("OS", "A"), Rig("Editor", "Vim") };
-  Database::Criterio c_inv = { Rdif("OS", "A"), Rig("Editor", "Vim") };
+  Database::Filters c = { Rig("OS", "A"), Rig("Editor", "Vim") };
+  Database::Filters c_inv = { Rdif("OS", "A"), Rig("Editor", "Vim") };
 
   EXPECT_EQ(db.uso_criterio(c), 0);
   EXPECT_EQ(db.uso_criterio(c_inv), 0);

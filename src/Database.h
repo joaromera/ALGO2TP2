@@ -29,33 +29,16 @@ public:
     {
       if (n.isFinal)
       {
-        it1 = nullptr;
-        it2 = nullptr;
-        cant_reg_en_tabla = 0;
-        cant_reg_por_clave = 0;
-        diccClavesStr = nullptr;
-        diccClavesNat = nullptr;
-        campo = "";
-        isFinal = true;
-        orden = true;
-        tipo = 0;
+        advanceToEnd();
       }
       else
       {
-        if (it1 != nullptr)
-        {
-          it1 = nullptr;
-        }
-        if (it2 != nullptr)
-        {
-          it2 = nullptr;
-        }
         it1 = std::make_shared<linear_set<Record>::const_iterator>(*n.it1);
         it2 = std::make_shared<Table::const_iterator>(*n.it2);
-        cant_reg_por_clave = n.cant_reg_por_clave;
-        cant_reg_en_tabla = n.cant_reg_en_tabla;
-        diccClavesStr = n.diccClavesStr;
-        diccClavesNat = n.diccClavesNat;
+        tableRecordCountByKey = n.tableRecordCountByKey;
+        tableRecordCount = n.tableRecordCount;
+        stringKeys = n.stringKeys;
+        integerKeys = n.integerKeys;
         campo = n.campo;
         isFinal = n.isFinal;
         orden = n.orden;
@@ -65,33 +48,20 @@ public:
 
     join_iterator &operator=(const join_iterator &n)
     {
-      if (n.isFinal == true)
+      if (n.isFinal)
       {
-        it1 = nullptr;
-        it2 = nullptr;
-        diccClavesNat = nullptr;
-        diccClavesStr = nullptr;
-        isFinal = true;
+        advanceToEnd();
       }
       else
       {
-        if (it1 != nullptr)
-        {
-          it1 = nullptr;
-        }
-        if (it2 != nullptr)
-        {
-          it2 = nullptr;
-        }
         it1 = std::make_shared<linear_set<Record>::const_iterator>(*n.it1);
         it2 = std::make_shared<Table::const_iterator>(*n.it2);
-        ;
-        diccClavesStr = n.diccClavesStr;
-        diccClavesNat = n.diccClavesNat;
+        stringKeys = n.stringKeys;
+        integerKeys = n.integerKeys;
         campo = n.campo;
         isFinal = n.isFinal;
-        cant_reg_en_tabla = n.cant_reg_en_tabla;
-        cant_reg_por_clave = n.cant_reg_por_clave;
+        tableRecordCount = n.tableRecordCount;
+        tableRecordCountByKey = n.tableRecordCountByKey;
         orden = n.orden;
         tipo = n.tipo;
       }
@@ -100,20 +70,15 @@ public:
 
     ~join_iterator()
     {
-      diccClavesStr = nullptr;
-      diccClavesNat = nullptr;
+      stringKeys = nullptr;
+      integerKeys = nullptr;
     }
 
     bool operator==(const join_iterator &j) const
     {
-      if (isFinal == j.isFinal)
-      {
-        return true;
-      }
-      else
-      {
-        return it1 == j.it1 && it2 == j.it2 && diccClavesStr == j.diccClavesStr && diccClavesNat == j.diccClavesNat && cant_reg_en_tabla == j.cant_reg_en_tabla && cant_reg_por_clave == j.cant_reg_por_clave && campo == j.campo && orden == j.orden && tipo == j.tipo;
-      }
+      if (isFinal == j.isFinal) return true;
+
+      return it1 == j.it1 && it2 == j.it2 && stringKeys == j.stringKeys && integerKeys == j.integerKeys && tableRecordCount == j.tableRecordCount && tableRecordCountByKey == j.tableRecordCountByKey && campo == j.campo && orden == j.orden && tipo == j.tipo;
     }
 
     bool operator!=(const join_iterator &j) const
@@ -123,13 +88,13 @@ public:
 
     join_iterator &operator++()
     {
-      avanzarItConIndice();
-      if (cant_reg_por_clave == 0)
+      incrementIteratorWithIndex();
+      if (tableRecordCountByKey == 0)
       {
-        avanzarItSinIndice();
-        if (cant_reg_en_tabla == 0)
+        incrementIteratorWithoutIndex();
+        if (tableRecordCount == 0)
         {
-          ponerEnFin();
+          advanceToEnd();
           return *this;
         }
         else
@@ -137,13 +102,13 @@ public:
           if (tipo == 0)
           {
             std::string clave = (*it2)->value(campo).value<std::string>();
-            buscarProxCoincidenciaStr(clave);
+            findNextMatchByString(clave);
             return *this;
           }
           else
           {
             int clave = (*it2)->value(campo).value<int>();
-            buscarProxCoincidenciaNat(clave);
+            findNextMatchByInteger(clave);
             return *this;
           }
         }
@@ -156,23 +121,15 @@ public:
 
     join_iterator operator++(int)
     {
-      auto copia = *this;
+      auto tmp = *this;
       ++*this;
-      return copia;
+      return tmp;
     }
 
     const Record operator*()
     {
-      if (orden)
-      {
-        Record nuevo = combinarRegistro(**it1, **it2);
-        return nuevo;
-      }
-      else
-      {
-        Record nuevo = combinarRegistro(**it2, **it1);
-        return nuevo;
-      }
+      if (orden) return mergeRecords(**it1, **it2);
+      return mergeRecords(**it2, **it1);
     }
 
     friend class Database;
@@ -180,25 +137,30 @@ public:
 
   private:
     join_iterator(linear_set<Record>::const_iterator a,
-      int ind,
       Table::const_iterator c,
+      int ind,
       int sin,
       const string_map<linear_set<Record>> *e,
       const std::map<int, linear_set<Record>> *g,
       const std::string &f,
       const bool &o,
-      int t) : cant_reg_por_clave(ind),
-               cant_reg_en_tabla(sin),
-               diccClavesStr(e), diccClavesNat(g),
-               campo(f), isFinal(false), orden(o), tipo(t)
+      int t)
+      : tableRecordCountByKey(ind)
+      , tableRecordCount(sin)
+      , stringKeys(e)
+      , integerKeys(g)
+      , campo(f)
+      , isFinal(false)
+      , orden(o)
+      , tipo(t)
     {
-      if (t == 0)
-      {// es string
+      if (t == 0) // es string
+      {
         it1 = std::make_shared<linear_set<Record>::const_iterator>(a);
         it2 = std::make_shared<Table::const_iterator>(c);
       }
-      else
-      {// es nat
+      else // es nat
+      {
         it1 = std::make_shared<linear_set<Record>::const_iterator>(a);
         it2 = std::make_shared<Table::const_iterator>(c);
       }
@@ -206,122 +168,123 @@ public:
 
     std::shared_ptr<linear_set<Record>::const_iterator> it1 {nullptr};
     std::shared_ptr<Table::const_iterator> it2 {nullptr};
-    int cant_reg_por_clave {0};
-    int cant_reg_en_tabla {0};
-    const string_map<linear_set<Record>> *diccClavesStr {nullptr};
-    const std::map<int, linear_set<Record>> *diccClavesNat {nullptr};
+    int tableRecordCountByKey{0};
+    int tableRecordCount{0};
+    const string_map<linear_set<Record>> *stringKeys{nullptr};
+    const std::map<int, linear_set<Record>> *integerKeys{nullptr};
     std::string campo {""};
     bool isFinal {true};
     bool orden {true};
     int tipo {0};
 
-    Record combinarRegistro(const Record & r1, const Record & r2)
+    Record mergeRecords(const Record & r1, const Record & r2)
     {
-      std::vector<std::string> combCampos;
-      std::vector<Datum> combDatos;
+      std::vector<std::string> mergedColumns;
+      std::vector<Datum> mergedValues;
 
       for (const auto& c : r1.columns())
       {
-        combCampos.emplace_back(c);
-        combDatos.emplace_back(r1.value(c));
+        mergedColumns.emplace_back(c);
+        mergedValues.emplace_back(r1.value(c));
       }
 
       for (const auto& c : r2.columns())
       {
         if (r1.columns().count(c) == 0 && c != campo)
         {
-          combCampos.emplace_back(c);
-          combDatos.emplace_back(r2.value(c));
+          mergedColumns.emplace_back(c);
+          mergedValues.emplace_back(r2.value(c));
         }
       }
 
-      return Record(combCampos, combDatos);
+      return { mergedColumns, mergedValues };
     }
 
-    void ponerEnFin()
+    void advanceToEnd()
     {
-      it1 = nullptr;
-      it2 = nullptr;
+      it1.reset();
+      it2.reset();
       campo = "";
       isFinal = true;
-      diccClavesNat = nullptr;
-      diccClavesStr = nullptr;
+      integerKeys = nullptr;
+      stringKeys = nullptr;
     }
 
-    void avanzarItConIndice()
+    void incrementIteratorWithIndex()
     {
       ++(*it1);
-      cant_reg_por_clave--;
+      tableRecordCountByKey--;
     }
 
-    void avanzarItSinIndice()
+    void incrementIteratorWithoutIndex()
     {
       ++(*it2);
-      cant_reg_en_tabla--;
+      tableRecordCount--;
     }
 
-    void buscarProxCoincidenciaStr(std::string &clave)
+    void findNextMatchByString(std::string &key)
     {
-      while (cant_reg_en_tabla != 0 && diccClavesStr->count(clave) == 0)
+      while (tableRecordCount != 0 && stringKeys->count(key) == 0)
       {
-        clave = (*it2)->value(campo).value<std::string>();
-        if (diccClavesStr->count(clave) == 0)
+        key = (*it2)->value(campo).value<std::string>();
+        if (stringKeys->count(key) == 0)
         {
-          avanzarItSinIndice();
+          incrementIteratorWithoutIndex();
         }
       }
-      if (cant_reg_en_tabla == 0)
+      if (tableRecordCount == 0)
       {
-        ponerEnFin();
+        advanceToEnd();
       }
-      else if (diccClavesStr->count(clave) != 0)
+      else if (stringKeys->count(key) != 0)
       {
-        setItEnNuevaClaveStr(clave);
+        setIteratorToNewStringKey(key);
       }
       else
       {
-        ponerEnFin();
+        advanceToEnd();
       }
     }
 
-    void buscarProxCoincidenciaNat(int &clave)
+    void findNextMatchByInteger(int &key)
     {
-      while (cant_reg_en_tabla != 0 && diccClavesNat->count(clave) == 0)
+      while (tableRecordCount != 0 && integerKeys->count(key) == 0)
       {
-        clave = (*it2)->value(campo).value<int>();
-        if (diccClavesNat->count(clave) == 0)
+        key = (*it2)->value(campo).value<int>();
+        if (integerKeys->count(key) == 0)
         {
-          avanzarItSinIndice();
+          incrementIteratorWithoutIndex();
         }
       }
-      if (cant_reg_en_tabla == 0)
+
+      if (tableRecordCount == 0)
       {
-        ponerEnFin();
+        advanceToEnd();
       }
-      else if (diccClavesNat->count(clave) != 0)
+      else if (integerKeys->count(key) != 0)
       {
-        setItEnNuevaClaveNat(clave);
+        setIteratorToNewIntegerKey(key);
       }
       else
       {
-        ponerEnFin();
+        advanceToEnd();
       }
     }
 
-    void setItEnNuevaClaveStr(const std::string &clave)
+    void setIteratorToNewStringKey(const std::string &key)
     {
-      it1 = std::make_shared<linear_set<Record>::const_iterator>(diccClavesStr->at(clave).begin());
-      cant_reg_por_clave = diccClavesStr->at(clave).size();
+      it1 = std::make_shared<linear_set<Record>::const_iterator>(stringKeys->at(key).begin());
+      tableRecordCountByKey = stringKeys->at(key).size();
     }
 
-    void setItEnNuevaClaveNat(const int &clave)
+    void setIteratorToNewIntegerKey(const int &key)
     {
-      it1 = std::make_shared<linear_set<Record>::const_iterator>(diccClavesNat->at(clave).begin());
-      cant_reg_por_clave = diccClavesNat->at(clave).size();
+      it1 = std::make_shared<linear_set<Record>::const_iterator>(integerKeys->at(key).begin());
+      tableRecordCountByKey = integerKeys->at(key).size();
     }
   };
 
-  typedef linear_set<Filter> Criterio;
+  typedef linear_set<Filter> Filters;
 
   Database();
 
@@ -333,15 +296,15 @@ public:
 
   const Table &dameTabla(const std::string &nombre) const;
 
-  int uso_criterio(const Criterio &criterio) const;
+  int uso_criterio(const Filters &criterio) const;
 
   bool registroValido(const Record &r, const std::string &nombre) const;
 
-  bool criterioValido(const Criterio &c, const std::string &nombre) const;
+  bool criterioValido(const Filters &c, const std::string &nombre) const;
 
-  Table busqueda(const Criterio &c, const std::string &nombre);
+  Table busqueda(const Filters &c, const std::string &nombre);
 
-  linear_set<Criterio> top_criterios() const;
+  linear_set<Filters> top_criterios() const;
 
   void crearIndice(const std::string &tabla, const std::string &campo);
 
@@ -354,7 +317,7 @@ public:
 private:
   linear_set<std::string> _nombres_tablas;
   string_map<Table> _tablas;
-  linear_map<Criterio, int> _uso_criterios;
+  linear_map<Filters, int> _uso_criterios;
   Index _indices;
   IndexInt _indicesNum;
 

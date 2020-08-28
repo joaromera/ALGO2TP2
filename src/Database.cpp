@@ -43,7 +43,7 @@ const Table &Database::dameTabla(const std::string &nombre) const
   return _tablas.at(nombre);
 }
 
-int Database::uso_criterio(const Database::Criterio &criterio) const
+int Database::uso_criterio(const Database::Filters &criterio) const
 {
   if (_uso_criterios.count(criterio))
   {
@@ -115,7 +115,7 @@ std::pair<std::vector<std::string>, std::vector<Datum>> Database::_tipos_tabla(c
   return std::make_pair(res_campos, res_tipos);
 }
 
-bool Database::criterioValido(const Criterio &c, const std::string &nombre) const
+bool Database::criterioValido(const Filters &c, const std::string &nombre) const
 {
   const Table &t = _tablas.at(nombre);
   for (const auto& restriccion : c)
@@ -126,7 +126,7 @@ bool Database::criterioValido(const Criterio &c, const std::string &nombre) cons
   return true;
 }
 
-Table Database::busqueda(const Database::Criterio &c, const std::string &nombre)
+Table Database::busqueda(const Database::Filters &c, const std::string &nombre)
 {
   if (_uso_criterios.count(c))
   {
@@ -152,9 +152,9 @@ Table Database::busqueda(const Database::Criterio &c, const std::string &nombre)
   return res;
 }
 
-linear_set<Database::Criterio> Database::top_criterios() const
+linear_set<Database::Filters> Database::top_criterios() const
 {
-  linear_set<Criterio> ret;
+  linear_set<Filters> ret;
   int max = 0;
   for (const auto& crit_count : _uso_criterios)
   {
@@ -162,7 +162,7 @@ linear_set<Database::Criterio> Database::top_criterios() const
     {
       if (crit_count.second > max)
       {
-        ret = linear_set<Criterio>();
+        ret = linear_set<Filters>();
         max = crit_count.second;
       }
       ret.fast_insert(crit_count.first);
@@ -249,7 +249,7 @@ Database::join_iterator Database::join_helper_str(const std::string &tabla1, con
   unsigned long cant_reg_por_indice = _indices[tabla1].at(campo).at(clave).size();
   auto it_tabla_sin_indice = t2.begin();
 
-  return join_iterator(it_tabla_con_indice, cant_reg_por_indice, it_tabla_sin_indice, cant_reg_it2, diccClaves, nullptr, campo, orden, tipo);
+  return join_iterator(it_tabla_con_indice, it_tabla_sin_indice, cant_reg_por_indice, cant_reg_it2, diccClaves, nullptr, campo, orden, tipo);
 }
 
 Database::join_iterator Database::join_helper_int(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden)
@@ -283,7 +283,7 @@ Database::join_iterator Database::join_helper_int(const std::string &tabla1, con
   unsigned long cant_reg_por_indice = _indicesNum[tabla1].at(campo).at(clave).size();
   auto it_tabla_sin_indice = t2.begin();
 
-  return join_iterator(it_tabla_con_indice, cant_reg_por_indice, it_tabla_sin_indice, cant_reg_it2, nullptr, diccClaves, campo, orden, tipo);
+  return join_iterator(it_tabla_con_indice, it_tabla_sin_indice, cant_reg_por_indice, cant_reg_it2, nullptr, diccClaves, campo, orden, tipo);
 }
 
 Database::join_iterator Database::join_end()
