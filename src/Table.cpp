@@ -70,6 +70,13 @@ Table::const_iterator &Table::const_iterator::operator++()
   return *this;
 }
 
+Table::const_iterator Table::const_iterator::operator++(int)
+{
+  const_iterator tmp(*this);
+  operator++();
+  return tmp;
+}
+
 bool Table::const_iterator::operator==(const Table::const_iterator &it) const
 {
   return record_iterator == it.record_iterator;

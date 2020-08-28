@@ -4,10 +4,7 @@
 linear_set<Record> to_set(Table::const_iterator begin, Table::const_iterator end)
 {
   linear_set<Record> res;
-  for (auto it = begin; it != end; ++it)
-  {
-    res.insert(*it);
-  }
+  while (begin != end) res.insert(*begin++);
   return res;
 }
 

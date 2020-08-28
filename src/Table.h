@@ -20,6 +20,7 @@ public:
     const Record &operator*() const;
     const Record *operator->() const;
     const_iterator &operator++();
+    const_iterator operator++(int);
 
     bool operator==(const const_iterator&) const;
     bool operator!=(const const_iterator&) const;
