@@ -1,5 +1,7 @@
 # Base De Datos
 
+[![Build Status](https://travis-ci.com/joaromera/algo2tp2.svg?branch=master)](https://travis-ci.com/joaromera/algo2tp2)
+
 ## Algoritmos y Estructuras de Datos 2 - Trabajo Práctico 2
 
 El enunciado se encuentra en la carpeta *docs*
