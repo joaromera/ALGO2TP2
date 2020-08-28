@@ -10,6 +10,7 @@ tests/google-test/libgtest.a
 tests/google-test/CMakeFiles/
 tests/google-test/Makefile
 tests/google-test/cmake_install.cmake
+tests/google-test/gtest.cbp
 
 # Created by https://www.toptal.com/developers/gitignore/api/cmake
 # Edit at https://www.toptal.com/developers/gitignore?templates=cmake
