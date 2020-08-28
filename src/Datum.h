@@ -8,7 +8,7 @@
 class Datum
 {
 public:
-  Datum() {}
+  Datum() = delete;
 
   template<typename T>
   Datum(T t)

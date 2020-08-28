@@ -1,54 +1,69 @@
 #include "gtest/gtest.h"
 #include "../src/Datum.h"
 
-TEST(dato_test, generadores)
+TEST(DatumTests, ConstructionSucceedsWithValidArguments)
 {
-  Datum(5);
-  Datum("hola");
+  Datum(42);
+  Datum(3.14);
+  Datum("Hello Datum!");
 }
 
-TEST(dato_test, esNat)
+TEST(DatumTests, IsIntegerReturnsTrueWhenDatumHoldsIntValues)
 {
   EXPECT_EQ(Datum(5).isInteger(), true);
   EXPECT_EQ(Datum(100).isInteger(), true);
+  EXPECT_EQ(Datum(-100).isInteger(), true);
+}
+
+TEST(DatumTests, IsIntegerReturnsFalseWhenDatumDoesNotHoldIntValues)
+{
+  EXPECT_EQ(Datum(3.5).isInteger(), false);
   EXPECT_EQ(Datum("").isInteger(), false);
-  EXPECT_EQ(Datum("hola").isInteger(), false);
+  EXPECT_EQ(Datum("Hello").isInteger(), false);
 }
 
-TEST(dato_test, esString)
+TEST(DatumTests, IsStringReturnsTrueWhenDatumHoldsStrings)
 {
-  EXPECT_EQ(Datum("hola").isString(), true);
-  EXPECT_EQ(Datum("chau").isString(), true);
-  EXPECT_EQ(Datum(10).isString(), false);
-  EXPECT_EQ(Datum(5).isString(), false);
+  EXPECT_EQ(Datum("").isString(), true);
+  EXPECT_EQ(Datum("Hello").isString(), true);
+  EXPECT_EQ(Datum("Datum").isString(), true);
 }
 
-TEST(dato_test, valores)
+TEST(DatumTests, IsStringReturnsFalseWhenDatumDoesNotHoldStrings)
 {
-  EXPECT_EQ(Datum(10).value<int>(), 10);
-  EXPECT_EQ(Datum(5).value<int>(), 5);
-  EXPECT_EQ(Datum(100).value<int>(), 100);
+  EXPECT_EQ(Datum(0).isString(), false);
+  EXPECT_EQ(Datum(42).isString(), false);
+  EXPECT_EQ(Datum(3.14).isString(), false);
+}
+
+TEST(DatumTests, IntValueIsCorrectlyRetrieved)
+{
   EXPECT_EQ(Datum("").value<std::string>(), "");
-  EXPECT_EQ(Datum("hola").value<std::string>(), "hola");
-  EXPECT_EQ(Datum("chau").value<std::string>(), "chau");
+  EXPECT_EQ(Datum("Hello").value<std::string>(), "Hello");
+  EXPECT_EQ(Datum("Datum").value<std::string>(), "Datum");
 }
 
-TEST(dato_test, igobs)
+TEST(DatumTests, StringValueIsCorrectlyRetrieved)
+{
+  EXPECT_EQ(Datum("").value<std::string>(), "");
+  EXPECT_EQ(Datum("Hello").value<std::string>(), "Hello");
+  EXPECT_EQ(Datum("Datum").value<std::string>(), "Datum");
+}
+
+TEST(DatumTests, ObservingEqualityBetweenIntegers)
 {
   EXPECT_EQ(Datum(5), Datum(5));
   EXPECT_NE(Datum(10), Datum(5));
+}
 
+TEST(DatumTests, ObservingEqualityBetweenStrings)
+{
   EXPECT_EQ(Datum("hola"), Datum("hola"));
   EXPECT_NE(Datum("holas"), Datum("hola"));
 }
 
-TEST(dato_test, shortcuts)
+TEST(DatumTests, ImplicitCasting)
 {
-  EXPECT_EQ(Datum{ 5 }, Datum{ 5 });
-  EXPECT_EQ(Datum("hola"), Datum("hola"));
-}
-
-TEST(dato_test, implicit_cast)
-{
+  EXPECT_EQ(Datum(42), (Datum) 42);
   EXPECT_EQ(Datum("Hola"), (Datum) "Hola");
 }
