@@ -10,11 +10,9 @@ using namespace std;
 template<class Iterator>
 bool isIncluded(Iterator begin_a, Iterator end_a, Iterator begin_b, Iterator end_b)
 {
-  for ( ; begin_b != end_b; ++begin_b)
-  {
-    if (find(begin_a, end_a, *begin_b) == end_a) return false;
-  }
-  return true;
+  return all_of(begin_b, end_b, [&] (const auto &value) {
+      return find(begin_a, end_a, value) != end_a;
+    });
 }
 
 TEST(BasicTests, NewDatabaseIsEmpty)
