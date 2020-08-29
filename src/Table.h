@@ -51,5 +51,4 @@ private:
 };
 
 bool operator==(const Table&, const Table&);
-
 bool operator!=(const Table&, const Table&);

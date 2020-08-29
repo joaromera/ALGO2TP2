@@ -5,6 +5,9 @@ using namespace Db::Types;
 Table::Table(const linear_set<std::string> &keys, const std::vector<std::string> &columns, const std::vector<Datum> &types)
   : _keys(keys)
 {
+  if (columns.size() > types.size()) throw std::invalid_argument("Each table column must have a Datum type");
+  if (keys.size() > types.size()) throw std::invalid_argument("Each table key must have a Datum type");
+
   for (size_t i = 0; i < columns.size(); ++i)
   {
     _types.fast_insert(std::make_pair(columns[i], types[i]));
