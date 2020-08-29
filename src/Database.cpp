@@ -175,17 +175,10 @@ Database::join_iterator Database::join(const std::string &table1, const std::str
   const auto &indexedTable = firstTableHasIndex ? table1 : table2;
   const auto &nonIndexedTable = firstTableHasIndex ? table2 : table1;
 
-  if (getTable(table1).columnType(columnName).isInteger())
-  {
-    return join_helper(indexedTable, nonIndexedTable, columnName, firstTableHasIndex, 1);
-  }
-  else
-  {
-    return join_helper(indexedTable, nonIndexedTable, columnName, firstTableHasIndex, 0);
-  }
+  return join_helper(indexedTable, nonIndexedTable, columnName, firstTableHasIndex);
 }
 
-Database::join_iterator Database::join_helper(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden, const int tipo)
+Database::join_iterator Database::join_helper(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden)
 {
   const Table &t2 = getTable(tabla2);
   auto it2 = t2.begin();
@@ -222,7 +215,7 @@ Database::join_iterator Database::join_helper(const std::string &tabla1, const s
   unsigned long cant_reg_por_indice = _indexRefs[tabla1].at(campo).at(clave).size();
   auto it_tabla_sin_indice = t2.begin();
 
-  return join_iterator(it_tabla_con_indice, it_tabla_sin_indice, cant_reg_por_indice, cant_reg_it2, diccClaves, campo, orden, tipo);
+  return join_iterator(it_tabla_con_indice, it_tabla_sin_indice, cant_reg_por_indice, cant_reg_it2, diccClaves, campo, orden);
 }
 
 Database::join_iterator Database::join_end()

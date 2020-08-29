@@ -12,8 +12,6 @@
 
 using namespace Db::Types;
 
-typedef string_map<string_map<string_map<linear_set<Record>>>> Index;
-typedef string_map<string_map<std::map<int, linear_set<Record>>>> IndexInt;
 typedef string_map<string_map<std::map<Datum, linear_set<Record>>>> IndexRef;
 
 class Database
@@ -42,7 +40,6 @@ public:
         campo = n.campo;
         isFinal = n.isFinal;
         orden = n.orden;
-        tipo = n.tipo;
       }
     }
 
@@ -62,7 +59,6 @@ public:
         tableRecordCount = n.tableRecordCount;
         tableRecordCountByKey = n.tableRecordCountByKey;
         orden = n.orden;
-        tipo = n.tipo;
       }
       return *this;
     }
@@ -75,7 +71,7 @@ public:
     {
       if (isFinal == j.isFinal) return true;
 
-      return it1 == j.it1 && it2 == j.it2 && datumKeys == j.datumKeys && tableRecordCount == j.tableRecordCount && tableRecordCountByKey == j.tableRecordCountByKey && campo == j.campo && orden == j.orden && tipo == j.tipo;
+      return it1 == j.it1 && it2 == j.it2 && datumKeys == j.datumKeys && tableRecordCount == j.tableRecordCount && tableRecordCountByKey == j.tableRecordCountByKey && campo == j.campo && orden == j.orden;
     }
 
     bool operator!=(const join_iterator &j) const
@@ -124,14 +120,13 @@ public:
     friend class Table;
 
   private:
-    join_iterator(linear_set<Record>::const_iterator a, Table::const_iterator c, int ind, int sin, std::shared_ptr<std::map<Datum, linear_set<Record>>> e, const std::string &f, const bool &o, int t)
+    join_iterator(linear_set<Record>::const_iterator a, Table::const_iterator c, int ind, int sin, std::shared_ptr<std::map<Datum, linear_set<Record>>> e, const std::string &f, const bool &o)
       : tableRecordCountByKey(ind)
       , tableRecordCount(sin)
       , datumKeys(e)
       , campo(f)
       , isFinal(false)
       , orden(o)
-      , tipo(t)
     {
       it1 = std::make_shared<linear_set<Record>::const_iterator>(a);
       it2 = std::make_shared<Table::const_iterator>(c);
@@ -145,7 +140,6 @@ public:
     std::string campo {""};
     bool isFinal {true};
     bool orden {true};
-    int tipo {0};
 
     Record mergeRecords(const Record & r1, const Record & r2)
     {
@@ -254,8 +248,6 @@ private:
   linear_set<std::string> _tableNames;
   string_map<Table> _tables;
   linear_map<Filters, int> _uso_criterios;
-  Index _indexes;
-  IndexInt _indexesInt;
   IndexRef _indexRefs;
 
   std::list<Record> &_filterRecords(const std::string &column, const Datum &value, std::list<Record> &records, bool equals) const;
@@ -264,5 +256,5 @@ private:
 
   std::pair<std::vector<std::string>, std::vector<Datum>> _tipos_tabla(const Table &t);
 
-  Database::join_iterator join_helper(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden, const int tipo);
+  Database::join_iterator join_helper(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden);
 };
