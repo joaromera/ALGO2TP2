@@ -63,6 +63,18 @@ public:
       return *this;
     }
 
+    join_iterator(linear_set<Record>::const_iterator a, Table::const_iterator c, int ind, int sin, std::shared_ptr<std::map<Datum, linear_set<Record>>> e, const std::string &f, const bool &o)
+      : tableRecordCountByKey(ind)
+      , tableRecordCount(sin)
+      , datumKeys(e)
+      , campo(f)
+      , isFinal(false)
+      , orden(o)
+    {
+      it1 = std::make_shared<linear_set<Record>::const_iterator>(a);
+      it2 = std::make_shared<Table::const_iterator>(c);
+    }
+
     ~join_iterator()
     {
     }
@@ -120,27 +132,6 @@ public:
     friend class Table;
 
   private:
-    join_iterator(linear_set<Record>::const_iterator a, Table::const_iterator c, int ind, int sin, std::shared_ptr<std::map<Datum, linear_set<Record>>> e, const std::string &f, const bool &o)
-      : tableRecordCountByKey(ind)
-      , tableRecordCount(sin)
-      , datumKeys(e)
-      , campo(f)
-      , isFinal(false)
-      , orden(o)
-    {
-      it1 = std::make_shared<linear_set<Record>::const_iterator>(a);
-      it2 = std::make_shared<Table::const_iterator>(c);
-    }
-
-    std::shared_ptr<linear_set<Record>::const_iterator> it1 {nullptr};
-    std::shared_ptr<Table::const_iterator> it2 {nullptr};
-    int tableRecordCountByKey{0};
-    int tableRecordCount{0};
-    std::shared_ptr<std::map<Datum, linear_set<Record>>> datumKeys {nullptr};
-    std::string campo {""};
-    bool isFinal {true};
-    bool orden {true};
-
     Record mergeRecords(const Record & r1, const Record & r2)
     {
       std::vector<std::string> mergedColumns;
@@ -212,6 +203,15 @@ public:
       it1 = std::make_shared<linear_set<Record>::const_iterator>(datumKeys->at(datum).begin());
       tableRecordCountByKey = datumKeys->at(datum).size();
     }
+
+    std::shared_ptr<linear_set<Record>::const_iterator> it1 {nullptr};
+    std::shared_ptr<Table::const_iterator> it2 {nullptr};
+    int tableRecordCountByKey{0};
+    int tableRecordCount{0};
+    std::shared_ptr<std::map<Datum, linear_set<Record>>> datumKeys {nullptr};
+    std::string campo {""};
+    bool isFinal {true};
+    bool orden {true};
   };
 
   typedef linear_set<Filter> Filters;
@@ -245,16 +245,14 @@ public:
   join_iterator join_end();
 
 private:
-  linear_set<std::string> _tableNames;
-  string_map<Table> _tables;
-  linear_map<Filters, int> _uso_criterios;
-  IndexRef _indexRefs;
-
   std::list<Record> &_filterRecords(const std::string &column, const Datum &value, std::list<Record> &records, bool equals) const;
-
-  std::list<Record> &_filterRecords(const std::string &column, const Datum &value, std::list<Record> &records) const;
 
   std::pair<std::vector<std::string>, std::vector<Datum>> _tableTypes(const Table &t);
 
   Database::join_iterator join_helper(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden);
+
+  linear_set<std::string> _tableNames;
+  string_map<Table> _tables;
+  linear_map<Filters, int> _uso_criterios;
+  IndexRef _indexRefs;
 };
