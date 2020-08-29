@@ -33,7 +33,7 @@ const Table &Database::getTable(const std::string &name) const
   return _tables.at(name);
 }
 
-int Database::useFilter(const Database::Filters &filter) const
+int Database::filterUsageCount(const Database::Filters &filter) const
 {
   if (_uso_criterios.count(filter)) return _uso_criterios.at(filter);
 
@@ -86,7 +86,7 @@ std::list<Record> &Database::_filterRecords(const std::string &column, const Dat
   return records;
 }
 
-std::pair<std::vector<std::string>, std::vector<Datum>> Database::_tipos_tabla(const Table &t)
+std::pair<std::vector<std::string>, std::vector<Datum>> Database::_tableTypes(const Table &t)
 {
   std::vector<std::string> res_campos;
   std::vector<Datum> res_tipos;
@@ -95,10 +95,10 @@ std::pair<std::vector<std::string>, std::vector<Datum>> Database::_tipos_tabla(c
     res_campos.push_back(c);
     res_tipos.push_back(t.columnType(c));
   }
-  return std::make_pair(res_campos, res_tipos);
+  return { res_campos, res_tipos };
 }
 
-bool Database::criterioValido(const Filters &c, const std::string &nombre) const
+bool Database::isValidFilter(const Filters &c, const std::string &nombre) const
 {
   const Table &t = _tables.at(nombre);
   for (const auto& restriccion : c)
@@ -109,7 +109,7 @@ bool Database::criterioValido(const Filters &c, const std::string &nombre) const
   return true;
 }
 
-Table Database::busqueda(const Database::Filters &c, const std::string &nombre)
+Table Database::search(const Database::Filters &c, const std::string &nombre)
 {
   if (_uso_criterios.count(c))
   {
@@ -121,7 +121,7 @@ Table Database::busqueda(const Database::Filters &c, const std::string &nombre)
   }
 
   const Table &ref = getTable(nombre);
-  auto campos_datos = _tipos_tabla(ref);
+  auto campos_datos = _tableTypes(ref);
   Table res(ref.keys(), campos_datos.first, campos_datos.second);
   std::list<Record> regs(ref.records().begin(), ref.records().end());
   for (const auto& restriccion : c)
@@ -135,7 +135,7 @@ Table Database::busqueda(const Database::Filters &c, const std::string &nombre)
   return res;
 }
 
-linear_set<Database::Filters> Database::top_criterios() const
+linear_set<Database::Filters> Database::mostUsedFilter() const
 {
   linear_set<Filters> ret;
   int max = 0;

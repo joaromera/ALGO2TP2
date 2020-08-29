@@ -226,15 +226,15 @@ public:
 
   const Table &getTable(const std::string &nombre) const;
 
-  int useFilter(const Filters &filter) const;
+  int filterUsageCount(const Filters &filter) const;
 
   bool isValidRecord(const Record &record, const std::string &name) const;
 
-  bool criterioValido(const Filters &c, const std::string &nombre) const;
+  bool isValidFilter(const Filters &c, const std::string &nombre) const;
 
-  Table busqueda(const Filters &c, const std::string &nombre);
+  Table search(const Filters &c, const std::string &nombre);
 
-  linear_set<Filters> top_criterios() const;
+  linear_set<Filters> mostUsedFilter() const;
 
   void createIndex(const std::string &table, const std::string &column);
 
@@ -254,7 +254,7 @@ private:
 
   std::list<Record> &_filterRecords(const std::string &column, const Datum &value, std::list<Record> &records) const;
 
-  std::pair<std::vector<std::string>, std::vector<Datum>> _tipos_tabla(const Table &t);
+  std::pair<std::vector<std::string>, std::vector<Datum>> _tableTypes(const Table &t);
 
   Database::join_iterator join_helper(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden);
 };

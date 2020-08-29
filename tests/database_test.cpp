@@ -24,7 +24,7 @@ TEST(BasicTests, NewDatabaseIsEmpty)
 TEST(BasicTests, UsingCriteriaWithEmptyDatabaseIsFalse)
 {
   Database db;
-  EXPECT_FALSE(db.useFilter(Database::Filters()));
+  EXPECT_FALSE(db.filterUsageCount(Database::Filters()));
 }
 
 TEST(BasicTests, BasicTableOperationsInDatabase)
@@ -240,7 +240,7 @@ TEST_F(DBAlumnos, validar_registro)
 TEST_F(DBAlumnos, busqueda_base)
 {
   // Incluye búsqueda equals simple
-  Table res = db.busqueda({ Rig("LU", "1/90") }, "alumnos");
+  Table res = db.search({ Rig("LU", "1/90") }, "alumnos");
   EXPECT_EQ(res.records().size(), (size_t) 1);
   EXPECT_EQ(res.columns(), alumnos.columns());
   EXPECT_EQ(res.keys(), alumnos.keys());
@@ -249,7 +249,7 @@ TEST_F(DBAlumnos, busqueda_base)
                          res.records().begin(),
                          res.records().end()));
 
-  res = db.busqueda({ Rig("LU_A", 90) }, "libretas");
+  res = db.search({ Rig("LU_A", 90) }, "libretas");
   EXPECT_EQ(res.records().size(), (size_t) 2);
   EXPECT_EQ(res.columns(), libretas.columns());
   EXPECT_EQ(res.keys(), libretas.keys());
@@ -258,7 +258,7 @@ TEST_F(DBAlumnos, busqueda_base)
                          res.records().begin(),
                          res.records().end()));
 
-  res = db.busqueda({ Rig("Materia", "AED2") }, "materias");
+  res = db.search({ Rig("Materia", "AED2") }, "materias");
   EXPECT_EQ(res.records().size(), (size_t) 3);
   EXPECT_EQ(res.columns(), materias.columns());
   EXPECT_EQ(res.keys(), materias.keys());
@@ -270,14 +270,14 @@ TEST_F(DBAlumnos, busqueda_base)
 
 TEST_F(DBAlumnos, busqueda_distinto_simple)
 {
-  Table res = db.busqueda({ Rdif("LU_A", 80) }, "libretas");
+  Table res = db.search({ Rdif("LU_A", 80) }, "libretas");
   EXPECT_EQ(res.records().size(), (size_t) 4);
   EXPECT_TRUE(isIncluded(libretas.records().begin(),
                          libretas.records().end(),
                          res.records().begin(),
                          res.records().end()));
 
-  res = db.busqueda({ Rdif("Editor", "Vim") }, "alumnos");
+  res = db.search({ Rdif("Editor", "Vim") }, "alumnos");
   EXPECT_EQ(res.records().size(), (size_t) 2);
   EXPECT_TRUE(isIncluded(alumnos.records().begin(),
                          alumnos.records().end(),
@@ -287,7 +287,7 @@ TEST_F(DBAlumnos, busqueda_distinto_simple)
 
 TEST_F(DBAlumnos, busqueda_igual_doble)
 {
-  Table res = db.busqueda({ Rig("LU_N", 1), Rig("LU_A", 90) },
+  Table res = db.search({ Rig("LU_N", 1), Rig("LU_A", 90) },
     "libretas");
   EXPECT_EQ(res.records().size(), (size_t) 1);
   EXPECT_TRUE(isIncluded(libretas.records().begin(),
@@ -296,7 +296,7 @@ TEST_F(DBAlumnos, busqueda_igual_doble)
                          res.records().end()));
 
   // Otro orden
-  res = db.busqueda({ Rig("LU_A", 90), Rig("LU_N", 1) },
+  res = db.search({ Rig("LU_A", 90), Rig("LU_N", 1) },
     "libretas");
   EXPECT_EQ(res.records().size(), (size_t) 1);
   EXPECT_TRUE(isIncluded(libretas.records().begin(),
@@ -304,7 +304,7 @@ TEST_F(DBAlumnos, busqueda_igual_doble)
                          res.records().begin(),
                          res.records().end()));
 
-  res = db.busqueda({ Rig("Editor", "Vim"), Rig("OS", "Linux") },
+  res = db.search({ Rig("Editor", "Vim"), Rig("OS", "Linux") },
     "alumnos");
   EXPECT_EQ(res.records().size(), (size_t) 2);
   EXPECT_TRUE(isIncluded(alumnos.records().begin(),
@@ -312,7 +312,7 @@ TEST_F(DBAlumnos, busqueda_igual_doble)
                          res.records().begin(),
                          res.records().end()));
 
-  res = db.busqueda({ Rig("OS", "macOS"), Rig("Editor", "Vim") },
+  res = db.search({ Rig("OS", "macOS"), Rig("Editor", "Vim") },
     "alumnos");
   EXPECT_EQ(res.records().size(), (size_t) 3);
   EXPECT_TRUE(isIncluded(alumnos.records().begin(),
@@ -323,7 +323,7 @@ TEST_F(DBAlumnos, busqueda_igual_doble)
 
 TEST_F(DBAlumnos, busqueda_distinto_doble)
 {
-  Table res = db.busqueda({ Rdif("LU_N", 1), Rdif("LU_A", 90) },
+  Table res = db.search({ Rdif("LU_N", 1), Rdif("LU_A", 90) },
     "libretas");
   EXPECT_EQ(res.records().size(), (size_t) 5);
   EXPECT_TRUE(isIncluded(libretas.records().begin(),
@@ -332,7 +332,7 @@ TEST_F(DBAlumnos, busqueda_distinto_doble)
                          res.records().end()));
 
   // Otro orden
-  res = db.busqueda({ Rdif("LU_A", 90), Rdif("LU_N", 1) },
+  res = db.search({ Rdif("LU_A", 90), Rdif("LU_N", 1) },
     "libretas");
   EXPECT_EQ(res.records().size(), (size_t) 5);
   EXPECT_TRUE(isIncluded(libretas.records().begin(),
@@ -340,7 +340,7 @@ TEST_F(DBAlumnos, busqueda_distinto_doble)
                          res.records().begin(),
                          res.records().end()));
 
-  res = db.busqueda({ Rdif("Editor", "Vim"), Rdif("OS", "Linux") },
+  res = db.search({ Rdif("Editor", "Vim"), Rdif("OS", "Linux") },
     "alumnos");
   EXPECT_EQ(res.records().size(), (size_t) 2);
   EXPECT_TRUE(isIncluded(alumnos.records().begin(),
@@ -348,7 +348,7 @@ TEST_F(DBAlumnos, busqueda_distinto_doble)
                          res.records().begin(),
                          res.records().end()));
 
-  res = db.busqueda({ Rdif("OS", "Win"), Rdif("Editor", "Vim") },
+  res = db.search({ Rdif("OS", "Win"), Rdif("Editor", "Vim") },
     "alumnos");
   EXPECT_EQ(res.records().size(), (size_t) 0);
   EXPECT_TRUE(isIncluded(alumnos.records().begin(),
@@ -356,7 +356,7 @@ TEST_F(DBAlumnos, busqueda_distinto_doble)
                          res.records().begin(),
                          res.records().end()));
 
-  res = db.busqueda({ Rdif("OS", "macOS"), Rdif("Editor", "Vim") },
+  res = db.search({ Rdif("OS", "macOS"), Rdif("Editor", "Vim") },
     "alumnos");
   EXPECT_EQ(res.records().size(), (size_t) 2);
   EXPECT_TRUE(isIncluded(alumnos.records().begin(),
@@ -367,7 +367,7 @@ TEST_F(DBAlumnos, busqueda_distinto_doble)
 
 TEST_F(DBAlumnos, busqueda_igual_distinto)
 {
-  Table res = db.busqueda({ Rig("Editor", "Vim"), Rdif("OS", "macOS") },
+  Table res = db.search({ Rig("Editor", "Vim"), Rdif("OS", "macOS") },
     "alumnos");
   EXPECT_EQ(res.records().size(), (size_t) 2);
   EXPECT_TRUE(isIncluded(alumnos.records().begin(),
@@ -375,7 +375,7 @@ TEST_F(DBAlumnos, busqueda_igual_distinto)
                          res.records().begin(),
                          res.records().end()));
 
-  res = db.busqueda({ Rig("OS", "Linux"), Rdif("Nombre", "March") },
+  res = db.search({ Rig("OS", "Linux"), Rdif("Nombre", "March") },
     "alumnos");
   EXPECT_EQ(res.records().size(), (size_t) 1);
   EXPECT_TRUE(isIncluded(alumnos.records().begin(),
@@ -383,7 +383,7 @@ TEST_F(DBAlumnos, busqueda_igual_distinto)
                          res.records().begin(),
                          res.records().end()));
 
-  res = db.busqueda({ Rdif("OS", "Linux"), Rig("Nombre", "March") },
+  res = db.search({ Rdif("OS", "Linux"), Rig("Nombre", "March") },
     "alumnos");
   EXPECT_EQ(res.records().size(), (size_t) 0);
   EXPECT_TRUE(isIncluded(alumnos.records().begin(),
@@ -391,7 +391,7 @@ TEST_F(DBAlumnos, busqueda_igual_distinto)
                          res.records().begin(),
                          res.records().end()));
 
-  res = db.busqueda({ Rdif("OS", "macOS"), Rig("Editor", "Vim") },
+  res = db.search({ Rdif("OS", "macOS"), Rig("Editor", "Vim") },
     "alumnos");
   EXPECT_EQ(res.records().size(), (size_t) 2);
   EXPECT_TRUE(isIncluded(alumnos.records().begin(),
@@ -402,7 +402,7 @@ TEST_F(DBAlumnos, busqueda_igual_distinto)
 
 TEST_F(DBAlumnos, busqueda_igual_distinto_doble)
 {
-  Table res = db.busqueda({ Rig("Editor", "Vim"), Rdif("OS", "macOS"), Rig("Nombre", "March") },
+  Table res = db.search({ Rig("Editor", "Vim"), Rdif("OS", "macOS"), Rig("Nombre", "March") },
     "alumnos");
   EXPECT_EQ(res.records().size(), (size_t) 1);
   EXPECT_TRUE(isIncluded(alumnos.records().begin(),
@@ -410,7 +410,7 @@ TEST_F(DBAlumnos, busqueda_igual_distinto_doble)
                          res.records().begin(),
                          res.records().end()));
 
-  res = db.busqueda({ Rig("OS", "Win"), Rdif("Nombre", "March"), Rig("Editor", "CLion") },
+  res = db.search({ Rig("OS", "Win"), Rdif("Nombre", "March"), Rig("Editor", "CLion") },
     "alumnos");
   EXPECT_EQ(res.records().size(), (size_t) 1);
   EXPECT_TRUE(isIncluded(alumnos.records().begin(),
@@ -418,7 +418,7 @@ TEST_F(DBAlumnos, busqueda_igual_distinto_doble)
                          res.records().begin(),
                          res.records().end()));
 
-  res = db.busqueda({ Rdif("Nombre", "Crack"), Rig("OS", "macOS"), Rig("Editor", "Vim") },
+  res = db.search({ Rdif("Nombre", "Crack"), Rig("OS", "macOS"), Rig("Editor", "Vim") },
     "alumnos");
   EXPECT_EQ(res.records().size(), (size_t) 3);
   EXPECT_TRUE(isIncluded(alumnos.records().begin(),
@@ -431,108 +431,108 @@ TEST_F(DBAlumnos, busqueda_igual_distinto_doble)
 TEST_F(DBAlumnos, crit_simple_nombre)
 {
   // ==
-  EXPECT_FALSE(db.criterioValido({ { Rig("LU_X", 1) } }, "libretas"));
-  EXPECT_FALSE(db.criterioValido({ { Rig("LU_X", "") } }, "libretas"));
-  EXPECT_FALSE(db.criterioValido({ { Rig("LU_X", 1) } }, "alumnos"));
-  EXPECT_FALSE(db.criterioValido({ { Rig("LU_X", "") } }, "alumnos"));
-  EXPECT_TRUE(db.criterioValido({ { Rig("LU_N", 5) } }, "libretas"));
-  EXPECT_TRUE(db.criterioValido({ { Rig("LU", "") } }, "alumnos"));
+  EXPECT_FALSE(db.isValidFilter({ { Rig("LU_X", 1) } }, "libretas"));
+  EXPECT_FALSE(db.isValidFilter({ { Rig("LU_X", "") } }, "libretas"));
+  EXPECT_FALSE(db.isValidFilter({ { Rig("LU_X", 1) } }, "alumnos"));
+  EXPECT_FALSE(db.isValidFilter({ { Rig("LU_X", "") } }, "alumnos"));
+  EXPECT_TRUE(db.isValidFilter({ { Rig("LU_N", 5) } }, "libretas"));
+  EXPECT_TRUE(db.isValidFilter({ { Rig("LU", "") } }, "alumnos"));
 
   // !=
-  EXPECT_FALSE(db.criterioValido({ { Rdif("LU_X", 1) } }, "libretas"));
-  EXPECT_FALSE(db.criterioValido({ { Rdif("LU_X", "") } }, "libretas"));
-  EXPECT_FALSE(db.criterioValido({ { Rdif("LU_X", 1) } }, "alumnos"));
-  EXPECT_FALSE(db.criterioValido({ { Rdif("LU_X", "") } }, "alumnos"));
-  EXPECT_TRUE(db.criterioValido({ { Rdif("LU_N", 5) } }, "libretas"));
-  EXPECT_TRUE(db.criterioValido({ { Rdif("LU", "") } }, "alumnos"));
+  EXPECT_FALSE(db.isValidFilter({ { Rdif("LU_X", 1) } }, "libretas"));
+  EXPECT_FALSE(db.isValidFilter({ { Rdif("LU_X", "") } }, "libretas"));
+  EXPECT_FALSE(db.isValidFilter({ { Rdif("LU_X", 1) } }, "alumnos"));
+  EXPECT_FALSE(db.isValidFilter({ { Rdif("LU_X", "") } }, "alumnos"));
+  EXPECT_TRUE(db.isValidFilter({ { Rdif("LU_N", 5) } }, "libretas"));
+  EXPECT_TRUE(db.isValidFilter({ { Rdif("LU", "") } }, "alumnos"));
 }
 
 TEST_F(DBAlumnos, crit_simple_tipo)
 {
   // ==
-  EXPECT_FALSE(db.criterioValido({ { Rig("LU_A", "") } }, "libretas"));
-  EXPECT_FALSE(db.criterioValido({ { Rig("LU", 1) } }, "alumnos"));
-  EXPECT_TRUE(db.criterioValido({ { Rig("LU_A", 5) } }, "libretas"));
-  EXPECT_TRUE(db.criterioValido({ { Rig("LU", "A") } }, "alumnos"));
+  EXPECT_FALSE(db.isValidFilter({ { Rig("LU_A", "") } }, "libretas"));
+  EXPECT_FALSE(db.isValidFilter({ { Rig("LU", 1) } }, "alumnos"));
+  EXPECT_TRUE(db.isValidFilter({ { Rig("LU_A", 5) } }, "libretas"));
+  EXPECT_TRUE(db.isValidFilter({ { Rig("LU", "A") } }, "alumnos"));
 
   // !=
-  EXPECT_FALSE(db.criterioValido({ { Rdif("LU_A", "") } }, "libretas"));
-  EXPECT_FALSE(db.criterioValido({ { Rdif("LU", 1) } }, "alumnos"));
-  EXPECT_TRUE(db.criterioValido({ { Rdif("LU_A", 5) } }, "libretas"));
-  EXPECT_TRUE(db.criterioValido({ { Rdif("LU", "A") } }, "alumnos"));
+  EXPECT_FALSE(db.isValidFilter({ { Rdif("LU_A", "") } }, "libretas"));
+  EXPECT_FALSE(db.isValidFilter({ { Rdif("LU", 1) } }, "alumnos"));
+  EXPECT_TRUE(db.isValidFilter({ { Rdif("LU_A", 5) } }, "libretas"));
+  EXPECT_TRUE(db.isValidFilter({ { Rdif("LU", "A") } }, "alumnos"));
 }
 
 TEST_F(DBAlumnos, crit_doble_nombre)
 {
   // ==
-  EXPECT_FALSE(db.criterioValido({ { Rig("LU_A", 5), Rig("LU_X", 5) } },
+  EXPECT_FALSE(db.isValidFilter({ { Rig("LU_A", 5), Rig("LU_X", 5) } },
     "libretas"));
-  EXPECT_TRUE(db.criterioValido({ { Rig("LU_A", 5), Rig("LU_N", 5) } },
+  EXPECT_TRUE(db.isValidFilter({ { Rig("LU_A", 5), Rig("LU_N", 5) } },
     "libretas"));
-  EXPECT_FALSE(db.criterioValido({ { Rig("LU", ""), Rig("os", "") } },
+  EXPECT_FALSE(db.isValidFilter({ { Rig("LU", ""), Rig("os", "") } },
     "alumnos"));
-  EXPECT_TRUE(db.criterioValido({ { Rig("LU", ""), Rig("OS", "") } },
+  EXPECT_TRUE(db.isValidFilter({ { Rig("LU", ""), Rig("OS", "") } },
     "alumnos"));
 
   // !=
-  EXPECT_FALSE(db.criterioValido({ { Rdif("LU_A", 5), Rig("LU_X", 5) } },
+  EXPECT_FALSE(db.isValidFilter({ { Rdif("LU_A", 5), Rig("LU_X", 5) } },
     "libretas"));
-  EXPECT_TRUE(db.criterioValido({ { Rdif("LU_A", 5), Rig("LU_N", 5) } },
+  EXPECT_TRUE(db.isValidFilter({ { Rdif("LU_A", 5), Rig("LU_N", 5) } },
     "libretas"));
-  EXPECT_FALSE(db.criterioValido({ { Rdif("LU", ""), Rig("os", "") } },
+  EXPECT_FALSE(db.isValidFilter({ { Rdif("LU", ""), Rig("os", "") } },
     "alumnos"));
-  EXPECT_TRUE(db.criterioValido({ { Rdif("LU", ""), Rig("OS", "") } },
+  EXPECT_TRUE(db.isValidFilter({ { Rdif("LU", ""), Rig("OS", "") } },
     "alumnos"));
 }
 
 TEST_F(DBAlumnos, crit_doble_tipo)
 {
   // ==
-  EXPECT_FALSE(db.criterioValido({ { Rig("LU_A", 5), Rig("LU_N", "") } },
+  EXPECT_FALSE(db.isValidFilter({ { Rig("LU_A", 5), Rig("LU_N", "") } },
     "libretas"));
-  EXPECT_TRUE(db.criterioValido({ { Rig("LU_A", 5), Rig("LU_N", 5) } },
+  EXPECT_TRUE(db.isValidFilter({ { Rig("LU_A", 5), Rig("LU_N", 5) } },
     "libretas"));
-  EXPECT_FALSE(db.criterioValido({ { Rig("LU", 4), Rig("OS", "") } },
+  EXPECT_FALSE(db.isValidFilter({ { Rig("LU", 4), Rig("OS", "") } },
     "alumnos"));
-  EXPECT_TRUE(db.criterioValido({ { Rig("LU", ""), Rig("OS", "") } },
+  EXPECT_TRUE(db.isValidFilter({ { Rig("LU", ""), Rig("OS", "") } },
     "alumnos"));
 
   // !=
-  EXPECT_FALSE(db.criterioValido({ { Rdif("LU_A", 5), Rig("LU_N", "") } },
+  EXPECT_FALSE(db.isValidFilter({ { Rdif("LU_A", 5), Rig("LU_N", "") } },
     "libretas"));
-  EXPECT_TRUE(db.criterioValido({ { Rdif("LU_A", 5), Rig("LU_N", 5) } },
+  EXPECT_TRUE(db.isValidFilter({ { Rdif("LU_A", 5), Rig("LU_N", 5) } },
     "libretas"));
-  EXPECT_FALSE(db.criterioValido({ { Rdif("LU", 4), Rig("OS", "") } },
+  EXPECT_FALSE(db.isValidFilter({ { Rdif("LU", 4), Rig("OS", "") } },
     "alumnos"));
-  EXPECT_TRUE(db.criterioValido({ { Rdif("LU", ""), Rig("OS", "") } },
+  EXPECT_TRUE(db.isValidFilter({ { Rdif("LU", ""), Rig("OS", "") } },
     "alumnos"));
 }
 
 // ## Uso Filters
 TEST_F(DBAlumnos, uso_un_criterio)
 {
-  db.busqueda({ Rig("OS", "A") }, "alumnos");
-  EXPECT_EQ(db.useFilter({ Rig("OS", "A") }), 1);
-  EXPECT_EQ(db.top_criterios(),
+  db.search({ Rig("OS", "A") }, "alumnos");
+  EXPECT_EQ(db.filterUsageCount({ Rig("OS", "A") }), 1);
+  EXPECT_EQ(db.mostUsedFilter(),
     linear_set<Database::Filters>({ { Rig("OS", "A") } }));
-  db.busqueda({ Rig("OS", "A") }, "alumnos");
-  EXPECT_EQ(db.useFilter({ Rig("OS", "A") }), 2);
-  EXPECT_EQ(db.top_criterios(),
-    linear_set<Database::Filters>({ { Rig("OS", "A") } }));
-
-  db.busqueda({ Rig("LU_A", 1) }, "libretas");
-  EXPECT_EQ(db.useFilter({ Rig("LU_A", 1) }), 1);
-  EXPECT_EQ(db.top_criterios(),
+  db.search({ Rig("OS", "A") }, "alumnos");
+  EXPECT_EQ(db.filterUsageCount({ Rig("OS", "A") }), 2);
+  EXPECT_EQ(db.mostUsedFilter(),
     linear_set<Database::Filters>({ { Rig("OS", "A") } }));
 
-  db.busqueda({ Rig("LU_A", 1) }, "libretas");
-  EXPECT_EQ(db.useFilter({ Rig("LU_A", 1) }), 2);
-  EXPECT_EQ(db.top_criterios(),
+  db.search({ Rig("LU_A", 1) }, "libretas");
+  EXPECT_EQ(db.filterUsageCount({ Rig("LU_A", 1) }), 1);
+  EXPECT_EQ(db.mostUsedFilter(),
+    linear_set<Database::Filters>({ { Rig("OS", "A") } }));
+
+  db.search({ Rig("LU_A", 1) }, "libretas");
+  EXPECT_EQ(db.filterUsageCount({ Rig("LU_A", 1) }), 2);
+  EXPECT_EQ(db.mostUsedFilter(),
     linear_set<Database::Filters>({ { Rig("OS", "A") },
       { Rig("LU_A", 1) } }));
-  db.busqueda({ Rig("LU_A", 1) }, "libretas");
-  EXPECT_EQ(db.useFilter({ Rig("LU_A", 1) }), 3);
-  EXPECT_EQ(db.top_criterios(),
+  db.search({ Rig("LU_A", 1) }, "libretas");
+  EXPECT_EQ(db.filterUsageCount({ Rig("LU_A", 1) }), 3);
+  EXPECT_EQ(db.mostUsedFilter(),
     linear_set<Database::Filters>({ { Rig("LU_A", 1) } }));
 }
 
@@ -541,21 +541,21 @@ TEST_F(DBAlumnos, uso_un_criterio_perm)
   Database::Filters c = { Rig("OS", "A"), Rig("Editor", "Vim") };
   Database::Filters c_perm = { Rig("Editor", "Vim"), Rig("OS", "A") };
   Database::Filters c_sim = { Rig("OS", "A") };
-  db.busqueda(c, "alumnos");
-  EXPECT_EQ(db.useFilter(c), 1);
-  EXPECT_EQ(db.useFilter(c_sim), 0);
-  EXPECT_EQ(db.top_criterios(),
+  db.search(c, "alumnos");
+  EXPECT_EQ(db.filterUsageCount(c), 1);
+  EXPECT_EQ(db.filterUsageCount(c_sim), 0);
+  EXPECT_EQ(db.mostUsedFilter(),
     linear_set<Database::Filters>({ c }));
 
-  db.busqueda(c_perm, "alumnos");
-  EXPECT_EQ(db.useFilter(c), 2);
-  EXPECT_EQ(db.useFilter(c_sim), 0);
-  EXPECT_EQ(db.top_criterios(),
+  db.search(c_perm, "alumnos");
+  EXPECT_EQ(db.filterUsageCount(c), 2);
+  EXPECT_EQ(db.filterUsageCount(c_sim), 0);
+  EXPECT_EQ(db.mostUsedFilter(),
     linear_set<Database::Filters>({ c }));
 
-  db.busqueda(c_sim, "alumnos");
-  EXPECT_EQ(db.useFilter(c_sim), 1);
-  EXPECT_EQ(db.top_criterios(),
+  db.search(c_sim, "alumnos");
+  EXPECT_EQ(db.filterUsageCount(c_sim), 1);
+  EXPECT_EQ(db.mostUsedFilter(),
     linear_set<Database::Filters>({ c }));
 }
 
@@ -564,16 +564,16 @@ TEST_F(DBAlumnos, crit_otro_bool)
   Database::Filters c = { Rig("OS", "A") };
   Database::Filters c_inv = { Rdif("OS", "A") };
 
-  EXPECT_EQ(db.useFilter(c), 0);
-  EXPECT_EQ(db.useFilter(c_inv), 0);
+  EXPECT_EQ(db.filterUsageCount(c), 0);
+  EXPECT_EQ(db.filterUsageCount(c_inv), 0);
 
-  db.busqueda(c, "alumnos");
-  EXPECT_EQ(db.useFilter(c), 1);
-  EXPECT_EQ(db.useFilter(c_inv), 0);
+  db.search(c, "alumnos");
+  EXPECT_EQ(db.filterUsageCount(c), 1);
+  EXPECT_EQ(db.filterUsageCount(c_inv), 0);
 
-  db.busqueda(c_inv, "alumnos");
-  EXPECT_EQ(db.useFilter(c), 1);
-  EXPECT_EQ(db.useFilter(c_inv), 1);
+  db.search(c_inv, "alumnos");
+  EXPECT_EQ(db.filterUsageCount(c), 1);
+  EXPECT_EQ(db.filterUsageCount(c_inv), 1);
 }
 
 TEST_F(DBAlumnos, crit_doble_otro_bool)
@@ -581,16 +581,16 @@ TEST_F(DBAlumnos, crit_doble_otro_bool)
   Database::Filters c = { Rig("OS", "A"), Rig("Editor", "Vim") };
   Database::Filters c_inv = { Rdif("OS", "A"), Rig("Editor", "Vim") };
 
-  EXPECT_EQ(db.useFilter(c), 0);
-  EXPECT_EQ(db.useFilter(c_inv), 0);
+  EXPECT_EQ(db.filterUsageCount(c), 0);
+  EXPECT_EQ(db.filterUsageCount(c_inv), 0);
 
-  db.busqueda(c, "alumnos");
-  EXPECT_EQ(db.useFilter(c), 1);
-  EXPECT_EQ(db.useFilter(c_inv), 0);
+  db.search(c, "alumnos");
+  EXPECT_EQ(db.filterUsageCount(c), 1);
+  EXPECT_EQ(db.filterUsageCount(c_inv), 0);
 
-  db.busqueda(c_inv, "alumnos");
-  EXPECT_EQ(db.useFilter(c), 1);
-  EXPECT_EQ(db.useFilter(c_inv), 1);
+  db.search(c_inv, "alumnos");
+  EXPECT_EQ(db.filterUsageCount(c), 1);
+  EXPECT_EQ(db.filterUsageCount(c_inv), 1);
 }
 
 // ## Join
