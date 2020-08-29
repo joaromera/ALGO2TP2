@@ -22,7 +22,7 @@ The original problem set is [here](docs/tp2_enunciado.pdf) (spanish only).
 
 Formal specification can be found [here](docs/tp2_especificacion.pdf). This is also spanish only, but it is worth to take a look at the degree of formality the project aimed to.
 
-I used `Doxygen` to document the code base. The generated html is [here](docs/html/index.html). Unfortunately, it's outdated.
+I used `Doxygen` to document the code base. The generated html is `docs/html/index.html`. Unfortunately, it's outdated.
 
 ## What to look for... 👀
 
