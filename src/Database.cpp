@@ -21,14 +21,7 @@ void Database::addRecord(const Record &record, const std::string &tableName)
   {
     if (hasIndex(tableName, c))
     {
-      if (record.value(c).isInteger())
-      {
-        _indexesInt[tableName][c][record.value(c).value<int>()].insert(record);
-      }
-      else
-      {
-        _indexes[tableName][c][record.value(c).value<std::string>()].insert(record);
-      }
+      _indexRefs[tableName][c][record.value(c)].insert(record);
     }
   }
 }
@@ -163,23 +156,17 @@ linear_set<Database::Filters> Database::top_criterios() const
 
 void Database::createIndex(const std::string &table, const std::string &column)
 {
-  linear_set<Record> reg = getTable(table).records();
+  const linear_set<Record> &reg = getTable(table).records();
+
   for (const auto& r : reg)
   {
-    if (r.value(column).isInteger())
-    {
-      _indexesInt[table][column][r.value(column).value<int>()].insert(r);
-    }
-    else
-    {
-      _indexes[table][column][r.value(column).value<std::string>()].insert(r);
-    }
+    _indexRefs[table][column][r.value(column)].insert(r);
   }
 }
 
 bool Database::hasIndex(const std::string &table, const std::string &column)
 {
-  return _indexes[table].count(column) >= 1 || _indexesInt[table].count(column) >= 1;
+  return _indexRefs[table].count(column) >= 1;
 }
 
 Database::join_iterator Database::join(const std::string &table1, const std::string &table2, const std::string &columnName)
@@ -190,31 +177,30 @@ Database::join_iterator Database::join(const std::string &table1, const std::str
 
   if (getTable(table1).columnType(columnName).isInteger())
   {
-    return join_helper_int(indexedTable, nonIndexedTable, columnName, firstTableHasIndex);
+    return join_helper(indexedTable, nonIndexedTable, columnName, firstTableHasIndex, 1);
   }
   else
   {
-    return join_helper_str(indexedTable, nonIndexedTable, columnName, firstTableHasIndex);
+    return join_helper(indexedTable, nonIndexedTable, columnName, firstTableHasIndex, 0);
   }
 }
 
-Database::join_iterator Database::join_helper_str(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden)
+Database::join_iterator Database::join_helper(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden, const int tipo)
 {
   const Table &t2 = getTable(tabla2);
-  int tipo = 0;
   auto it2 = t2.begin();
   int cant_reg_it2 = t2.size();
-  std::string clave = (*it2).value(campo).value<std::string>();
+  auto clave = (*it2).value(campo);
 
-  auto it = _indexes[tabla1].at(campo).find(clave);
-  auto it_end = _indexes[tabla1].at(campo).end();
+  auto it = _indexRefs[tabla1].at(campo).find(clave)->second.begin();
+  auto it_end = _indexRefs[tabla1].at(campo).find(clave)->second.end();
 
   // Busca primer coincidencia entre las dos tableNames
   while (cant_reg_it2 != 0 && it == it_end)
   {
-    clave = (*it2).value(campo).value<std::string>();
-    it = _indexes[tabla1].at(campo).find(clave);
-    it_end = _indexes[tabla1].at(campo).end();
+    clave = (*it2).value(campo);
+    it = _indexRefs[tabla1].at(campo).find(clave)->second.begin();
+    it_end = _indexRefs[tabla1].at(campo).find(clave)->second.end();
     if (it == it_end)
     {
       ++it2;
@@ -224,46 +210,19 @@ Database::join_iterator Database::join_helper_str(const std::string &tabla1, con
 
   if (cant_reg_it2 == 0) return join_iterator();
 
-  auto diccClaves = std::make_shared<string_map<linear_set<Record>>>(_indexes[tabla1].at(campo));
-  auto it_tabla_con_indice = _indexes[tabla1].at(campo).at(clave).begin();
-  unsigned long cant_reg_por_indice = _indexes[tabla1].at(campo).at(clave).size();
+  auto diccClaves = std::make_shared<std::map<Datum, linear_set<Record>>>(_indexRefs[tabla1].at(campo));
+  auto &tab = _indexRefs[tabla1];
+  auto &col = tab.at(campo);
+
+  if (col.find(clave) == col.end()) return join_iterator();
+
+  auto &dat = col.at(clave);
+
+  auto it_tabla_con_indice = dat.begin();
+  unsigned long cant_reg_por_indice = _indexRefs[tabla1].at(campo).at(clave).size();
   auto it_tabla_sin_indice = t2.begin();
 
-  return join_iterator(it_tabla_con_indice, it_tabla_sin_indice, cant_reg_por_indice, cant_reg_it2, diccClaves, nullptr, campo, orden, tipo);
-}
-
-Database::join_iterator Database::join_helper_int(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden)
-{
-  const Table &t2 = getTable(tabla2);
-  int tipo = 1;
-  auto it2 = t2.begin();
-  int cant_reg_it2 = t2.size();
-  int clave = (*it2).value(campo).value<int>();
-
-  auto it = _indexesInt[tabla1].at(campo).find(clave)->second.begin();
-  auto it_end = _indexesInt[tabla1].at(campo).find(clave)->second.end();
-
-  // Busca primer coincidencia entre las dos tableNames
-  while (cant_reg_it2 != 0 && it == it_end)
-  {
-    clave = (*it2).value(campo).value<int>();
-    it = _indexesInt[tabla1].at(campo).find(clave)->second.begin();
-    it_end = _indexesInt[tabla1].at(campo).find(clave)->second.end();
-    if (it == it_end)
-    {
-      ++it2;
-      cant_reg_it2--;
-    }
-  }
-
-  if (cant_reg_it2 == 0) return join_iterator();
-
-  auto diccClaves = std::make_shared<std::map<int, linear_set<Record>>>(_indexesInt[tabla1].at(campo));
-  auto it_tabla_con_indice = _indexesInt[tabla1].at(campo).at(clave).begin();
-  unsigned long cant_reg_por_indice = _indexesInt[tabla1].at(campo).at(clave).size();
-  auto it_tabla_sin_indice = t2.begin();
-
-  return join_iterator(it_tabla_con_indice, it_tabla_sin_indice, cant_reg_por_indice, cant_reg_it2, nullptr, diccClaves, campo, orden, tipo);
+  return join_iterator(it_tabla_con_indice, it_tabla_sin_indice, cant_reg_por_indice, cant_reg_it2, diccClaves, campo, orden, tipo);
 }
 
 Database::join_iterator Database::join_end()

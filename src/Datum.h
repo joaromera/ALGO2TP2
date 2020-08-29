@@ -60,7 +60,7 @@ public:
 
   bool operator<(const Datum &rhs) const
   {
-    return self_.get() < rhs.self_.get();
+    return self_->operator<(rhs.self_);
   }
 
   friend std::ostream &operator<<(std::ostream &os, const Datum &datum)

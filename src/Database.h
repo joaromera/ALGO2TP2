@@ -14,6 +14,7 @@ using namespace Db::Types;
 
 typedef string_map<string_map<string_map<linear_set<Record>>>> Index;
 typedef string_map<string_map<std::map<int, linear_set<Record>>>> IndexInt;
+typedef string_map<string_map<std::map<Datum, linear_set<Record>>>> IndexRef;
 
 class Database
 {
@@ -37,8 +38,7 @@ public:
         it2 = std::make_shared<Table::const_iterator>(*n.it2);
         tableRecordCountByKey = n.tableRecordCountByKey;
         tableRecordCount = n.tableRecordCount;
-        stringKeys = n.stringKeys;
-        integerKeys = n.integerKeys;
+        datumKeys = n.datumKeys;
         campo = n.campo;
         isFinal = n.isFinal;
         orden = n.orden;
@@ -56,8 +56,7 @@ public:
       {
         it1 = std::make_shared<linear_set<Record>::const_iterator>(*n.it1);
         it2 = std::make_shared<Table::const_iterator>(*n.it2);
-        stringKeys = n.stringKeys;
-        integerKeys = n.integerKeys;
+        datumKeys = n.datumKeys;
         campo = n.campo;
         isFinal = n.isFinal;
         tableRecordCount = n.tableRecordCount;
@@ -76,7 +75,7 @@ public:
     {
       if (isFinal == j.isFinal) return true;
 
-      return it1 == j.it1 && it2 == j.it2 && stringKeys == j.stringKeys && integerKeys == j.integerKeys && tableRecordCount == j.tableRecordCount && tableRecordCountByKey == j.tableRecordCountByKey && campo == j.campo && orden == j.orden && tipo == j.tipo;
+      return it1 == j.it1 && it2 == j.it2 && datumKeys == j.datumKeys && tableRecordCount == j.tableRecordCount && tableRecordCountByKey == j.tableRecordCountByKey && campo == j.campo && orden == j.orden && tipo == j.tipo;
     }
 
     bool operator!=(const join_iterator &j) const
@@ -97,18 +96,9 @@ public:
         }
         else
         {
-          if (tipo == 0)
-          {
-            auto key = (*it2)->value(campo).value<std::string>();
-            findNextMatchByString(key);
-            return *this;
-          }
-          else
-          {
-            auto key = (*it2)->value(campo).value<int>();
-            findNextMatchByInteger(key);
-            return *this;
-          }
+          auto key = (*it2)->value(campo);
+          findNextMatchByDatum(key);
+          return *this;
         }
       }
       else
@@ -134,42 +124,24 @@ public:
     friend class Table;
 
   private:
-    join_iterator(linear_set<Record>::const_iterator a,
-      Table::const_iterator c,
-      int ind,
-      int sin,
-      std::shared_ptr<string_map<linear_set<Record>>> e,
-      std::shared_ptr<std::map<int, linear_set<Record>>> g,
-      const std::string &f,
-      const bool &o,
-      int t)
+    join_iterator(linear_set<Record>::const_iterator a, Table::const_iterator c, int ind, int sin, std::shared_ptr<std::map<Datum, linear_set<Record>>> e, const std::string &f, const bool &o, int t)
       : tableRecordCountByKey(ind)
       , tableRecordCount(sin)
-      , stringKeys(e)
-      , integerKeys(g)
+      , datumKeys(e)
       , campo(f)
       , isFinal(false)
       , orden(o)
       , tipo(t)
     {
-      if (t == 0) // string
-      {
-        it1 = std::make_shared<linear_set<Record>::const_iterator>(a);
-        it2 = std::make_shared<Table::const_iterator>(c);
-      }
-      else // integer
-      {
-        it1 = std::make_shared<linear_set<Record>::const_iterator>(a);
-        it2 = std::make_shared<Table::const_iterator>(c);
-      }
+      it1 = std::make_shared<linear_set<Record>::const_iterator>(a);
+      it2 = std::make_shared<Table::const_iterator>(c);
     }
 
     std::shared_ptr<linear_set<Record>::const_iterator> it1 {nullptr};
     std::shared_ptr<Table::const_iterator> it2 {nullptr};
     int tableRecordCountByKey{0};
     int tableRecordCount{0};
-    std::shared_ptr<string_map<linear_set<Record>>> stringKeys {nullptr};
-    std::shared_ptr<std::map<int, linear_set<Record>>> integerKeys {nullptr};
+    std::shared_ptr<std::map<Datum, linear_set<Record>>> datumKeys {nullptr};
     std::string campo {""};
     bool isFinal {true};
     bool orden {true};
@@ -202,8 +174,7 @@ public:
     {
       it1.reset();
       it2.reset();
-      integerKeys.reset();
-      stringKeys.reset();
+      datumKeys.reset();
       isFinal = true;
       campo = "";
     }
@@ -220,21 +191,21 @@ public:
       tableRecordCount--;
     }
 
-    void findNextMatchByString(std::string &key)
+    void findNextMatchByDatum(Datum datum)
     {
-      while (tableRecordCount != 0 && stringKeys->count(key) == 0)
+      while (tableRecordCount != 0 && datumKeys->count(datum) == 0)
       {
-        key = (*it2)->value(campo).value<std::string>();
-        if (stringKeys->count(key) == 0) incrementIteratorWithoutIndex();
+        datum = (*it2)->value(campo);
+        if (datumKeys->count(datum) == 0) incrementIteratorWithoutIndex();
       }
 
       if (tableRecordCount == 0)
       {
         advanceToEnd();
       }
-      else if (stringKeys->count(key) != 0)
+      else if (datumKeys->count(datum) != 0)
       {
-        setIteratorToNewStringKey(key);
+        setIteratorToNewDatumKey(datum);
       }
       else
       {
@@ -242,38 +213,10 @@ public:
       }
     }
 
-    void findNextMatchByInteger(int &key)
+    void setIteratorToNewDatumKey(const Datum &datum)
     {
-      while (tableRecordCount != 0 && integerKeys->count(key) == 0)
-      {
-        key = (*it2)->value(campo).value<int>();
-        if (integerKeys->count(key) == 0) incrementIteratorWithoutIndex();
-      }
-
-      if (tableRecordCount == 0)
-      {
-        advanceToEnd();
-      }
-      else if (integerKeys->count(key) != 0)
-      {
-        setIteratorToNewIntegerKey(key);
-      }
-      else
-      {
-        advanceToEnd();
-      }
-    }
-
-    void setIteratorToNewStringKey(const std::string &key)
-    {
-      it1 = std::make_shared<linear_set<Record>::const_iterator>(stringKeys->at(key).begin());
-      tableRecordCountByKey = stringKeys->at(key).size();
-    }
-
-    void setIteratorToNewIntegerKey(const int &key)
-    {
-      it1 = std::make_shared<linear_set<Record>::const_iterator>(integerKeys->at(key).begin());
-      tableRecordCountByKey = integerKeys->at(key).size();
+      it1 = std::make_shared<linear_set<Record>::const_iterator>(datumKeys->at(datum).begin());
+      tableRecordCountByKey = datumKeys->at(datum).size();
     }
   };
 
@@ -313,6 +256,7 @@ private:
   linear_map<Filters, int> _uso_criterios;
   Index _indexes;
   IndexInt _indexesInt;
+  IndexRef _indexRefs;
 
   std::list<Record> &_filterRecords(const std::string &column, const Datum &value, std::list<Record> &records, bool equals) const;
 
@@ -320,7 +264,5 @@ private:
 
   std::pair<std::vector<std::string>, std::vector<Datum>> _tipos_tabla(const Table &t);
 
-  join_iterator join_helper_str(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden);
-
-  join_iterator join_helper_int(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden);
+  Database::join_iterator join_helper(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden, const int tipo);
 };
