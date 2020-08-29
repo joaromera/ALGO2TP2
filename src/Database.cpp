@@ -68,11 +68,6 @@ bool Database::isValidRecord(const Record &record, const std::string &name) cons
   return true;
 }
 
-std::list<Record> &Database::_filterRecords(const std::string &column, const Datum &value, std::list<Record> &records) const
-{
-  return _filterRecords(column, value, records, true);
-}
-
 std::list<Record> &Database::_filterRecords(const std::string &column, const Datum &value, std::list<Record> &records, bool equals) const
 {
   auto iter = records.begin();
@@ -80,7 +75,11 @@ std::list<Record> &Database::_filterRecords(const std::string &column, const Dat
   while (iter != records.end())
   {
     auto now = iter++;
-    if (!equals ^ (now->value(column) != value)) records.erase(now);
+
+    if (((now->value(column) != value) && equals) || ((now->value(column) == value) && !equals))
+    {
+      records.erase(now);
+    }
   }
 
   return records;
