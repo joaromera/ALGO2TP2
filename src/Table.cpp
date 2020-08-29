@@ -1,75 +1,26 @@
+#include <algorithm>
 #include "Table.h"
 
 using namespace Db::Types;
 
-Table::Table(const linear_set<std::string> &keys, const std::vector<std::string> &columns, const std::vector<Datum> &types)
-  : _keys(keys)
+Table::const_iterator::const_iterator(const const_iterator &o_it)
+  : mRecordIterator(o_it.mRecordIterator)
 {
-  if (columns.size() > types.size()) throw std::invalid_argument("Each table column must have a Datum type");
-  if (keys.size() > types.size()) throw std::invalid_argument("Each table key must have a Datum type");
-
-  for (size_t i = 0; i < columns.size(); ++i)
-  {
-    _types.fast_insert(std::make_pair(columns[i], types[i]));
-    _columns.fast_insert(columns[i]);
-  }
 }
-
-Table::const_iterator Table::addRecord(const Record &r)
-{
-  return Table::const_iterator(linear_set<Record>::const_iterator(_records.fast_insert(r)));
-}
-
-const linear_set<std::string> &Table::columns() const
-{
-  return _columns;
-}
-
-const linear_set<std::string> &Table::keys() const
-{
-  return _keys;
-}
-
-const Datum &Table::columnType(const std::string &column) const
-{
-  return _types.at(column);
-}
-
-const linear_set<Record> &Table::records() const
-{
-  return _records;
-}
-
-Table::const_iterator Table::begin() const
-{
-  return Table::const_iterator(_records.begin());
-}
-
-Table::const_iterator Table::end() const
-{
-  return Table::const_iterator(_records.end());
-}
-
-size_t Table::size() const
-{
-  return _records.size();
-}
-
-Table::const_iterator::const_iterator(const const_iterator &o_it) : record_iterator(o_it.record_iterator) {}
 
 const Record &Table::const_iterator::operator*() const
 {
-  return *record_iterator;
+  return *mRecordIterator;
 }
 
 const Record *Table::const_iterator::operator->() const
 {
-  return &(*record_iterator);
+  return &(*mRecordIterator);
 }
 
 Table::const_iterator &Table::const_iterator::operator++()
 {
-  ++record_iterator;
+  ++mRecordIterator;
   return *this;
 }
 
@@ -82,37 +33,85 @@ Table::const_iterator Table::const_iterator::operator++(int)
 
 bool Table::const_iterator::operator==(const Table::const_iterator &it) const
 {
-  return record_iterator == it.record_iterator;
+  return mRecordIterator == it.mRecordIterator;
 }
 
 bool Table::const_iterator::operator!=(const Table::const_iterator &it) const
 {
-  return !(record_iterator == it.record_iterator);
+  return !(mRecordIterator == it.mRecordIterator);
 }
 
 Table::const_iterator::const_iterator(const linear_set<Record>::const_iterator record_it)
-  : record_iterator(record_it)
+  : mRecordIterator(record_it)
 {
+}
+
+Table::Table(const linear_set<std::string> &keys, const std::vector<std::string> &columns, const std::vector<Datum> &types)
+  : mKeys(keys)
+{
+  if (columns.size() > types.size())
+    throw std::invalid_argument("Each table column must have a Datum type");
+
+  if (keys.size() > types.size())
+    throw std::invalid_argument("Each table key must have a Datum type");
+
+  for (size_t i = 0; i < columns.size(); ++i)
+  {
+    mTypes.fast_insert(std::make_pair(columns[i], types[i]));
+    mColumns.fast_insert(columns[i]);
+  }
+}
+
+Table::const_iterator Table::addRecord(const Record &r)
+{
+  return Table::const_iterator(linear_set<Record>::const_iterator(mRecords.fast_insert(r)));
+}
+
+Table::const_iterator Table::begin() const
+{
+  return Table::const_iterator(mRecords.begin());
+}
+
+Table::const_iterator Table::end() const
+{
+  return Table::const_iterator(mRecords.end());
+}
+
+size_t Table::size() const
+{
+  return mRecords.size();
+}
+
+const linear_set<std::string> &Table::columns() const
+{
+  return mColumns;
+}
+
+const linear_set<std::string> &Table::keys() const
+{
+  return mKeys;
+}
+
+const Datum &Table::columnType(const std::string &column) const
+{
+  return mTypes.at(column);
+}
+
+const linear_set<Record> &Table::records() const
+{
+  return mRecords;
 }
 
 bool operator==(const Table &lhs, const Table &rhs)
 {
-  if (lhs.columns() != rhs.columns())
-  {
-    return false;
-  }
-  else if (lhs.keys() != rhs.keys())
-  {
-    return false;
-  }
-  else
-  {
-    for (const auto& c : lhs.columns())
-    {
-      if (lhs.columnType(c) != rhs.columnType(c)) { return false; }
-    }
-  }
-  return lhs.records() == rhs.records();
+  auto sameColumnTypes = [&] (const auto &c) {
+    return lhs.columnType(c) == rhs.columnType(c);
+  };
+
+  return lhs.columns() == rhs.columns() &&
+         lhs.keys() == rhs.keys() &&
+         std::all_of(lhs.columns().begin(), lhs.columns().end(), sameColumnTypes) &&
+         lhs.records() == rhs.records();
 }
 
 bool operator!=(const Table &lhs, const Table &rhs)

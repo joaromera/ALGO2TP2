@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-
 #include "Datum.h"
 #include "linear_map.h"
 #include "linear_set.h"
@@ -30,24 +29,24 @@ public:
 
     const_iterator(const linear_set<Record>::const_iterator);
 
-    linear_set<Record>::const_iterator record_iterator;
+    linear_set<Record>::const_iterator mRecordIterator;
   };
 
   Table(const linear_set<std::string> &keys, const std::vector<std::string> &columns, const std::vector<Datum> &types);
   const_iterator addRecord(const Record&);
+  const_iterator begin() const;
+  const_iterator end() const;
+  size_t size() const;
   const linear_set<std::string> &columns() const;
   const Datum &columnType(const std::string &column) const;
   const linear_set<std::string> &keys() const;
   const linear_set<Record> &records() const;
-  size_t size() const;
-  const_iterator begin() const;
-  const_iterator end() const;
 
 private:
-  linear_set<std::string> _keys;
-  linear_set<std::string> _columns;
-  linear_map<std::string, Datum> _types;
-  linear_set<Record> _records;
+  linear_set<std::string> mKeys;
+  linear_set<std::string> mColumns;
+  linear_map<std::string, Datum> mTypes;
+  linear_set<Record> mRecords;
 };
 
 bool operator==(const Table&, const Table&);
