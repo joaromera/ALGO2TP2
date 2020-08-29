@@ -281,17 +281,17 @@ public:
 
   Database();
 
-  void crearTabla(const std::string &nombre, const linear_set<std::string> &claves, const std::vector<std::string> &campos, const std::vector<Datum> &tipos);
+  void createTable(const std::string &name, const linear_set<std::string> &keys, const std::vector<std::string> &columns, const std::vector<Datum> &types);
 
-  void agregarRegistro(const Record &r, const std::string &nombre);
+  void addRecord(const Record &record, const std::string &name);
 
-  const linear_set<std::string> &tablas() const;
+  const linear_set<std::string> &tableNames() const;
 
-  const Table &dameTabla(const std::string &nombre) const;
+  const Table &getTable(const std::string &nombre) const;
 
-  int uso_criterio(const Filters &criterio) const;
+  int useFilter(const Filters &filter) const;
 
-  bool registroValido(const Record &r, const std::string &nombre) const;
+  bool isValidRecord(const Record &record, const std::string &name) const;
 
   bool criterioValido(const Filters &c, const std::string &nombre) const;
 
@@ -299,24 +299,24 @@ public:
 
   linear_set<Filters> top_criterios() const;
 
-  void crearIndice(const std::string &tabla, const std::string &campo);
+  void createIndex(const std::string &table, const std::string &column);
 
-  bool tieneIndice(const std::string &tabla, const std::string &campo);
+  bool hasIndex(const std::string &table, const std::string &column);
 
   join_iterator join(const std::string &tabla1, const std::string &tabla2, const std::string &campo);
 
   join_iterator join_end();
 
 private:
-  linear_set<std::string> _nombres_tablas;
-  string_map<Table> _tablas;
+  linear_set<std::string> _tableNames;
+  string_map<Table> _tables;
   linear_map<Filters, int> _uso_criterios;
-  Index _indices;
-  IndexInt _indicesNum;
+  Index _indexes;
+  IndexInt _indexesInt;
 
-  std::list<Record> &_filtrar_registros(const std::string &campo, const Datum &valor, std::list<Record> &registros, bool igualdad) const;
+  std::list<Record> &_filterRecords(const std::string &column, const Datum &value, std::list<Record> &records, bool equals) const;
 
-  std::list<Record> &_filtrar_registros(const std::string &campo, const Datum &valor, std::list<Record> &registros) const;
+  std::list<Record> &_filterRecords(const std::string &column, const Datum &value, std::list<Record> &records) const;
 
   std::pair<std::vector<std::string>, std::vector<Datum>> _tipos_tabla(const Table &t);
 

@@ -18,13 +18,13 @@ bool isIncluded(Iterator begin_a, Iterator end_a, Iterator begin_b, Iterator end
 TEST(BasicTests, NewDatabaseIsEmpty)
 {
   Database db;
-  EXPECT_TRUE(db.tablas().empty());
+  EXPECT_TRUE(db.tableNames().empty());
 }
 
 TEST(BasicTests, UsingCriteriaWithEmptyDatabaseIsFalse)
 {
   Database db;
-  EXPECT_FALSE(db.uso_criterio(Database::Filters()));
+  EXPECT_FALSE(db.useFilter(Database::Filters()));
 }
 
 TEST(BasicTests, BasicTableOperationsInDatabase)
@@ -34,23 +34,23 @@ TEST(BasicTests, BasicTableOperationsInDatabase)
   linear_set<string> claves_alumnos = { "LU", "Ano" };
 
   Database db;
-  db.crearTabla("alumnos", claves_alumnos, campos_alumnos, tipos_alumnos);
-  EXPECT_EQ(db.dameTabla("alumnos"), Table(claves_alumnos, campos_alumnos, tipos_alumnos));
+  db.createTable("alumnos", claves_alumnos, campos_alumnos, tipos_alumnos);
+  EXPECT_EQ(db.getTable("alumnos"), Table(claves_alumnos, campos_alumnos, tipos_alumnos));
 
   Record gerva = Record(campos_alumnos, { Datum(123), Datum(45), Datum("Gerva"), Datum("10001") });
-  EXPECT_TRUE(db.registroValido(gerva, "alumnos"));
+  EXPECT_TRUE(db.isValidRecord(gerva, "alumnos"));
 
-  db.agregarRegistro(gerva, "alumnos");
-  EXPECT_FALSE(db.registroValido(gerva, "alumnos"));
+  db.addRecord(gerva, "alumnos");
+  EXPECT_FALSE(db.isValidRecord(gerva, "alumnos"));
 
   Record gerva2 = Record(campos_alumnos, { Datum(124), Datum(45), Datum("Gerva"), Datum("10001") });
-  EXPECT_TRUE(db.registroValido(gerva2, "alumnos"));
+  EXPECT_TRUE(db.isValidRecord(gerva2, "alumnos"));
 
-  db.agregarRegistro(gerva2, "alumnos");
-  EXPECT_FALSE(db.registroValido(gerva2, "alumnos"));
+  db.addRecord(gerva2, "alumnos");
+  EXPECT_FALSE(db.isValidRecord(gerva2, "alumnos"));
 
   Record gerva_clon = Record(campos_alumnos, { Datum(124), Datum(45), Datum("Gerva"), Datum("10001") });
-  EXPECT_FALSE(db.registroValido(gerva_clon, "alumnos"));
+  EXPECT_FALSE(db.isValidRecord(gerva_clon, "alumnos"));
 }
 
 class DBAlumnos : public ::testing::Test
@@ -84,8 +84,8 @@ protected:
     cargarAlumno(6, 80, "CLU", "Vim", "macOS", { "Orga1" });
     cargarAlumno(5, 2, "Hipster", "Vim", "macOS", { "AED3" });
 
-    db.agregarRegistro(Record({ "LU", "Egreso" }, { Datum("100/70"), Datum(75) }), "ex_alumnos");
-    db.agregarRegistro(Record({ "LU", "Egreso" }, { Datum("102/70"), Datum(75) }), "ex_alumnos");
+    db.addRecord(Record({ "LU", "Egreso" }, { Datum("100/70"), Datum(75) }), "ex_alumnos");
+    db.addRecord(Record({ "LU", "Egreso" }, { Datum("102/70"), Datum(75) }), "ex_alumnos");
   }
 
   struct DefinicionTable
@@ -112,7 +112,7 @@ protected:
 
   void definir_Table(const string &nombre, const DefinicionTable &def)
   {
-    db.crearTabla(nombre, def.claves, def.campos, def.tipos);
+    db.createTable(nombre, def.claves, def.campos, def.tipos);
   }
 
   Record registro(const DefinicionTable &def, const vector<Datum> &valores)
@@ -125,11 +125,11 @@ protected:
     string lu = to_string(lu_n) + '/' + to_string(lu_a);
     Record r_libretas{ { "LU_N", "LU_A", "LU" }, { Datum(lu_n), Datum(lu_a), Datum(lu) } };
     libretas.addRecord(r_libretas);
-    db.agregarRegistro(r_libretas, "libretas");
+    db.addRecord(r_libretas, "libretas");
 
     Record r_alumno{ { "LU", "Nombre", "Editor", "OS" }, { Datum(lu), Datum(nombre), Datum(editor), Datum(os) } };
     alumnos.addRecord(r_alumno);
-    db.agregarRegistro(r_alumno, "alumnos");
+    db.addRecord(r_alumno, "alumnos");
 
     Record r_join_libretas_alumnos{ { "LU_N", "LU_A", "LU", "Nombre", "Editor", "OS" }, { Datum(lu_n), Datum(lu_a), Datum(lu), Datum(nombre), Datum(editor), Datum(os) } };
     join_libretas_alumnos.addRecord(r_join_libretas_alumnos);
@@ -138,7 +138,7 @@ protected:
     {
       Record r_materia{ { "LU", "Materia" }, { Datum(lu), Datum(mat) } };
       materias.addRecord(r_materia);
-      db.agregarRegistro(r_materia, "materias");
+      db.addRecord(r_materia, "materias");
 
       Record r_join_libretas_materias{ { "LU_N", "LU_A", "LU", "Materia" }, { Datum(lu_n), Datum(lu_a), Datum(lu), Datum(mat) } };
       join_libretas_materias.addRecord(r_join_libretas_materias);
@@ -162,9 +162,9 @@ protected:
 
 TEST_F(DBAlumnos, init)
 {
-  EXPECT_EQ(libretas, db.dameTabla("libretas"));
-  EXPECT_EQ(alumnos, db.dameTabla("alumnos"));
-  EXPECT_EQ(materias, db.dameTabla("materias"));
+  EXPECT_EQ(libretas, db.getTable("libretas"));
+  EXPECT_EQ(alumnos, db.getTable("alumnos"));
+  EXPECT_EQ(materias, db.getTable("materias"));
 }
 
 TEST_F(DBAlumnos, agregar_registro)
@@ -173,34 +173,34 @@ TEST_F(DBAlumnos, agregar_registro)
   Record alu2 = registro(def_libretas, { Datum(11), Datum(10), Datum("11/10") });
   Record alu3 = registro(def_libretas, { Datum(12), Datum(10), Datum("12/10") });
 
-  int cant_libretas = db.dameTabla("libretas").records().size();
+  int cant_libretas = db.getTable("libretas").records().size();
 
   vector<Record> regs = { alu1, alu2, alu3 };
 
   for (size_t i = 0; i < regs.size(); i++)
   {
     // Voy agregando de a uno
-    EXPECT_EQ(db.dameTabla("libretas").records().size(), cant_libretas + i);
+    EXPECT_EQ(db.getTable("libretas").records().size(), cant_libretas + i);
 
     for (size_t j = i; j < regs.size(); j++)
     {
       // Antes de agregar faltan el resto
-      EXPECT_FALSE(db.dameTabla("libretas").records().count(regs[j]));
+      EXPECT_FALSE(db.getTable("libretas").records().count(regs[j]));
     }
 
-    db.agregarRegistro(regs[i], "libretas");
+    db.addRecord(regs[i], "libretas");
 
     // Ahora no falta el agregado
-    EXPECT_TRUE(db.dameTabla("libretas").records().count(regs[i]));
+    EXPECT_TRUE(db.getTable("libretas").records().count(regs[i]));
 
     // Pero siguen faltando los otros
     for (size_t j = i + 1; j < regs.size(); j++)
     {
-      EXPECT_FALSE(db.dameTabla("libretas").records().count(regs[j]));
+      EXPECT_FALSE(db.getTable("libretas").records().count(regs[j]));
     }
 
     // Se actualizó la cantidad de records
-    EXPECT_EQ(db.dameTabla("libretas").records().size(), cant_libretas + 1 + i);
+    EXPECT_EQ(db.getTable("libretas").records().size(), cant_libretas + 1 + i);
   }
 }
 
@@ -208,32 +208,32 @@ TEST_F(DBAlumnos, agregar_registro)
 TEST_F(DBAlumnos, validar_registro)
 {
   // Record inválido por faltar columns
-  EXPECT_FALSE(db.registroValido(Record({ "LU_N", "LU_A" }, { Datum{ 0 }, Datum{ 0 } }), "libretas"));
-  EXPECT_FALSE(db.registroValido(Record({ "LU", "LU_N" }, { Datum{ 0 }, Datum{ 0 } }), "libretas"));
-  EXPECT_FALSE(db.registroValido(Record({ "LU", "Nombre" }, { Datum{ "" }, Datum{ "" } }), "alumnos"));
-  EXPECT_FALSE(db.registroValido(Record({ "Editor", "Nombre" }, { Datum{ "" }, Datum{ "" } }), "alumnos"));
+  EXPECT_FALSE(db.isValidRecord(Record({ "LU_N", "LU_A" }, { Datum{ 0 }, Datum{ 0 } }), "libretas"));
+  EXPECT_FALSE(db.isValidRecord(Record({ "LU", "LU_N" }, { Datum{ 0 }, Datum{ 0 } }), "libretas"));
+  EXPECT_FALSE(db.isValidRecord(Record({ "LU", "Nombre" }, { Datum{ "" }, Datum{ "" } }), "alumnos"));
+  EXPECT_FALSE(db.isValidRecord(Record({ "Editor", "Nombre" }, { Datum{ "" }, Datum{ "" } }), "alumnos"));
 
   // Record inválido por distintos tipos
-  EXPECT_FALSE(db.registroValido(Record({ "LU_N", "LU_A", "LU" }, { Datum{ 0 }, Datum{ "" }, Datum{ "" } }), "libretas"));
-  EXPECT_FALSE(db.registroValido(Record({ "LU", "LU_A", "LU_N" }, { Datum{ 0 }, Datum{ 0 }, Datum{ 0 } }), "libretas"));
-  EXPECT_FALSE(db.registroValido(Record({ "LU", "Nombre", "Editor", "OS" }, { Datum{ "" }, Datum{ "" }, Datum{ 0 }, Datum{ "" } }), "alumnos"));
+  EXPECT_FALSE(db.isValidRecord(Record({ "LU_N", "LU_A", "LU" }, { Datum{ 0 }, Datum{ "" }, Datum{ "" } }), "libretas"));
+  EXPECT_FALSE(db.isValidRecord(Record({ "LU", "LU_A", "LU_N" }, { Datum{ 0 }, Datum{ 0 }, Datum{ 0 } }), "libretas"));
+  EXPECT_FALSE(db.isValidRecord(Record({ "LU", "Nombre", "Editor", "OS" }, { Datum{ "" }, Datum{ "" }, Datum{ 0 }, Datum{ "" } }), "alumnos"));
 
   // Record invalido por keys
-  EXPECT_FALSE(db.registroValido(Record({ "LU_N", "LU_A", "LU" }, { Datum(1), Datum(90), Datum("1/90") }), "libretas"));
-  EXPECT_FALSE(db.registroValido(Record({ "LU", "LU_N", "LU_A" }, { Datum("1/90"), Datum(1), Datum(90) }), "libretas"));
-  EXPECT_FALSE(db.registroValido(Record({ "LU", "Nombre", "Editor", "OS" }, { Datum("1/90"), Datum("March-Orga2"), Datum("Nano"), Datum("Win") }), "alumnos"));
+  EXPECT_FALSE(db.isValidRecord(Record({ "LU_N", "LU_A", "LU" }, { Datum(1), Datum(90), Datum("1/90") }), "libretas"));
+  EXPECT_FALSE(db.isValidRecord(Record({ "LU", "LU_N", "LU_A" }, { Datum("1/90"), Datum(1), Datum(90) }), "libretas"));
+  EXPECT_FALSE(db.isValidRecord(Record({ "LU", "Nombre", "Editor", "OS" }, { Datum("1/90"), Datum("March-Orga2"), Datum("Nano"), Datum("Win") }), "alumnos"));
 
   // Record válido
   // Clave múltiple, 1 dif
-  EXPECT_TRUE(db.registroValido(Record({ "LU_N", "LU_A", "LU" }, { Datum(1), Datum(90), Datum("??") }), "libretas"));
-  EXPECT_TRUE(db.registroValido(Record({ "LU", "Materia" }, { Datum("1/90"), Datum("Orga2") }), "materias"));
+  EXPECT_TRUE(db.isValidRecord(Record({ "LU_N", "LU_A", "LU" }, { Datum(1), Datum(90), Datum("??") }), "libretas"));
+  EXPECT_TRUE(db.isValidRecord(Record({ "LU", "Materia" }, { Datum("1/90"), Datum("Orga2") }), "materias"));
 
   // Clave múltiple, 1 dif, otro orden
-  EXPECT_TRUE(db.registroValido(Record({ "LU_N", "LU", "LU_A" }, { Datum(1), Datum("??"), Datum(90) }), "libretas"));
-  EXPECT_TRUE(db.registroValido(Record({ "Materia", "LU" }, { Datum("Orga2"), Datum("1/90") }), "materias"));
+  EXPECT_TRUE(db.isValidRecord(Record({ "LU_N", "LU", "LU_A" }, { Datum(1), Datum("??"), Datum(90) }), "libretas"));
+  EXPECT_TRUE(db.isValidRecord(Record({ "Materia", "LU" }, { Datum("Orga2"), Datum("1/90") }), "materias"));
 
   // Clave simple
-  EXPECT_TRUE(db.registroValido(Record({ "LU", "Nombre", "Editor", "OS" }, { Datum("2/90"), Datum("March"), Datum("Vim"), Datum("Linux") }), "alumnos"));
+  EXPECT_TRUE(db.isValidRecord(Record({ "LU", "Nombre", "Editor", "OS" }, { Datum("2/90"), Datum("March"), Datum("Vim"), Datum("Linux") }), "alumnos"));
 }
 
 // ## Búsqueda
@@ -512,26 +512,26 @@ TEST_F(DBAlumnos, crit_doble_tipo)
 TEST_F(DBAlumnos, uso_un_criterio)
 {
   db.busqueda({ Rig("OS", "A") }, "alumnos");
-  EXPECT_EQ(db.uso_criterio({ Rig("OS", "A") }), 1);
+  EXPECT_EQ(db.useFilter({ Rig("OS", "A") }), 1);
   EXPECT_EQ(db.top_criterios(),
     linear_set<Database::Filters>({ { Rig("OS", "A") } }));
   db.busqueda({ Rig("OS", "A") }, "alumnos");
-  EXPECT_EQ(db.uso_criterio({ Rig("OS", "A") }), 2);
+  EXPECT_EQ(db.useFilter({ Rig("OS", "A") }), 2);
   EXPECT_EQ(db.top_criterios(),
     linear_set<Database::Filters>({ { Rig("OS", "A") } }));
 
   db.busqueda({ Rig("LU_A", 1) }, "libretas");
-  EXPECT_EQ(db.uso_criterio({ Rig("LU_A", 1) }), 1);
+  EXPECT_EQ(db.useFilter({ Rig("LU_A", 1) }), 1);
   EXPECT_EQ(db.top_criterios(),
     linear_set<Database::Filters>({ { Rig("OS", "A") } }));
 
   db.busqueda({ Rig("LU_A", 1) }, "libretas");
-  EXPECT_EQ(db.uso_criterio({ Rig("LU_A", 1) }), 2);
+  EXPECT_EQ(db.useFilter({ Rig("LU_A", 1) }), 2);
   EXPECT_EQ(db.top_criterios(),
     linear_set<Database::Filters>({ { Rig("OS", "A") },
       { Rig("LU_A", 1) } }));
   db.busqueda({ Rig("LU_A", 1) }, "libretas");
-  EXPECT_EQ(db.uso_criterio({ Rig("LU_A", 1) }), 3);
+  EXPECT_EQ(db.useFilter({ Rig("LU_A", 1) }), 3);
   EXPECT_EQ(db.top_criterios(),
     linear_set<Database::Filters>({ { Rig("LU_A", 1) } }));
 }
@@ -542,19 +542,19 @@ TEST_F(DBAlumnos, uso_un_criterio_perm)
   Database::Filters c_perm = { Rig("Editor", "Vim"), Rig("OS", "A") };
   Database::Filters c_sim = { Rig("OS", "A") };
   db.busqueda(c, "alumnos");
-  EXPECT_EQ(db.uso_criterio(c), 1);
-  EXPECT_EQ(db.uso_criterio(c_sim), 0);
+  EXPECT_EQ(db.useFilter(c), 1);
+  EXPECT_EQ(db.useFilter(c_sim), 0);
   EXPECT_EQ(db.top_criterios(),
     linear_set<Database::Filters>({ c }));
 
   db.busqueda(c_perm, "alumnos");
-  EXPECT_EQ(db.uso_criterio(c), 2);
-  EXPECT_EQ(db.uso_criterio(c_sim), 0);
+  EXPECT_EQ(db.useFilter(c), 2);
+  EXPECT_EQ(db.useFilter(c_sim), 0);
   EXPECT_EQ(db.top_criterios(),
     linear_set<Database::Filters>({ c }));
 
   db.busqueda(c_sim, "alumnos");
-  EXPECT_EQ(db.uso_criterio(c_sim), 1);
+  EXPECT_EQ(db.useFilter(c_sim), 1);
   EXPECT_EQ(db.top_criterios(),
     linear_set<Database::Filters>({ c }));
 }
@@ -564,16 +564,16 @@ TEST_F(DBAlumnos, crit_otro_bool)
   Database::Filters c = { Rig("OS", "A") };
   Database::Filters c_inv = { Rdif("OS", "A") };
 
-  EXPECT_EQ(db.uso_criterio(c), 0);
-  EXPECT_EQ(db.uso_criterio(c_inv), 0);
+  EXPECT_EQ(db.useFilter(c), 0);
+  EXPECT_EQ(db.useFilter(c_inv), 0);
 
   db.busqueda(c, "alumnos");
-  EXPECT_EQ(db.uso_criterio(c), 1);
-  EXPECT_EQ(db.uso_criterio(c_inv), 0);
+  EXPECT_EQ(db.useFilter(c), 1);
+  EXPECT_EQ(db.useFilter(c_inv), 0);
 
   db.busqueda(c_inv, "alumnos");
-  EXPECT_EQ(db.uso_criterio(c), 1);
-  EXPECT_EQ(db.uso_criterio(c_inv), 1);
+  EXPECT_EQ(db.useFilter(c), 1);
+  EXPECT_EQ(db.useFilter(c_inv), 1);
 }
 
 TEST_F(DBAlumnos, crit_doble_otro_bool)
@@ -581,16 +581,16 @@ TEST_F(DBAlumnos, crit_doble_otro_bool)
   Database::Filters c = { Rig("OS", "A"), Rig("Editor", "Vim") };
   Database::Filters c_inv = { Rdif("OS", "A"), Rig("Editor", "Vim") };
 
-  EXPECT_EQ(db.uso_criterio(c), 0);
-  EXPECT_EQ(db.uso_criterio(c_inv), 0);
+  EXPECT_EQ(db.useFilter(c), 0);
+  EXPECT_EQ(db.useFilter(c_inv), 0);
 
   db.busqueda(c, "alumnos");
-  EXPECT_EQ(db.uso_criterio(c), 1);
-  EXPECT_EQ(db.uso_criterio(c_inv), 0);
+  EXPECT_EQ(db.useFilter(c), 1);
+  EXPECT_EQ(db.useFilter(c_inv), 0);
 
   db.busqueda(c_inv, "alumnos");
-  EXPECT_EQ(db.uso_criterio(c), 1);
-  EXPECT_EQ(db.uso_criterio(c_inv), 1);
+  EXPECT_EQ(db.useFilter(c), 1);
+  EXPECT_EQ(db.useFilter(c_inv), 1);
 }
 
 // ## Join
@@ -602,7 +602,7 @@ TEST_F(DBAlumnos, crit_doble_otro_bool)
 
 TEST_F(DBAlumnos, join_vacio)
 {
-  db.crearIndice("alumnos", "LU");
+  db.createIndex("alumnos", "LU");
   auto begin = db.join("alumnos", "ex_alumnos", "LU");
   auto end = db.join_end();
   EXPECT_EQ(begin, end);
@@ -610,7 +610,7 @@ TEST_F(DBAlumnos, join_vacio)
 
 TEST_F(DBAlumnos, join_sin_repetidos)
 {
-  db.crearIndice("alumnos", "LU");
+  db.createIndex("alumnos", "LU");
   auto begin = db.join("libretas", "alumnos", "LU");
   auto end = db.join_end();
   linear_set<string> nuevos_campos({ "LU_N", "LU_A", "LU", "Nombre", "Editor", "OS" });
@@ -622,7 +622,7 @@ TEST_F(DBAlumnos, join_sin_repetidos)
     count++;
   }
 
-  EXPECT_EQ(count, db.dameTabla("libretas").records().size());
+  EXPECT_EQ(count, db.getTable("libretas").records().size());
   begin = db.join("libretas", "alumnos", "LU");
   linear_set<Record> join(begin, end);
   EXPECT_EQ(join, join_libretas_alumnos.records());
@@ -630,7 +630,7 @@ TEST_F(DBAlumnos, join_sin_repetidos)
 
 TEST_F(DBAlumnos, join_repetidos_uno)
 {
-  db.crearIndice("libretas", "LU");
+  db.createIndex("libretas", "LU");
   auto begin = db.join("libretas", "materias", "LU");
   auto end = db.join_end();
 
@@ -647,8 +647,8 @@ TEST_F(DBAlumnos, join_repetidos_uno)
 TEST_F(DBAlumnos, join_repetidos_ambos)
 {
   Database db2;
-  db2.crearTabla("T1", { "X", "Y" }, { "X", "Y" }, { Datum{ 0 }, Datum{ 0 } });
-  db2.crearTabla("T2", { "Y", "Z" }, { "Y", "Z" }, { Datum{ 0 }, Datum{ "" } });
+  db2.createTable("T1", { "X", "Y" }, { "X", "Y" }, { Datum{ 0 }, Datum{ 0 } });
+  db2.createTable("T2", { "Y", "Z" }, { "Y", "Z" }, { Datum{ 0 }, Datum{ "" } });
   /*
      * T1           T2
      * | X | Y |    | Y | Z |
@@ -664,13 +664,13 @@ TEST_F(DBAlumnos, join_repetidos_ambos)
      * | 2 | 2 | C |
      * | 3 | 2 | C |
      */
-  db2.agregarRegistro(Record({ "X", "Y" }, { Datum(1), Datum(1) }), "T1");
-  db2.agregarRegistro(Record({ "X", "Y" }, { Datum(2), Datum(2) }), "T1");
-  db2.agregarRegistro(Record({ "X", "Y" }, { Datum(3), Datum(2) }), "T1");
-  db2.agregarRegistro(Record({ "X", "Y" }, { Datum(4), Datum(0) }), "T1");
-  db2.agregarRegistro(Record({ "Y", "Z" }, { Datum(1), Datum("A") }), "T2");
-  db2.agregarRegistro(Record({ "Y", "Z" }, { Datum(1), Datum("B") }), "T2");
-  db2.agregarRegistro(Record({ "Y", "Z" }, { Datum(2), Datum("C") }), "T2");
+  db2.addRecord(Record({ "X", "Y" }, { Datum(1), Datum(1) }), "T1");
+  db2.addRecord(Record({ "X", "Y" }, { Datum(2), Datum(2) }), "T1");
+  db2.addRecord(Record({ "X", "Y" }, { Datum(3), Datum(2) }), "T1");
+  db2.addRecord(Record({ "X", "Y" }, { Datum(4), Datum(0) }), "T1");
+  db2.addRecord(Record({ "Y", "Z" }, { Datum(1), Datum("A") }), "T2");
+  db2.addRecord(Record({ "Y", "Z" }, { Datum(1), Datum("B") }), "T2");
+  db2.addRecord(Record({ "Y", "Z" }, { Datum(2), Datum("C") }), "T2");
 
   Table t_join = Table({ "X", "Y", "Z" }, { "X", "Y", "Z" }, { Datum{ 0 }, Datum{ 0 }, Datum{ "" } });
   t_join.addRecord(Record({ "X", "Y", "Z" },
@@ -682,8 +682,8 @@ TEST_F(DBAlumnos, join_repetidos_ambos)
   t_join.addRecord(Record({ "X", "Y", "Z" },
     { Datum(3), Datum(2), Datum("C") }));
 
-  db2.crearIndice("T1", "Y");
-  db2.crearIndice("T2", "Y");
+  db2.createIndex("T1", "Y");
+  db2.createIndex("T2", "Y");
   auto begin = db2.join("T1", "T2", "Y");
   auto end = db2.join_end();
 
@@ -700,8 +700,8 @@ TEST_F(DBAlumnos, join_repetidos_ambos)
 TEST_F(DBAlumnos, join_campos_repetidos)
 {
   Database db2;
-  db2.crearTabla("T1", { "X", "Y" }, { "X", "Y" }, { Datum{ 0 }, Datum{ 0 } });
-  db2.crearTabla("T2", { "X", "Y", "Z" }, { "X", "Y", "Z" }, { Datum{ 0 }, Datum{ 0 }, Datum{ "" } });
+  db2.createTable("T1", { "X", "Y" }, { "X", "Y" }, { Datum{ 0 }, Datum{ 0 } });
+  db2.createTable("T2", { "X", "Y", "Z" }, { "X", "Y", "Z" }, { Datum{ 0 }, Datum{ 0 }, Datum{ "" } });
   /*
      * T1          T2
      * | X | Y |  | X | Y | Z |
@@ -719,10 +719,10 @@ TEST_F(DBAlumnos, join_campos_repetidos)
      * | 3 | 2 | C |
      *
      */
-  db2.agregarRegistro(Record({ "X", "Y" }, { Datum(1), Datum(1) }), "T1");
-  db2.agregarRegistro(Record({ "X", "Y" }, { Datum(2), Datum(2) }), "T1");
-  db2.agregarRegistro(Record({ "X", "Y", "Z" }, { Datum(1), Datum(1), Datum("A") }), "T2");
-  db2.agregarRegistro(Record({ "X", "Y", "Z" }, { Datum(3), Datum(2), Datum("C") }), "T2");
+  db2.addRecord(Record({ "X", "Y" }, { Datum(1), Datum(1) }), "T1");
+  db2.addRecord(Record({ "X", "Y" }, { Datum(2), Datum(2) }), "T1");
+  db2.addRecord(Record({ "X", "Y", "Z" }, { Datum(1), Datum(1), Datum("A") }), "T2");
+  db2.addRecord(Record({ "X", "Y", "Z" }, { Datum(3), Datum(2), Datum("C") }), "T2");
 
   Table t_join_a = Table({ "X", "Y", "Z" }, { "X", "Y", "Z" }, { Datum{ 0 }, Datum{ 0 }, Datum{ "" } });
   t_join_a.addRecord(Record({ "X", "Y", "Z" }, { Datum(1), Datum(1), Datum("A") }));
@@ -732,9 +732,9 @@ TEST_F(DBAlumnos, join_campos_repetidos)
   t_join_b.addRecord(Record({ "X", "Y", "Z" }, { Datum(1), Datum(1), Datum("A") }));
   t_join_b.addRecord(Record({ "X", "Y", "Z" }, { Datum(3), Datum(2), Datum("C") }));
 
-  db2.crearIndice("T1", "X");
-  db2.crearIndice("T2", "Z");
-  db2.crearIndice("T2", "Y");
+  db2.createIndex("T1", "X");
+  db2.createIndex("T2", "Z");
+  db2.createIndex("T2", "Y");
   auto begin = db2.join("T1", "T2", "Y");
   auto end = db2.join_end();
 
