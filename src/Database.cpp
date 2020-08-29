@@ -13,21 +13,21 @@ void Database::createTable(const std::string &name, const linear_set<std::string
   _tables.insert(make_pair(name, Table(keys, columns, types)));
 }
 
-void Database::addRecord(const Record &record, const std::string &name)
+void Database::addRecord(const Record &record, const std::string &tableName)
 {
-  Table &t = _tables.at(name);
+  Table &t = _tables.at(tableName);
   t.addRecord(record);
   for (const auto& c : record.columns())
   {
-    if (hasIndex(name, c))
+    if (hasIndex(tableName, c))
     {
       if (record.value(c).isInteger())
       {
-        _indexesInt[name][c][record.value(c).value<int>()].insert(record);
+        _indexesInt[tableName][c][record.value(c).value<int>()].insert(record);
       }
       else
       {
-        _indexes[name][c][record.value(c).value<std::string>()].insert(record);
+        _indexes[tableName][c][record.value(c).value<std::string>()].insert(record);
       }
     }
   }
@@ -182,31 +182,19 @@ bool Database::hasIndex(const std::string &table, const std::string &column)
   return _indexes[table].count(column) >= 1 || _indexesInt[table].count(column) >= 1;
 }
 
-Database::join_iterator Database::join(const std::string &tabla1, const std::string &tabla2, const std::string &campo)
+Database::join_iterator Database::join(const std::string &table1, const std::string &table2, const std::string &columnName)
 {
-  bool mismoOrden = true;
-  bool primeraConIndice = hasIndex(tabla1, campo);
+  const bool firstTableHasIndex = hasIndex(table1, columnName);
+  const auto &indexedTable = firstTableHasIndex ? table1 : table2;
+  const auto &nonIndexedTable = firstTableHasIndex ? table2 : table1;
 
-  if (!primeraConIndice)
+  if (getTable(table1).columnType(columnName).isInteger())
   {
-    mismoOrden = false;
-    if (getTable(tabla1).columnType(campo).isInteger())
-    {
-      return join_helper_int(tabla2, tabla1, campo, mismoOrden);
-    }
-    else
-    {
-      return join_helper_str(tabla2, tabla1, campo, mismoOrden);
-    }
-  }
-
-  if (getTable(tabla1).columnType(campo).isInteger())
-  {
-    return join_helper_int(tabla1, tabla2, campo, mismoOrden);
+    return join_helper_int(indexedTable, nonIndexedTable, columnName, firstTableHasIndex);
   }
   else
   {
-    return join_helper_str(tabla1, tabla2, campo, mismoOrden);
+    return join_helper_str(indexedTable, nonIndexedTable, columnName, firstTableHasIndex);
   }
 }
 

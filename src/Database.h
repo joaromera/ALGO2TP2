@@ -283,7 +283,7 @@ public:
 
   void createTable(const std::string &name, const linear_set<std::string> &keys, const std::vector<std::string> &columns, const std::vector<Datum> &types);
 
-  void addRecord(const Record &record, const std::string &name);
+  void addRecord(const Record &record, const std::string &tableName);
 
   const linear_set<std::string> &tableNames() const;
 
@@ -303,7 +303,7 @@ public:
 
   bool hasIndex(const std::string &table, const std::string &column);
 
-  join_iterator join(const std::string &tabla1, const std::string &tabla2, const std::string &campo);
+  join_iterator join(const std::string &table1, const std::string &table2, const std::string &columnName);
 
   join_iterator join_end();
 
