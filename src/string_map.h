@@ -255,9 +255,9 @@ private:
     {
       for (auto &c : mChildren)
       {
-        if (c != nullptr) delete c;
+        if (c) delete c;
       }
-      if (mValue != nullptr) delete mValue;
+      if (mValue) delete mValue;
     }
 
 
