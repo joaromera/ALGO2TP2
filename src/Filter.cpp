@@ -2,7 +2,9 @@
 #include <tuple>
 
 Filter::Filter(const std::string &column, const Datum &datum, bool equals)
-  : mColumn(column), mDatum(datum), mEquals(equals)
+  : mColumn(column)
+  , mDatum(datum)
+  , mEquals(equals)
 {
 }
 
@@ -28,7 +30,7 @@ bool operator==(const Filter &lhs, const Filter &rhs)
 
 bool operator<(const Filter &lhs, const Filter &rhs)
 {
-  return (std::make_tuple(lhs.column(), lhs.datum(), lhs.equals()) < std::make_tuple(rhs.column(), rhs.datum(), rhs.equals()));
+  return std::make_tuple(lhs.column(), lhs.datum(), lhs.equals()) < std::make_tuple(rhs.column(), rhs.datum(), rhs.equals());
 }
 
 Filter Rig(const std::string &column, const std::string &value)
