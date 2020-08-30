@@ -56,14 +56,13 @@ public:
       if (nu != nullptr)
       {
         node = nu;
-        return *this;
       }
       else
       {
         nu = proximoArriba(node);
         node = nu;
-        return *this;
       }
+      return *this;
     }
 
     iterator operator++(int)
