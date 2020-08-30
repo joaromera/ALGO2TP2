@@ -3,49 +3,6 @@
 
 using namespace Db::Types;
 
-Table::const_iterator::const_iterator(const const_iterator &o_it)
-  : mRecordIterator(o_it.mRecordIterator)
-{
-}
-
-const Record &Table::const_iterator::operator*() const
-{
-  return *mRecordIterator;
-}
-
-const Record *Table::const_iterator::operator->() const
-{
-  return &(*mRecordIterator);
-}
-
-Table::const_iterator &Table::const_iterator::operator++()
-{
-  ++mRecordIterator;
-  return *this;
-}
-
-Table::const_iterator Table::const_iterator::operator++(int)
-{
-  const_iterator tmp(*this);
-  operator++();
-  return tmp;
-}
-
-bool Table::const_iterator::operator==(const Table::const_iterator &it) const
-{
-  return mRecordIterator == it.mRecordIterator;
-}
-
-bool Table::const_iterator::operator!=(const Table::const_iterator &it) const
-{
-  return !(mRecordIterator == it.mRecordIterator);
-}
-
-Table::const_iterator::const_iterator(const linear_set<Record>::const_iterator record_it)
-  : mRecordIterator(record_it)
-{
-}
-
 Table::Table(const linear_set<std::string> &keys, const std::vector<std::string> &columns, const std::vector<Datum> &types)
   : mKeys(keys)
 {

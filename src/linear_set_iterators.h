@@ -22,6 +22,13 @@ typename linear_set<T>::const_iterator &linear_set<T>::const_iterator::operator+
 }
 
 template<typename T>
+typename linear_set<T>::const_iterator linear_set<T>::const_iterator::operator++(int)
+{
+  auto tmp = it++;
+  return tmp;
+}
+
+template<typename T>
 const typename linear_set<T>::const_iterator::value_type &linear_set<T>::const_iterator::operator*() const
 {
   return it->first;
@@ -66,6 +73,13 @@ typename linear_set<T>::iterator &linear_set<T>::iterator::operator++()
 {
   it++;
   return *this;
+}
+
+template<typename T>
+typename linear_set<T>::iterator linear_set<T>::iterator::operator++(int)
+{
+  auto tmp = it++;
+  return tmp;
 }
 
 template<typename T>

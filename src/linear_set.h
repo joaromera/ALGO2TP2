@@ -27,6 +27,8 @@ public:
 
     const_iterator &operator++();
 
+    const_iterator operator++(int);
+
     const value_type &operator*() const;
 
     const value_type *operator->() const;
@@ -55,6 +57,8 @@ public:
     iterator(const iterator &);
 
     iterator &operator++();
+
+    iterator operator++(int);
 
     const value_type &operator*() const;
 

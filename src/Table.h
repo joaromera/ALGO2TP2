@@ -12,25 +12,7 @@ using namespace Db::Types;
 class Table
 {
 public:
-  class const_iterator
-  {
-  public:
-    const_iterator(const const_iterator&);
-    const Record &operator*() const;
-    const Record *operator->() const;
-    const_iterator &operator++();
-    const_iterator operator++(int);
-
-    bool operator==(const const_iterator&) const;
-    bool operator!=(const const_iterator&) const;
-
-  private:
-    friend class Table;
-
-    const_iterator(const linear_set<Record>::const_iterator);
-
-    linear_set<Record>::const_iterator mRecordIterator;
-  };
+  using const_iterator = linear_set<Record>::const_iterator;
 
   Table(const linear_set<std::string> &keys, const std::vector<std::string> &columns, const std::vector<Datum> &types);
   const_iterator addRecord(const Record&);
