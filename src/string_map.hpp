@@ -165,75 +165,6 @@ void string_map<T>::iterator::buscarNodoArriba(Node *&n)
 }
 
 template<typename T>
-typename string_map<T>::Node *string_map<T>::const_iterator::proximoAbajo(Node *n)
-{
-  // Busca recursivamente el primer node no nulo y con mValue definido
-  // Si no hay ninguno n -> nullptr
-  Node *tmp = n;
-  buscarNodoAbajo(tmp);
-  return tmp;
-}
-
-template<typename T>
-void string_map<T>::const_iterator::buscarNodoAbajo(Node *&n)
-{
-  // Busca recursivamente el primer node no nulo y con mValue definido
-  // Si no hay ninguno n -> nullptr
-  int i = 0;
-  while (i < 128 && n->mChildren[i] == nullptr) i++;
-  if (i == 128)
-  {
-    n = nullptr;
-  }
-  else if (n->mChildren[i]->mValue != nullptr)
-  {
-    n = n->mChildren[i];
-  }
-  else
-  {
-    n = n->mChildren[i];
-    buscarNodoAbajo(n);
-  }
-}
-
-template<typename T>
-typename string_map<T>::Node *string_map<T>::const_iterator::proximoArriba(Node *n)
-{
-  // Busca recursivamente el primer node no nulo y con mValue definido
-  // Si no hay ninguno n -> nullptr
-  Node *tmp = n;
-  buscarNodoArriba(tmp);
-  return tmp;
-}
-
-template<typename T>
-void string_map<T>::const_iterator::buscarNodoArriba(Node *&n)
-{
-  // Busca los hermanos mayores lexicograficamente de n
-  if (n->mParent == nullptr) n = nullptr;
-  if (n != nullptr)
-  {
-    Node *proximo = n->mParent;
-    char clave = n->mKey.back();
-    int i = clave + 1;
-    while (i < 128 && proximo->mChildren[i] == nullptr) i++;
-    if (i != 128)
-    {
-      n = proximo->mChildren[i];
-      if (n->mValue == nullptr)
-      {
-        buscarNodoAbajo(n);
-      }
-    }
-    else
-    {
-      n = proximo;
-      buscarNodoArriba(n);
-    }
-  }
-}
-
-template<typename T>
 size_t string_map<T>::count(const key_type &key) const
 {
   Node *walk = mTrieRoot;
@@ -306,7 +237,7 @@ template<typename T>
 const typename string_map<T>::mapped_type &string_map<T>::at(const key_type &key) const
 {
   auto it = find(key);
-  return it.node->mValue->second;
+  return it->second;
 }
 
 template<typename T>

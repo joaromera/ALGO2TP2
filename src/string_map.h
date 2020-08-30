@@ -28,22 +28,9 @@ public:
     typedef std::pair<const key_type, mapped_type> value_type;
 
     iterator() = default;
-
-    iterator(const iterator &n)
-    {
-      node = n.node;
-    }
-
-    iterator &operator=(const iterator &n)
-    {
-      node = n.node;
-      return *this;
-    }
-
-    ~iterator()
-    {
-      node = nullptr;
-    }
+    iterator(const iterator &n) = default;
+    iterator &operator=(const iterator &n) = default;
+    ~iterator() = default;
 
     bool operator==(const iterator &n) const
     {
@@ -81,9 +68,9 @@ public:
 
     iterator operator++(int)
     {
-      auto copia = *this;
+      auto tmp = *this;
       ++*this;
-      return copia;
+      return tmp;
     }
 
     value_type &operator*() const
@@ -97,9 +84,10 @@ public:
     }
 
     friend class string_map;
+    friend class const_iterator;
 
   private:
-    iterator(Node *n) : node(n){};
+    iterator(Node *n) : node(n) {}
     Node* node = nullptr;
 
     typename string_map<T>::Node *proximoAbajo(Node *n);
@@ -108,42 +96,20 @@ public:
     void buscarNodoArriba(Node *&n);
   };
 
-  class const_iterator
+  struct const_iterator
   {
-  public:
     typedef std::string key_type;
     typedef T mapped_type;
     typedef std::pair<const key_type, mapped_type> value_type;
 
     const_iterator() = default;
-
-    const_iterator(const const_iterator &n)
-    {
-      node = n.node;
-    }
-
-    ~const_iterator()
-    {
-      node = nullptr;
-    }
-
-    const_iterator &operator=(const const_iterator &n)
-    {
-      node = n.node;
-      return *this;
-    }
+    const_iterator(const const_iterator &n) = default;
+    const_iterator &operator=(const const_iterator &n) = default;
+    ~const_iterator() = default;
 
     bool operator==(const const_iterator &n) const
     {
-      if (node == nullptr || n.node == nullptr)
-      {
-        return node == n.node;
-      }
-      if (node->mValue == nullptr || n.node->mValue == nullptr)
-      {
-        return node->mValue == n.node->mValue;
-      }
-      return *(node->mValue) == *(n.node->mValue);
+      return it.operator==(n.it);
     }
 
     bool operator!=(const const_iterator &n) const
@@ -153,47 +119,29 @@ public:
 
     const_iterator &operator++()
     {
-      Node *nu = proximoAbajo(node);
-      if (nu != nullptr)
-      {
-        node = nu;
-        return *this;
-      }
-      else
-      {
-        nu = proximoArriba(node);
-        node = nu;
-        return *this;
-      }
+      it.operator++();
+      return *this;
     }
 
     const_iterator operator++(int)
     {
-      auto copia = *this;
+      auto tmp = *this;
       ++*this;
-      return copia;
+      return tmp;
     }
 
     const value_type &operator*() const
     {
-      return *node->mValue;
+      return it.operator*();
     }
 
     const value_type *operator->() const
     {
-      return node->mValue;
+      return it.operator->();
     }
 
-    friend class string_map;
-
-  private:
-    const_iterator(Node *n) : node(n) {}
-    Node *node = nullptr;
-
-    typename string_map<T>::Node *proximoAbajo(Node *n);
-    void buscarNodoAbajo(Node *&n);
-    typename string_map<T>::Node *proximoArriba(Node *n);
-    void buscarNodoArriba(Node *&n);
+    const_iterator(Node *n) : it(n) {}
+    iterator it { nullptr };
   };
 
   string_map();
