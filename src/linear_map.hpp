@@ -8,15 +8,15 @@ namespace Db {
 namespace Types {
 
 template<class K, class S>
-linear_map<K, S>::linear_map() : _elems() {}
+linear_map<K, S>::linear_map() : mElems() {}
 
 template<class K, class S>
-linear_map<K, S>::linear_map(const linear_map<K, S> &other) : _elems(other._elems) {}
+linear_map<K, S>::linear_map(const linear_map<K, S> &other) : mElems(other.mElems) {}
 
 template<class K, class S>
 std::pair<typename linear_map<K, S>::iterator, bool> linear_map<K, S>::insert(const linear_map<K, S>::value_type &v)
 {
-  for (linear_map<K, S>::iterator it = _elems.begin(); it != _elems.end(); ++it)
+  for (linear_map<K, S>::iterator it = mElems.begin(); it != mElems.end(); ++it)
   {
     if (it->first == v.first)
     {
@@ -24,24 +24,24 @@ std::pair<typename linear_map<K, S>::iterator, bool> linear_map<K, S>::insert(co
       return make_pair(it, false);
     }
   }
-  auto it = _elems.insert(_elems.end(), v);
+  auto it = mElems.insert(mElems.end(), v);
   return make_pair(it, true);
 }
 
 template<class K, class S>
 typename linear_map<K, S>::iterator linear_map<K, S>::fast_insert(const linear_map<K, S>::value_type &v)
 {
-  auto it = _elems.insert(_elems.end(), v);
+  auto it = mElems.insert(mElems.end(), v);
   return it;
 }
 
 template<class K, class S>
 linear_map<K, S> &linear_map<K, S>::operator=(const linear_map<K, S> &other)
 {
-  _elems.clear();
-  for (const auto& v : other._elems)
+  mElems.clear();
+  for (const auto& v : other.mElems)
   {
-    _elems.push_back(v);
+    mElems.push_back(v);
   }
   return *this;
 }
@@ -49,47 +49,46 @@ linear_map<K, S> &linear_map<K, S>::operator=(const linear_map<K, S> &other)
 template<class K, class S>
 typename linear_map<K, S>::size_type linear_map<K, S>::size() const
 {
-  return _elems.size();
+  return mElems.size();
 }
 
 template<class K, class S>
 typename linear_map<K, S>::iterator linear_map<K, S>::find(const K &k)
 {
-  for (auto it = _elems.begin(); it != _elems.end(); ++it)
+  for (auto it = mElems.begin(); it != mElems.end(); ++it)
   {
     if (it->first == k)
     {
       return it;
     }
   }
-  return _elems.end();
+  return mElems.end();
 }
 
 template<class K, class S>
 typename linear_map<K, S>::const_iterator linear_map<K, S>::find(const K &k) const
 {
-  for (auto it = _elems.begin(); it != _elems.end(); it++)
+  for (auto it = mElems.begin(); it != mElems.end(); it++)
   {
     if (it->first == k)
     {
       return it;
     }
   }
-  return _elems.end();
+  return mElems.end();
 }
 
 template<class K, class S>
-size_t linear_map<K, S>::count(const K &k) const
+typename linear_map<K, S>::size_type linear_map<K, S>::count(const K &k) const
 {
-  return find(k) != _elems.end();
+  return find(k) != mElems.end();
 }
 
 template<class K, class S>
 bool linear_map<K, S>::empty() const
 {
-  return _elems.empty();
+  return mElems.empty();
 }
-
 
 template<class K, class S>
 bool linear_map<K, S>::operator==(const linear_map<K, S> &other) const
@@ -107,11 +106,11 @@ bool linear_map<K, S>::operator==(const linear_map<K, S> &other) const
 template<class K, class S>
 bool linear_map<K, S>::erase(const K &key)
 {
-  for (auto it = _elems.begin(); it != _elems.end(); it++)
+  for (auto it = mElems.begin(); it != mElems.end(); it++)
   {
     if (it->first == key)
     {
-      _elems.erase(it);
+      mElems.erase(it);
       return true;
     }
   }
@@ -133,25 +132,25 @@ S &linear_map<K, S>::at(const K &key)
 template<class K, class S>
 typename linear_map<K, S>::iterator linear_map<K, S>::begin()
 {
-  return _elems.begin();
+  return mElems.begin();
 }
 
 template<class K, class S>
 typename linear_map<K, S>::iterator linear_map<K, S>::end()
 {
-  return _elems.end();
+  return mElems.end();
 }
 
 template<class K, class S>
 typename linear_map<K, S>::const_iterator linear_map<K, S>::begin() const
 {
-  return _elems.cbegin();
+  return mElems.cbegin();
 }
 
 template<class K, class S>
 typename linear_map<K, S>::const_iterator linear_map<K, S>::end() const
 {
-  return _elems.cend();
+  return mElems.cend();
 }
 
 template<class K, class S>
