@@ -266,7 +266,7 @@ typename string_map<T>::iterator string_map<T>::begin()
 template<typename T>
 typename string_map<T>::iterator string_map<T>::end()
 {
-  return nullptr;
+  return iterator();
 }
 
 template<typename T>
@@ -287,7 +287,7 @@ typename string_map<T>::const_iterator string_map<T>::begin() const
 template<typename T>
 typename string_map<T>::const_iterator string_map<T>::end() const
 {
-  return nullptr;
+  return const_iterator();
 }
 
 template<typename T>

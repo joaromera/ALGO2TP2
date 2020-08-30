@@ -87,7 +87,7 @@ public:
     friend class const_iterator;
 
   private:
-    iterator(Node *n) : node(n) {}
+    explicit iterator(Node *n) : node(n) {}
     Node* node = nullptr;
 
     typename string_map<T>::Node *proximoAbajo(Node *n);
@@ -140,7 +140,7 @@ public:
       return it.operator->();
     }
 
-    const_iterator(Node *n) : it(n) {}
+    explicit const_iterator(Node *n) : it(n) {}
     iterator it { nullptr };
   };
 
@@ -201,13 +201,9 @@ private:
 
     ~Node()
     {
-      for (auto &c : mChildren)
-      {
-        if (c) delete c;
-      }
-      if (mValue) delete mValue;
+      for (auto &c : mChildren) { if (c) { delete c; } }
+      if (mValue) { delete mValue; }
     }
-
 
     bool operator==(const Node &rhs) const
     {
