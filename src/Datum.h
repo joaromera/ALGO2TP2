@@ -13,44 +13,44 @@ public:
   template<typename T>
   Datum(T t)
   {
-    self_ = std::make_unique<entity_impl<T>>(t);
+    mSelf = std::make_unique<entity_impl<T>>(t);
   }
 
   Datum(const char* str)
   {
-    self_ = std::make_unique<entity_impl<std::string>>(str);
+    mSelf = std::make_unique<entity_impl<std::string>>(str);
   }
 
   Datum(const Datum &datum)
   {
-    self_ = datum.self_->copy();
+    mSelf = datum.mSelf->copy();
   }
 
   Datum &operator=(const Datum &rhs)
   {
-    self_ = rhs.self_->copy();
+    mSelf = rhs.mSelf->copy();
     return *this;
   }
 
   bool isInteger() const
   {
-    return dynamic_cast<entity_impl<int> *>(self_.get()) != nullptr;
+    return dynamic_cast<entity_impl<int> *>(mSelf.get()) != nullptr;
   }
 
   bool isString() const
   {
-    return dynamic_cast<entity_impl<std::string> *>(self_.get()) != nullptr;
+    return dynamic_cast<entity_impl<std::string> *>(mSelf.get()) != nullptr;
   }
 
   template<typename T>
   T value() const
   {
-    return (dynamic_cast<entity_impl<T> *>(self_.get()))->data_;
+    return (dynamic_cast<entity_impl<T> *>(mSelf.get()))->mData;
   }
 
   bool operator==(const Datum &rhs) const
   {
-    return self_->operator==(rhs.self_);
+    return mSelf->operator==(rhs.mSelf);
   }
 
   bool operator!=(const Datum &rhs) const
@@ -60,7 +60,7 @@ public:
 
   bool operator<(const Datum &rhs) const
   {
-    return self_->operator<(rhs.self_);
+    return mSelf->operator<(rhs.mSelf);
   }
 
   friend std::ostream &operator<<(std::ostream &os, const Datum &datum)
@@ -89,13 +89,13 @@ private:
   template<typename T>
   struct entity_impl final : entity
   {
-    entity_impl(T t) : data_(std::move(t)) {}
+    entity_impl(T t) : mData(std::move(t)) {}
 
     ~entity_impl() = default;
 
     std::unique_ptr<entity> copy() override
     {
-      std::unique_ptr<entity> rt = std::make_unique<entity_impl<T>>(data_);
+      std::unique_ptr<entity> rt = std::make_unique<entity_impl<T>>(mData);
       return rt;
     }
 
@@ -104,7 +104,7 @@ private:
       try
       {
         auto rhs_casted = dynamic_cast<entity_impl<T>*>(rhs.get());
-        return data_ < rhs_casted->data_;
+        return mData < rhs_casted->mData;
       }
       catch (const std::exception& e)
       {
@@ -116,11 +116,11 @@ private:
     {
       auto rhs_casted = dynamic_cast<entity_impl<T>*>(rhs.get());
       if (rhs_casted == nullptr) return false;
-      return data_ == rhs_casted->data_;
+      return mData == rhs_casted->mData;
     }
 
-    T data_;
+    T mData;
   };
 
-  std::unique_ptr<entity> self_;
+  std::unique_ptr<entity> mSelf;
 };
