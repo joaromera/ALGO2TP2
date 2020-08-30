@@ -188,7 +188,7 @@ TEST(string_map_test, test_tipo_complejo)
 TEST(string_map_test, test_iterator)
 {
   string_map<int> m1;
-  // 3 ramas disjuntas: las debe iterar en orden lexicográfico
+  // 3 ramas disjuntas: las debe iterar en mOrder lexicográfico
   m1["mundo"] = 2;
   m1["aaaa"] = 0;
   m1["hola"] = 1;
@@ -202,7 +202,7 @@ TEST(string_map_test, test_iterator)
     l1.push_back(p.second);
   EXPECT_EQ(l1, l2);
 
-  // Agrego subramas de "aa": debe iterar en orden correcto lexicográfico
+  // Agrego subramas de "aa": debe iterar en mOrder correcto lexicográfico
   m1["aaaab"] = 12;
   m1["aaaba"] = 24;
   m1["aabba"] = 48;

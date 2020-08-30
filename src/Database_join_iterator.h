@@ -9,12 +9,12 @@ public:
   join_iterator &operator=(const join_iterator &n);
   ~join_iterator() = default;
 
-  bool operator==(const join_iterator &j) const;
-  bool operator!=(const join_iterator &j) const;
-
   join_iterator &operator++();
   join_iterator operator++(int);
   const Record operator*();
+
+  bool operator==(const join_iterator &j) const;
+  bool operator!=(const join_iterator &j) const;
 
 private:
   join_iterator() = default;
@@ -34,14 +34,14 @@ private:
   void findNextMatchByDatum(Datum datum);
   void setIteratorToNewDatumKey(const Datum &datum);
 
-  std::shared_ptr<linear_set<Record>::const_iterator> it1 {nullptr};
-  std::shared_ptr<Table::const_iterator> it2 {nullptr};
-  int tableRecordCountByKey{0};
-  int tableRecordCount{0};
-  std::shared_ptr<std::map<Datum, linear_set<Record>>> datumKeys {nullptr};
-  std::string campo {""};
-  bool isFinal {true};
-  bool orden {true};
+  std::shared_ptr<linear_set<Record>::const_iterator> mIterLeft{nullptr};
+  std::shared_ptr<Table::const_iterator> mIterRight{nullptr};
+  int mTableRecordCountByKey{0};
+  int mTableRecordCount{0};
+  std::shared_ptr<std::map<Datum, linear_set<Record>>> mDatumKeys{nullptr};
+  std::string mValue{""};
+  bool mIsFinal{true};
+  bool mOrder{true};
 
   friend class Database;
   friend class Table;

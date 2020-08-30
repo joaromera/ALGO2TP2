@@ -2,66 +2,66 @@
 
 join_iterator::join_iterator(const join_iterator &n)
 {
-  if (!n.isFinal)
+  if (!n.mIsFinal)
   {
-    it1 = std::make_shared<linear_set<Record>::const_iterator>(*n.it1);
-    it2 = std::make_shared<Table::const_iterator>(*n.it2);
-    tableRecordCountByKey = n.tableRecordCountByKey;
-    tableRecordCount = n.tableRecordCount;
-    datumKeys = n.datumKeys;
-    campo = n.campo;
-    isFinal = n.isFinal;
-    orden = n.orden;
+    mIterLeft = std::make_shared<linear_set<Record>::const_iterator>(*n.mIterLeft);
+    mIterRight = std::make_shared<Table::const_iterator>(*n.mIterRight);
+    mTableRecordCountByKey = n.mTableRecordCountByKey;
+    mTableRecordCount = n.mTableRecordCount;
+    mDatumKeys = n.mDatumKeys;
+    mValue = n.mValue;
+    mIsFinal = n.mIsFinal;
+    mOrder = n.mOrder;
   }
 }
 
 join_iterator &join_iterator::operator=(const join_iterator &n)
 {
-  if (!n.isFinal)
+  if (!n.mIsFinal)
   {
-    it1 = std::make_shared<linear_set<Record>::const_iterator>(*n.it1);
-    it2 = std::make_shared<Table::const_iterator>(*n.it2);
-    datumKeys = n.datumKeys;
-    campo = n.campo;
-    isFinal = n.isFinal;
-    tableRecordCount = n.tableRecordCount;
-    tableRecordCountByKey = n.tableRecordCountByKey;
-    orden = n.orden;
+    mIterLeft = std::make_shared<linear_set<Record>::const_iterator>(*n.mIterLeft);
+    mIterRight = std::make_shared<Table::const_iterator>(*n.mIterRight);
+    mDatumKeys = n.mDatumKeys;
+    mValue = n.mValue;
+    mIsFinal = n.mIsFinal;
+    mTableRecordCount = n.mTableRecordCount;
+    mTableRecordCountByKey = n.mTableRecordCountByKey;
+    mOrder = n.mOrder;
   }
   return *this;
 }
 
-join_iterator::join_iterator(linear_set<Record>::const_iterator a,
-                             Table::const_iterator c,
-                             int ind,
-                             int sin,
-                             std::shared_ptr<std::map<Datum,
-                               linear_set<Record>>> e,
-                             const std::string &f,
-                             const bool &o
-)
-  : tableRecordCountByKey(ind)
-  , tableRecordCount(sin)
-  , datumKeys(e)
-  , campo(f)
-  , isFinal(false)
-  , orden(o)
+join_iterator::join_iterator(
+  linear_set<Record>::const_iterator a,
+  Table::const_iterator c,
+  int ind,
+  int sin,
+  std::shared_ptr<std::map<Datum,
+   linear_set<Record>>> e,
+  const std::string &f,
+  const bool &o)
+  : mTableRecordCountByKey(ind)
+  , mTableRecordCount(sin)
+  , mDatumKeys(e)
+  , mValue(f)
+  , mIsFinal(false)
+  , mOrder(o)
 {
-  it1 = std::make_shared<linear_set<Record>::const_iterator>(a);
-  it2 = std::make_shared<Table::const_iterator>(c);
+  mIterLeft = std::make_shared<linear_set<Record>::const_iterator>(a);
+  mIterRight = std::make_shared<Table::const_iterator>(c);
 }
 
 bool join_iterator::operator==(const join_iterator &j) const
 {
-  if (isFinal == j.isFinal) return true;
+  if (mIsFinal == j.mIsFinal) return true;
 
-  return it1 == j.it1 &&
-         it2 == j.it2 &&
-         datumKeys == j.datumKeys &&
-         tableRecordCount == j.tableRecordCount &&
-         tableRecordCountByKey == j.tableRecordCountByKey &&
-         campo == j.campo &&
-         orden == j.orden;
+  return mIterLeft == j.mIterLeft &&
+         mIterRight == j.mIterRight &&
+         mDatumKeys == j.mDatumKeys &&
+         mTableRecordCount == j.mTableRecordCount &&
+         mTableRecordCountByKey == j.mTableRecordCountByKey &&
+         mValue == j.mValue &&
+         mOrder == j.mOrder;
 }
 
 bool join_iterator::operator!=(const join_iterator &j) const
@@ -72,16 +72,16 @@ bool join_iterator::operator!=(const join_iterator &j) const
 join_iterator &join_iterator::operator++()
 {
   incrementIteratorWithIndex();
-  if (tableRecordCountByKey == 0)
+  if (mTableRecordCountByKey == 0)
   {
     incrementIteratorWithoutIndex();
-    if (tableRecordCount == 0)
+    if (mTableRecordCount == 0)
     {
       advanceToEnd();
     }
     else
     {
-      auto key = (*it2)->value(campo);
+      auto key = (*mIterRight)->value(mValue);
       findNextMatchByDatum(key);
     }
   }
@@ -97,8 +97,8 @@ join_iterator join_iterator::operator++(int)
 
 const Record join_iterator::operator*()
 {
-  if (orden) return mergeRecords(**it1, **it2);
-  return mergeRecords(**it2, **it1);
+  if (mOrder) return mergeRecords(**mIterLeft, **mIterRight);
+  return mergeRecords(**mIterRight, **mIterLeft);
 }
 
 Record join_iterator::mergeRecords(const Record & r1, const Record & r2)
@@ -114,7 +114,7 @@ Record join_iterator::mergeRecords(const Record & r1, const Record & r2)
 
   for (const auto& c : r2.columns())
   {
-    if (r1.columns().count(c) == 0 && c != campo)
+    if (r1.columns().count(c) == 0 && c != mValue)
     {
       mergedColumns.emplace_back(c);
       mergedValues.emplace_back(r2.value(c));
@@ -126,38 +126,38 @@ Record join_iterator::mergeRecords(const Record & r1, const Record & r2)
 
 void join_iterator::advanceToEnd()
 {
-  it1.reset();
-  it2.reset();
-  datumKeys.reset();
-  isFinal = true;
-  campo = "";
+  mIterLeft.reset();
+  mIterRight.reset();
+  mDatumKeys.reset();
+  mIsFinal = true;
+  mValue = "";
 }
 
 void join_iterator::incrementIteratorWithIndex()
 {
-  ++(*it1);
-  tableRecordCountByKey--;
+  ++(*mIterLeft);
+  mTableRecordCountByKey--;
 }
 
 void join_iterator::incrementIteratorWithoutIndex()
 {
-  ++(*it2);
-  tableRecordCount--;
+  ++(*mIterRight);
+  mTableRecordCount--;
 }
 
 void join_iterator::findNextMatchByDatum(Datum datum)
 {
-  while (tableRecordCount != 0 && datumKeys->count(datum) == 0)
+  while (mTableRecordCount != 0 && mDatumKeys->count(datum) == 0)
   {
-    datum = (*it2)->value(campo);
-    if (datumKeys->count(datum) == 0) incrementIteratorWithoutIndex();
+    datum = (*mIterRight)->value(mValue);
+    if (mDatumKeys->count(datum) == 0) incrementIteratorWithoutIndex();
   }
 
-  if (tableRecordCount == 0)
+  if (mTableRecordCount == 0)
   {
     advanceToEnd();
   }
-  else if (datumKeys->count(datum) != 0)
+  else if (mDatumKeys->count(datum) != 0)
   {
     setIteratorToNewDatumKey(datum);
   }
@@ -169,6 +169,7 @@ void join_iterator::findNextMatchByDatum(Datum datum)
 
 void join_iterator::setIteratorToNewDatumKey(const Datum &datum)
 {
-  it1 = std::make_shared<linear_set<Record>::const_iterator>(datumKeys->at(datum).begin());
-  tableRecordCountByKey = datumKeys->at(datum).size();
+  const auto &iter = mDatumKeys->at(datum).begin();
+  mIterLeft = std::make_shared<linear_set<Record>::const_iterator>(iter);
+  mTableRecordCountByKey = mDatumKeys->at(datum).size();
 }

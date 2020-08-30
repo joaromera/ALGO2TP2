@@ -228,7 +228,7 @@ TEST_F(DBAlumnos, validar_registro)
   EXPECT_TRUE(db.isValidRecord(Record({ "LU_N", "LU_A", "LU" }, { Datum(1), Datum(90), Datum("??") }), "libretas"));
   EXPECT_TRUE(db.isValidRecord(Record({ "LU", "Materia" }, { Datum("1/90"), Datum("Orga2") }), "materias"));
 
-  // Clave múltiple, 1 dif, otro orden
+  // Clave múltiple, 1 dif, otro mOrder
   EXPECT_TRUE(db.isValidRecord(Record({ "LU_N", "LU", "LU_A" }, { Datum(1), Datum("??"), Datum(90) }), "libretas"));
   EXPECT_TRUE(db.isValidRecord(Record({ "Materia", "LU" }, { Datum("Orga2"), Datum("1/90") }), "materias"));
 
@@ -295,7 +295,7 @@ TEST_F(DBAlumnos, busqueda_igual_doble)
                          res.records().begin(),
                          res.records().end()));
 
-  // Otro orden
+  // Otro mOrder
   res = db.search({ Rig("LU_A", 90), Rig("LU_N", 1) },
     "libretas");
   EXPECT_EQ(res.records().size(), (size_t) 1);
@@ -331,7 +331,7 @@ TEST_F(DBAlumnos, busqueda_distinto_doble)
                          res.records().begin(),
                          res.records().end()));
 
-  // Otro orden
+  // Otro mOrder
   res = db.search({ Rdif("LU_A", 90), Rdif("LU_N", 1) },
     "libretas");
   EXPECT_EQ(res.records().size(), (size_t) 5);
