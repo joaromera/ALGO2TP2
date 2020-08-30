@@ -26,11 +26,7 @@ public:
 
     join_iterator(const join_iterator &n)
     {
-      if (n.isFinal)
-      {
-        advanceToEnd();
-      }
-      else
+      if (!n.isFinal)
       {
         it1 = std::make_shared<linear_set<Record>::const_iterator>(*n.it1);
         it2 = std::make_shared<Table::const_iterator>(*n.it2);
@@ -45,11 +41,7 @@ public:
 
     join_iterator &operator=(const join_iterator &n)
     {
-      if (n.isFinal)
-      {
-        advanceToEnd();
-      }
-      else
+      if (!n.isFinal)
       {
         it1 = std::make_shared<linear_set<Record>::const_iterator>(*n.it1);
         it2 = std::make_shared<Table::const_iterator>(*n.it2);
