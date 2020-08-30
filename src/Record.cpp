@@ -3,27 +3,27 @@
 
 using namespace Db::Types;
 
-Record::Record(const std::vector<std::string> &columns, const std::vector<Datum> &values) : _columns(columns.begin(), columns.end())
+Record::Record(const std::vector<std::string> &columns,
+  const std::vector<Datum> &values)
+  : mColumns(columns.begin(), columns.end())
 {
   for (size_t i = 0; i < columns.size(); i++)
-  {
-    _values.insert(make_pair(columns[i], values[i]));
-  }
+    mValues.insert(std::make_pair(columns[i], values[i]));
 }
 
 const Datum&Record::value(const std::string &column) const
 {
-  return _values.at(column);
+  return mValues.at(column);
 }
 
 const linear_set<std::string> &Record::columns() const
 {
-  return _columns;
+  return mColumns;
 }
 
 const string_map<Datum> &Record::columnValues() const
 {
-  return _values;
+  return mValues;
 }
 
 bool operator==(const Record &r1, const Record &r2)
@@ -37,7 +37,7 @@ std::ostream &operator<<(std::ostream &os, const Record &r)
   int count = r.columns().size();
   for (const auto& v : r.columns())
   {
-    os << r._values.at(v);
+    os << r.mValues.at(v);
     count--;
     if (count)
     {

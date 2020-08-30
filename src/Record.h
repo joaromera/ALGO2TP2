@@ -11,15 +11,16 @@ using namespace Db::Types;
 class Record
 {
 public:
-  Record(const std::vector<std::string> &columns, const std::vector<Datum> &values);
+  Record(const std::vector<std::string> &columns,
+    const std::vector<Datum> &values);
 
   const Datum &value(const std::string &column) const;
   const linear_set<std::string> &columns() const;
   const string_map<Datum> &columnValues() const;
 
 private:
-  linear_set<std::string> _columns;
-  string_map<Datum> _values;
+  linear_set<std::string> mColumns;
+  string_map<Datum> mValues;
   friend std::ostream &operator<<(std::ostream &, const Record &);
 };
 
