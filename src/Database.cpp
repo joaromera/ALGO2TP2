@@ -5,51 +5,59 @@
 
 using namespace Db::Types;
 
-Database::Database() {}
-
-void Database::createTable(const std::string &name, const linear_set<std::string> &keys, const std::vector<std::string> &columns, const std::vector<Datum> &types)
+void Database::createTable(const std::string &name,
+  const linear_set<std::string> &keys,
+  const std::vector<std::string> &columns,
+  const std::vector<Datum> &types)
 {
-  _tableNames.fast_insert(name);
-  _tables.insert(make_pair(name, Table(keys, columns, types)));
+  mTableNames.fast_insert(name);
+  mTables.insert(make_pair(name, Table(keys, columns, types)));
 }
 
 void Database::addRecord(const Record &record, const std::string &tableName)
 {
-  Table &t = _tables.at(tableName);
+  Table &t = mTables.at(tableName);
   t.addRecord(record);
   for (const auto& c : record.columns())
   {
     if (hasIndex(tableName, c))
     {
-      _indexRefs[tableName][c][record.value(c)].insert(record);
+      mIndexRefs[tableName][c][record.value(c)].insert(record);
     }
   }
 }
 
-const linear_set<std::string> &Database::tableNames() const { return _tableNames; }
+const linear_set<std::string> &Database::tableNames() const
+{
+  return mTableNames;
+}
 
 const Table &Database::getTable(const std::string &name) const
 {
-  return _tables.at(name);
+  return mTables.at(name);
 }
 
 int Database::filterUsageCount(const Database::Filters &filter) const
 {
-  if (_uso_criterios.count(filter)) return _uso_criterios.at(filter);
+  if (mFilterUsageCount.count(filter)) return mFilterUsageCount.at(filter);
 
   return 0;
 }
 
 bool Database::isValidRecord(const Record &record, const std::string &name) const
 {
-  const Table &t = _tables.at(name);
+  const Table &t = mTables.at(name);
 
-  if (t.columns().size() != record.columns().size()) return false;
+  if (t.columns().size() != record.columns().size())
+    return false;
 
   for (const auto& c : record.columnValues())
   {
-    if (t.columns().count(c.first) == 0) return false;
-    if (t.columnType(c.first).isInteger() != c.second.isInteger()) return false;
+    if (t.columns().count(c.first) == 0)
+      return false;
+
+    if (t.columnType(c.first).isInteger() != c.second.isInteger())
+      return false;
   }
 
   for (const auto& rt : t.records())
@@ -59,24 +67,32 @@ bool Database::isValidRecord(const Record &record, const std::string &name) cons
 
     for (const auto& c : t.keys())
     {
-      if (record.value(c) == rt.value(c)) coincidencias++;
+      if (record.value(c) == rt.value(c))
+        coincidencias++;
     }
 
-    if (claves_en_t - coincidencias == 0) return false;
+    if (claves_en_t - coincidencias == 0)
+      return false;
   }
 
   return true;
 }
 
-std::list<Record> &Database::_filterRecords(const std::string &column, const Datum &value, std::list<Record> &records, bool equals) const
+std::list<Record> &Database::filterRecords(
+  const std::string &column,
+  const Datum &value,
+  std::list<Record> &records,
+  bool equals) const
 {
   auto iter = records.begin();
 
   while (iter != records.end())
   {
     auto now = iter++;
+    const bool excludeNonMatch = (now->value(column) != value) && equals;
+    const bool excludeMatch = (now->value(column) == value) && !equals;
 
-    if (((now->value(column) != value) && equals) || ((now->value(column) == value) && !equals))
+    if (excludeNonMatch || excludeMatch)
     {
       records.erase(now);
     }
@@ -85,60 +101,74 @@ std::list<Record> &Database::_filterRecords(const std::string &column, const Dat
   return records;
 }
 
-std::pair<std::vector<std::string>, std::vector<Datum>> Database::_tableTypes(const Table &t)
+std::pair<std::vector<std::string>, std::vector<Datum>>Database::tableTypes(const Table &t)
 {
-  std::vector<std::string> res_campos;
-  std::vector<Datum> res_tipos;
+  std::vector<std::string> columns;
+  std::vector<Datum> types;
   for (const auto& c : t.columns())
   {
-    res_campos.push_back(c);
-    res_tipos.push_back(t.columnType(c));
+    columns.push_back(c);
+    types.push_back(t.columnType(c));
   }
-  return { res_campos, res_tipos };
+  return { columns, types };
 }
 
-bool Database::isValidFilter(const Filters &c, const std::string &nombre) const
+bool Database::isValidFilter(const Filters &filters, const std::string &name) const
 {
-  const Table &t = _tables.at(nombre);
-  for (const auto& restriccion : c)
+  const Table &t = mTables.at(name);
+  for (const auto &filter : filters)
   {
-    if (!t.columns().count(restriccion.column())) return false;
-    if (t.columnType(restriccion.column()).isInteger() != restriccion.datum().isInteger()) return false;
+    const auto &column = filter.column();
+    const auto &datum = filter.datum();
+
+    if (!t.columns().count(column))
+      return false;
+
+    if (t.columnType(column).isInteger() != datum.isInteger())
+      return false;
   }
   return true;
 }
 
-Table Database::search(const Database::Filters &c, const std::string &nombre)
+Table Database::search(const Database::Filters &filters, const std::string &name)
 {
-  if (_uso_criterios.count(c))
+  updateFilterUsageCount(filters);
+
+  const Table &tableToFilter = getTable(name);
+  auto filterTableTypes = tableTypes(tableToFilter);
+  Table res(tableToFilter.keys(), filterTableTypes.first, filterTableTypes.second);
+
+  std::list<Record> records(tableToFilter.records().begin(), tableToFilter.records().end());
+
+  for (const auto& filter : filters)
   {
-    _uso_criterios.at(c)++;
-  }
-  else
-  {
-    _uso_criterios.fast_insert(std::make_pair(c, 1));
+    filterRecords(filter.column(), filter.datum(), records, filter.equals());
   }
 
-  const Table &ref = getTable(nombre);
-  auto campos_datos = _tableTypes(ref);
-  Table res(ref.keys(), campos_datos.first, campos_datos.second);
-  std::list<Record> regs(ref.records().begin(), ref.records().end());
-  for (const auto& restriccion : c)
-  {
-    _filterRecords(restriccion.column(), restriccion.datum(), regs, restriccion.equals());
-  }
-  for (const auto& r : regs)
+  for (const auto& r : records)
   {
     res.addRecord(r);
   }
+
   return res;
+}
+void Database::updateFilterUsageCount(const Database::Filters &filters)
+{
+  if (mFilterUsageCount.count(filters))
+  {
+    mFilterUsageCount.at(filters)++;
+  }
+  else
+  {
+    mFilterUsageCount.fast_insert({ filters, 1 });
+  }
 }
 
 linear_set<Database::Filters> Database::mostUsedFilter() const
 {
   linear_set<Filters> ret;
   int max = 0;
-  for (const auto& crit_count : _uso_criterios)
+  for (const auto& crit_count : mFilterUsageCount)
   {
     if (crit_count.second >= max)
     {
@@ -159,13 +189,13 @@ void Database::createIndex(const std::string &table, const std::string &column)
 
   for (const auto& r : reg)
   {
-    _indexRefs[table][column][r.value(column)].insert(r);
+    mIndexRefs[table][column][r.value(column)].insert(r);
   }
 }
 
 bool Database::hasIndex(const std::string &table, const std::string &column)
 {
-  return _indexRefs[table].count(column) >= 1;
+  return mIndexRefs[table].count(column) >= 1;
 }
 
 join_iterator Database::join(const std::string &table1, const std::string &table2, const std::string &columnName)
@@ -177,22 +207,22 @@ join_iterator Database::join(const std::string &table1, const std::string &table
   return join_helper(indexedTable, nonIndexedTable, columnName, firstTableHasIndex);
 }
 
-join_iterator Database::join_helper(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden)
+join_iterator Database::join_helper(const std::string &leftTable, const std::string &rightTable, const std::string &joinValue, const bool &order)
 {
-  const Table &t2 = getTable(tabla2);
+  const Table &t2 = getTable(rightTable);
   auto it2 = t2.begin();
   int cant_reg_it2 = t2.size();
-  auto clave = (*it2).value(campo);
+  auto clave = (*it2).value(joinValue);
 
-  auto it = _indexRefs[tabla1].at(campo).find(clave)->second.begin();
-  auto it_end = _indexRefs[tabla1].at(campo).find(clave)->second.end();
+  auto it = mIndexRefs[leftTable].at(joinValue).find(clave)->second.begin();
+  auto it_end = mIndexRefs[leftTable].at(joinValue).find(clave)->second.end();
 
   // Busca primer coincidencia entre las dos tableNames
   while (cant_reg_it2 != 0 && it == it_end)
   {
-    clave = (*it2).value(campo);
-    it = _indexRefs[tabla1].at(campo).find(clave)->second.begin();
-    it_end = _indexRefs[tabla1].at(campo).find(clave)->second.end();
+    clave = (*it2).value(joinValue);
+    it = mIndexRefs[leftTable].at(joinValue).find(clave)->second.begin();
+    it_end = mIndexRefs[leftTable].at(joinValue).find(clave)->second.end();
     if (it == it_end)
     {
       ++it2;
@@ -202,19 +232,19 @@ join_iterator Database::join_helper(const std::string &tabla1, const std::string
 
   if (cant_reg_it2 == 0) return join_iterator();
 
-  auto diccClaves = std::make_shared<std::map<Datum, linear_set<Record>>>(_indexRefs[tabla1].at(campo));
-  auto &tab = _indexRefs[tabla1];
-  auto &col = tab.at(campo);
+  auto diccClaves = std::make_shared<std::map<Datum, linear_set<Record>>>(mIndexRefs[leftTable].at(joinValue));
+  auto &tab = mIndexRefs[leftTable];
+  auto &col = tab.at(joinValue);
 
   if (col.find(clave) == col.end()) return join_iterator();
 
   auto &dat = col.at(clave);
 
   auto it_tabla_con_indice = dat.begin();
-  unsigned long cant_reg_por_indice = _indexRefs[tabla1].at(campo).at(clave).size();
+  unsigned long cant_reg_por_indice = mIndexRefs[leftTable].at(joinValue).at(clave).size();
   auto it_tabla_sin_indice = t2.begin();
 
-  return join_iterator(it_tabla_con_indice, it_tabla_sin_indice, cant_reg_por_indice, cant_reg_it2, diccClaves, campo, orden);
+  return join_iterator(it_tabla_con_indice, it_tabla_sin_indice, cant_reg_por_indice, cant_reg_it2, diccClaves, joinValue, order);
 }
 
 join_iterator Database::join_end()
