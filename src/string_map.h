@@ -245,15 +245,14 @@ public:
 private:
   struct Node
   {
-    std::string mKey;
-    Node *mParent;
-    std::vector<Node *> mChildren;
-    int mSize;
-    value_type *mValue;
+    std::string mKey {""};
+    Node *mParent {nullptr};
+    std::vector<Node *> mChildren = std::vector<Node *>(128, nullptr);
+    int mSize {0};
+    value_type *mValue { nullptr};
 
-    Node() : mKey(), mParent(nullptr), mChildren(128, nullptr), mSize(), mValue(nullptr) {}
-
-    Node(const Node &n) : mKey(n.mKey), mParent(n.mParent), mChildren(n.mChildren), mSize(n.mSize), mValue(n.mValue) {}
+    Node() = default;
+    Node(const Node &n) = default;
 
     bool operator==(const Node &rhs) const
     {
