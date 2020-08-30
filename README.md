@@ -1,6 +1,6 @@
 # Database with Trie Search Tree
 
-[![Build Status](https://travis-ci.com/joaromera/algo2tp2.svg?branch=master)](https://travis-ci.com/joaromera/algo2tp2)
+[![Build Status](https://travis-ci.com/joaromera/trie-database.svg?branch=master)](https://travis-ci.com/joaromera/trie-database)
 
 ## Introduction
 
