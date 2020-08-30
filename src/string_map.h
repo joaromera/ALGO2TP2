@@ -51,11 +51,11 @@ public:
       {
         return node == n.node;
       }
-      if (node->par == nullptr || n.node->par == nullptr)
+      if (node->mValue == nullptr || n.node->mValue == nullptr)
       {
-        return node->par == n.node->par;
+        return node->mValue == n.node->mValue;
       }
-      return *(node->par) == *(n.node->par);
+      return *(node->mValue) == *(n.node->mValue);
     }
 
     bool operator!=(const iterator &n) const
@@ -88,12 +88,12 @@ public:
 
     value_type &operator*() const
     {
-      return *node->par;
+      return *node->mValue;
     }
 
     value_type *operator->() const
     {
-      return node->par;
+      return node->mValue;
     }
 
     friend class string_map;
@@ -139,11 +139,11 @@ public:
       {
         return node == n.node;
       }
-      if (node->par == nullptr || n.node->par == nullptr)
+      if (node->mValue == nullptr || n.node->mValue == nullptr)
       {
-        return node->par == n.node->par;
+        return node->mValue == n.node->mValue;
       }
-      return *(node->par) == *(n.node->par);
+      return *(node->mValue) == *(n.node->mValue);
     }
 
     bool operator!=(const const_iterator &n) const
@@ -176,12 +176,12 @@ public:
 
     const value_type &operator*() const
     {
-      return *node->par;
+      return *node->mValue;
     }
 
     const value_type *operator->() const
     {
-      return node->par;
+      return node->mValue;
     }
 
     friend class string_map;
@@ -245,19 +245,19 @@ public:
 private:
   struct Node
   {
-    std::string key;
-    Node *parent;
-    std::vector<Node *> children;
-    int cantHijos;
-    value_type *par;
+    std::string mKey;
+    Node *mParent;
+    std::vector<Node *> mChildren;
+    int mSize;
+    value_type *mValue;
 
-    Node() : key(), parent(nullptr), children(128, nullptr), cantHijos(), par(nullptr) {}
+    Node() : mKey(), mParent(nullptr), mChildren(128, nullptr), mSize(), mValue(nullptr) {}
 
-    Node(const Node &n) : key(n.key), parent(n.parent), children(n.children), cantHijos(n.cantHijos), par(n.par) {}
+    Node(const Node &n) : mKey(n.mKey), mParent(n.mParent), mChildren(n.mChildren), mSize(n.mSize), mValue(n.mValue) {}
 
     bool operator==(const Node &rhs) const
     {
-      return key == rhs.key && parent == rhs.parent && children == rhs.children && cantHijos == rhs.cantHijos && par == rhs.par;
+      return mKey == rhs.mKey && mParent == rhs.mParent && mChildren == rhs.mChildren && mSize == rhs.mSize && mValue == rhs.mValue;
     }
 
     bool operator!=(const Node &rhs) const
@@ -266,11 +266,11 @@ private:
     }
   };
 
-  Node * head = nullptr;
-  size_t cantClaves = 0;
+  Node *mTrieRoot = nullptr;
+  size_t mKeysCount = 0;
 
-  void borrar(Node *&n);
-  void copiarHijos(Node *head, Node *other);
+  void eraseTrie(Node *&n);
+  void copyChildren(Node *head, Node *other);
 };
 
 } // namespace Types

@@ -26,7 +26,7 @@ I used `Doxygen` to document the code base. The generated html is `docs/html/ind
 
 ## What to look for... 👀
 
-Probably the most interesting place to look at is the implementation of [Datum.h](src/Datum.h). This is the type that stores the values of each _cell_ in the database. I've drawn some inspiration from _Sean Parent's Better Code_ talk [Better Code: Runtime Polymorphism](https://www.youtube.com/watch?v=QGcVXgEVMJg) (also visit Sean Parent's [site](https://sean-parent.stlab.cc/) for more information on his papers and talks). There's still a lot to improve but the exercise was definitely worth the effort.
+Probably the most interesting place to look at is the implementation of [Datum.h](src/Datum.h). This is the type that stores the values of each _cell_ in the database. I've drawn some inspiration from _Sean Parent's Better Code_ talk [Better Code: Runtime Polymorphism](https://www.youtube.com/watch?v=QGcVXgEVMJg) (also visit Sean Parent's [site](https://sean-mParent.stlab.cc/) for more information on his papers and talks). There's still a lot to improve but the exercise was definitely worth the effort.
 
 The implementation of the [Trie](https://en.wikipedia.org/wiki/Trie) search tree: [string_map.h](src/string_map.h) and [string_map.hpp](src/string_map.hpp).
 
