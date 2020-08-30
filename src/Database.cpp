@@ -168,7 +168,7 @@ bool Database::hasIndex(const std::string &table, const std::string &column)
   return _indexRefs[table].count(column) >= 1;
 }
 
-Database::join_iterator Database::join(const std::string &table1, const std::string &table2, const std::string &columnName)
+join_iterator Database::join(const std::string &table1, const std::string &table2, const std::string &columnName)
 {
   const bool firstTableHasIndex = hasIndex(table1, columnName);
   const auto &indexedTable = firstTableHasIndex ? table1 : table2;
@@ -177,7 +177,7 @@ Database::join_iterator Database::join(const std::string &table1, const std::str
   return join_helper(indexedTable, nonIndexedTable, columnName, firstTableHasIndex);
 }
 
-Database::join_iterator Database::join_helper(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden)
+join_iterator Database::join_helper(const std::string &tabla1, const std::string &tabla2, const std::string &campo, const bool &orden)
 {
   const Table &t2 = getTable(tabla2);
   auto it2 = t2.begin();
@@ -217,7 +217,7 @@ Database::join_iterator Database::join_helper(const std::string &tabla1, const s
   return join_iterator(it_tabla_con_indice, it_tabla_sin_indice, cant_reg_por_indice, cant_reg_it2, diccClaves, campo, orden);
 }
 
-Database::join_iterator Database::join_end()
+join_iterator Database::join_end()
 {
   return join_iterator();
 }
