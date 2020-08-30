@@ -37,7 +37,7 @@ public:
 private:
   std::list<Record> &filterRecords(const std::string &column, const Datum &value, std::list<Record> &records, bool equals) const;
   std::pair<std::vector<std::string>, std::vector<Datum>> tableTypes(const Table &t);
-  join_iterator join_helper(const std::string &leftTable, const std::string &rightTable, const std::string &joinValue, const bool &order);
+  join_iterator join_helper(const std::string &leftTable, const std::string &rightTable, const std::string &joinColumn, const bool &order);
   void updateFilterUsageCount(const Filters &filters);
 
   linear_set<std::string> mTableNames;

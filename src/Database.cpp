@@ -136,7 +136,6 @@ Table Database::search(const Database::Filters &filters, const std::string &name
 
   const Table &tableToFilter = getTable(name);
   auto filterTableTypes = tableTypes(tableToFilter);
-  Table res(tableToFilter.keys(), filterTableTypes.first, filterTableTypes.second);
 
   std::list<Record> records(tableToFilter.records().begin(), tableToFilter.records().end());
 
@@ -145,12 +144,14 @@ Table Database::search(const Database::Filters &filters, const std::string &name
     filterRecords(filter.column(), filter.datum(), records, filter.equals());
   }
 
+  Table t(tableToFilter.keys(), filterTableTypes.first, filterTableTypes.second);
+
   for (const auto& r : records)
   {
-    res.addRecord(r);
+    t.addRecord(r);
   }
 
-  return res;
+  return t;
 }
 void Database::updateFilterUsageCount(const Database::Filters &filters)
 {
@@ -166,28 +167,28 @@ void Database::updateFilterUsageCount(const Database::Filters &filters)
 
 linear_set<Database::Filters> Database::mostUsedFilter() const
 {
-  linear_set<Filters> ret;
+  linear_set<Filters> mostUsedFilters;
   int max = 0;
-  for (const auto& crit_count : mFilterUsageCount)
+  for (const auto&filter : mFilterUsageCount)
   {
-    if (crit_count.second >= max)
+    if (filter.second >= max)
     {
-      if (crit_count.second > max)
+      if (filter.second > max)
       {
-        ret = linear_set<Filters>();
-        max = crit_count.second;
+        mostUsedFilters = linear_set<Filters>();
+        max = filter.second;
       }
-      ret.fast_insert(crit_count.first);
+      mostUsedFilters.fast_insert(filter.first);
     }
   }
-  return ret;
+  return mostUsedFilters;
 }
 
 void Database::createIndex(const std::string &table, const std::string &column)
 {
-  const linear_set<Record> &reg = getTable(table).records();
+  const linear_set<Record> &records = getTable(table).records();
 
-  for (const auto& r : reg)
+  for (const auto& r : records)
   {
     mIndexRefs[table][column][r.value(column)].insert(r);
   }
@@ -198,7 +199,9 @@ bool Database::hasIndex(const std::string &table, const std::string &column)
   return mIndexRefs[table].count(column) >= 1;
 }
 
-join_iterator Database::join(const std::string &table1, const std::string &table2, const std::string &columnName)
+join_iterator Database::join(const std::string &table1,
+  const std::string &table2,
+  const std::string &columnName)
 {
   const bool firstTableHasIndex = hasIndex(table1, columnName);
   const auto &indexedTable = firstTableHasIndex ? table1 : table2;
@@ -207,44 +210,41 @@ join_iterator Database::join(const std::string &table1, const std::string &table
   return join_helper(indexedTable, nonIndexedTable, columnName, firstTableHasIndex);
 }
 
-join_iterator Database::join_helper(const std::string &leftTable, const std::string &rightTable, const std::string &joinValue, const bool &order)
+join_iterator Database::join_helper(const std::string &leftTable,
+  const std::string &rightTable,
+  const std::string &joinColumn,
+  const bool &order)
 {
   const Table &t2 = getTable(rightTable);
   auto it2 = t2.begin();
-  int cant_reg_it2 = t2.size();
-  auto clave = (*it2).value(joinValue);
+  auto table2Size = t2.size();
+  auto valueAtIt2 = it2->value(joinColumn);
 
-  auto it = mIndexRefs[leftTable].at(joinValue).find(clave)->second.begin();
-  auto it_end = mIndexRefs[leftTable].at(joinValue).find(clave)->second.end();
+  auto it = mIndexRefs[leftTable].at(joinColumn).find(valueAtIt2)->second.begin();
+  auto it_end = mIndexRefs[leftTable].at(joinColumn).find(valueAtIt2)->second.end();
 
   // Busca primer coincidencia entre las dos tableNames
-  while (cant_reg_it2 != 0 && it == it_end)
+  while (table2Size != 0 && it == it_end)
   {
-    clave = (*it2).value(joinValue);
-    it = mIndexRefs[leftTable].at(joinValue).find(clave)->second.begin();
-    it_end = mIndexRefs[leftTable].at(joinValue).find(clave)->second.end();
-    if (it == it_end)
-    {
-      ++it2;
-      cant_reg_it2--;
-    }
+    valueAtIt2 = it2->value(joinColumn);
+    it = mIndexRefs[leftTable].at(joinColumn).find(valueAtIt2)->second.begin();
+    it_end = mIndexRefs[leftTable].at(joinColumn).find(valueAtIt2)->second.end();
+    if (it++ == it_end) { table2Size--; }
   }
 
-  if (cant_reg_it2 == 0) return join_iterator();
+  if (table2Size == 0) return join_iterator();
 
-  auto diccClaves = std::make_shared<std::map<Datum, linear_set<Record>>>(mIndexRefs[leftTable].at(joinValue));
   auto &tab = mIndexRefs[leftTable];
-  auto &col = tab.at(joinValue);
+  auto &col = tab.at(joinColumn);
+  if (col.find(valueAtIt2) == col.end()) return join_iterator();
 
-  if (col.find(clave) == col.end()) return join_iterator();
-
-  auto &dat = col.at(clave);
-
+  auto &dat = col.at(valueAtIt2);
   auto it_tabla_con_indice = dat.begin();
-  unsigned long cant_reg_por_indice = mIndexRefs[leftTable].at(joinValue).at(clave).size();
   auto it_tabla_sin_indice = t2.begin();
+  auto diccClaves = std::make_shared<std::map<Datum, linear_set<Record>>>(mIndexRefs[leftTable].at(joinColumn));
+  auto cant_reg_por_indice = mIndexRefs[leftTable].at(joinColumn).at(valueAtIt2).size();
 
-  return join_iterator(it_tabla_con_indice, it_tabla_sin_indice, cant_reg_por_indice, cant_reg_it2, diccClaves, joinValue, order);
+  return join_iterator(it_tabla_con_indice, it_tabla_sin_indice, cant_reg_por_indice, table2Size, diccClaves, joinColumn, order);
 }
 
 join_iterator Database::join_end()
