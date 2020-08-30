@@ -14,36 +14,8 @@ string_map<T>::string_map()
 template<typename T>
 string_map<T>::~string_map()
 {
-  eraseTrie(mTrieRoot);
+  delete mTrieRoot;
   mTrieRoot = nullptr;
-}
-
-template<typename T>
-void string_map<T>::eraseTrie(Node *&n)
-{
-  // Recursivamente recorre todos los mChildren del node, liberando memoria y seteando a nullptr
-  Node *node = n;
-  for (int i = 0; i < 128; i++)
-  {
-    if (node->mChildren[i] != nullptr)
-    {
-      eraseTrie(node->mChildren[i]);
-      node->mChildren[i] = nullptr;
-      node->mSize--;
-    }
-  }
-  if (node->mValue != nullptr)
-  {
-    delete node->mValue;
-    node->mValue = nullptr;
-    mKeysCount--;
-  }
-  if (node->mParent != nullptr)
-  {
-    node->mParent = nullptr;
-  }
-  delete node;
-  node = nullptr;
 }
 
 template<typename T>
@@ -83,7 +55,7 @@ void string_map<T>::copyChildren(Node *head, Node *other)
 template<typename T>
 string_map<T> &string_map<T>::operator=(const string_map &p)
 {
-  this->clear();
+  clear();
 
   if (p.mTrieRoot == nullptr)
   {
@@ -340,10 +312,7 @@ const typename string_map<T>::mapped_type &string_map<T>::at(const key_type &key
 template<typename T>
 void string_map<T>::clear()
 {
-  if (mTrieRoot != nullptr)
-  {
-    eraseTrie(mTrieRoot);
-  }
+  if (mTrieRoot != nullptr) delete mTrieRoot;
   mTrieRoot = new Node;
   mKeysCount = 0;
 }
@@ -428,7 +397,7 @@ typename string_map<T>::const_iterator string_map<T>::find(const key_type &key) 
   {
     if (temp->mChildren[int(*it)] == nullptr)
     {
-      return this->end();
+      return end();
     }
     else
     {
@@ -488,7 +457,7 @@ std::pair<typename string_map<T>::iterator, bool> string_map<T>::insert(const st
 template<typename T>
 typename string_map<T>::size_type string_map<T>::erase(const string_map<T>::key_type &key)
 {
-  auto it = this->find(key);
+  auto it = find(key);
   Node *walk = it.node;
   int eliminados = 0;
 

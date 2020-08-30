@@ -198,11 +198,11 @@ public:
 
   string_map();
 
-  ~string_map();
-
   string_map(const string_map &p);
 
   string_map &operator=(const string_map &p);
+
+  ~string_map();
 
   bool operator==(const string_map &otro) const;
 
@@ -247,12 +247,19 @@ private:
   {
     std::string mKey {""};
     Node *mParent {nullptr};
-    std::vector<Node *> mChildren = std::vector<Node *>(128, nullptr);
+    std::vector<Node*> mChildren = std::vector<Node*>(128, nullptr);
     int mSize {0};
     value_type *mValue { nullptr};
 
-    Node() = default;
-    Node(const Node &n) = default;
+    ~Node()
+    {
+      for (auto &c : mChildren)
+      {
+        if (c != nullptr) delete c;
+      }
+      if (mValue != nullptr) delete mValue;
+    }
+
 
     bool operator==(const Node &rhs) const
     {
@@ -268,7 +275,6 @@ private:
   Node *mTrieRoot = nullptr;
   size_t mKeysCount = 0;
 
-  void eraseTrie(Node *&n);
   void copyChildren(Node *head, Node *other);
 };
 
