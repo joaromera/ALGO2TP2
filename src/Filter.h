@@ -12,9 +12,9 @@ public:
   const bool &equals() const;
 
 private:
-  std::string _column;
-  Datum _datum;
-  bool _equals;
+  std::string mColumn;
+  Datum mDatum;
+  bool mEquals;
 };
 
 bool operator==(const Filter &r1, const Filter &r2);
