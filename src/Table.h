@@ -14,7 +14,10 @@ class Table
 public:
   using const_iterator = linear_set<Record>::const_iterator;
 
-  Table(const linear_set<std::string> &keys, const std::vector<std::string> &columns, const std::vector<Datum> &types);
+  Table(const linear_set<std::string> &keys,
+    const std::vector<std::string> &columns,
+    const std::vector<Datum> &types);
+
   const_iterator addRecord(const Record&);
   const_iterator begin() const;
   const_iterator end() const;

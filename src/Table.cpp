@@ -3,7 +3,9 @@
 
 using namespace Db::Types;
 
-Table::Table(const linear_set<std::string> &keys, const std::vector<std::string> &columns, const std::vector<Datum> &types)
+Table::Table(const linear_set<std::string> &keys,
+  const std::vector<std::string> &columns,
+  const std::vector<Datum> &types)
   : mKeys(keys)
 {
   if (columns.size() > types.size())
@@ -21,7 +23,8 @@ Table::Table(const linear_set<std::string> &keys, const std::vector<std::string>
 
 Table::const_iterator Table::addRecord(const Record &r)
 {
-  return Table::const_iterator(linear_set<Record>::const_iterator(mRecords.fast_insert(r)));
+  const auto &it = mRecords.fast_insert(r);
+  return Table::const_iterator(linear_set<Record>::const_iterator(it));
 }
 
 Table::const_iterator Table::begin() const
