@@ -75,14 +75,14 @@ public:
 
     iterator &operator++()
     {
-      Node *node = proximoAbajo(mNode);
+      Node *node = nextDescendant(mNode);
       if (node)
       {
         mNode = node;
       }
       else
       {
-        node = proximoArriba(mNode);
+        node = nextAncestor(mNode);
         mNode = node;
       }
       return *this;
@@ -112,10 +112,10 @@ public:
     explicit iterator(Node *n) : mNode(n) {}
     Node *mNode = nullptr;
 
-    typename string_map<T>::Node *proximoAbajo(Node *n);
-    void buscarNodoAbajo(Node *&n);
-    typename string_map<T>::Node *proximoArriba(Node *n);
-    void buscarNodoArriba(Node *&n);
+    typename string_map<T>::Node *nextDescendant(Node *n);
+    void findNextDescendant(Node *&n);
+    typename string_map<T>::Node *nextAncestor(Node *n);
+    void findNextAncestor(Node *&n);
   };
 
   struct const_iterator
@@ -174,7 +174,7 @@ public:
 
   ~string_map();
 
-  bool operator==(const string_map &otro) const;
+  bool operator==(const string_map &other) const;
 
   bool operator!=(const string_map &otro) const;
 
