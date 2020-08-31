@@ -152,11 +152,7 @@ void join_iterator::findNextMatchByDatum(Datum datum)
     if (mDatumKeys->count(datum) == 0) incrementIteratorWithoutIndex();
   }
 
-  if (mTableRecordCount == 0)
-  {
-    advanceToEnd();
-  }
-  else if (mDatumKeys->count(datum) != 0)
+  if (mDatumKeys->count(datum) != 0)
   {
     setIteratorToNewDatumKey(datum);
   }
