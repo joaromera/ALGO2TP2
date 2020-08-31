@@ -30,11 +30,11 @@ string_map<T>::string_map(const string_map &p)
 template<typename T>
 void string_map<T>::copyChildren(Node *head, Node *other)
 {
-  if (other != nullptr)
+  if (other)
   {
     for (int i = 0; i < 128; i++)
     {
-      if (other->mChildren[i] != nullptr)
+      if (other->mChildren[i])
       {
         head->mSize++;
         head->mChildren[i] = new Node;
@@ -43,7 +43,7 @@ void string_map<T>::copyChildren(Node *head, Node *other)
       }
     }
     head->mKey = other->mKey;
-    if (other->mValue != nullptr)
+    if (other->mValue)
     {
       key_type key = other->mValue->first;
       mapped_type value = other->mValue->second;
@@ -57,13 +57,13 @@ string_map<T> &string_map<T>::operator=(const string_map &p)
 {
   clear();
 
-  if (p.mTrieRoot == nullptr)
+  if (!p.mTrieRoot)
   {
     mTrieRoot = nullptr;
   }
   else
   {
-    if (p.mTrieRoot->mValue != nullptr) { mTrieRoot->mValue = new value_type(p.mTrieRoot->mValue->first, p.mTrieRoot->mValue->second); }
+    if (p.mTrieRoot->mValue) { mTrieRoot->mValue = new value_type(p.mTrieRoot->mValue->first, p.mTrieRoot->mValue->second); }
     copyChildren(mTrieRoot, p.mTrieRoot);
   }
   mTrieRoot->mKey = p.mTrieRoot->mKey;
@@ -112,12 +112,12 @@ void string_map<T>::iterator::buscarNodoAbajo(Node *&n)
   // Busca recursivamente el primer mNode no nulo y con mValue definido
   // Si no hay ninguno n -> nullptr
   int i = 0;
-  while (i < 128 && n->mChildren[i] == nullptr) i++;
+  while (i < 128 && !n->mChildren[i]) i++;
   if (i == 128)
   {
     n = nullptr;
   }
-  else if (n->mChildren[i]->mValue != nullptr)
+  else if (n->mChildren[i]->mValue)
   {
     n = n->mChildren[i];
   }
@@ -141,17 +141,17 @@ typename string_map<T>::Node *string_map<T>::iterator::proximoArriba(Node *n)
 template<typename T>
 void string_map<T>::iterator::buscarNodoArriba(Node *&n)
 {
-  if (n->mParent == nullptr) n = nullptr;
-  if (n != nullptr)
+  if (!n->mParent) n = nullptr;
+  if (n)
   {
     Node *proximo = n->mParent;
     char clave = n->mKey.back();
     int i = clave + 1;
-    while (i < 128 && proximo->mChildren[i] == nullptr) i++;
+    while (i < 128 && !proximo->mChildren[i]) i++;
     if (i != 128)
     {
       n = proximo->mChildren[i];
-      if (n->mValue == nullptr)
+      if (!n->mValue)
       {
         buscarNodoAbajo(n);
       }
@@ -170,7 +170,7 @@ size_t string_map<T>::count(const key_type &key) const
   Node *walk = mTrieRoot;
   for (const char& c : key)
   {
-    if (walk->mChildren[int(c)] == nullptr)
+    if (!walk->mChildren[int(c)])
     {
       return 0;
     }
@@ -179,7 +179,7 @@ size_t string_map<T>::count(const key_type &key) const
       walk = walk->mChildren[int(c)];
     }
   }
-  if (walk->mKey == key && walk->mValue != nullptr)
+  if (walk->mKey == key && walk->mValue)
   {
     return 1;
   }
@@ -207,7 +207,7 @@ typename string_map<T>::mapped_type &string_map<T>::operator[](const key_type &k
   Node *temp = mTrieRoot;
   for (auto it = key.begin(); it < key.end(); it++)
   {
-    if (temp->mChildren[int(*it)] == nullptr)
+    if (!temp->mChildren[int(*it)])
     {
       temp->mSize++;
       Node *nuevo = new Node;
@@ -218,7 +218,7 @@ typename string_map<T>::mapped_type &string_map<T>::operator[](const key_type &k
     temp->mKey = *it;
   }
   temp->mKey = key;
-  if (temp->mValue == nullptr)
+  if (!temp->mValue)
   {
     temp->mValue = new value_type(key, T());
     mKeysCount++;
@@ -243,7 +243,7 @@ const typename string_map<T>::mapped_type &string_map<T>::at(const key_type &key
 template<typename T>
 void string_map<T>::clear()
 {
-  if (mTrieRoot != nullptr) delete mTrieRoot;
+  if (mTrieRoot) delete mTrieRoot;
   mTrieRoot = new Node;
   mKeysCount = 0;
 }
@@ -253,11 +253,11 @@ typename string_map<T>::iterator string_map<T>::begin()
 {
   if (empty()) return end();
   Node *walk = mTrieRoot;
-  while (walk->mValue == nullptr)
+  while (!walk->mValue)
   {
     int i = 0;
-    while (i < 128 && walk->mChildren[i] == nullptr) i++;
-    if (walk->mChildren[i] != nullptr) walk = walk->mChildren[i];
+    while (i < 128 && !walk->mChildren[i]) i++;
+    if (walk->mChildren[i]) walk = walk->mChildren[i];
   }
   auto it = iterator(walk);
   return it;
@@ -274,11 +274,11 @@ typename string_map<T>::const_iterator string_map<T>::begin() const
 {
   if (empty()) return end();
   Node *walk = mTrieRoot;
-  while (walk->mValue == nullptr)
+  while (!walk->mValue)
   {
     int i = 0;
-    while (i < 128 && walk->mChildren[i] == nullptr) i++;
-    if (walk->mChildren[i] != nullptr) walk = walk->mChildren[i];
+    while (i < 128 && !walk->mChildren[i]) i++;
+    if (walk->mChildren[i]) walk = walk->mChildren[i];
   }
   auto it = const_iterator(walk);
   return it;
@@ -308,7 +308,7 @@ typename string_map<T>::iterator string_map<T>::find(const key_type &key)
   Node *temp = mTrieRoot;
   for (auto it = key.begin(); it < key.end(); it++)
   {
-    if (temp->mChildren[int(*it)] == nullptr)
+    if (!temp->mChildren[int(*it)])
     {
       return end();
     }
@@ -326,7 +326,7 @@ typename string_map<T>::const_iterator string_map<T>::find(const key_type &key) 
   Node *temp = mTrieRoot;
   for (auto it = key.begin(); it < key.end(); it++)
   {
-    if (temp->mChildren[int(*it)] == nullptr)
+    if (!temp->mChildren[int(*it)])
     {
       return end();
     }
@@ -348,7 +348,7 @@ std::pair<typename string_map<T>::iterator, bool> string_map<T>::insert(const st
 
   for (auto it = tmpKey.begin(); it < tmpKey.end() - 1; it++)
   {
-    if (current->mChildren[int(*it)] != nullptr)
+    if (current->mChildren[int(*it)])
     {
       current = current->mChildren[int(*it)];
     }
@@ -364,7 +364,7 @@ std::pair<typename string_map<T>::iterator, bool> string_map<T>::insert(const st
 
   char c = tmpKey.back();
 
-  if (current->mChildren[int(c)] == nullptr)
+  if (!current->mChildren[int(c)])
   {
     mKeysCount += 1;
     current->mSize += 1;
@@ -401,7 +401,7 @@ typename string_map<T>::size_type string_map<T>::erase(const string_map<T>::key_
   if (walk->mSize > 0) return eliminados;
 
   Node *actualizar = walk->mParent;
-  while (actualizar->mSize == 0 && actualizar->mValue == nullptr && actualizar->mParent != nullptr)
+  while (actualizar->mSize == 0 && !actualizar->mValue && actualizar->mParent)
   {
     actualizar->mParent->mChildren[int(actualizar->mKey.back())] = nullptr;
     actualizar->mParent->mSize -= 1;
@@ -436,7 +436,7 @@ typename string_map<T>::iterator string_map<T>::erase(iterator pos)
     Node *actualizar = padredelnodo;
     padredelnodo = nullptr;
 
-    while (actualizar->mSize == 0 && actualizar->mValue == nullptr && actualizar->mParent != nullptr)
+    while (actualizar->mSize == 0 && !actualizar->mValue && actualizar->mParent)
     {
       actualizar = actualizar->mParent;
 
