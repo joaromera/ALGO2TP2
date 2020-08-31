@@ -17,7 +17,30 @@ public:
   typedef size_t size_type;
 
 private:
-  struct Node;
+  struct Node
+  {
+    std::string mKey {""};
+    Node *mParent {nullptr};
+    std::vector<Node*> mChildren = std::vector<Node*>(128, nullptr);
+    int mSize {0};
+    value_type *mValue { nullptr};
+
+    ~Node()
+    {
+      for (auto &c : mChildren) { if (c) { delete c; } }
+      if (mValue) { delete mValue; }
+    }
+
+    bool operator==(const Node &rhs) const
+    {
+      return mKey == rhs.mKey && mParent == rhs.mParent && mChildren == rhs.mChildren && mSize == rhs.mSize && mValue == rhs.mValue;
+    }
+
+    bool operator!=(const Node &rhs) const
+    {
+      return !(rhs == *this);
+    }
+  };
 
 public:
   class iterator
@@ -34,15 +57,15 @@ public:
 
     bool operator==(const iterator &n) const
     {
-      if (node == nullptr || n.node == nullptr)
+      if (mNode == nullptr || n.mNode == nullptr)
       {
-        return node == n.node;
+        return mNode == n.mNode;
       }
-      if (node->mValue == nullptr || n.node->mValue == nullptr)
+      if (mNode->mValue == nullptr || n.mNode->mValue == nullptr)
       {
-        return node->mValue == n.node->mValue;
+        return mNode->mValue == n.mNode->mValue;
       }
-      return *(node->mValue) == *(n.node->mValue);
+      return *(mNode->mValue) == *(n.mNode->mValue);
     }
 
     bool operator!=(const iterator &n) const
@@ -52,15 +75,15 @@ public:
 
     iterator &operator++()
     {
-      Node *nu = proximoAbajo(node);
+      Node *nu = proximoAbajo(mNode);
       if (nu != nullptr)
       {
-        node = nu;
+        mNode = nu;
       }
       else
       {
-        nu = proximoArriba(node);
-        node = nu;
+        nu = proximoArriba(mNode);
+        mNode = nu;
       }
       return *this;
     }
@@ -74,20 +97,20 @@ public:
 
     value_type &operator*() const
     {
-      return *node->mValue;
+      return *mNode->mValue;
     }
 
     value_type *operator->() const
     {
-      return node->mValue;
+      return mNode->mValue;
     }
 
     friend class string_map;
     friend class const_iterator;
 
   private:
-    explicit iterator(Node *n) : node(n) {}
-    Node* node = nullptr;
+    explicit iterator(Node *n) : mNode(n) {}
+    Node *mNode = nullptr;
 
     typename string_map<T>::Node *proximoAbajo(Node *n);
     void buscarNodoAbajo(Node *&n);
@@ -108,7 +131,7 @@ public:
 
     bool operator==(const const_iterator &n) const
     {
-      return it.operator==(n.it);
+      return mIterator.operator==(n.mIterator);
     }
 
     bool operator!=(const const_iterator &n) const
@@ -118,7 +141,7 @@ public:
 
     const_iterator &operator++()
     {
-      it.operator++();
+      mIterator.operator++();
       return *this;
     }
 
@@ -131,16 +154,16 @@ public:
 
     const value_type &operator*() const
     {
-      return it.operator*();
+      return mIterator.operator*();
     }
 
     const value_type *operator->() const
     {
-      return it.operator->();
+      return mIterator.operator->();
     }
 
-    explicit const_iterator(Node *n) : it(n) {}
-    iterator it { nullptr };
+    explicit const_iterator(Node *n) : mIterator(n) {}
+    iterator mIterator{ nullptr };
   };
 
   string_map();
@@ -190,35 +213,10 @@ public:
   iterator erase(iterator pos);
 
 private:
-  struct Node
-  {
-    std::string mKey {""};
-    Node *mParent {nullptr};
-    std::vector<Node*> mChildren = std::vector<Node*>(128, nullptr);
-    int mSize {0};
-    value_type *mValue { nullptr};
-
-    ~Node()
-    {
-      for (auto &c : mChildren) { if (c) { delete c; } }
-      if (mValue) { delete mValue; }
-    }
-
-    bool operator==(const Node &rhs) const
-    {
-      return mKey == rhs.mKey && mParent == rhs.mParent && mChildren == rhs.mChildren && mSize == rhs.mSize && mValue == rhs.mValue;
-    }
-
-    bool operator!=(const Node &rhs) const
-    {
-      return !(rhs == *this);
-    }
-  };
+  void copyChildren(Node *head, Node *other);
 
   Node *mTrieRoot = nullptr;
   size_t mKeysCount = 0;
-
-  void copyChildren(Node *head, Node *other);
 };
 
 } // namespace Types

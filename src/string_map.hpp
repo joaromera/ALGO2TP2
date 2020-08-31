@@ -99,7 +99,7 @@ bool string_map<T>::operator!=(const string_map &otro) const
 template<typename T>
 typename string_map<T>::Node *string_map<T>::iterator::proximoAbajo(Node *n)
 {
-  // Busca recursivamente el primer node no nulo y con mValue definido
+  // Busca recursivamente el primer mNode no nulo y con mValue definido
   // Si no hay ninguno n -> nullptr
   Node *tmp = n;
   buscarNodoAbajo(tmp);
@@ -109,7 +109,7 @@ typename string_map<T>::Node *string_map<T>::iterator::proximoAbajo(Node *n)
 template<typename T>
 void string_map<T>::iterator::buscarNodoAbajo(Node *&n)
 {
-  // Busca recursivamente el primer node no nulo y con mValue definido
+  // Busca recursivamente el primer mNode no nulo y con mValue definido
   // Si no hay ninguno n -> nullptr
   int i = 0;
   while (i < 128 && n->mChildren[i] == nullptr) i++;
@@ -131,7 +131,7 @@ void string_map<T>::iterator::buscarNodoAbajo(Node *&n)
 template<typename T>
 typename string_map<T>::Node *string_map<T>::iterator::proximoArriba(Node *n)
 {
-  // Busca recursivamente el primer node no nulo y con mValue definido
+  // Busca recursivamente el primer mNode no nulo y con mValue definido
   // Si no hay ninguno n -> nullptr
   Node *tmp = n;
   buscarNodoArriba(tmp);
@@ -230,7 +230,7 @@ template<typename T>
 typename string_map<T>::mapped_type &string_map<T>::at(const key_type &key)
 {
   auto it = find(key);
-  return it.node->mValue->second;
+  return it.mNode->mValue->second;
 }
 
 template<typename T>
@@ -389,7 +389,7 @@ template<typename T>
 typename string_map<T>::size_type string_map<T>::erase(const string_map<T>::key_type &key)
 {
   auto it = find(key);
-  Node *walk = it.node;
+  Node *walk = it.mNode;
   int eliminados = 0;
 
   delete walk->mValue;
@@ -414,12 +414,12 @@ typename string_map<T>::size_type string_map<T>::erase(const string_map<T>::key_
 template<typename T>
 typename string_map<T>::iterator string_map<T>::erase(iterator pos)
 {
-  std::string clave = pos.node->mKey;
-  if (pos.node->mSize == 0)
+  std::string clave = pos.mNode->mKey;
+  if (pos.mNode->mSize == 0)
   {
 
-    Node *nodoaborrar = pos.node;
-    Node *padredelnodo = pos.node->mParent;
+    Node *nodoaborrar = pos.mNode;
+    Node *padredelnodo = pos.mNode->mParent;
 
     delete nodoaborrar->mValue;
     nodoaborrar->mValue = nullptr;
@@ -452,9 +452,9 @@ typename string_map<T>::iterator string_map<T>::erase(iterator pos)
   }
   else
   {
-    delete pos.node->mValue;
-    pos.node->mValue = nullptr;
-    pos.node->mKey = clave.back();
+    delete pos.mNode->mValue;
+    pos.mNode->mValue = nullptr;
+    pos.mNode->mKey = clave.back();
     mKeysCount -= 1;
     pos++;
     return pos;
