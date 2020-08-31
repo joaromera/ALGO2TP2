@@ -37,12 +37,12 @@ join_iterator::join_iterator(
   int ind,
   int sin,
   std::shared_ptr<std::map<Datum, linear_set<Record>>> e,
-  const std::string &f,
+  const std::string &joinColumn,
   const bool &o)
   : mTableRecordCountByKey(ind)
   , mTableRecordCount(sin)
   , mDatumKeys(e)
-  , mValue(f)
+  , mValue(joinColumn)
   , mIsFinal(false)
   , mOrder(o)
 {

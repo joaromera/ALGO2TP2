@@ -23,7 +23,7 @@ private:
     int ind,
     int sin,
     std::shared_ptr<std::map<Datum, linear_set<Record>>> e,
-    const std::string &f,
+    const std::string &joinColumn,
     const bool &o);
 
   Record mergeRecords(const Record & r1, const Record & r2);
