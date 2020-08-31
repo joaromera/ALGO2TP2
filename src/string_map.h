@@ -75,15 +75,15 @@ public:
 
     iterator &operator++()
     {
-      Node *nu = proximoAbajo(mNode);
-      if (nu != nullptr)
+      Node *node = proximoAbajo(mNode);
+      if (node)
       {
-        mNode = nu;
+        mNode = node;
       }
       else
       {
-        nu = proximoArriba(mNode);
-        mNode = nu;
+        node = proximoArriba(mNode);
+        mNode = node;
       }
       return *this;
     }
