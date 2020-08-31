@@ -4,7 +4,7 @@ join_iterator::join_iterator(const join_iterator &n)
 {
   if (!n.mIsFinal)
   {
-    mIterLeft = std::make_shared<linear_set<Record>::const_iterator>(*n.mIterLeft);
+    mIterLeft = std::make_shared<RecordSet::const_iterator>(*n.mIterLeft);
     mIterRight = std::make_shared<Table::const_iterator>(*n.mIterRight);
     mTableRecordCountByKey = n.mTableRecordCountByKey;
     mTableRecordCount = n.mTableRecordCount;
@@ -19,7 +19,7 @@ join_iterator &join_iterator::operator=(const join_iterator &n)
 {
   if (!n.mIsFinal)
   {
-    mIterLeft = std::make_shared<linear_set<Record>::const_iterator>(*n.mIterLeft);
+    mIterLeft = std::make_shared<RecordSet::const_iterator>(*n.mIterLeft);
     mIterRight = std::make_shared<Table::const_iterator>(*n.mIterRight);
     mDatumKeys = n.mDatumKeys;
     mValue = n.mValue;
@@ -32,11 +32,11 @@ join_iterator &join_iterator::operator=(const join_iterator &n)
 }
 
 join_iterator::join_iterator(
-  const linear_set<Record> &a,
+  const RecordSet &a,
   const Table &c,
   int tableRecordCountByKey,
   int tableRecordCount,
-  std::shared_ptr<std::map<Datum, linear_set<Record>>> e,
+  std::shared_ptr<DatumToRecordsMap> e,
   const std::string &joinColumn,
   const bool &o)
   : mTableRecordCountByKey(tableRecordCountByKey)
@@ -46,7 +46,7 @@ join_iterator::join_iterator(
   , mIsFinal(false)
   , mOrder(o)
 {
-  mIterLeft = std::make_shared<linear_set<Record>::const_iterator>(a.begin());
+  mIterLeft = std::make_shared<RecordSet::const_iterator>(a.begin());
   mIterRight = std::make_shared<Table::const_iterator>(c.begin());
 }
 

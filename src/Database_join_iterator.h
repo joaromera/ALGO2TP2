@@ -1,4 +1,6 @@
 #pragma once
+#include "Database_defines.h"
+#include "linear_set.h"
 #include "Record.h"
 #include "Table.h"
 
@@ -18,11 +20,11 @@ public:
 
 private:
   join_iterator() = default;
-  join_iterator(const linear_set<Record> &a,
+  join_iterator(const RecordSet &a,
     const Table &c,
     int tableRecordCountByKey,
     int tableRecordCount,
-    std::shared_ptr<std::map<Datum, linear_set<Record>>> e,
+    std::shared_ptr<DatumToRecordsMap> e,
     const std::string &joinColumn,
     const bool &o);
 
@@ -33,11 +35,11 @@ private:
   void findNextMatchByDatum(Datum datum);
   void setIteratorToNewDatumKey(const Datum &datum);
 
-  std::shared_ptr<linear_set<Record>::const_iterator> mIterLeft{nullptr};
+  std::shared_ptr<RecordSet::const_iterator> mIterLeft{nullptr};
   std::shared_ptr<Table::const_iterator> mIterRight{nullptr};
   int mTableRecordCountByKey{0};
   int mTableRecordCount{0};
-  std::shared_ptr<std::map<Datum, linear_set<Record>>> mDatumKeys{nullptr};
+  std::shared_ptr<DatumToRecordsMap> mDatumKeys{nullptr};
   std::string mValue{""};
   bool mIsFinal{true};
   bool mOrder{true};
