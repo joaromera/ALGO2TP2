@@ -24,7 +24,7 @@ TEST(BasicTests, NewDatabaseIsEmpty)
 TEST(BasicTests, UsingCriteriaWithEmptyDatabaseIsFalse)
 {
   Database db;
-  EXPECT_FALSE(db.filterUsageCount(Database::Filters()));
+  EXPECT_FALSE(db.filterUsageCount(Filters()));
 }
 
 TEST(BasicTests, BasicTableOperationsInDatabase)
@@ -514,55 +514,55 @@ TEST_F(DBAlumnos, uso_un_criterio)
   db.search({ Rig("OS", "A") }, "alumnos");
   EXPECT_EQ(db.filterUsageCount({ Rig("OS", "A") }), 1);
   EXPECT_EQ(db.mostUsedFilter(),
-    linear_set<Database::Filters>({ { Rig("OS", "A") } }));
+    linear_set<Filters>({ { Rig("OS", "A") } }));
   db.search({ Rig("OS", "A") }, "alumnos");
   EXPECT_EQ(db.filterUsageCount({ Rig("OS", "A") }), 2);
   EXPECT_EQ(db.mostUsedFilter(),
-    linear_set<Database::Filters>({ { Rig("OS", "A") } }));
+    linear_set<Filters>({ { Rig("OS", "A") } }));
 
   db.search({ Rig("LU_A", 1) }, "libretas");
   EXPECT_EQ(db.filterUsageCount({ Rig("LU_A", 1) }), 1);
   EXPECT_EQ(db.mostUsedFilter(),
-    linear_set<Database::Filters>({ { Rig("OS", "A") } }));
+    linear_set<Filters>({ { Rig("OS", "A") } }));
 
   db.search({ Rig("LU_A", 1) }, "libretas");
   EXPECT_EQ(db.filterUsageCount({ Rig("LU_A", 1) }), 2);
   EXPECT_EQ(db.mostUsedFilter(),
-    linear_set<Database::Filters>({ { Rig("OS", "A") },
+    linear_set<Filters>({ { Rig("OS", "A") },
       { Rig("LU_A", 1) } }));
   db.search({ Rig("LU_A", 1) }, "libretas");
   EXPECT_EQ(db.filterUsageCount({ Rig("LU_A", 1) }), 3);
   EXPECT_EQ(db.mostUsedFilter(),
-    linear_set<Database::Filters>({ { Rig("LU_A", 1) } }));
+    linear_set<Filters>({ { Rig("LU_A", 1) } }));
 }
 
 TEST_F(DBAlumnos, uso_un_criterio_perm)
 {
-  Database::Filters c = { Rig("OS", "A"), Rig("Editor", "Vim") };
-  Database::Filters c_perm = { Rig("Editor", "Vim"), Rig("OS", "A") };
-  Database::Filters c_sim = { Rig("OS", "A") };
+  Filters c = { Rig("OS", "A"), Rig("Editor", "Vim") };
+  Filters c_perm = { Rig("Editor", "Vim"), Rig("OS", "A") };
+  Filters c_sim = { Rig("OS", "A") };
   db.search(c, "alumnos");
   EXPECT_EQ(db.filterUsageCount(c), 1);
   EXPECT_EQ(db.filterUsageCount(c_sim), 0);
   EXPECT_EQ(db.mostUsedFilter(),
-    linear_set<Database::Filters>({ c }));
+    linear_set<Filters>({ c }));
 
   db.search(c_perm, "alumnos");
   EXPECT_EQ(db.filterUsageCount(c), 2);
   EXPECT_EQ(db.filterUsageCount(c_sim), 0);
   EXPECT_EQ(db.mostUsedFilter(),
-    linear_set<Database::Filters>({ c }));
+    linear_set<Filters>({ c }));
 
   db.search(c_sim, "alumnos");
   EXPECT_EQ(db.filterUsageCount(c_sim), 1);
   EXPECT_EQ(db.mostUsedFilter(),
-    linear_set<Database::Filters>({ c }));
+    linear_set<Filters>({ c }));
 }
 
 TEST_F(DBAlumnos, crit_otro_bool)
 {
-  Database::Filters c = { Rig("OS", "A") };
-  Database::Filters c_inv = { Rdif("OS", "A") };
+  Filters c = { Rig("OS", "A") };
+  Filters c_inv = { Rdif("OS", "A") };
 
   EXPECT_EQ(db.filterUsageCount(c), 0);
   EXPECT_EQ(db.filterUsageCount(c_inv), 0);
@@ -578,8 +578,8 @@ TEST_F(DBAlumnos, crit_otro_bool)
 
 TEST_F(DBAlumnos, crit_doble_otro_bool)
 {
-  Database::Filters c = { Rig("OS", "A"), Rig("Editor", "Vim") };
-  Database::Filters c_inv = { Rdif("OS", "A"), Rig("Editor", "Vim") };
+  Filters c = { Rig("OS", "A"), Rig("Editor", "Vim") };
+  Filters c_inv = { Rdif("OS", "A"), Rig("Editor", "Vim") };
 
   EXPECT_EQ(db.filterUsageCount(c), 0);
   EXPECT_EQ(db.filterUsageCount(c_inv), 0);

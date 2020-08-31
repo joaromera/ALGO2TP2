@@ -1,25 +1,26 @@
 #pragma once
-#include "Record.h"
-#include "Filter.h"
-#include "Table.h"
-#include <utility>
+
 #include <list>
+#include <map>
 #include <string>
+#include <utility>
+
+#include "Database_defines.h"
+#include "Database_join_iterator.h"
+#include "Filter.h"
 #include "linear_map.h"
 #include "linear_set.h"
+#include "Record.h"
 #include "string_map.h"
-#include "Database_join_iterator.h"
-#include <map>
+#include "Table.h"
 
 using namespace Db::Types;
 
-typedef string_map<string_map<std::map<Datum, linear_set<Record>>>> IndexRef;
+typedef string_map<DatumToRecordsStringMap> IndexRef;
 
 class Database
 {
 public:
-  typedef linear_set<Filter> Filters;
-
   void createTable(const std::string &name, const linear_set<std::string> &keys, const std::vector<std::string> &columns, const std::vector<Datum> &types);
   void addRecord(const Record &record, const std::string &tableName);
   const linear_set<std::string> &tableNames() const;
@@ -35,7 +36,7 @@ public:
   join_iterator join_end();
 
 private:
-  std::list<Record> &filterRecords(const std::string &column, const Datum &value, std::list<Record> &records, bool equals) const;
+  Records &filterRecords(const std::string &column, const Datum &value, Records &records, bool equals) const;
   std::pair<std::vector<std::string>, std::vector<Datum>> tableTypes(const Table &t);
   join_iterator join_helper(const std::string &leftTable, const std::string &rightTable, const std::string &joinColumn, const bool &order);
   void updateFilterUsageCount(const Filters &filters);
@@ -44,5 +45,4 @@ private:
   string_map<Table> mTables;
   linear_map<Filters, int> mFilterUsageCount;
   IndexRef mIndexRefs;
-
 };

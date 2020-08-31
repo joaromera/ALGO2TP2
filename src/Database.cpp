@@ -37,7 +37,7 @@ const Table &Database::getTable(const std::string &name) const
   return mTables.at(name);
 }
 
-int Database::filterUsageCount(const Database::Filters &filter) const
+int Database::filterUsageCount(const Filters &filter) const
 {
   if (mFilterUsageCount.count(filter)) return mFilterUsageCount.at(filter);
 
@@ -78,10 +78,10 @@ bool Database::isValidRecord(const Record &record, const std::string &name) cons
   return true;
 }
 
-std::list<Record> &Database::filterRecords(
+Records &Database::filterRecords(
   const std::string &column,
   const Datum &value,
-  std::list<Record> &records,
+  Records &records,
   bool equals) const
 {
   auto iter = records.begin();
@@ -130,14 +130,14 @@ bool Database::isValidFilter(const Filters &filters, const std::string &name) co
   return true;
 }
 
-Table Database::search(const Database::Filters &filters, const std::string &name)
+Table Database::search(const Filters &filters, const std::string &name)
 {
   updateFilterUsageCount(filters);
 
   const Table &tableToFilter = getTable(name);
   auto filterTableTypes = tableTypes(tableToFilter);
 
-  std::list<Record> records(tableToFilter.records().begin(), tableToFilter.records().end());
+  Records records(tableToFilter.records().begin(), tableToFilter.records().end());
 
   for (const auto& filter : filters)
   {
@@ -153,7 +153,7 @@ Table Database::search(const Database::Filters &filters, const std::string &name
 
   return t;
 }
-void Database::updateFilterUsageCount(const Database::Filters &filters)
+void Database::updateFilterUsageCount(const Filters &filters)
 {
   if (mFilterUsageCount.count(filters))
   {
@@ -165,7 +165,7 @@ void Database::updateFilterUsageCount(const Database::Filters &filters)
   }
 }
 
-linear_set<Database::Filters> Database::mostUsedFilter() const
+linear_set<Filters> Database::mostUsedFilter() const
 {
   linear_set<Filters> mostUsedFilters;
   int max = 0;
@@ -186,7 +186,7 @@ linear_set<Database::Filters> Database::mostUsedFilter() const
 
 void Database::createIndex(const std::string &table, const std::string &column)
 {
-  const linear_set<Record> &records = getTable(table).records();
+  const RecordSet &records = getTable(table).records();
 
   for (const auto& r : records)
   {
