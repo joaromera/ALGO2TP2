@@ -10,10 +10,9 @@ This means creating custom containers, their iterators, and manually doing memor
 I've tried to update the project following these goals:
 
 1. Move to `C++17`.
-2. Where possible, try to follow C++ best practices and core guidelines. _It's actually *impossible* given the course constraints_.
-3. Improve the testing done with `Google Test`.
-4. Set a CI pipeline with `Travis` for building and testing. Get coverage with `Codecov`.
-5. Use tools from the ecosystem: `cppcheck`, `clang-format`, `clang-tidy`, `valgrind`. 
+2. Improve the testing done with `Google Test`.
+3. Set a CI pipeline with `Travis` for building and testing. Get coverage with `Codecov`.
+4. Use tools from the ecosystem: `cppcheck`, `clang-format`, `clang-tidy`, `valgrind`. 
 
 ---
 
