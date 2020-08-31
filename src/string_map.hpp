@@ -29,7 +29,7 @@ void string_map<T>::copyChildren(Node *head, Node *other)
 {
   if (!other) return;
 
-  for (int i = 0; i < 128; i++)
+  for (int i = 0; i < 128; ++i)
   {
     if (other->mChildren[i])
     {
@@ -82,9 +82,7 @@ bool string_map<T>::operator==(const string_map &other) const
   auto itend2 = other.end();
   while (it1 != itend1 && it2 != itend2)
   {
-    if (it1 != it2) return false;
-    it1++;
-    it2++;
+    if (it1++ != it2++) return false;
   }
   if (it1 != itend1 || it2 != itend2) return false;
 
@@ -109,7 +107,7 @@ template<typename T>
 void string_map<T>::iterator::findNextDescendant(Node *&n)
 {
   int i = 0;
-  while (i < 128 && !n->mChildren[i]) i++;
+  while (i < 128 && !n->mChildren[i]) ++i;
 
   if (i == 128)
   {
@@ -146,7 +144,7 @@ void string_map<T>::iterator::findNextAncestor(Node *&n)
   Node *next = n->mParent;
   char key = n->mKey.back();
   int i = key + 1;
-  while (i < 128 && !next->mChildren[i]) i++;
+  while (i < 128 && !next->mChildren[i]) ++i;
 
   if (i != 128)
   {
@@ -194,7 +192,7 @@ template<typename T>
 typename string_map<T>::mapped_type &string_map<T>::operator[](const key_type &key)
 {
   Node *temp = mTrieRoot;
-  for (auto it = key.begin(); it < key.end(); it++)
+  for (auto it = key.begin(); it < key.end(); ++it)
   {
     if (!temp->mChildren[int(*it)])
     {
@@ -210,7 +208,7 @@ typename string_map<T>::mapped_type &string_map<T>::operator[](const key_type &k
   if (!temp->mValue)
   {
     temp->mValue = new value_type(key, T());
-    mKeysCount++;
+    ++mKeysCount;
   }
   return temp->mValue->second;
 }
@@ -245,7 +243,7 @@ typename string_map<T>::iterator string_map<T>::begin()
   while (!walk->mValue)
   {
     int i = 0;
-    while (i < 128 && !walk->mChildren[i]) i++;
+    while (i < 128 && !walk->mChildren[i]) ++i;
     if (walk->mChildren[i]) walk = walk->mChildren[i];
   }
   auto it = iterator(walk);
@@ -266,7 +264,7 @@ typename string_map<T>::const_iterator string_map<T>::begin() const
   while (!walk->mValue)
   {
     int i = 0;
-    while (i < 128 && !walk->mChildren[i]) i++;
+    while (i < 128 && !walk->mChildren[i]) ++i;
     if (walk->mChildren[i]) walk = walk->mChildren[i];
   }
   auto it = const_iterator(walk);
@@ -295,7 +293,7 @@ template<typename T>
 typename string_map<T>::iterator string_map<T>::find(const key_type &key)
 {
   Node *temp = mTrieRoot;
-  for (auto it = key.begin(); it < key.end(); it++)
+  for (auto it = key.begin(); it < key.end(); ++it)
   {
     if (!temp->mChildren[int(*it)]) return end();
     temp = temp->mChildren[int(*it)];
@@ -307,7 +305,7 @@ template<typename T>
 typename string_map<T>::const_iterator string_map<T>::find(const key_type &key) const
 {
   Node *temp = mTrieRoot;
-  for (auto it = key.begin(); it < key.end(); it++)
+  for (auto it = key.begin(); it < key.end(); ++it)
   {
     if (!temp->mChildren[int(*it)]) return end();
     temp = temp->mChildren[int(*it)];
@@ -329,7 +327,7 @@ std::pair<typename string_map<T>::iterator, bool> string_map<T>::insert(const st
     }
     else
     {
-      current->mSize += 1;
+      ++current->mSize;
       current->mChildren[int(*it)] = new Node;
       current->mChildren[int(*it)]->mParent = current;
       current = current->mChildren[int(*it)];
@@ -341,8 +339,8 @@ std::pair<typename string_map<T>::iterator, bool> string_map<T>::insert(const st
   bool modified = false;
   if (!current->mChildren[int(c)])
   {
-    mKeysCount += 1;
-    current->mSize += 1;
+    ++mKeysCount;
+    ++current->mSize;
     current->mChildren[int(c)] = new Node;
   }
   else
@@ -368,16 +366,15 @@ typename string_map<T>::size_type string_map<T>::erase(const string_map<T>::key_
   delete walk->mValue;
   walk->mValue = nullptr;
   walk->mKey = key.back();
-  mKeysCount--;
-  erasedCount++;
+  --mKeysCount;
 
-  if (walk->mSize > 0) return erasedCount;
+  if (walk->mSize > 0) return ++erasedCount;
 
   Node *update = walk->mParent;
   while (update->mSize == 0 && !update->mValue && update->mParent)
   {
     update->mParent->mChildren[int(update->mKey.back())] = nullptr;
-    update->mParent->mSize -= 1;
+    --update->mParent->mSize;
     update = update->mParent;
   }
 
@@ -392,18 +389,17 @@ typename string_map<T>::iterator string_map<T>::erase(iterator pos)
   {
     Node *nodeToErase = pos.mNode;
     Node *nodeParent = pos.mNode->mParent;
+    ++pos;
 
     delete nodeToErase->mValue;
     nodeToErase->mValue = nullptr;
     nodeToErase->mKey = key.back();
 
-    pos++;
-
     delete nodeToErase;
     nodeToErase = nullptr;
 
     nodeParent->mChildren[int(key.back())] = nullptr;
-    nodeParent->mSize -= 1;
+    --nodeParent->mSize;
     key = nodeParent->mKey;
     Node *nodeToUpdate = nodeParent;
     nodeParent = nullptr;
@@ -414,12 +410,13 @@ typename string_map<T>::iterator string_map<T>::erase(iterator pos)
 
       delete nodeToUpdate->mChildren[int(key.back())];
       nodeToUpdate->mChildren[int(key.back())] = nullptr;
-      nodeToUpdate->mSize -= 1;
+      --nodeToUpdate->mSize;
 
       key = nodeToUpdate->mKey;
     }
+
     nodeToUpdate = nullptr;
-    mKeysCount -= 1;
+    --mKeysCount;
     return pos;
   }
   else
@@ -427,9 +424,8 @@ typename string_map<T>::iterator string_map<T>::erase(iterator pos)
     delete pos.mNode->mValue;
     pos.mNode->mValue = nullptr;
     pos.mNode->mKey = key.back();
-    mKeysCount -= 1;
-    pos++;
-    return pos;
+    --mKeysCount;
+    return ++pos;
   }
 }
 
