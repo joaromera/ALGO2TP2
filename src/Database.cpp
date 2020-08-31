@@ -220,27 +220,24 @@ join_iterator Database::join_helper(const std::string &leftTable,
   auto table2Size = t2.size();
   auto valueAtIt2 = it2->value(joinColumn);
 
-  auto it = mIndexRefs[leftTable].at(joinColumn).find(valueAtIt2)->second.begin();
-  auto it_end = mIndexRefs[leftTable].at(joinColumn).find(valueAtIt2)->second.end();
+  const auto &leftTableIndexes = mIndexRefs[leftTable].at(joinColumn);
+  auto it = leftTableIndexes.find(valueAtIt2)->second.begin();
+  auto it_end = leftTableIndexes.find(valueAtIt2)->second.end();
 
   // Busca primer coincidencia entre las dos tableNames
   while (table2Size != 0 && it == it_end)
   {
     valueAtIt2 = it2->value(joinColumn);
-    it = mIndexRefs[leftTable].at(joinColumn).find(valueAtIt2)->second.begin();
-    it_end = mIndexRefs[leftTable].at(joinColumn).find(valueAtIt2)->second.end();
+    it = leftTableIndexes.find(valueAtIt2)->second.begin();
+    it_end = leftTableIndexes.find(valueAtIt2)->second.end();
     if (it++ == it_end) { table2Size--; }
   }
 
-  if (table2Size == 0) return join_iterator();
+  if (leftTableIndexes.find(valueAtIt2) == leftTableIndexes.end()) return join_iterator();
 
-  auto &tab = mIndexRefs[leftTable];
-  auto &col = tab.at(joinColumn);
-  if (col.find(valueAtIt2) == col.end()) return join_iterator();
-
-  auto &dat = col.at(valueAtIt2);
-  auto diccClaves = std::make_shared<std::map<Datum, linear_set<Record>>>(mIndexRefs[leftTable].at(joinColumn));
-  auto cant_reg_por_indice = mIndexRefs[leftTable].at(joinColumn).at(valueAtIt2).size();
+  auto &dat = leftTableIndexes.at(valueAtIt2);
+  auto diccClaves = std::make_shared<std::map<Datum, linear_set<Record>>>(leftTableIndexes);
+  auto cant_reg_por_indice = dat.size();
 
   return join_iterator(dat, t2, cant_reg_por_indice, table2Size, diccClaves, joinColumn, order);
 }

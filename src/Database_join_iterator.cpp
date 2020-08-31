@@ -34,13 +34,13 @@ join_iterator &join_iterator::operator=(const join_iterator &n)
 join_iterator::join_iterator(
   const linear_set<Record> &a,
   const Table &c,
-  int ind,
-  int sin,
+  int tableRecordCountByKey,
+  int tableRecordCount,
   std::shared_ptr<std::map<Datum, linear_set<Record>>> e,
   const std::string &joinColumn,
   const bool &o)
-  : mTableRecordCountByKey(ind)
-  , mTableRecordCount(sin)
+  : mTableRecordCountByKey(tableRecordCountByKey)
+  , mTableRecordCount(tableRecordCount)
   , mDatumKeys(e)
   , mValue(joinColumn)
   , mIsFinal(false)

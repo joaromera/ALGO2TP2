@@ -20,8 +20,8 @@ private:
   join_iterator() = default;
   join_iterator(const linear_set<Record> &a,
     const Table &c,
-    int ind,
-    int sin,
+    int tableRecordCountByKey,
+    int tableRecordCount,
     std::shared_ptr<std::map<Datum, linear_set<Record>>> e,
     const std::string &joinColumn,
     const bool &o);
