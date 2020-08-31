@@ -5,14 +5,15 @@
 ## Introduction
 
 This project was done in the context of the subject _Algorithms and Data Structures 2_. Its goal was to exercise writing _abstract data types_ with their _formal specification_, and providing an implementation to them in C++ using our own data structures.
+This means creating custom containers, their iterators, and manually doing memory management, all in the context of a university subject which offered no proper introduction to C++. 
 
-To keep this project interesting, to me at least, I'm currently working towards these goals:
+I've tried to update the project following these goals:
 
 1. Move to `C++17`.
-2. Follow C++ best practices and core guidelines.
+2. Where possible, try to follow C++ best practices and core guidelines. _It's actually *impossible* given the course constraints_.
 3. Improve the testing done with `Google Test`.
 4. Set a CI pipeline with `Travis` for building and testing. Get coverage with `Codecov`.
-5. Use tools from the ecosystem: `cppcheck`, `clang-format`, `clang-tidy`, `valgrind`.
+5. Use tools from the ecosystem: `cppcheck`, `clang-format`, `clang-tidy`, `valgrind`. 
 
 ---
 
@@ -28,7 +29,7 @@ I used `Doxygen` to document the code base. The generated html is `docs/html/ind
 
 Probably the most interesting place to look at is the implementation of [Datum.h](src/Datum.h). This is the type that stores the values of each _cell_ in the database. I've drawn some inspiration from _Sean Parent's Better Code_ talk [Better Code: Runtime Polymorphism](https://www.youtube.com/watch?v=QGcVXgEVMJg) (also visit Sean Parent's [site](https://sean-mParent.stlab.cc/) for more information on his papers and talks). There's still a lot to improve but the exercise was definitely worth the effort.
 
-The implementation of the [Trie](https://en.wikipedia.org/wiki/Trie) search tree: [string_map.h](src/string_map.h) and [string_map.hpp](src/string_map.hpp).
+Beyond that, it's only a course project...
 
 ## How to run
 
