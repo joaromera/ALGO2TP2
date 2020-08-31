@@ -32,12 +32,11 @@ join_iterator &join_iterator::operator=(const join_iterator &n)
 }
 
 join_iterator::join_iterator(
-  linear_set<Record>::const_iterator a,
-  Table::const_iterator c,
+  const linear_set<Record> &a,
+  const Table &c,
   int ind,
   int sin,
-  std::shared_ptr<std::map<Datum,
-   linear_set<Record>>> e,
+  std::shared_ptr<std::map<Datum, linear_set<Record>>> e,
   const std::string &f,
   const bool &o)
   : mTableRecordCountByKey(ind)
@@ -47,8 +46,8 @@ join_iterator::join_iterator(
   , mIsFinal(false)
   , mOrder(o)
 {
-  mIterLeft = std::make_shared<linear_set<Record>::const_iterator>(a);
-  mIterRight = std::make_shared<Table::const_iterator>(c);
+  mIterLeft = std::make_shared<linear_set<Record>::const_iterator>(a.begin());
+  mIterRight = std::make_shared<Table::const_iterator>(c.begin());
 }
 
 bool join_iterator::operator==(const join_iterator &j) const

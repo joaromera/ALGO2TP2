@@ -239,12 +239,10 @@ join_iterator Database::join_helper(const std::string &leftTable,
   if (col.find(valueAtIt2) == col.end()) return join_iterator();
 
   auto &dat = col.at(valueAtIt2);
-  auto it_tabla_con_indice = dat.begin();
-  auto it_tabla_sin_indice = t2.begin();
   auto diccClaves = std::make_shared<std::map<Datum, linear_set<Record>>>(mIndexRefs[leftTable].at(joinColumn));
   auto cant_reg_por_indice = mIndexRefs[leftTable].at(joinColumn).at(valueAtIt2).size();
 
-  return join_iterator(it_tabla_con_indice, it_tabla_sin_indice, cant_reg_por_indice, table2Size, diccClaves, joinColumn, order);
+  return join_iterator(dat, t2, cant_reg_por_indice, table2Size, diccClaves, joinColumn, order);
 }
 
 join_iterator Database::join_end()
