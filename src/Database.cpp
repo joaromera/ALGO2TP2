@@ -62,16 +62,16 @@ bool Database::isValidRecord(const Record &record, const std::string &name) cons
 
   for (const auto& rt : t.records())
   {
-    int coincidencias = 0;
-    int claves_en_t = t.keys().size();
+    int keyMatches = 0;
+    int tableKeys = t.keys().size();
 
     for (const auto& c : t.keys())
     {
       if (record.value(c) == rt.value(c))
-        coincidencias++;
+        ++keyMatches;
     }
 
-    if (claves_en_t - coincidencias == 0)
+    if (tableKeys - keyMatches == 0)
       return false;
   }
 
@@ -85,7 +85,6 @@ Records &Database::filterRecords(
   bool equals) const
 {
   auto iter = records.begin();
-
   while (iter != records.end())
   {
     auto now = iter++;
@@ -101,7 +100,7 @@ Records &Database::filterRecords(
   return records;
 }
 
-std::pair<std::vector<std::string>, std::vector<Datum>>Database::tableTypes(const Table &t)
+std::pair<std::vector<std::string>, std::vector<Datum>>Database::tableTypes(const Table &t) const
 {
   std::vector<std::string> columns;
   std::vector<Datum> types;
@@ -153,6 +152,7 @@ Table Database::search(const Filters &filters, const std::string &name)
 
   return t;
 }
+
 void Database::updateFilterUsageCount(const Filters &filters)
 {
   if (mFilterUsageCount.count(filters))
@@ -242,7 +242,7 @@ join_iterator Database::join_helper(const std::string &leftTable,
   return join_iterator(dat, t2, cant_reg_por_indice, table2Size, diccClaves, joinColumn, order);
 }
 
-join_iterator Database::join_end()
+join_iterator Database::join_end() const
 {
   return join_iterator();
 }

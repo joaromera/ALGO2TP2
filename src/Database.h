@@ -33,11 +33,11 @@ public:
   void createIndex(const std::string &table, const std::string &column);
   bool hasIndex(const std::string &table, const std::string &column);
   join_iterator join(const std::string &table1, const std::string &table2, const std::string &columnName);
-  join_iterator join_end();
+  join_iterator join_end() const;
 
 private:
   Records &filterRecords(const std::string &column, const Datum &value, Records &records, bool equals) const;
-  std::pair<std::vector<std::string>, std::vector<Datum>> tableTypes(const Table &t);
+  std::pair<std::vector<std::string>, std::vector<Datum>> tableTypes(const Table &t) const;
   join_iterator join_helper(const std::string &leftTable, const std::string &rightTable, const std::string &joinColumn, const bool &order);
   void updateFilterUsageCount(const Filters &filters);
 
