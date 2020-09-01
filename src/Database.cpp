@@ -68,7 +68,7 @@ bool Database::isValidRecord(const Record &record, const std::string &name) cons
         ++keyMatches;
     }
 
-    if (tableKeys - keyMatches == 0)
+    if (tableKeys == keyMatches)
       return false;
   }
 
