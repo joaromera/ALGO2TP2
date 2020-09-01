@@ -16,8 +16,8 @@ void Database::createTable(const std::string &name,
 
 void Database::addRecord(const Record &record, const std::string &tableName)
 {
-  Table &t = mTables.at(tableName);
-  t.addRecord(record);
+  mTables.at(tableName).addRecord(record);
+
   for (const auto& c : record.columns())
   {
     if (hasIndex(tableName, c))
@@ -48,14 +48,11 @@ bool Database::isValidRecord(const Record &record, const std::string &name) cons
 {
   const Table &t = mTables.at(name);
 
-  if (t.columns().size() != record.columns().size())
+  if (t.columns() != record.columns())
     return false;
 
   for (const auto& c : record.columnValues())
   {
-    if (t.columns().count(c.first) == 0)
-      return false;
-
     if (t.columnType(c.first).isInteger() != c.second.isInteger())
       return false;
   }

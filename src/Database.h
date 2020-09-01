@@ -45,4 +45,5 @@ private:
   string_map<Table> mTables;
   linear_map<Filters, int> mFilterUsageCount;
   IndexRef mIndexRefs;
+
 };
