@@ -25,7 +25,7 @@ const bool &Filter::equals() const
 
 bool operator==(const Filter &lhs, const Filter &rhs)
 {
-  return (lhs.column() == rhs.column() and lhs.datum() == rhs.datum() and lhs.equals() == rhs.equals());
+  return ((lhs.column() == rhs.column()) && (lhs.datum() == rhs.datum()) && (lhs.equals() == rhs.equals()));
 }
 
 bool operator<(const Filter &lhs, const Filter &rhs)
