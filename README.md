@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.com/joaromera/trie-database.svg?branch=master)](https://travis-ci.com/joaromera/trie-database)
 
+_DISCLAIMER_: this project is several years old. It was made with little knowledge of C++ and its best & common practices. Recent updates are made as an exercise of code reviewing my past self, just for fun.
+
 ## Introduction
 
 This project was done in the context of the subject _Algorithms and Data Structures 2_. Its goal was to exercise writing _abstract data types_ with their _formal specification_, and providing an implementation to them in C++ using our own data structures.
